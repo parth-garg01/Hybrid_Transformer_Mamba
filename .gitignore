@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.env
+venv/
+mamba_env/
+
+*.png
+*.pt
+*.pth
