@@ -2,11 +2,50 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*$py.class
+
+# Python packaging/build
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Test and coverage output
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Type checker/linter caches
+.mypy_cache/
+.ruff_cache/
+.pyre/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs and temp files
+*.log
+*.tmp
+*.temp
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
 
 .env
+.env.*
 venv/
+.venv/
+env/
 mamba_env/
 
 *.png
 *.pt
 *.pth
+
+# Local debug dumps
+debug_freeze.txt
