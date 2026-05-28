@@ -19,7 +19,7 @@ TRAIN_STEPS  = 10_000
 BATCH_SIZE   = 32
 SEQ_LEN      = 256       # default; overridden in context-length benchmark
 LR           = 3e-4
-LR_WARMUP    = 500
+LR_WARMUP    = 100   # kept small so quick-test runs (200 steps) don't hit warmup >= total
 WEIGHT_DECAY = 0.1
 GRAD_CLIP    = 1.0
 EVAL_EVERY   = 500

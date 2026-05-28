@@ -27,7 +27,9 @@ os.makedirs(RESULTS_DIR, exist_ok=True)
 
 def cosine_lr(step, warmup, total, base_lr):
     if step < warmup:
-        return base_lr * step / warmup
+        return base_lr * step / max(warmup, 1)
+    if total <= warmup:
+        return base_lr
     progress = (step - warmup) / (total - warmup)
     return base_lr * 0.5 * (1 + math.cos(math.pi * progress))
 
