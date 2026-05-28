@@ -14,8 +14,11 @@ class WikiTextBPE:
         tok.add_special_tokens({"pad_token": "<|pad|>"})
         self.vocab_size = len(tok)
 
-        raw = load_dataset("wikitext", "wikitext-103-raw-v1",
-                           split=split, trust_remote_code=True)
+        raw = load_dataset(
+            "wikitext",
+            "wikitext-103-raw-v1",
+            split=split
+        )
         text = "\n".join(t for t in raw["text"] if t.strip())
 
         ids = tok.encode(text, add_special_tokens=False)
