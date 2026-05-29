@@ -1,6 +1,41 @@
-torch>=2.1.0
-torchvision>=0.16.0
-torchaudio>=2.1.0
+# ── Core ──────────────────────────────────────────────────────────────────────
+# PyTorch: install the CUDA build matching your driver from https://pytorch.org
+# Example (CUDA 12.1):
+#   pip install torch==2.2.2 --index-url https://download.pytorch.org/whl/cu121
+torch>=2.2.0
 
+# numpy <2 required — PyTorch 2.2 was compiled against numpy 1.x
+numpy>=1.24.0,<2.0.0
+
+# ── Mamba SSM (CUDA GPU required) ─────────────────────────────────────────────
+# causal-conv1d and mamba-ssm must be installed from pre-built wheels.
+# The PyPI sdist does NOT include CUDA source files.
+#
+# Step 1 — find your wheel at:
+#   https://github.com/Dao-AILab/causal-conv1d/releases
+#   https://github.com/state-spaces/mamba/releases
+#
+# Wheel filename format:
+#   causal_conv1d-<ver>+cu<cuda>torch<torch>cxx11abi<ABI>-cp<py>-cp<py>-linux_x86_64.whl
+#
+# Example for CUDA 12.x, PyTorch 2.2, Python 3.10, CXX11 ABI=FALSE:
+#   wget https://github.com/Dao-AILab/causal-conv1d/releases/download/v1.4.0/\
+#        causal_conv1d-1.4.0+cu122torch2.2cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+#   pip install causal_conv1d-1.4.0+cu122torch2.2cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+#
+#   wget https://github.com/state-spaces/mamba/releases/download/v2.2.2/\
+#        mamba_ssm-2.2.2+cu122torch2.2cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+#   pip install mamba_ssm-2.2.2+cu122torch2.2cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+
+# ── HuggingFace ───────────────────────────────────────────────────────────────
+# Pin to 4.40 — transformers 5.x removed classes that mamba-ssm 2.2 imports
+transformers==4.40.0
+datasets>=2.18.0
+
+# ── Build tools ───────────────────────────────────────────────────────────────
+# ninja is required by PyTorch's cpp_extension build backend
+ninja>=1.11.0
+packaging>=23.0
+
+# ── Plotting ──────────────────────────────────────────────────────────────────
 matplotlib>=3.7.0
-numpy>=1.24.0
