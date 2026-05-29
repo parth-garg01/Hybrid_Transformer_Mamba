@@ -191,45 +191,57 @@ class ABRLayer(nn.Module):
 
     def _forward_cbsc(self, blocks, indices, B, N, b, D):
         """
-        Cross-Block State Continuity (CBSC): the last-token hidden vector from
-        each Mamba-routed block is injected additively into the first token of
-        the next Mamba-routed block.  This propagates recurrent context across
-        non-adjacent positions in a fully differentiable way and works with both
-        the real Mamba SSM and the GRU fallback.
+        Two-pass vectorized CBSC (fast, no per-block Python loop on the GPU).
+
+        Pass 1 — run every block through its expert in one large batched call.
+        Pass 2 — for each Mamba block that directly follows another Mamba block,
+                  inject the predecessor's last-token output into position 0 of
+                  its input, then re-run Mamba for those blocks only.
+
+        This keeps GPU utilisation high (two big CUDA calls instead of N small
+        sequential ones) while correctly propagating the recurrent context that
+        defines CBSC across block boundaries.
         """
-        y_list = []
-        prev_last = None   # (B, D) — last-token output of most recent Mamba block
+        flat   = blocks.view(B * N, b, D)   # (B*N, b, D)
+        r_flat = indices.view(B * N)        # (B*N,)
+        t_flat = (r_flat == 0)
+        m_flat = (r_flat == 1)
 
-        for i in range(N):
-            blk   = blocks[:, i]       # (B, b, D)
-            route = indices[:, i]       # (B,)
-            t_mask = (route == 0)
-            m_mask = (route == 1)
-            y_blk  = blk.new_zeros(B, b, D)
+        # ── Pass 1: full parallel forward ────────────────────────────────────
+        y_flat = flat.clone()
+        if t_flat.any():
+            y_flat[t_flat] = self.transformer(flat[t_flat])
+        if m_flat.any():
+            y_flat[m_flat] = self.mamba(flat[m_flat])
 
-            if t_mask.any():
-                y_blk[t_mask] = self.transformer(blk[t_mask])
+        # ── Find consecutive Mamba→Mamba block pairs that need CBSC ─────────
+        m_route   = (indices == 1)                  # (B, N) bool
+        prev_mamba = torch.zeros_like(m_route)
+        prev_mamba[:, 1:] = m_route[:, :-1]
+        cbsc_mask = m_route & prev_mamba            # (B, N)
 
-            if m_mask.any():
-                blk_m = blk[m_mask].clone()   # (n_m, b, D)
+        if cbsc_mask.any():
+            # Last token of each block, pass-1 output: (B, N, D)
+            last_tok = y_flat.view(B, N, b, D)[:, :, -1, :]
 
-                if prev_last is not None:
-                    # Inject previous block's last hidden state into position 0.
-                    # The SSM's causal structure then propagates it to all
-                    # subsequent tokens within this block.
-                    blk_m[:, 0, :] = blk_m[:, 0, :] + prev_last[m_mask]
+            # Predecessor's last token shifted by 1: (B, N, D)
+            prev_last = torch.zeros_like(last_tok)
+            prev_last[:, 1:, :] = last_tok[:, :-1, :]
 
-                y_m = self.mamba(blk_m)        # works with real Mamba or GRU
-                y_blk[m_mask] = y_m
+            # Build CBSC-augmented inputs: add predecessor last token to pos-0
+            inp2 = flat.view(B, N, b, D).clone()
+            cbsc_exp = cbsc_mask.unsqueeze(-1).unsqueeze(-1)  # (B, N, 1, 1)
+            prev_exp  = prev_last.unsqueeze(2)                 # (B, N, 1, D)
+            inp2[:, :, :1, :] = inp2[:, :, :1, :] + cbsc_exp * prev_exp
 
-                # Save last token (differentiable — gradients flow back through CBSC)
-                if prev_last is None:
-                    prev_last = blk.new_zeros(B, D)
-                prev_last = prev_last.clone()
-                prev_last[m_mask] = y_m[:, -1, :]
+            # ── Pass 2: re-run only the CBSC Mamba blocks ───────────────────
+            cbsc_flat = cbsc_mask.view(B * N)
+            inp2_flat = inp2.view(B * N, b, D)
+            y_flat2   = y_flat.clone()
+            y_flat2[cbsc_flat] = self.mamba(inp2_flat[cbsc_flat])
+            return y_flat2.view(B, N * b, D)
 
-            y_list.append(y_blk)
-        return torch.stack(y_list, dim=1).view(B, N * b, D)
+        return y_flat.view(B, N * b, D)
 
     def _forward_batched(self, blocks, indices, B, N, b, D):
         flat = blocks.view(B * N, b, D)
