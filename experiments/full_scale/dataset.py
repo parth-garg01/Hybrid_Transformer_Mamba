@@ -1,6 +1,9 @@
 """
 WikiText-103 dataset with GPT-2 BPE tokenizer.
 Returns (input_ids, target_ids) batches for language modeling.
+
+Tokenizes in chunks to keep peak RAM under ~1.5 GB even for the
+full 103M-token corpus (avoids WSL2 OOM crashes during load).
 """
 import os
 import torch
@@ -11,28 +14,36 @@ from transformers import GPT2TokenizerFast
 class WikiTextBPE:
     def __init__(self, split="train", seq_len=256, max_tokens=None):
         self.seq_len = seq_len
-        # Use local copy if available so training works fully offline
+
+        # Use pre-saved local copy so loading works fully offline
         _LOCAL_TOK = os.path.join(os.path.expanduser("~"), "gpt2_tokenizer")
         _tok_path  = _LOCAL_TOK if os.path.isdir(_LOCAL_TOK) else "gpt2"
-        tok = GPT2TokenizerFast.from_pretrained(_tok_path, local_files_only=os.path.isdir(_LOCAL_TOK))
+        tok = GPT2TokenizerFast.from_pretrained(
+            _tok_path, local_files_only=os.path.isdir(_LOCAL_TOK))
         tok.add_special_tokens({"pad_token": "<|pad|>"})
         self.vocab_size = len(tok)
 
-        raw = load_dataset(
-            "wikitext",
-            "wikitext-103-raw-v1",
-            split=split
-        )
-        text = "\n".join(t for t in raw["text"] if t.strip())
+        raw = load_dataset("wikitext", "wikitext-103-raw-v1", split=split)
 
-        ids = tok.encode(text, add_special_tokens=False)
+        # Tokenize in chunks of 5,000 articles to keep peak RAM low
+        all_ids = []
+        texts   = [t for t in raw["text"] if t.strip()]
+        chunk   = 5_000
+        for i in range(0, len(texts), chunk):
+            batch_text = "\n".join(texts[i : i + chunk])
+            ids = tok.encode(batch_text, add_special_tokens=False)
+            all_ids.extend(ids)
+            if max_tokens and len(all_ids) >= max_tokens:
+                break
+
         if max_tokens:
-            ids = ids[:max_tokens]
-        self.data = torch.tensor(ids, dtype=torch.long)
+            all_ids = all_ids[:max_tokens]
+
+        self.data = torch.tensor(all_ids, dtype=torch.long)
         print(f"  [{split}] {len(self.data):,} tokens | vocab={self.vocab_size}")
 
     def get_batch(self, batch_size, device="cuda"):
         ix = torch.randint(len(self.data) - self.seq_len - 1, (batch_size,))
-        x = torch.stack([self.data[i:i + self.seq_len]     for i in ix])
-        y = torch.stack([self.data[i + 1:i + self.seq_len + 1] for i in ix])
+        x = torch.stack([self.data[i : i + self.seq_len]     for i in ix])
+        y = torch.stack([self.data[i + 1 : i + self.seq_len + 1] for i in ix])
         return x.to(device), y.to(device)
