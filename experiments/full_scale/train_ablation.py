@@ -57,8 +57,52 @@ def evaluate(model, val_ds, criterion, n_steps, seq_len):
     return total / n_steps
 
 
+def run_label(label):
+    return label.replace(' ', '_').replace('=', '').replace('(', '').replace(')', '')
+
+
+def save_checkpoint(label, seed, step, model, optimizer, curve_steps, curve_train,
+                    curve_val, routing_history, elapsed_so_far):
+    ckpt = {
+        "step": step,
+        "model": model.state_dict(),
+        "optimizer": optimizer.state_dict(),
+        "curve_steps": curve_steps,
+        "curve_train": curve_train,
+        "curve_val": curve_val,
+        "routing_history": routing_history,
+        "elapsed_so_far": elapsed_so_far,
+    }
+    path = os.path.join(RESULTS_DIR, f"{run_label(label)}_seed{seed}_ckpt.pt")
+    torch.save(ckpt, path)
+
+
+def load_checkpoint(label, seed, model, optimizer):
+    path = os.path.join(RESULTS_DIR, f"{run_label(label)}_seed{seed}_ckpt.pt")
+    if not os.path.exists(path):
+        return 0, [], [], [], [], 0.0
+    ckpt = torch.load(path, map_location=device)
+    model.load_state_dict(ckpt["model"])
+    optimizer.load_state_dict(ckpt["optimizer"])
+    print(f"  Resumed from checkpoint at step {ckpt['step']}", flush=True)
+    return (ckpt["step"], ckpt["curve_steps"], ckpt["curve_train"],
+            ckpt["curve_val"], ckpt["routing_history"], ckpt["elapsed_so_far"])
+
+
+CKPT_EVERY = 2_000   # save checkpoint every N steps
+
+
 def train_one(cfg_tuple, seed, train_ds, val_ds):
     label = cfg_tuple[0]
+
+    # Skip if final result already exists (allows re-running after partial crash)
+    fname = f"{run_label(label)}_seed{seed}.json"
+    fpath = os.path.join(RESULTS_DIR, fname)
+    if os.path.exists(fpath):
+        print(f"  [SKIP] {label} seed={seed} — result already exists.", flush=True)
+        with open(fpath) as f:
+            return json.load(f)
+
     torch.manual_seed(seed)
     np.random.seed(seed)
 
@@ -72,12 +116,13 @@ def train_one(cfg_tuple, seed, train_ds, val_ds):
     optimizer = torch.optim.AdamW(model.parameters(), lr=LR,
                                    weight_decay=WEIGHT_DECAY, betas=(0.9, 0.95))
 
-    curve_steps, curve_train, curve_val = [], [], []
-    routing_history = []
+    # Resume from checkpoint if one exists
+    start_step, curve_steps, curve_train, curve_val, routing_history, elapsed_base = \
+        load_checkpoint(label, seed, model, optimizer)
+
     t0 = time.time()
 
-    for step in range(1, TRAIN_STEPS + 1):
-        # learning rate schedule
+    for step in range(start_step + 1, TRAIN_STEPS + 1):
         lr = cosine_lr(step, LR_WARMUP, TRAIN_STEPS, LR)
         for pg in optimizer.param_groups:
             pg["lr"] = lr
@@ -102,7 +147,6 @@ def train_one(cfg_tuple, seed, train_ds, val_ds):
             curve_train.append(ce.item())
             curve_val.append(val_loss)
 
-            # routing stats
             rs = {}
             if hasattr(model, "get_routing_stats"):
                 rs = model.get_routing_stats()
@@ -117,9 +161,15 @@ def train_one(cfg_tuple, seed, train_ds, val_ds):
                   f"train={ce.item():.4f} PPL={ppl_t:.1f} | "
                   f"val={val_loss:.4f} PPL={ppl_v:.1f}{r_str}", flush=True)
 
-    elapsed = time.time() - t0
-    final_val  = curve_val[-1]
-    final_ppl  = math.exp(min(final_val, 20))
+        # Periodic checkpoint so training can resume after interruption
+        if step % CKPT_EVERY == 0:
+            save_checkpoint(label, seed, step, model, optimizer,
+                            curve_steps, curve_train, curve_val, routing_history,
+                            elapsed_base + time.time() - t0)
+
+    elapsed = elapsed_base + time.time() - t0
+    final_val = curve_val[-1]
+    final_ppl = math.exp(min(final_val, 20))
 
     result = {
         "label": label, "seed": seed, "params": params,
@@ -131,9 +181,13 @@ def train_one(cfg_tuple, seed, train_ds, val_ds):
         "routing_history": routing_history,
     }
 
-    fname = f"{label.replace(' ', '_').replace('=', '').replace('(', '').replace(')', '')}_seed{seed}.json"
-    with open(os.path.join(RESULTS_DIR, fname), "w") as f:
+    with open(fpath, "w") as f:
         json.dump(result, f)
+
+    # Clean up checkpoint once final result is saved
+    ckpt_path = os.path.join(RESULTS_DIR, f"{run_label(label)}_seed{seed}_ckpt.pt")
+    if os.path.exists(ckpt_path):
+        os.remove(ckpt_path)
 
     return result
 
