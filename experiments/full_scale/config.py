@@ -15,15 +15,15 @@ DATASET_NAME = "wikitext-103-raw-v1"
 TOKENIZER    = "gpt2"    # BPE, vocab ≈ 50K
 
 # ── Training ──────────────────────────────────────────────────────────────────
-TRAIN_STEPS  = 10_000
-BATCH_SIZE   = 32
+TRAIN_STEPS  = 30_000
+BATCH_SIZE   = 8         # 4 GB VRAM safe; increase to 16 on A100/V100
 SEQ_LEN      = 256       # default; overridden in context-length benchmark
 LR           = 3e-4
-LR_WARMUP    = 100   # kept small so quick-test runs (200 steps) don't hit warmup >= total
+LR_WARMUP    = 500
 WEIGHT_DECAY = 0.1
 GRAD_CLIP    = 1.0
-EVAL_EVERY   = 500
-EVAL_STEPS   = 100
+EVAL_EVERY   = 1_000
+EVAL_STEPS   = 200
 
 # ── Ablation seeds ────────────────────────────────────────────────────────────
 SEEDS        = [42, 123, 7]

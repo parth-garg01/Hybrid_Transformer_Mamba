@@ -19,7 +19,7 @@ class WikiTextBPE:
             "wikitext-103-raw-v1",
             split=split
         )
-        text = "\n".join(t for t in raw["text"][:50000] if t.strip())
+        text = "\n".join(t for t in raw["text"] if t.strip())
 
         ids = tok.encode(text, add_special_tokens=False)
         if max_tokens:

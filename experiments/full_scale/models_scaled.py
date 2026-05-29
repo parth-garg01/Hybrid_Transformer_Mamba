@@ -95,24 +95,19 @@ class MambaBlock(nn.Module):
             self._use_real = False
             self.d_inner   = d_inner
 
-    def forward(self, x, hidden=None, return_hidden=False):
+    def forward(self, x):
         residual = x
         x = self.norm(x)
         if self._use_real:
-            out = residual + self.ssm(x)
-            return (out, None) if return_hidden else out
+            return residual + self.ssm(x)
         else:
             B, T, _ = x.shape
             xz = self.in_proj(x)
             xi, z = xz.chunk(2, dim=-1)
             xi = self.conv1d(xi.transpose(1, 2))[:, :, :T].transpose(1, 2)
             xi = F.silu(xi)
-            if hidden is not None:
-                xi_out, new_h = self.gru(xi, hidden)
-            else:
-                xi_out, new_h = self.gru(xi)
-            out = residual + self.out_proj(xi_out * F.silu(z))
-            return (out, new_h) if return_hidden else out
+            xi_out, _ = self.gru(xi)
+            return residual + self.out_proj(xi_out * F.silu(z))
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -195,10 +190,19 @@ class ABRLayer(nn.Module):
         return out, z_soft_all, indices
 
     def _forward_cbsc(self, blocks, indices, B, N, b, D):
-        y_list, mamba_h = [], None
+        """
+        Cross-Block State Continuity (CBSC): the last-token hidden vector from
+        each Mamba-routed block is injected additively into the first token of
+        the next Mamba-routed block.  This propagates recurrent context across
+        non-adjacent positions in a fully differentiable way and works with both
+        the real Mamba SSM and the GRU fallback.
+        """
+        y_list = []
+        prev_last = None   # (B, D) — last-token output of most recent Mamba block
+
         for i in range(N):
-            blk   = blocks[:, i]
-            route = indices[:, i]
+            blk   = blocks[:, i]       # (B, b, D)
+            route = indices[:, i]       # (B,)
             t_mask = (route == 0)
             m_mask = (route == 1)
             y_blk  = blk.new_zeros(B, b, D)
@@ -207,15 +211,23 @@ class ABRLayer(nn.Module):
                 y_blk[t_mask] = self.transformer(blk[t_mask])
 
             if m_mask.any():
-                h_in = mamba_h[:, m_mask, :] if mamba_h is not None else None
-                y_m, h_out = self.mamba(blk[m_mask], hidden=h_in, return_hidden=True)
+                blk_m = blk[m_mask].clone()   # (n_m, b, D)
+
+                if prev_last is not None:
+                    # Inject previous block's last hidden state into position 0.
+                    # The SSM's causal structure then propagates it to all
+                    # subsequent tokens within this block.
+                    blk_m[:, 0, :] = blk_m[:, 0, :] + prev_last[m_mask]
+
+                y_m = self.mamba(blk_m)        # works with real Mamba or GRU
                 y_blk[m_mask] = y_m
-                if h_out is not None:
-                    if mamba_h is None:
-                        mamba_h = blk.new_zeros(h_out.shape[0], B, h_out.shape[-1])
-                    new_h = mamba_h.clone()
-                    new_h[:, m_mask, :] = h_out
-                    mamba_h = new_h
+
+                # Save last token (differentiable — gradients flow back through CBSC)
+                if prev_last is None:
+                    prev_last = blk.new_zeros(B, D)
+                prev_last = prev_last.clone()
+                prev_last[m_mask] = y_m[:, -1, :]
+
             y_list.append(y_blk)
         return torch.stack(y_list, dim=1).view(B, N * b, D)
 
