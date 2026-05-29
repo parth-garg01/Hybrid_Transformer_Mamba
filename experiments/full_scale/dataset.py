@@ -2,6 +2,7 @@
 WikiText-103 dataset with GPT-2 BPE tokenizer.
 Returns (input_ids, target_ids) batches for language modeling.
 """
+import os
 import torch
 from datasets import load_dataset
 from transformers import GPT2TokenizerFast
@@ -10,7 +11,10 @@ from transformers import GPT2TokenizerFast
 class WikiTextBPE:
     def __init__(self, split="train", seq_len=256, max_tokens=None):
         self.seq_len = seq_len
-        tok = GPT2TokenizerFast.from_pretrained("gpt2")
+        # Use local copy if available so training works fully offline
+        _LOCAL_TOK = os.path.join(os.path.expanduser("~"), "gpt2_tokenizer")
+        _tok_path  = _LOCAL_TOK if os.path.isdir(_LOCAL_TOK) else "gpt2"
+        tok = GPT2TokenizerFast.from_pretrained(_tok_path, local_files_only=os.path.isdir(_LOCAL_TOK))
         tok.add_special_tokens({"pad_token": "<|pad|>"})
         self.vocab_size = len(tok)
 
