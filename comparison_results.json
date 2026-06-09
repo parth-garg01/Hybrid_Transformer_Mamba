@@ -1,0 +1,44 @@
+[
+  {
+    "model": "1. Transformer-Only (d=256)",
+    "val_loss": 2.447645039558411,
+    "val_ppl": 11.561087608337402,
+    "time_s": 12.961025714874268,
+    "params": 442165
+  },
+  {
+    "model": "2. Mamba-Only (d=256, CPU fallback)",
+    "val_loss": 2.450901470184326,
+    "val_ppl": 11.598798751831055,
+    "time_s": 34.683037757873535,
+    "params": 739125
+  },
+  {
+    "model": "3. Soft Hybrid (d=256)",
+    "val_loss": 2.4176343154907225,
+    "val_ppl": 11.21928596496582,
+    "time_s": 46.73353099822998,
+    "params": 937526
+  },
+  {
+    "model": "4. Jamba Baseline (4L, d=256, 3:1 M:T)",
+    "val_loss": 1.2183053302764892,
+    "val_ppl": 3.3814525604248047,
+    "time_s": 249.41786813735962,
+    "params": 1928117
+  },
+  {
+    "model": "5. Sparse Hybrid b=8 state=OFF 1L (baseline)",
+    "val_loss": 1.8236796712875367,
+    "val_ppl": 6.194610595703125,
+    "time_s": 49.011284828186035,
+    "params": 937655
+  },
+  {
+    "model": "6. MultiLayer Hybrid 2L state=ON (NOVEL)",
+    "val_loss": 1.618907790184021,
+    "val_ppl": 5.047574520111084,
+    "time_s": 243.58869552612305,
+    "params": 1631673
+  }
+]
