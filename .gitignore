@@ -40,6 +40,7 @@ Thumbs.db
 .env.*
 venv/
 .venv/
+.venv_cuda/
 env/
 mamba_env/
 
