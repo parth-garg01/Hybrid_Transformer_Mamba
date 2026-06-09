@@ -6,7 +6,7 @@ Target: ~20M params, WikiText-103, GPT-2 BPE tokenizer, CUDA required.
 # ── Model ─────────────────────────────────────────────────────────────────────
 D_MODEL      = 256       # hidden dim  (512 → ~50M params if VRAM allows)
 N_HEADS      = 8
-BLOCK_SIZE   = 8         # tokens per routing block
+BLOCK_SIZE   = 32        # tokens per routing block
 FFN_MULT     = 4         # FFN hidden = D_MODEL * FFN_MULT
 
 # ── Dataset ───────────────────────────────────────────────────────────────────
@@ -32,14 +32,20 @@ SEEDS        = [42, 123, 7]
 # Each entry: (label, n_layers, use_routing, use_cross_block_state, expert_type)
 # expert_type: "hybrid" | "transformer" | "mamba"
 ABLATION_CONFIGS = [
-    # Baselines
+    # Pure baselines
     ("Transformer-Only",        4, False, False, "transformer"),
     ("Mamba-Only",              4, False, False, "mamba"),
+    # Fixed-interleave hybrid baseline (Jamba-style: T-M-T-M, no routing)
+    ("Jamba-Style-4L",          4, False, False, "jamba"),
     # Routing ablation
     ("ABR-1L-state=OFF",        1, True,  False, "hybrid"),
     ("ABR-1L-state=ON",         1, True,  True,  "hybrid"),
     ("ABR-2L-state=OFF",        2, True,  False, "hybrid"),
     ("ABR-2L-state=ON (Ours)",  2, True,  True,  "hybrid"),
+    # Gated CBSC variant — learned per-dimension gate replaces plain addition
+    ("ABR-2L-CBSC-Gated",       2, True,  True,  "hybrid-gated"),
+    # 4-layer ABR to match baseline depth
+    ("ABR-4L-CBSC-Gated",       4, True,  True,  "hybrid-gated"),
 ]
 
 # ── Context lengths to benchmark ──────────────────────────────────────────────

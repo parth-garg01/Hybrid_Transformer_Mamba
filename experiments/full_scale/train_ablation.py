@@ -241,6 +241,29 @@ def main():
               f"{row['Val_PPL_mean']:>10.2f} ±{row['Val_PPL_std']:>7.2f}")
     print(f"\nSaved -> {csv_path}")
 
+    # ── Welch t-tests for key CBSC comparisons ───────────────────────────────
+    try:
+        from scipy import stats as scipy_stats
+        print(f"\n{'='*60}")
+        print("SIGNIFICANCE TESTS  (Welch two-sample t-test, two-tailed)")
+        print(f"{'='*60}")
+        pairs = [
+            ("ABR-2L-state=OFF",   "ABR-2L-state=ON (Ours)", "CBSC additive vs OFF (2L)"),
+            ("ABR-2L-state=ON (Ours)", "ABR-2L-CBSC-Gated",  "Gated vs additive CBSC"),
+            ("ABR-1L-state=OFF",   "ABR-1L-state=ON",        "CBSC additive vs OFF (1L)"),
+            ("Jamba-Style-4L",     "ABR-2L-state=ON (Ours)", "ABR vs Jamba-style"),
+        ]
+        for label_a, label_b, desc in pairs:
+            ppls_a = [r["val_ppl"] for r in grouped.get(label_a, [])]
+            ppls_b = [r["val_ppl"] for r in grouped.get(label_b, [])]
+            if len(ppls_a) >= 2 and len(ppls_b) >= 2:
+                t, p = scipy_stats.ttest_ind(ppls_a, ppls_b, equal_var=False)
+                sig  = "**" if p < 0.05 else ("*" if p < 0.10 else "ns")
+                print(f"  {desc:<40} t={t:+.3f}  p={p:.4f}  {sig}")
+    except ImportError:
+        print("  (scipy not available — skipping significance tests)")
+    # ── End significance tests ────────────────────────────────────────────────
+
 
 if __name__ == "__main__":
     main()
