@@ -50,3 +50,10 @@ mamba_env/
 
 # Local debug dumps
 debug_freeze.txt
+# Paper: keep figures, ignore LaTeX build output
+!paper/figures/*.png
+paper/main.pdf
+
+# Paper is kept locally only, never committed or pushed
+paper/
+Hybrid Transformer Mamba.pdf
