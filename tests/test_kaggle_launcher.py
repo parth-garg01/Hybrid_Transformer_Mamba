@@ -92,7 +92,7 @@ def test_render_runner_is_valid_python_with_values():
                 consts[node.targets[0].id] = ast.literal_eval(node.value)
             except ValueError:
                 pass
-    assert consts["CMD"] == cmd
+    assert consts["RUNS"] == [{"name": None, "cmd": cmd}]
     assert consts["EXPECTED_COMMIT"] == "deadbeef"
     assert consts["DATASET_VERSION"] is None
     assert consts["KERNEL_URL"] == "https://www.kaggle.com/code/u/abr-n"
@@ -230,7 +230,7 @@ class FakeCLI:
         self.version += 1
         return "Dataset version is being created. Please check progress at ..."
 
-    def kernel_push(self, folder):
+    def kernel_push(self, folder, timeout=None):
         self.calls.append(("push", folder))
         return SimpleNamespace(returncode=self.push_rc, stdout=self.push_text, stderr="")
 
@@ -315,3 +315,194 @@ def test_main_end_to_end_mocked(repo, tmp_path, monkeypatch):
     assert rec["final_status"] == "complete" and rec["download"]["gpu"] == "Tesla T4"
     for k in ("launched_utc", "pushed_utc", "finished_utc", "downloaded_utc"):
         assert rec[k].endswith("Z")
+
+
+# ---------------------------------------------------------------- multi-run (T4 x2)
+def test_normalize_runs():
+    assert launch.normalize_runs("echo a") == [{"name": None, "cmd": "echo a"}]
+    r = launch.normalize_runs(["echo a", "echo b"])
+    assert [x["name"] for x in r] == ["run0", "run1"]
+    r = launch.normalize_runs(["echo a", "echo b"], ["A_s1", "B_s2"])
+    assert [x["name"] for x in r] == ["A_s1", "B_s2"]
+    with pytest.raises(launch.LaunchError):
+        launch.normalize_runs(["a", "b"], ["x", "x"])
+    with pytest.raises(launch.LaunchError):
+        launch.normalize_runs(["a"], ["bad name"])
+    with pytest.raises(launch.LaunchError):
+        launch.normalize_runs([])
+
+
+def test_t4x2_shape():
+    assert launch.make_kernel_metadata("u", "x", "t4x2")["machine_shape"] == "NvidiaTeslaT4"
+
+
+def test_cmds_file(tmp_path):
+    f = tmp_path / "runs.json"
+    f.write_text(json.dumps([{"name": "a", "cmd": "echo a"}, {"name": "b", "cmd": "echo b"}]))
+    assert [r["name"] for r in launch.normalize_runs(launch.load_cmds_file(f))] == ["a", "b"]
+    f.write_text(json.dumps({"cmd": "x"}))
+    with pytest.raises(launch.LaunchError):
+        launch.load_cmds_file(f)
+
+
+def _run_runner(tmp_path, repo, runs, resume_sources=None, prev=None):
+    """Execute the generated runner locally against a fake /kaggle tree (no installs)."""
+    pkg = launch.build_code_archive(repo, "HEAD", tmp_path / "ds")
+    inp = tmp_path / "input"
+    (inp / "abr-code").mkdir(parents=True)
+    (inp / "abr-code" / "abr-code.tar.gz").write_bytes(Path(pkg["archive"]).read_bytes())
+    if prev:
+        for rel, content in prev.items():
+            f = inp / rel
+            f.parent.mkdir(parents=True, exist_ok=True)
+            f.write_text(content)
+    kdir = launch.build_kernel_dir(tmp_path / "k", user="u", name="t", cmd=runs,
+                                   commit=pkg["commit"], dataset_version=3, gpu="t4x2",
+                                   kernel_sources=resume_sources)
+    work = tmp_path / "work"
+    env = dict(__import__("os").environ, ABR_RUNNER_WORK=str(work), ABR_RUNNER_INPUT=str(inp),
+               ABR_RUNNER_SKIP_INSTALL="1")
+    r = subprocess.run([sys.executable, str(kdir / "runner.py")], env=env, capture_output=True,
+                       text=True, timeout=300)
+    return r, work / "output"
+
+
+def test_runner_named_runs_and_resume(repo, tmp_path):
+    runs = launch.normalize_runs([
+        'echo "A $ABR_RUN_NAME resumed=$ABR_RESUMED"; cat $ABR_OUTPUT_DIR/ckpt.txt; '
+        'echo step2 > $ABR_OUTPUT_DIR/ckpt.txt',
+        "echo B; exit 4"], ["A_s1", "B_s1"])
+    prev = {"abr-old/A_s1/run_status.json": json.dumps({"sessions": 1, "state": "running"}),
+            "abr-old/A_s1/ckpt.txt": "step1\n",
+            "abr-old/A_s1/run.log": "old log\n"}
+    r, out = _run_runner(tmp_path, repo, runs, ["u/abr-old"], prev)
+    assert r.returncode == 1, r.stdout + r.stderr          # B failed -> kernel exit 1
+    a = json.loads((out / "A_s1" / "run_status.json").read_text())
+    b = json.loads((out / "B_s1" / "run_status.json").read_text())
+    assert a["state"] == "done" and a["exit_code"] == 0 and a["sessions"] == 2
+    assert b["state"] == "failed" and b["exit_code"] == 4 and b["sessions"] == 1
+    log_a = (out / "A_s1" / "run.log").read_text()
+    assert "A A_s1 resumed=1" in log_a and "step1" in log_a
+    assert (out / "A_s1" / "ckpt.txt").read_text().strip() == "step2"
+    assert (out / "A_s1" / "previous_sessions" / "run.session1.log").read_text() == "old log\n"
+    env = json.loads((out / "kaggle_env.json").read_text())
+    assert env["run_exit_codes"] == {"A_s1": 0, "B_s1": 4}
+    assert not (tmp_path / "work" / "repo").exists()
+
+
+def test_runner_single_run_layout(repo, tmp_path):
+    r, out = _run_runner(tmp_path, repo, launch.normalize_runs("echo hi $CODE_COMMIT"))
+    assert r.returncode == 0, r.stdout + r.stderr
+    env = json.loads((out / "kaggle_env.json").read_text())
+    assert env["cmd_exit_code"] == 0 and env["commit"] == env["commit_expected"]
+    assert "hi " + env["commit"] in (out / "run.log").read_text()
+
+
+# ---------------------------------------------------------------- queue
+_qspec = importlib.util.spec_from_file_location("kaggle_queue", ROOT / "scripts" / "kaggle" / "queue.py")
+kq = importlib.util.module_from_spec(_qspec)
+_qspec.loader.exec_module(kq)
+
+FAKE_CONFIG = '''
+SEEDS_KEY = [42, 123, 7, 2024, 31337]
+PHASE2_CONFIGS = [{"label": l, "expert_type": e} for l, e in [
+    ("Transformer-Only", "transformer"), ("Mamba-Only", "mamba"), ("Jamba-1:3", "jamba-1:3"),
+    ("ABR-4L-CBSC", "abr")]]
+SEED_COUNT = {"Transformer-Only": 5, "Mamba-Only": 2, "Jamba-1:3": 5, "ABR-4L-CBSC": 5}
+KEY_CONFIGS = {k for k, n in SEED_COUNT.items() if n == 5}
+BLOCK_SWEEP_TRAIN = [8, 16, 64]
+BLOCK_SWEEP_SEEDS = SEEDS_KEY[:2]
+def get_config(label):
+    return [c for c in PHASE2_CONFIGS if c["label"] == label][0]
+def contains_mamba(cfg):
+    return cfg["expert_type"] != "transformer"
+def planned_runs():
+    return [(c["label"], s, None) for c in PHASE2_CONFIGS for s in SEEDS_KEY[:SEED_COUNT[c["label"]]]]
+'''
+
+
+@pytest.fixture
+def qrepo(repo):
+    d = repo / "experiments" / "full_scale"
+    d.mkdir(parents=True)
+    (d / "config.py").write_text(FAKE_CONFIG)
+    git(repo, "add", "-A")
+    git(repo, "commit", "-qm", "cfg")
+    return repo
+
+
+def test_queue_order_and_sweep(qrepo):
+    q = kq.Queue(qrepo, FakeCLI())
+    st = q.init("HEAD", sweep="ABR-4L-CBSC")
+    order = st["order"]
+    assert len(order) == 5 + 2 + 5 + 5 + 6
+    assert all(not r.startswith("Mamba-Only") for r in order[:15])  # key configs first
+    assert order[:3] == ["Transformer-Only_s42", "Jamba-1_3_s42", "ABR-4L-CBSC_s42"]
+    assert order[-6:] == [f"ABR-4L-CBSC_s{s}_b{b}" for s in (42, 123) for b in (8, 16, 64)]
+    assert order[15:17] == ["Mamba-Only_s42", "Mamba-Only_s123"]
+    r = st["runs"]["ABR-4L-CBSC_s42_b16"]
+    assert "--block-size 16" in r["cmd"] and "--config ABR-4L-CBSC" in r["cmd"]
+    assert "--out $ABR_OUTPUT_DIR" in r["cmd"] and st["commit"] == git(qrepo, "rev-parse", "HEAD")
+    assert json.loads((qrepo / "results/kaggle/queue.json").read_text())["order"] == order
+    assert q.add_sweep("ABR-4L-CBSC") == []                 # idempotent
+
+
+def test_queue_exclude_non_mamba(qrepo):
+    st = kq.Queue(qrepo, FakeCLI()).init("HEAD", exclude_non_mamba=True)
+    assert not any(r.startswith("Transformer") for r in st["order"])
+
+
+def test_queue_step_launch_settle_resume(qrepo, monkeypatch):
+    cli = FakeCLI()
+    q = kq.Queue(qrepo, cli)
+    q.init("HEAD")
+    monkeypatch.setattr(kq.L.time, "sleep", lambda s: None)
+    launched = q.step(max_sessions=1)
+    assert launched == ["q001"]
+    s = q.state["sessions"]["q001"]
+    assert s["runs"] == ["Transformer-Only_s42", "Jamba-1_3_s42"] and s["status"] == "running"
+    assert q.state["runs"]["Jamba-1_3_s42"]["status"] == "running"
+    # slot is busy: a second step launches nothing while the kernel runs
+    cli.statuses = [("running", "")]
+    assert q.step(max_sessions=1) == []
+
+    # session ends: run A finished, run B hit its budget (incomplete, exit 0, no result)
+    def fake_output(ref, folder):
+        a, b = folder / "Transformer-Only_s42", folder / "Jamba-1_3_s42"
+        (a / "x").mkdir(parents=True)
+        (a / "x" / "result.json").write_text("{}")
+        (a / "run_status.json").write_text(json.dumps({"exit_code": 0, "state": "done"}))
+        b.mkdir(parents=True)
+        (b / "run_status.json").write_text(json.dumps({"exit_code": 0, "state": "done"}))
+        return ""
+    cli.kernel_output = fake_output
+    cli.statuses = [("complete", "")]
+    launched = q.step(max_sessions=1)
+    runs = q.state["runs"]
+    assert runs["Transformer-Only_s42"]["status"] == "done"
+    jb = runs["Jamba-1_3_s42"]
+    assert jb["status"] == "running" and jb["resume_from"] == "u/abr-q001"
+    assert launched == ["q002"]
+    # the incomplete run is relaunched first (it keeps its place in the order)
+    assert q.state["sessions"]["q002"]["runs"] == ["Jamba-1_3_s42", "ABR-4L-CBSC_s42"]
+    assert q.state["sessions"]["q002"]["resume_from"] == ["u/abr-q001"]
+    rec = json.loads((qrepo / "results/kaggle/queue/q002/launch.json").read_text())
+    assert rec["resume_from"] == ["u/abr-q001"] and len(rec["runs"]) == 2
+
+
+def test_queue_failures(qrepo):
+    q = kq.Queue(qrepo, FakeCLI())
+    q.init("HEAD")
+    sess = {"kernel_ref": "u/abr-q009", "kernel_status": "complete"}
+    d = qrepo / "out"
+    (d / "Mamba-Only_s42").mkdir(parents=True)
+    (d / "Mamba-Only_s42" / "run_status.json").write_text(json.dumps({"exit_code": 1, "state": "failed"}))
+    q._settle("Mamba-Only_s42", sess, d, max_failures=2)
+    assert q.state["runs"]["Mamba-Only_s42"]["status"] == "pending"
+    q._settle("Mamba-Only_s42", sess, d, max_failures=2)
+    assert q.state["runs"]["Mamba-Only_s42"]["status"] == "failed"
+    q.retry("Mamba-Only_s42")
+    assert q.state["runs"]["Mamba-Only_s42"]["status"] == "pending"
+    # kernel errored before writing run_status (e.g. install failure) counts as a failure
+    q._settle("Jamba-1_3_s42", {"kernel_ref": "u/abr-q009", "kernel_status": "error"}, d, 2)
+    assert q.state["runs"]["Jamba-1_3_s42"]["failures"] == 1

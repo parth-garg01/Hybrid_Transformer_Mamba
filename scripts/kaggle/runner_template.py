@@ -13,6 +13,8 @@ import os
 import platform
 import re
 import shutil
+import signal
+import threading
 import subprocess
 import sys
 import tarfile
@@ -20,7 +22,10 @@ import time
 import traceback
 import urllib.request
 
-CMD = "__ABR_CMD__"
+# [{"name": None, "cmd": ...}] = single run (output/run.log); otherwise named runs that
+# are spread over the GPUs (one process per GPU) with output/<name>/run.log each.
+RUNS = "__ABR_RUNS__"
+CMD = RUNS[0]["cmd"] if len(RUNS) == 1 else None
 EXPECTED_COMMIT = "__ABR_COMMIT__"
 KERNEL_URL = "__ABR_KERNEL_URL__"
 KERNEL_REF = "__ABR_KERNEL_REF__"
@@ -35,6 +40,10 @@ REPO = os.path.join(WORK, "repo")
 OUT = os.path.join(WORK, "output")
 INPUT = os.environ.get("ABR_RUNNER_INPUT", "/kaggle/input")
 SKIP_INSTALL = os.environ.get("ABR_RUNNER_SKIP_INSTALL") == "1"
+# Kaggle stops a session at 12 h. Named runs get SIGTERM at this budget (from runner
+# start) so they can checkpoint; they are then marked resumable for the next session.
+SESSION_BUDGET_S = float(os.environ.get("ABR_SESSION_BUDGET_S", 11.5 * 3600))
+T_START = time.time()
 os.makedirs(OUT, exist_ok=True)
 LOG_PATH = os.path.join(OUT, "run.log")
 ENV_PATH = os.path.join(OUT, "kaggle_env.json")
@@ -51,16 +60,25 @@ def log(msg):
     _log.write(line + "\n")
 
 
-def sh(cmd, cwd=None, env=None, check=False):
-    """Run a shell command, streaming combined output to stdout and run.log."""
-    log(f"$ {cmd}")
+_print_lock = threading.Lock()
+
+
+def sh(cmd, cwd=None, env=None, check=False, logfile=None, prefix="", on_start=None):
+    """Run a shell command, streaming combined output to stdout and run.log (or `logfile`)."""
+    log(f"{prefix}$ {cmd}")
     p = subprocess.Popen(cmd, shell=True, cwd=cwd, env=env, stdout=subprocess.PIPE,
-                         stderr=subprocess.STDOUT, text=True, bufsize=1, executable="/bin/bash")
+                         stderr=subprocess.STDOUT, text=True, bufsize=1, executable="/bin/bash",
+                         start_new_session=True)
+    if on_start:
+        on_start(p)
     out = []
+    dst = logfile or _log
     for line in p.stdout:
-        sys.stdout.write(line)
-        _log.write(line)
-        out.append(line)
+        with _print_lock:
+            sys.stdout.write(prefix + line)
+        dst.write(line)
+        if logfile is None:
+            out.append(line)
     rc = p.wait()
     log(f"exit {rc}")
     if check and rc != 0:
@@ -77,6 +95,7 @@ ENV = {
     "commit_expected": EXPECTED_COMMIT,
     "gpu_requested": GPU_REQUESTED,
     "cmd": CMD,
+    "runs": RUNS,
     "python": sys.version,
     "platform": platform.platform(),
     "kaggle_env_vars": {k: v for k, v in os.environ.items()
@@ -167,6 +186,7 @@ def torch_info():
         ENV["torch_gpu_name"] = torch.cuda.get_device_name(0)
         ENV["torch_compute_capability"] = list(torch.cuda.get_device_capability(0))
         ENV["torch_arch_list"] = torch.cuda.get_arch_list()
+    ENV["torch_device_count"] = torch.cuda.device_count() if torch.cuda.is_available() else 0
     return torch
 
 
@@ -257,6 +277,119 @@ def installed_versions():
 
 
 # ---------------------------------------------------------------------------------
+# Named runs: one process per GPU, resumable across sessions
+# ---------------------------------------------------------------------------------
+def find_previous_run_dir(run_name):
+    """Previous session's output/<run>/ from the attached kernel outputs (newest session wins)."""
+    best = None
+    for src in RESUME_SOURCES:
+        slug = src.split("/")[-1]
+        for st in glob.glob(os.path.join(INPUT, "**", run_name, "run_status.json"), recursive=True):
+            if slug not in st:
+                continue
+            try:
+                n = int(json.load(open(st)).get("sessions", 0))
+            except Exception:
+                n = 0
+            if best is None or n > best[0]:
+                best = (n, os.path.dirname(st))
+    return best[1] if best else None
+
+
+def write_status(path, st):
+    tmp = path + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(st, f, indent=2, sort_keys=True)
+    os.replace(tmp, path)
+
+
+def run_named(run, gpu_slot, base_env):
+    name = run["name"]
+    rdir = os.path.join(OUT, name)
+    prev = find_previous_run_dir(name)
+    prev_status = {}
+    if prev:
+        log(f"[{name}] restoring previous session output from {prev}")
+        shutil.copytree(prev, rdir, dirs_exist_ok=True)
+        try:
+            prev_status = json.load(open(os.path.join(rdir, "run_status.json")))
+        except Exception:
+            prev_status = {}
+        old_log = os.path.join(rdir, "run.log")
+        if os.path.exists(old_log):
+            keep = os.path.join(rdir, "previous_sessions")
+            os.makedirs(keep, exist_ok=True)
+            shutil.move(old_log, os.path.join(keep, f"run.session{prev_status.get('sessions', 0)}.log"))
+    os.makedirs(rdir, exist_ok=True)
+    status_path = os.path.join(rdir, "run_status.json")
+    sessions = int(prev_status.get("sessions", 0)) + 1
+    st = {"name": name, "cmd": run["cmd"], "commit": ENV.get("commit"), "kernel_ref": KERNEL_REF,
+          "kernel_url": KERNEL_URL, "dataset_version": DATASET_VERSION, "sessions": sessions,
+          "gpu_slot": gpu_slot, "resumed_from": prev, "state": "running", "exit_code": None,
+          "started_utc": utcnow(),
+          "history": list(prev_status.get("history", []))}
+    write_status(status_path, st)
+    env = dict(base_env)
+    env.update({"ABR_OUTPUT_DIR": rdir, "ABR_RUN_NAME": name, "ABR_RESUME_DIR": rdir,
+                "ABR_RESUMED": "1" if prev else "0", "ABR_SESSION_INDEX": str(sessions),
+                "WANDB_DIR": os.path.join(rdir, "wandb"),
+                "ABR_SESSION_DEADLINE": str(int(T_START + SESSION_BUDGET_S))})
+    if gpu_slot is not None:
+        env["CUDA_VISIBLE_DEVICES"] = str(gpu_slot)
+    os.makedirs(env["WANDB_DIR"], exist_ok=True)
+    procs = {}
+    stopped = threading.Event()
+
+    def watchdog():
+        remaining = T_START + SESSION_BUDGET_S - time.time()
+        if remaining > 0 and not stopped.wait(remaining):
+            p = procs.get("p")
+            if p and p.poll() is None:
+                log(f"[{name}] session budget reached, sending SIGTERM (resume next session)")
+                st["stopped_by_deadline"] = True
+                try:
+                    os.killpg(p.pid, signal.SIGTERM)
+                except Exception:
+                    pass
+    threading.Thread(target=watchdog, daemon=True).start()
+    with open(os.path.join(rdir, "run.log"), "a", buffering=1) as lf:
+        rc, _ = sh(run["cmd"], cwd=REPO, env=env, logfile=lf, prefix=f"[{name}] ",
+                   on_start=lambda p: procs.__setitem__("p", p))
+    stopped.set()
+    st["exit_code"] = rc
+    st["finished_utc"] = utcnow()
+    st["state"] = "done" if rc == 0 else ("preempted" if st.get("stopped_by_deadline") else "failed")
+    st["history"].append({"session": sessions, "kernel_ref": KERNEL_REF, "exit_code": rc,
+                          "started_utc": st["started_utc"], "finished_utc": st["finished_utc"],
+                          "state": st["state"]})
+    write_status(status_path, st)
+    return name, rc
+
+
+def run_all_named(base_env, n_gpus):
+    slots = list(range(n_gpus)) if n_gpus > 0 else [None]
+    queues = {i: [] for i in range(len(slots))}
+    for k, run in enumerate(RUNS):
+        queues[k % len(slots)].append(run)
+    results = {}
+
+    def worker(i):
+        for run in queues[i]:
+            try:
+                n, rc = run_named(run, slots[i], base_env)
+            except Exception:
+                log(f"[{run['name']}] runner error:\n{traceback.format_exc()}")
+                n, rc = run["name"], 1
+            results[n] = rc
+    threads = [threading.Thread(target=worker, args=(i,)) for i in queues if queues[i]]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+    return results
+
+
+# ---------------------------------------------------------------------------------
 # main
 # ---------------------------------------------------------------------------------
 def main():
@@ -304,9 +437,16 @@ def main():
         os.makedirs(env["WANDB_DIR"], exist_ok=True)
         ENV["cmd_started_utc"] = utcnow()
         save_env()
-        log(f"running command in {REPO}: {CMD}")
-        rc, _ = sh(CMD, cwd=REPO, env=env)
-        ENV["cmd_exit_code"] = rc
+        if len(RUNS) == 1 and not RUNS[0].get("name"):
+            log(f"running command in {REPO}: {CMD}")
+            rc, _ = sh(CMD, cwd=REPO, env=env)
+            ENV["cmd_exit_code"] = rc
+        else:
+            n_gpus = int(ENV.get("torch_device_count") or 0)
+            log(f"running {len(RUNS)} named runs on {n_gpus} GPU(s)")
+            res = run_all_named(env, n_gpus)
+            ENV["run_exit_codes"] = res
+            rc = 0 if all(v == 0 for v in res.values()) else 1
     except Exception:
         ENV["runner_error"] = traceback.format_exc()
         log(ENV["runner_error"])

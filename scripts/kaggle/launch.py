@@ -3,7 +3,10 @@
 
 Usage:
     launch.py --name <short> --commit <sha-or-ref> --cmd "<command run inside repo>"
-              [--gpu t4|p100] [--wait] [--download results/kaggle/<name>]
+              [--gpu t4|t4x2|p100] [--wait] [--download results/kaggle/<name>]
+    launch.py --name <short> --commit <sha> --gpu t4x2 \
+              --run a --cmd "<cmd A>" --run b --cmd "<cmd B>"   # one process per GPU
+    launch.py --name <short> --commit <sha> --cmds-file runs.json   # [{"name":..,"cmd":..}]
     launch.py --name <short> --attach [--wait] [--download DIR]   # re-attach to a pushed kernel
 
 What it does (see scripts/kaggle/README.md):
@@ -24,6 +27,12 @@ launcher can be tested with the CLI mocked.
 Never prints or reads the Kaggle API token.
 """
 from __future__ import annotations
+
+import sys as _sys
+from pathlib import Path as _P
+# This folder contains queue.py, which would shadow the stdlib `queue` module for
+# anything imported later; drop the script directory from sys.path first.
+_sys.path[:] = [p for p in _sys.path if _P(p or ".").resolve() != _P(__file__).resolve().parent]
 
 import argparse
 import datetime as _dt
@@ -50,9 +59,12 @@ ARCHIVE_NAME = "abr-code.tar.gz"
 KERNEL_PREFIX = "abr-"
 DEFAULT_KAGGLE_BIN = os.path.expanduser("~/.venvs/kaggle/bin/kaggle")
 
-# Kaggle has no public API switch for the GPU type in CLI 1.7.x; we still write the
-# field that newer CLIs understand, and record what was actually assigned at run time.
-MACHINE_SHAPES = {"t4": "NvidiaTeslaT4", "p100": "NvidiaTeslaP100"}
+# Kaggle's GPU machine shape "NvidiaTeslaT4" is the "GPU T4 x2" accelerator and is the
+# server default; "NvidiaTeslaP100" is retired (the server substitutes T4 x2). CLI 1.7.x
+# does not send machine_shape at all, so every GPU kernel gets the default T4 x2. We still
+# write the field newer CLIs understand, and record what was actually assigned at run time.
+MACHINE_SHAPES = {"t4": "NvidiaTeslaT4", "t4x2": "NvidiaTeslaT4", "p100": "NvidiaTeslaP100"}
+RUN_NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,80}$")
 
 PHONE_HELP = (
     "\n*** ACTION NEEDED BY THE OWNER ***\n"
@@ -240,10 +252,41 @@ def build_code_archive(repo: Path, ref: str, out_dir: Path) -> dict:
             "archive_sha256": digest, "n_files": n_files, "git_snapshot": snap is not None}
 
 
-def render_runner(template: str, *, cmd: str, commit: str, user: str, name: str,
+def normalize_runs(cmds, names=None) -> list[dict]:
+    """[cmd] -> [{'name': None, 'cmd': cmd}] (single-run layout: output/run.log);
+    several cmds -> named runs, each with its own GPU slot and output/<name>/ directory."""
+    if isinstance(cmds, str):
+        cmds = [cmds]
+    runs = []
+    for i, c in enumerate(cmds):
+        if isinstance(c, dict):
+            runs.append({"name": c.get("name"), "cmd": c["cmd"]})
+        else:
+            runs.append({"name": (names[i] if names and i < len(names) else None), "cmd": c})
+    if not runs or any(not r["cmd"] for r in runs):
+        raise LaunchError("need at least one non-empty command")
+    if len(runs) > 1 or runs[0]["name"]:
+        for i, r in enumerate(runs):
+            r["name"] = r["name"] or f"run{i}"
+            if not RUN_NAME_RE.match(r["name"]):
+                raise LaunchError(f"bad run name {r['name']!r} (letters, digits, . _ -)")
+        if len({r["name"] for r in runs}) != len(runs):
+            raise LaunchError("run names must be unique")
+    return runs
+
+
+def load_cmds_file(path: Path) -> list[dict]:
+    data = json.loads(Path(path).read_text())
+    if not isinstance(data, list) or not all(isinstance(d, dict) and "cmd" in d for d in data):
+        raise LaunchError(f"{path}: expected a JSON list of {{'name': ..., 'cmd': ...}}")
+    return data
+
+
+def render_runner(template: str, *, cmd, commit: str, user: str, name: str,
                   dataset_version, gpu: str, resume_sources: list[str] | None = None) -> str:
+    runs = cmd if isinstance(cmd, list) and cmd and isinstance(cmd[0], dict) else normalize_runs(cmd)
     values = {
-        "__ABR_CMD__": cmd,
+        "__ABR_RUNS__": runs,
         "__ABR_COMMIT__": commit,
         "__ABR_KERNEL_URL__": kernel_url(user, name),
         "__ABR_KERNEL_REF__": kernel_ref(user, name),
@@ -261,7 +304,7 @@ def render_runner(template: str, *, cmd: str, commit: str, user: str, name: str,
     return out
 
 
-def build_kernel_dir(out_dir: Path, *, user: str, name: str, cmd: str, commit: str,
+def build_kernel_dir(out_dir: Path, *, user: str, name: str, cmd, commit: str,
                      dataset_version, gpu: str, kernel_sources: list[str] | None = None) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
     meta = make_kernel_metadata(user, name, gpu, kernel_sources=kernel_sources)
@@ -359,8 +402,9 @@ class KaggleCLI:
         return self.run("datasets", "version", "-p", str(folder), "-m", notes).stdout
 
     # kernels ------------------------------------------------------------------------
-    def kernel_push(self, folder: Path) -> subprocess.CompletedProcess:
-        return self.run("kernels", "push", "-p", str(folder), check=False)
+    def kernel_push(self, folder: Path, timeout: int | None = None) -> subprocess.CompletedProcess:
+        extra = ["-t", str(int(timeout))] if timeout else []
+        return self.run("kernels", "push", "-p", str(folder), *extra, check=False)
 
     def kernel_status(self, ref: str) -> tuple[str, str]:
         r = self.run("kernels", "status", ref, check=False)
@@ -437,8 +481,8 @@ def upload_code(cli: KaggleCLI, pkg: dict, staging: Path, name: str,
             "is_private": info.get("is_private")}
 
 
-def push_kernel(cli: KaggleCLI, kdir: Path, user: str, name: str) -> dict:
-    r = cli.kernel_push(kdir)
+def push_kernel(cli: KaggleCLI, kdir: Path, user: str, name: str, timeout: int | None = None) -> dict:
+    r = cli.kernel_push(kdir, timeout) if timeout else cli.kernel_push(kdir)
     text = (r.stdout + "\n" + r.stderr).strip()
     print(text)
     parsed = parse_push_output(text)
@@ -520,20 +564,77 @@ def download_outputs(cli: KaggleCLI, ref: str, dest: Path, user: str) -> dict:
     return summary
 
 
+def launch_session(*, repo: Path, cli: "KaggleCLI", name: str, commit: str, runs: list[dict],
+                   gpu: str = "t4", resume_from: list[str] | None = None, timeout: int | None = None,
+                   rec_path: Path | None = None, staging: Path | None = None,
+                   dry_run: bool = False) -> dict:
+    """Package `commit`, upload it, push kernel abr-<name> and write launch.json. Returns the record."""
+    user = cli.user
+    ref = kernel_ref(user, name)
+    rec_path = rec_path or (repo / "results" / "kaggle" / name / "launch.json")
+    staging_root = staging or Path(tempfile.mkdtemp(prefix="abr-kaggle-"))
+    ds_dir, k_dir = staging_root / "dataset", staging_root / "kernel"
+    pkg = build_code_archive(repo, commit, ds_dir)
+    print(f"[launch] packaged commit {pkg['commit']} ({pkg['n_files']} files, "
+          f"sha256 {pkg['archive_sha256'][:16]}..., git_snapshot={pkg['git_snapshot']})")
+    if gpu == "p100":
+        print("[launch] warning: Kaggle retired P100; the session will run on the default GPU (T4 x2).")
+    record = {
+        "name": name, "commit": pkg["commit"], "commit_ref": commit,
+        "archive_sha256": pkg["archive_sha256"], "git_snapshot": pkg["git_snapshot"],
+        "runs": runs, "cmd": runs[0]["cmd"] if len(runs) == 1 else None,
+        "gpu_requested": gpu, "kaggle_user": user,
+        "kernel_ref": ref, "kernel_url": kernel_url(user, name),
+        "launched_utc": utcnow(), "resume_from": list(resume_from or []),
+    }
+    if timeout:
+        record["timeout_s"] = timeout
+    if dry_run:
+        build_kernel_dir(k_dir, user=user, name=name, cmd=runs, commit=pkg["commit"],
+                         dataset_version=None, gpu=gpu, kernel_sources=resume_from)
+        record["staging"] = str(staging_root)
+        print(f"[launch] dry run: staging in {staging_root}")
+        return record
+    ds = upload_code(cli, pkg, ds_dir, name)
+    record["dataset"] = ds
+    print(f"[launch] dataset {ds['ref']} v{ds['version']} ready")
+    build_kernel_dir(k_dir, user=user, name=name, cmd=runs, commit=pkg["commit"],
+                     dataset_version=ds["version"], gpu=gpu, kernel_sources=resume_from)
+    pushed = push_kernel(cli, k_dir, user, name, timeout=timeout)
+    record["kernel_version"] = pushed["version"]
+    record["kernel_version_url"] = pushed["url"]
+    record["pushed_utc"] = utcnow()
+    record["server_settings"] = verify_server_settings(cli, ref, user)
+    write_launch_record(rec_path, record)
+    print(f"[launch] kernel: {record['kernel_url']} (version {pushed['version']})")
+    print(f"[launch] record: {rec_path}")
+    return record
+
+
 def main(argv=None) -> int:
+    try:  # progress lines must show up promptly even when redirected to a file
+        sys.stdout.reconfigure(line_buffering=True)
+    except Exception:
+        pass
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--name", required=True, help="short kernel name; kernel slug is abr-<name>")
     p.add_argument("--commit", help="git sha or ref to package (required unless --attach)")
-    p.add_argument("--cmd", help="shell command run inside /kaggle/working/repo")
+    p.add_argument("--cmd", action="append", default=[],
+                   help="shell command run inside /kaggle/working/repo; repeat for parallel runs "
+                        "(one per GPU, CUDA_VISIBLE_DEVICES=0,1,...)")
+    p.add_argument("--run", action="append", default=[], metavar="NAME",
+                   help="name for the matching --cmd (output goes to output/<NAME>/)")
+    p.add_argument("--cmds-file", help='JSON list of {"name": ..., "cmd": ...}')
     p.add_argument("--gpu", choices=sorted(MACHINE_SHAPES), default="t4",
-                   help="requested GPU (Kaggle may assign another; the real one is logged)")
+                   help="requested GPU (Kaggle's GPU shape is T4 x2; the real one is logged)")
     p.add_argument("--wait", action="store_true", help="poll until the kernel finishes")
-    p.add_argument("--download", metavar="DIR", help="download kernel outputs into DIR")
+    p.add_argument("--download", metavar="DIR",
+                   help="download kernel outputs into DIR (launch.json is then written there too)")
     p.add_argument("--attach", action="store_true",
                    help="don't push; wait/download an already pushed kernel (uses launch.json)")
     p.add_argument("--resume-from", action="append", default=[], metavar="KERNEL",
                    help="attach a previous kernel's output as input (e.g. parthgarg101/abr-run-s1); "
-                        "the runner exports ABR_RESUME_DIRS")
+                        "each named run's previous output/<run>/ is copied back before it starts")
     p.add_argument("--timeout", type=int, default=None, help="kernel run-time limit in seconds")
     p.add_argument("--repo", default=None, help="repo root (default: git toplevel of this file)")
     p.add_argument("--user", default=DEFAULT_USER)
@@ -545,47 +646,31 @@ def main(argv=None) -> int:
     try:
         validate_name(a.name)
         repo = Path(a.repo) if a.repo else Path(_git(HERE, "rev-parse", "--show-toplevel"))
-        rec_path = repo / "results" / "kaggle" / a.name / "launch.json"
+        dest = None
+        if a.download:
+            dest = Path(a.download)
+            if not dest.is_absolute():
+                dest = repo / dest
+        rec_path = (dest or repo / "results" / "kaggle" / a.name) / "launch.json"
         cli = KaggleCLI(a.kaggle_bin, a.user)
         ref = kernel_ref(a.user, a.name)
 
         if a.attach:
             record = json.loads(rec_path.read_text()) if rec_path.exists() else {"kernel_ref": ref}
         else:
-            if not a.commit or not a.cmd:
-                p.error("--commit and --cmd are required unless --attach")
-            staging_root = Path(a.keep_staging) if a.keep_staging else Path(tempfile.mkdtemp(prefix="abr-kaggle-"))
-            ds_dir, k_dir = staging_root / "dataset", staging_root / "kernel"
-            pkg = build_code_archive(repo, a.commit, ds_dir)
-            print(f"[launch] packaged commit {pkg['commit']} ({pkg['n_files']} files, "
-                  f"sha256 {pkg['archive_sha256'][:16]}...)")
-            record = {
-                "name": a.name, "commit": pkg["commit"], "commit_ref": a.commit,
-                "archive_sha256": pkg["archive_sha256"], "cmd": a.cmd, "gpu_requested": a.gpu,
-                "kernel_ref": ref, "kernel_url": kernel_url(a.user, a.name),
-                "launched_utc": utcnow(), "resume_from": a.resume_from,
-            }
+            if a.cmds_file:
+                runs = normalize_runs(load_cmds_file(Path(a.cmds_file)))
+            else:
+                runs = normalize_runs(a.cmd, a.run)
+            if not a.commit:
+                p.error("--commit is required unless --attach")
+            record = launch_session(
+                repo=repo, cli=cli, name=a.name, commit=a.commit, runs=runs, gpu=a.gpu,
+                resume_from=a.resume_from, timeout=a.timeout, rec_path=rec_path,
+                staging=Path(a.keep_staging) if a.keep_staging else None, dry_run=a.dry_run)
             if a.dry_run:
-                build_kernel_dir(k_dir, user=a.user, name=a.name, cmd=a.cmd, commit=pkg["commit"],
-                                 dataset_version=None, gpu=a.gpu, kernel_sources=a.resume_from)
-                print(f"[launch] dry run: staging in {staging_root}")
                 print(json.dumps(record, indent=2))
                 return 0
-            ds = upload_code(cli, pkg, ds_dir, a.name)
-            record["dataset"] = ds
-            print(f"[launch] dataset {ds['ref']} v{ds['version']} ready")
-            build_kernel_dir(k_dir, user=a.user, name=a.name, cmd=a.cmd, commit=pkg["commit"],
-                             dataset_version=ds["version"], gpu=a.gpu, kernel_sources=a.resume_from)
-            if a.timeout:
-                record["timeout_s"] = a.timeout
-            pushed = push_kernel(cli, k_dir, a.user, a.name)
-            record["kernel_version"] = pushed["version"]
-            record["kernel_version_url"] = pushed["url"]
-            record["pushed_utc"] = utcnow()
-            record["server_settings"] = verify_server_settings(cli, ref, a.user)
-            write_launch_record(rec_path, record)
-            print(f"[launch] kernel: {record['kernel_url']} (version {pushed['version']})")
-            print(f"[launch] record: {rec_path}")
 
         if a.wait:
             status, msg = wait_for_kernel(cli, ref)
@@ -594,10 +679,7 @@ def main(argv=None) -> int:
             write_launch_record(rec_path, record)
             if msg and classify_error(msg) in ("phone_verification", "gpu_or_internet_refused"):
                 print(PHONE_HELP.format(user=a.user), file=sys.stderr)
-        if a.download:
-            dest = Path(a.download)
-            if not dest.is_absolute():
-                dest = repo / dest
+        if dest is not None:
             record["download"] = download_outputs(cli, ref, dest, a.user)
             record["downloaded_utc"] = utcnow()
             write_launch_record(rec_path, record)

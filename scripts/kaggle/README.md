@@ -9,6 +9,7 @@ an exact commit of this repo to a Kaggle GPU kernel.
 | `launch.py` | CLI: package a commit, upload it, push the kernel, wait, download |
 | `runner_template.py` | The kernel script (placeholders filled in by `launch.py`) |
 | `compat_check.py` | Mamba-1/Mamba-2 GPU compatibility check (runs on Kaggle) |
+| `queue.py` | Job queue for the Phase 2 runs: 2 runs per T4 x2 session, resume across sessions |
 
 Prerequisites: Kaggle CLI at `~/.venvs/kaggle/bin/kaggle`, authenticated through
 `~/.kaggle/kaggle.json` (chmod 600; never print, copy or commit it). The account must be
@@ -30,15 +31,67 @@ python scripts/kaggle/launch.py --name compat-check --commit HEAD \
   contain the sha. The launcher waits until that version is ready before pushing.
 * `--cmd` runs with bash inside `/kaggle/working/repo`. Write outputs to
   `$ABR_OUTPUT_DIR` (= `/kaggle/working/output`), which is what gets downloaded.
-* `--gpu t4|p100` is written to `kernel-metadata.json` as `machine_shape`, but Kaggle CLI
-  1.7.4.5 (the newest that installs on the CLI venv's Python 3.9) does not send it, so
-  Kaggle assigns its default accelerator. The real GPU is logged in `kaggle_env.json`.
+* `--gpu t4|t4x2|p100` is written to `kernel-metadata.json` as `machine_shape`. Kaggle's
+  `NvidiaTeslaT4` shape *is* "GPU T4 x2" and is the server default; P100 is retired (the
+  server substitutes T4 x2). Kaggle CLI 1.7.4.5 (the newest that installs on the CLI venv's
+  Python 3.9) does not send `machine_shape` at all, so every GPU kernel gets the default.
+  The real GPU(s) are logged in `kaggle_env.json`.
 * `--timeout SECONDS` caps the kernel run time.
 * `--dry-run --keep-staging DIR` builds the archive and kernel folder without network.
 
 The launcher prints the kernel URL and writes `results/kaggle/<name>/launch.json` with the
 commit, archive SHA-256, dataset version, kernel slug, kernel version and UTC timestamps
 (launched, pushed, finished, downloaded) and the final status.
+
+## Two runs per session (T4 x2)
+
+Give several commands; each becomes a named run with its own GPU:
+
+```bash
+python scripts/kaggle/launch.py --name pair1 --commit <sha> --gpu t4x2 \
+    --run ABR-4L-CBSC_s42  --cmd "python experiments/full_scale/train.py --config ABR-4L-CBSC --seed 42 --out \$ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 11" \
+    --run Jamba-1_3_s42    --cmd "python experiments/full_scale/train.py --config Jamba-1:3 --seed 42 --out \$ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 11"
+# or: --cmds-file runs.json   with [{"name": "...", "cmd": "..."}, ...]
+```
+
+Run *i* gets `CUDA_VISIBLE_DEVICES=i % n_gpus` (extra runs queue up behind the first two),
+`ABR_OUTPUT_DIR=/kaggle/working/output/<run>/`, `WANDB_DIR=<that>/wandb`, its own
+`output/<run>/run.log`, and `output/<run>/run_status.json` (state `done` / `failed` /
+`preempted` / `running`, exit code, session count, history). `ABR_SESSION_DEADLINE`
+(epoch s) is exported; at 11.5 h the runner sends SIGTERM so the run can checkpoint.
+A single unnamed `--cmd` keeps the simple layout (`output/run.log`).
+
+**Resume:** pass `--resume-from <previous kernel>`. Before a named run starts, the runner
+copies the previous session's `output/<run>/` (checkpoints, logs, W&B files) back into the
+new `output/<run>/`, moves the old `run.log` to `previous_sessions/run.session<N>.log`, and
+sets `ABR_RESUMED=1`. `train.py` then resumes from
+`$ABR_OUTPUT_DIR/checkpoints/<run_name>/ckpt.pt` by itself.
+
+## Job queue
+
+```bash
+python scripts/kaggle/queue.py init --commit <sha> [--sweep ABR-4L-gatedCBSC] [--exclude-non-mamba]
+python scripts/kaggle/queue.py status
+python scripts/kaggle/queue.py step  [--max-sessions 1]     # one pass (cron-friendly)
+python scripts/kaggle/queue.py watch [--interval 900]       # loop until all done/failed
+python scripts/kaggle/queue.py add-sweep ABR-4L-gatedCBSC  # later, once the sweep config is chosen
+python scripts/kaggle/queue.py retry <run_id>
+```
+
+* The default queue is `config.planned_runs()` (40 runs), ordered key 5-seed configs first,
+  seed-major (every key config gets seed 42 before any gets seed 123), then the 2-seed
+  configs, then the 6 block-sweep runs (`BLOCK_SWEEP_TRAIN` x `BLOCK_SWEEP_SEEDS`).
+  `--exclude-non-mamba` drops Transformer-Only (PRD §0.3 allows it locally, but the speed
+  numbers must come from the same Kaggle GPU).
+* Slots = `--max-sessions` (default 1) x `--gpus-per-session` (2). Each session is a new
+  kernel `abr-qNNN`; every session uses the queue's commit.
+* State: `results/kaggle/queue.json`; per-session outputs and `launch.json` in
+  `results/kaggle/queue/qNNN/`.
+* After a session ends the queue downloads it and settles each run: **done** if exit 0 and
+  a `result.json` exists; **pending** with `resume_from = that kernel` if it stopped on its
+  budget or was killed; a non-zero exit (or a kernel error before the run started) counts
+  as a failure, and after `--max-failures` (2) it is **failed**. Failed runs stay listed
+  (PRD §0.4 B: report every run started).
 
 ## Re-attach, wait and download later
 
@@ -112,6 +165,9 @@ After download, sync W&B locally: `wandb sync results/kaggle/<name>/wandb/offlin
   remaining quota at https://www.kaggle.com/settings.
 * Log GPU time per run and a weekly running total in `project.md`. The run time is
   `finished_utc - started_utc` in `kaggle_env.json`.
+* T4 x2 runs two jobs per session, so 30 GPU h/week is about 30 h of wall time for 2 runs
+  if Kaggle counts session hours rather than per-GPU hours. Check the quota meter on the
+  settings page after the first T4 x2 session to confirm.
 * Install takes a few minutes per kernel (prebuilt wheels). A source build can take 30+ min:
   if `kaggle_env.json` shows `"method": "pip_no_build_isolation"`, check `run.log`.
 

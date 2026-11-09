@@ -22,6 +22,8 @@ Checks
                           both the SSM state and the conv state (what gated CBSC needs)
   mamba1_initial_state_api
                           what Mamba-1 exposes for passing an initial state (signatures + source)
+  multi_gpu               nvidia-smi GPU count (T4 x2 should show 2) and Mamba-1/Mamba-2
+                          forward+backward on every visible GPU
   throughput              tokens/s and peak memory, Mamba-1 and Mamba-2 layers, L=256/1024/4096
 """
 from __future__ import annotations
@@ -472,6 +474,41 @@ def check_mamba1_api():
     return res
 
 
+@check("multi_gpu")
+def check_multi_gpu():
+    import torch
+    from mamba_ssm import Mamba, Mamba2
+    smi = subprocess.run(["nvidia-smi", "-L"], capture_output=True, text=True, timeout=60).stdout
+    res = {"nvidia_smi_L": smi.strip(), "nvidia_smi_gpu_count": len([l for l in smi.splitlines() if l.startswith("GPU ")]),
+           "torch_device_count": torch.cuda.device_count(), "devices": {}}
+    for i in range(torch.cuda.device_count()):
+        def run(i=i):
+            dev = torch.device("cuda", i)
+            out = {"name": torch.cuda.get_device_name(i)}
+            with torch.cuda.device(i):
+                for lname, ctor in (("mamba1", lambda: Mamba(d_model=D_MODEL, d_state=16)),
+                                    ("mamba2", lambda: Mamba2(d_model=D_MODEL, d_state=64, headdim=64))):
+                    torch.manual_seed(0)
+                    layer = ctor().to(dev)
+                    x = torch.randn(BATCH, SEQ, D_MODEL, device=dev, requires_grad=True)
+                    for label, dt in (("fp32", None), ("fp16_autocast", torch.float16)):
+                        x.grad = None
+                        if dt is None:
+                            y = layer(x)
+                        else:
+                            with torch.autocast("cuda", dtype=dt):
+                                y = layer(x)
+                        y.float().pow(2).mean().backward()
+                        torch.cuda.synchronize(dev)
+                        out[f"{lname}_{label}"] = bool(torch.isfinite(y).all() and torch.isfinite(x.grad).all())
+                    del layer
+            return out
+        res["devices"][str(i)] = sub(run)
+    res["all_devices_ok"] = bool(res["devices"]) and all(
+        d["ok"] and all(v for k, v in d.items() if k.startswith("mamba")) for d in res["devices"].values())
+    return res
+
+
 # ---------------------------------------------------------------------------------
 @check("throughput")
 def check_throughput(quick=False):
@@ -552,6 +589,7 @@ def main():
     check_chunked_kernel()
     check_chunked_module()
     check_mamba1_api()
+    check_multi_gpu()
     check_throughput(quick=a.quick)
     RESULTS["finished_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     RESULTS["summary"] = {k: v.get("ok") for k, v in RESULTS["checks"].items()}
