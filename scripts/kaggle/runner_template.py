@@ -259,6 +259,75 @@ def find_wheel(repo, cuda_major, torch_mm, abi, cp):
     return None
 
 
+# Versions validated by the compatibility check (results/kaggle/compat_check).
+PINNED = {"causal_conv1d": ("causal-conv1d", "1.7.0", "CAUSAL_CONV1D"),
+          "mamba_ssm": ("mamba-ssm", "2.3.2.post1", "MAMBA")}
+WHEEL_DIR = os.path.join(OUT, "wheels")
+
+
+def local_tag(torch):
+    """e.g. cu130torch2.11sm75: CUDA, torch major.minor and the GPU arch the wheel targets."""
+    cuda = (torch.version.cuda or "0").replace(".", "")
+    tmm = ".".join(torch.__version__.split("+")[0].split(".")[:2])
+    cap = torch.cuda.get_device_capability(0) if torch.cuda.is_available() else (0, 0)
+    return f"cu{cuda}torch{tmm}sm{cap[0]}{cap[1]}", f"{cap[0]}{cap[1]}"
+
+
+def mounted_wheels(tag, cp):
+    """Wheels built earlier by this runner and uploaded as a private dataset."""
+    found = {}
+    for pkg in PINNED:
+        hits = sorted(w for w in glob.glob(os.path.join(INPUT, "**", f"{pkg}-*.whl"), recursive=True)
+                      if f"+{tag}-{cp}-" in os.path.basename(w))
+        if hits:
+            found[pkg] = hits[-1]
+    return found
+
+
+def patch_setup_for_arch(setup_py, arch):
+    """Compile only for this GPU's arch (the stock setup.py builds 9 archs: ~75 min on Kaggle)."""
+    src = open(setup_py).read()
+    pat = re.compile(r'cc_flag\.append\("-gencode"\)\n(\s*)cc_flag\.append\("arch=compute_(\d+),code=sm_\d+"\)')
+    archs = [m.group(2) for m in pat.finditer(src)]
+    if arch not in archs:
+        raise RuntimeError(f"arch sm_{arch} not in setup.py arch list {archs}")
+    out = pat.sub(lambda m: m.group(0) if m.group(2) == arch else f"pass\n{m.group(1)}pass", src)
+    open(setup_py, "w").write(out)
+    return archs
+
+
+def pypi_sdist(name, version):
+    with urllib.request.urlopen(f"https://pypi.org/pypi/{name}/{version}/json", timeout=60) as r:
+        meta = json.load(r)
+    return [u["url"] for u in meta["urls"] if u["packagetype"] == "sdist"][0]
+
+
+def build_wheels(torch, tag, arch):
+    os.makedirs(WHEEL_DIR, exist_ok=True)
+    bdir = os.path.join(WORK, "_build")
+    os.makedirs(bdir, exist_ok=True)
+    built = {}
+    for pkg, (name, ver, envp) in PINNED.items():  # causal_conv1d first
+        url = pypi_sdist(name, ver)
+        tgz = os.path.join(bdir, os.path.basename(url))
+        urllib.request.urlretrieve(url, tgz)
+        with tarfile.open(tgz) as t:
+            t.extractall(bdir)
+        src = os.path.join(bdir, os.path.basename(url)[:-len(".tar.gz")])
+        patch_setup_for_arch(os.path.join(src, "setup.py"), arch)
+        env = dict(os.environ, MAX_JOBS="4", **{f"{envp}_FORCE_BUILD": "TRUE",
+                                                 f"{envp}_LOCAL_VERSION": tag})
+        rc, _ = sh(f"pip wheel --no-build-isolation --no-deps -w {WHEEL_DIR} {src}", env=env)
+        whl = sorted(glob.glob(os.path.join(WHEEL_DIR, f"{pkg}-*+{tag}-*.whl")))
+        if rc != 0 or not whl:
+            raise RuntimeError(f"building {name} {ver} for sm_{arch} failed")
+        built[pkg] = whl[-1]
+        # install right away: mamba-ssm's build imports causal_conv1d's presence lazily
+        sh(f"pip install {whl[-1]}", check=True)
+    shutil.rmtree(bdir, ignore_errors=True)
+    return built
+
+
 def install_mamba(torch):
     t0 = time.time()
     info = {}
@@ -266,7 +335,20 @@ def install_mamba(torch):
     cuda_major = (torch.version.cuda or "12").split(".")[0]
     abi = "TRUE" if torch._C._GLIBCXX_USE_CXX11_ABI else "FALSE"
     cp = f"cp{sys.version_info.major}{sys.version_info.minor}"
-    info["match_key"] = {"torch": torch_mm, "cuda_major": cuda_major, "cxx11abi": abi, "python": cp}
+    tag, arch = local_tag(torch)
+    info["match_key"] = {"torch": torch_mm, "cuda_major": cuda_major, "cxx11abi": abi,
+                         "python": cp, "local_tag": tag}
+    sh("pip install einops ninja packaging")
+    # 1. wheels from a mounted private dataset (built by an earlier session of this runner)
+    mw = mounted_wheels(tag, cp)
+    info["mounted_wheels"] = mw
+    if len(mw) == len(PINNED):
+        rc, _ = sh(f"pip install {mw['causal_conv1d']} {mw['mamba_ssm']}")
+        if rc == 0:
+            info["method"] = "mounted_wheels"
+            info["install_seconds"] = round(time.time() - t0, 1)
+            return info
+    # 2. official GitHub release wheels matching torch/CUDA/python/ABI
     wheels = {}
     for pkg, repo in (("causal_conv1d", "Dao-AILab/causal-conv1d"), ("mamba_ssm", "state-spaces/mamba")):
         try:
@@ -276,20 +358,55 @@ def install_mamba(torch):
             wheels[pkg] = None
     info["wheels"] = wheels
     if all(wheels.values()):
-        info["method"] = "prebuilt_wheels"
-        rc, _ = sh(f"pip install --no-deps {wheels['causal_conv1d']['url']} {wheels['mamba_ssm']['url']}")
-        if rc != 0:
-            info["method"] = "prebuilt_wheels_failed->pip_no_build_isolation"
-    else:
+        rc, _ = sh(f"pip install {wheels['causal_conv1d']['url']} {wheels['mamba_ssm']['url']}")
+        if rc == 0:
+            info["method"] = "prebuilt_wheels"
+            info["install_seconds"] = round(time.time() - t0, 1)
+            return info
+    # 3. build pinned versions from source for this GPU arch only; wheels kept in output/wheels
+    try:
+        info["built_wheels"] = build_wheels(torch, tag, arch)
+        info["method"] = f"built_from_source_sm{arch}"
+    except Exception:
+        info["build_error"] = traceback.format_exc()
+        log(info["build_error"])
+        # 4. stock build (all archs, slow)
         info["method"] = "pip_no_build_isolation"
-    sh("pip install einops ninja packaging")
-    if info["method"] != "prebuilt_wheels":
-        # The packages' setup.py first tries to download the matching wheel itself and
-        # only compiles CUDA sources if none exists (slow: tens of minutes).
-        sh("pip install --no-build-isolation causal-conv1d", env=dict(os.environ, MAX_JOBS="4"))
-        sh("pip install --no-build-isolation mamba-ssm", env=dict(os.environ, MAX_JOBS="4"))
+        for pkg, (name, ver, _) in PINNED.items():
+            sh(f"pip install --no-build-isolation {name}=={ver}", env=dict(os.environ, MAX_JOBS="4"))
     info["install_seconds"] = round(time.time() - t0, 1)
     return info
+
+
+# ---------------------------------------------------------------------------------
+# Triton kernel cache (Mamba-2 kernels take minutes to JIT-compile on a T4)
+# ---------------------------------------------------------------------------------
+TRITON_CACHE = os.path.join(WORK, "triton_cache")
+
+
+def restore_triton_cache():
+    os.makedirs(TRITON_CACHE, exist_ok=True)
+    for tgz in sorted(glob.glob(os.path.join(INPUT, "**", "triton_cache.tar.gz"), recursive=True)):
+        try:
+            with tarfile.open(tgz) as t:
+                t.extractall(WORK)
+            log(f"restored Triton cache from {tgz}")
+            return tgz
+        except Exception as e:
+            log(f"could not restore Triton cache {tgz}: {e}")
+    # Kaggle may have auto-extracted the archive into a directory
+    for d in sorted(glob.glob(os.path.join(INPUT, "**", "triton_cache"), recursive=True)):
+        if os.path.isdir(d) and d != TRITON_CACHE:
+            shutil.copytree(d, TRITON_CACHE, dirs_exist_ok=True)
+            log(f"restored Triton cache from {d}")
+            return d
+    return None
+
+
+def save_triton_cache():
+    if os.path.isdir(TRITON_CACHE) and os.listdir(TRITON_CACHE):
+        with tarfile.open(os.path.join(OUT, "triton_cache.tar.gz"), "w:gz") as t:
+            t.add(TRITON_CACHE, arcname="triton_cache")
 
 
 def installed_versions():
@@ -468,6 +585,8 @@ def main():
         })
         if cache_dir:
             env["ABR_CACHE_DIR"] = cache_dir
+        ENV["triton_cache_restored_from"] = restore_triton_cache()
+        env["TRITON_CACHE_DIR"] = TRITON_CACHE
         # Kaggle does not tell a running kernel its own version number; the launcher
         # records the real one in results/kaggle/<name>/launch.json. Pass one through
         # only if the platform provides it.
@@ -493,6 +612,10 @@ def main():
         log(ENV["runner_error"])
         rc = 1
     finally:
+        try:
+            save_triton_cache()
+        except Exception as e:
+            log(f"could not save Triton cache: {e}")
         ENV["finished_utc"] = utcnow()
         save_env()
         # The exact code is preserved in the dataset version; don't duplicate it in outputs.

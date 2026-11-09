@@ -551,3 +551,26 @@ def test_runner_token_cache_mismatch_refuses(repo, tmp_path, monkeypatch):
     assert r.returncode == 1
     env = json.loads((out / "kaggle_env.json").read_text())
     assert "mismatch" in env["runner_error"] and "cmd_exit_code" not in env
+
+
+def test_patch_setup_for_arch(tmp_path):
+    src = launch.RUNNER_TEMPLATE.read_text()
+    ns = {}
+    exec("import re\n" + src[src.index("def patch_setup_for_arch"):src.index("def pypi_sdist")], ns)
+    setup = tmp_path / "setup.py"
+    setup.write_text(
+        "cc_flag = []\n"
+        "if True:\n"
+        '    cc_flag.append("-gencode")\n'
+        '    cc_flag.append("arch=compute_75,code=sm_75")\n'
+        '    cc_flag.append("-gencode")\n'
+        '    cc_flag.append("arch=compute_80,code=sm_80")\n'
+        "    if True:\n"
+        '        cc_flag.append("-gencode")\n'
+        '        cc_flag.append("arch=compute_90,code=sm_90")\n')
+    assert ns["patch_setup_for_arch"](str(setup), "75") == ["75", "80", "90"]
+    g = {}
+    exec(setup.read_text(), g)
+    assert g["cc_flag"] == ["-gencode", "arch=compute_75,code=sm_75"]
+    with pytest.raises(RuntimeError):
+        ns["patch_setup_for_arch"](str(setup), "60")
