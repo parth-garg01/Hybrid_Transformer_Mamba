@@ -1,0 +1,25 @@
+{
+  "cmd": "python scripts/kaggle/time_train.py --config Transformer-Only",
+  "commit": "3d051a8673ae73ecb2d882f4db83cab33f29206a",
+  "dataset_version": 2,
+  "exit_code": 0,
+  "finished_utc": "2026-11-09T21:51:10Z",
+  "gpu_slot": 1,
+  "history": [
+    {
+      "exit_code": 0,
+      "finished_utc": "2026-11-09T21:51:10Z",
+      "kernel_ref": "parthgarg101/abr-gputest-t4x2",
+      "session": 1,
+      "started_utc": "2026-11-09T21:50:23Z",
+      "state": "done"
+    }
+  ],
+  "kernel_ref": "parthgarg101/abr-gputest-t4x2",
+  "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-gputest-t4x2",
+  "name": "time_Transformer-Only",
+  "resumed_from": null,
+  "sessions": 1,
+  "started_utc": "2026-11-09T21:50:23Z",
+  "state": "done"
+}

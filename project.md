@@ -13,7 +13,7 @@ Plan: see `prd.md`. This file is the single source of truth for progress (PRD §
 | P1.4 Aux losses + temperature | done (model side; training loop must call the new API) | agent: model | 2026-11-09 |
 | P1.5 Full evaluation + stats | done | agent: train-eval | 2026-11-09 |
 | P1.6 Smoke runs | todo | lead | |
-| Kaggle pipeline + Mamba compatibility check | todo | agent: kaggle | |
+| Kaggle pipeline + Mamba compatibility check | done | agent: kaggle | 2026-11-10 |
 | P2.1–P2.6 Fair experiments | todo | | |
 | P3.1 Attention-budget dial | todo | | |
 | P3.2 Scale up | todo | | |
@@ -163,3 +163,43 @@ None yet. No reportable experiment has been run under the new pipeline.
   - validation `a6091ca4a7f0bd4caae7e4d7eb895cf01a1891bf32e1aa64587c26c877e222ea`
   - test `84bb27f5bcebc4b63e77725bee2e0d318f79cab1ba34b10e9413612630b29b64`
 - Kaggle kernels must check these hashes before training (recorded per run in `kaggle_env.json`).
+
+
+### 2026-11-09 — Kaggle pipeline + Mamba compatibility check (agent: kaggle)
+- **Done:**
+  - Built `scripts/kaggle/launch.py`: packages a commit with `git archive` (plus `COMMIT`, and `git_snapshot.json` from `provenance.py snapshot` when the module is in the commit), uploads it as a new version of the private dataset `parthgarg101/abr-code` (commit sha in the version notes), pushes a private GPU + internet script kernel `abr-<name>`, waits with backoff, downloads, and writes `launch.json` (commit, archive SHA-256, dataset version, kernel slug/version, timestamps, run/lane plan). It detects phone-verification / GPU refusals (push response, pulled-back kernel metadata, `no_gpu` in `kaggle_env.json`).
+  - Kernel runner (`runner_template.py`): verifies the snapshot's commit, mounts and SHA-256-checks the token cache (`ABR_CACHE_DIR`), installs mamba-ssm/causal-conv1d, sets `WANDB_MODE=offline`, `KAGGLE_KERNEL_URL`, `CODE_COMMIT`, tees all output, writes `kaggle_env.json`. Named runs run one per GPU (T4 x2), each lane back to back, with `{max_hours}` = remaining lane budget, own `output/<run>/run.log` and `run_status.json`, and resume by copying the previous session's `output/<run>/` back.
+  - `queue.py`: queue from `config.planned_runs()` (+ block sweep), key configs first; packed sessions (2 lanes x 11.5 h, longest-job-first from `scripts/kaggle/run_costs.json`); `advance` = one idempotent command (check, selective download, settle, launch next).
+  - `compat_check.py` and `time_train.py`; ran both on Kaggle (2 GPU kernels in total).
+  - Created the private dataset `parthgarg101/abr-mamba-wheels` (sm_75 wheels built by the T4x2 kernel + Triton cache; SHA256SUMS inside: causal_conv1d `c13ca5ad…edb9`, mamba_ssm `33994f83…cccc`, triton_cache.tar.gz `775d5338…4216`).
+- **Files changed:** `scripts/kaggle/{launch.py,runner_template.py,compat_check.py,time_train.py,queue.py,run_costs.json,README.md}`, `tests/test_kaggle_launcher.py`, `results/kaggle/compat_check/`, `results/kaggle/gputest_t4x2/` (logs/JSON only), `project.md`
+- **Results:**
+  - Environment (`results/kaggle/compat_check/output/kaggle_env.json`): Kaggle "GPU T4 x2" (2 x Tesla T4, sm_75, 15 GB), driver 580.178.04, CUDA 13.0, torch 2.11.0+cu130, Python 3.13, triton 3.6.0, **mamba-ssm 2.3.2.post1, causal-conv1d 1.7.0** (no release wheels exist for this combo; built from source), transformers 4.57.6.
+  - Compatibility (`results/kaggle/compat_check/output/compat_check.json`), all checks OK:
+
+    | Check | Result on T4 |
+    |---|---|
+    | Mamba-1 fwd+bwd (d=256, L=256, B=8) | OK in fp32, fp16 autocast, bf16 autocast (bf16 not native on T4, emulated) |
+    | Mamba-1 fused vs reference path | max abs diff 0.0 |
+    | Mamba-2 fwd+bwd | OK in fp32/fp16/bf16 (first call JIT-compiles Triton for ~17 min in this check) |
+    | `mamba_chunk_scan_combined` + `initial_states` + `return_final_states` | OK; vs naive fp32 recurrence: y 2.0e-5, final state 9.7e-6, grad(initial_states) 1.9e-6 |
+    | Gradient through a gated state hand-off | non-zero to gate and to the previous block's input |
+    | Chunked vs single (kernel, L=512) | split at 256: 0.0; split at 200: 5.4e-5; 16 blocks of 32: 3.3e-5 |
+    | Chunked vs single (full Mamba2 layer, blocks of 32) | 1.2e-6 when SSM **and conv** state are carried; 1.74 if the conv state is dropped |
+    | Mamba-1 initial state | none: `selective_scan_fn(..., return_last_state=False)` has no initial-state input; only `Mamba.step(conv_state, ssm_state)` (single-token inference) |
+    | Layer throughput fwd+bwd, fp32 | Mamba-1 ~0.50-0.56 M tok/s, Mamba-2 ~0.51-0.52 M tok/s at L=256/1024/4096 (fp16: Mamba-1 1.1-1.3 M, Mamba-2 0.52 M) |
+  - GPU tests on T4 x2 (`results/kaggle/gputest_t4x2/output/pytest/`): all 5 `test_gpu_*` pass (`test_gpu_mamba2_manual_forward_matches_library`, `test_gpu_mamba2_state_continuation_and_grad`, `test_gpu_cbsc_equivalence[1]`, `[2]`, `test_gpu_phase2_param_match`). Full suite there: 106 passed, 54 failed. 53 failures are CPU tests in `test_models.py` that assume the GRU stand-in, but `mamba_ssm` is importable on Kaggle so they build real Mamba on CPU tensors; 1 is `test_provenance::test_kaggle_detection` seeing real Kaggle env vars. All 53 launcher tests passed on Kaggle too.
+  - Training speed on T4 (fp32, B=8, T=256, two runs in parallel on T4 x2; `results/kaggle/gputest_t4x2/output/time_*/timing.json`): Transformer-Only 6L **11.05 steps/s** (1.5 h per 60k steps), Mamba-Only 13L **9.40** (1.8 h), ABR-4L-CBSC **7.92** (2.1 h), ABR-4L-gatedCBSC **3.75** (4.4 h; plus ~5 min Triton JIT). Final full eval not included (est. a few min).
+  - Plan estimate (`queue.py plan` logic, `run_costs.json`): 46 runs = 105-119 lane-hours = **5-6 packed T4x2 sessions** of 11.5 h (5 if the sweep uses ABR-4L-CBSC, 6 if ABR-4L-gatedCBSC), i.e. ~58-69 session-hours, about 2-2.3 weeks at 30 h/week if Kaggle counts session hours.
+  - **GPU time used: ~127 min** (compat check 100 min, of which 75 min was the all-arch source build; T4x2 test 27 min).
+- **Problems / notes:**
+  - No release wheels for torch 2.11/CUDA 13/cp313; the stock source build takes 75 min. Fixed: build only sm_75 (13 min) and install from `abr-mamba-wheels` (expected ~1 min; not yet exercised by a run). Kaggle strips `+` from uploaded file names; the runner restores it.
+  - Kaggle P100 is retired; the default GPU shape is T4 x2, and CLI 1.7.4.5 cannot choose a shape anyway.
+  - `kaggle kernels output` of the T4x2 test took > 1 h (1 GB of checkpoints plus thousands of Triton cache files) and timed out. The Triton cache now lives outside `/kaggle/working`, and the queue downloads only small files.
+  - The first launch's `timeout_s` was recorded but not sent to Kaggle (fixed: `-t` is now passed).
+  - The code archive is deterministic only without `git_snapshot.json` (the snapshot has a timestamp); its SHA-256 is still recorded.
+  - Big binaries of the T4x2 test (`output/wheels/*.whl`, `triton_cache.tar.gz`, `*.pt`) are not committed; they stay in the Kaggle kernel version and the wheels dataset.
+- **Decisions:**
+  - Gated CBSC on real Mamba must use Mamba-2: run each Mamba block through the layer's own ops (in_proj, causal conv, `mamba_chunk_scan_combined` with `initial_states`/`return_final_states`, norm, out_proj), carrying the SSM state `(B, nheads, headdim, d_state)` = `(B, 8, 64, 64)` per layer **and** the conv state `(B, conv_dim, d_conv-1)` = `(B, 640, 3)`; gate only the SSM state. Mamba-1 cannot take an initial state; plain CBSC with Mamba-1 has to use the concatenate-the-Mamba-blocks approach.
+- **Next:** lead merges `p1/kaggle`; fix the CPU tests to force the GRU stand-in when run on a GPU box; `queue.py init --commit <tag>` and `queue.py advance` to start Phase 2; update `run_costs.json` after the first real session.
+

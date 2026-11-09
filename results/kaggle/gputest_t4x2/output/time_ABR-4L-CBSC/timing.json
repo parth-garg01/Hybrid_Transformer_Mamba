@@ -1,0 +1,63 @@
+{
+  "config": "ABR-4L-CBSC",
+  "seed": 42,
+  "exit_code": 0,
+  "cmd": [
+    "/usr/bin/python3",
+    "-u",
+    "experiments/full_scale/train.py",
+    "--config",
+    "ABR-4L-CBSC",
+    "--seed",
+    "42",
+    "--stop-after-steps",
+    "300",
+    "--eval-every",
+    "50",
+    "--eval-batches",
+    "2",
+    "--out",
+    "/kaggle/working/output/time_ABR-4L-CBSC/train_out",
+    "--device",
+    "cuda",
+    "--wandb",
+    "disabled",
+    "--debug"
+  ],
+  "wall_s": 56.5,
+  "marks": [
+    [
+      50,
+      23.049962997436523
+    ],
+    [
+      100,
+      29.244672536849976
+    ],
+    [
+      150,
+      35.48186779022217
+    ],
+    [
+      200,
+      41.70319485664368
+    ],
+    [
+      250,
+      48.100890159606934
+    ],
+    [
+      300,
+      54.514660358428955
+    ]
+  ],
+  "gpu": "0",
+  "gpu_name": "Tesla T4",
+  "steps_per_s": 7.915,
+  "window": [
+    100,
+    300
+  ],
+  "est_hours_per_run": 2.11,
+  "time_to_first_step_s": 23.0
+}

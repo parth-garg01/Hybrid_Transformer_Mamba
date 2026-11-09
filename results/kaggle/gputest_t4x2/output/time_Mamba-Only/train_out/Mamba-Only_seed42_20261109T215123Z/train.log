@@ -1,0 +1,11 @@
+
+===== session start 2026-11-09T21:51:24+00:00 | run_id=Mamba-Only_seed42_20261109T215123Z | run=Mamba-Only_s42 | device=cuda | mamba_backend=mamba_ssm | reportable=False =====
+[train] Mamba-Only seed=42 params=18,630,144 steps=60000 B=8 T=256 block=32
+  [Mamba-Only s=42] step=    50 lr=3.00e-05 train=10.8185 val~=10.7134 (ppl 44955.6)
+  [Mamba-Only s=42] step=   100 lr=6.00e-05 train=10.2824 val~=9.8496 (ppl 18949.9)
+  [Mamba-Only s=42] step=   150 lr=9.00e-05 train=9.4038 val~=8.8959 (ppl 7301.8)
+  [Mamba-Only s=42] step=   200 lr=1.20e-04 train=8.3693 val~=7.8743 (ppl 2628.9)
+  [Mamba-Only s=42] step=   250 lr=1.50e-04 train=7.5532 val~=7.2338 (ppl 1385.4)
+  [Mamba-Only s=42] step=   300 lr=1.80e-04 train=7.1325 val~=7.0039 (ppl 1100.9)
+[train] session budget reached at step 300; checkpoint saved. Run the same command again to resume.
+===== session end 2026-11-09T21:51:57+00:00 | status=incomplete =====
