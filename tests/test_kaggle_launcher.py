@@ -506,3 +506,48 @@ def test_queue_failures(qrepo):
     # kernel errored before writing run_status (e.g. install failure) counts as a failure
     q._settle("Jamba-1_3_s42", {"kernel_ref": "u/abr-q009", "kernel_status": "error"}, d, 2)
     assert q.state["runs"]["Jamba-1_3_s42"]["failures"] == 1
+
+
+# ---------------------------------------------------------------- token cache
+def test_token_cache_spec_and_metadata(tmp_path):
+    (tmp_path / "wikitext103_train_gpt2.pt").write_bytes(b"abc")
+    (tmp_path / "other.pt").write_bytes(b"x")
+    spec = launch.token_cache_spec("u/abr-tokens", tmp_path)
+    import hashlib
+    assert spec == {"ref": "u/abr-tokens",
+                    "expected_sha256": {"wikitext103_train_gpt2.pt": hashlib.sha256(b"abc").hexdigest()}}
+    assert launch.token_cache_spec(None) is None
+    with pytest.raises(launch.LaunchError):
+        launch.token_cache_spec("noslash", tmp_path)
+    m = launch.make_kernel_metadata("u", "n", extra_datasets=["u/abr-tokens"])
+    assert m["dataset_sources"] == ["u/abr-code", "u/abr-tokens"]
+
+
+def _cache_prev(content=b"abc"):
+    return {"abr-tokens/wikitext103_train_gpt2.pt": content.decode()}
+
+
+def test_runner_token_cache_verified(repo, tmp_path, monkeypatch):
+    import hashlib
+    cache = {"ref": "u/abr-tokens",
+             "expected_sha256": {"wikitext103_train_gpt2.pt": hashlib.sha256(b"abc").hexdigest()}}
+    orig = launch.build_kernel_dir
+    monkeypatch.setattr(launch, "build_kernel_dir", lambda *a, **k: orig(*a, token_cache=cache, **k))
+    r, out = _run_runner(tmp_path, repo, launch.normalize_runs("echo cache=$ABR_CACHE_DIR"),
+                         prev=_cache_prev())
+    assert r.returncode == 0, r.stdout + r.stderr
+    env = json.loads((out / "kaggle_env.json").read_text())
+    assert env["token_cache"]["verified"] is True
+    assert env["token_cache"]["dir"].endswith("abr-tokens")
+    assert "cache=" + env["token_cache"]["dir"] in (out / "run.log").read_text()
+
+
+def test_runner_token_cache_mismatch_refuses(repo, tmp_path, monkeypatch):
+    cache = {"ref": "u/abr-tokens", "expected_sha256": {"wikitext103_train_gpt2.pt": "0" * 64}}
+    orig = launch.build_kernel_dir
+    monkeypatch.setattr(launch, "build_kernel_dir", lambda *a, **k: orig(*a, token_cache=cache, **k))
+    r, out = _run_runner(tmp_path, repo, launch.normalize_runs("echo SHOULD_NOT_RUN"),
+                         prev=_cache_prev())
+    assert r.returncode == 1
+    env = json.loads((out / "kaggle_env.json").read_text())
+    assert "mismatch" in env["runner_error"] and "cmd_exit_code" not in env

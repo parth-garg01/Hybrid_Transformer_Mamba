@@ -120,7 +120,8 @@ def dataset_ref(user: str) -> str:
 
 def make_kernel_metadata(user: str, name: str, gpu: str = "t4",
                          code_file: str = "runner.py",
-                         kernel_sources: list[str] | None = None) -> dict:
+                         kernel_sources: list[str] | None = None,
+                         extra_datasets: list[str] | None = None) -> dict:
     slug = kernel_slug(name)
     if gpu not in MACHINE_SHAPES:
         raise LaunchError(f"--gpu must be one of {sorted(MACHINE_SHAPES)}")
@@ -134,7 +135,8 @@ def make_kernel_metadata(user: str, name: str, gpu: str = "t4",
         "enable_gpu": True,
         "enable_tpu": False,
         "enable_internet": True,
-        "dataset_sources": [dataset_ref(user)],
+        "dataset_sources": [dataset_ref(user)] + [d for d in (extra_datasets or [])
+                                                   if d != dataset_ref(user)],
         "competition_sources": [],
         "kernel_sources": list(kernel_sources or []),
         "model_sources": [],
@@ -283,7 +285,8 @@ def load_cmds_file(path: Path) -> list[dict]:
 
 
 def render_runner(template: str, *, cmd, commit: str, user: str, name: str,
-                  dataset_version, gpu: str, resume_sources: list[str] | None = None) -> str:
+                  dataset_version, gpu: str, resume_sources: list[str] | None = None,
+                  token_cache: dict | None = None) -> str:
     runs = cmd if isinstance(cmd, list) and cmd and isinstance(cmd[0], dict) else normalize_runs(cmd)
     values = {
         "__ABR_RUNS__": runs,
@@ -294,6 +297,7 @@ def render_runner(template: str, *, cmd, commit: str, user: str, name: str,
         "__ABR_DATASET_VERSION__": dataset_version,
         "__ABR_GPU_REQUESTED__": gpu,
         "__ABR_RESUME_SOURCES__": list(resume_sources or []),
+        "__ABR_TOKEN_CACHE__": token_cache,
     }
     out = template
     for key, val in values.items():
@@ -304,13 +308,45 @@ def render_runner(template: str, *, cmd, commit: str, user: str, name: str,
     return out
 
 
+TOKEN_CACHE_GLOB = "wikitext103_*_gpt2.pt"
+DEFAULT_LOCAL_CACHE = Path(os.path.expanduser("~/.cache/abr"))
+
+
+def sha256_file(path: Path) -> str:
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def token_cache_spec(ref: str | None, local_dir: Path | None = DEFAULT_LOCAL_CACHE) -> dict | None:
+    """{'ref': <user/slug>, 'expected_sha256': {file: sha}} for a token-cache dataset.
+
+    The expected hashes come from the local cache the dataset was uploaded from; the
+    runner refuses to start if the mounted files differ. No local files -> the runner
+    only records the hashes it sees.
+    """
+    if not ref:
+        return None
+    if "/" not in ref:
+        raise LaunchError(f"--cache-dataset must be <owner>/<slug>, got {ref!r}")
+    exp = {}
+    if local_dir and Path(local_dir).is_dir():
+        for f in sorted(Path(local_dir).glob(TOKEN_CACHE_GLOB)):
+            exp[f.name] = sha256_file(f)
+    return {"ref": ref, "expected_sha256": exp}
+
+
 def build_kernel_dir(out_dir: Path, *, user: str, name: str, cmd, commit: str,
-                     dataset_version, gpu: str, kernel_sources: list[str] | None = None) -> Path:
+                     dataset_version, gpu: str, kernel_sources: list[str] | None = None,
+                     token_cache: dict | None = None) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
-    meta = make_kernel_metadata(user, name, gpu, kernel_sources=kernel_sources)
+    meta = make_kernel_metadata(user, name, gpu, kernel_sources=kernel_sources,
+                                extra_datasets=[token_cache["ref"]] if token_cache else None)
     runner = render_runner(RUNNER_TEMPLATE.read_text(), cmd=cmd, commit=commit, user=user,
                            name=name, dataset_version=dataset_version, gpu=gpu,
-                           resume_sources=kernel_sources)
+                           resume_sources=kernel_sources, token_cache=token_cache)
     (out_dir / meta["code_file"]).write_text(runner)
     (out_dir / "kernel-metadata.json").write_text(json.dumps(meta, indent=2) + "\n")
     return out_dir
@@ -567,7 +603,7 @@ def download_outputs(cli: KaggleCLI, ref: str, dest: Path, user: str) -> dict:
 def launch_session(*, repo: Path, cli: "KaggleCLI", name: str, commit: str, runs: list[dict],
                    gpu: str = "t4", resume_from: list[str] | None = None, timeout: int | None = None,
                    rec_path: Path | None = None, staging: Path | None = None,
-                   dry_run: bool = False) -> dict:
+                   dry_run: bool = False, token_cache: dict | None = None) -> dict:
     """Package `commit`, upload it, push kernel abr-<name> and write launch.json. Returns the record."""
     user = cli.user
     ref = kernel_ref(user, name)
@@ -586,12 +622,14 @@ def launch_session(*, repo: Path, cli: "KaggleCLI", name: str, commit: str, runs
         "gpu_requested": gpu, "kaggle_user": user,
         "kernel_ref": ref, "kernel_url": kernel_url(user, name),
         "launched_utc": utcnow(), "resume_from": list(resume_from or []),
+        "token_cache": token_cache,
     }
     if timeout:
         record["timeout_s"] = timeout
     if dry_run:
         build_kernel_dir(k_dir, user=user, name=name, cmd=runs, commit=pkg["commit"],
-                         dataset_version=None, gpu=gpu, kernel_sources=resume_from)
+                         dataset_version=None, gpu=gpu, kernel_sources=resume_from,
+                         token_cache=token_cache)
         record["staging"] = str(staging_root)
         print(f"[launch] dry run: staging in {staging_root}")
         return record
@@ -599,7 +637,8 @@ def launch_session(*, repo: Path, cli: "KaggleCLI", name: str, commit: str, runs
     record["dataset"] = ds
     print(f"[launch] dataset {ds['ref']} v{ds['version']} ready")
     build_kernel_dir(k_dir, user=user, name=name, cmd=runs, commit=pkg["commit"],
-                     dataset_version=ds["version"], gpu=gpu, kernel_sources=resume_from)
+                     dataset_version=ds["version"], gpu=gpu, kernel_sources=resume_from,
+                     token_cache=token_cache)
     pushed = push_kernel(cli, k_dir, user, name, timeout=timeout)
     record["kernel_version"] = pushed["version"]
     record["kernel_version_url"] = pushed["url"]
@@ -636,6 +675,11 @@ def main(argv=None) -> int:
                    help="attach a previous kernel's output as input (e.g. parthgarg101/abr-run-s1); "
                         "each named run's previous output/<run>/ is copied back before it starts")
     p.add_argument("--timeout", type=int, default=None, help="kernel run-time limit in seconds")
+    p.add_argument("--cache-dataset", metavar="OWNER/SLUG",
+                   help="private dataset with wikitext103_*_gpt2.pt token caches; mounted and "
+                        "exported as ABR_CACHE_DIR, SHA-256 checked against --cache-local")
+    p.add_argument("--cache-local", default=str(DEFAULT_LOCAL_CACHE),
+                   help="local cache dir the dataset was uploaded from (expected hashes)")
     p.add_argument("--repo", default=None, help="repo root (default: git toplevel of this file)")
     p.add_argument("--user", default=DEFAULT_USER)
     p.add_argument("--kaggle-bin", default=DEFAULT_KAGGLE_BIN)
@@ -667,6 +711,7 @@ def main(argv=None) -> int:
             record = launch_session(
                 repo=repo, cli=cli, name=a.name, commit=a.commit, runs=runs, gpu=a.gpu,
                 resume_from=a.resume_from, timeout=a.timeout, rec_path=rec_path,
+                token_cache=token_cache_spec(a.cache_dataset, Path(a.cache_local)),
                 staging=Path(a.keep_staging) if a.keep_staging else None, dry_run=a.dry_run)
             if a.dry_run:
                 print(json.dumps(record, indent=2))

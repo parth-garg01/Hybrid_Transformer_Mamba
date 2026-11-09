@@ -33,6 +33,8 @@ DATASET_REF = "__ABR_DATASET_REF__"
 DATASET_VERSION = "__ABR_DATASET_VERSION__"
 GPU_REQUESTED = "__ABR_GPU_REQUESTED__"
 RESUME_SOURCES = "__ABR_RESUME_SOURCES__"
+# None or {"ref": "<owner>/<slug>", "expected_sha256": {"wikitext103_train_gpt2.pt": ...}}
+TOKEN_CACHE = "__ABR_TOKEN_CACHE__"
 
 # Overridable only for local testing of the runner itself.
 WORK = os.environ.get("ABR_RUNNER_WORK", "/kaggle/working")
@@ -151,6 +153,42 @@ def locate_and_copy_code():
         ENV["git_snapshot_sha256"] = hashlib.sha256(open(snap, "rb").read()).hexdigest()
     log(f"code snapshot at {REPO}, commit {commit}, git_snapshot.json present: "
         f"{ENV['git_snapshot_present']}")
+
+
+def setup_token_cache():
+    """Locate the mounted token-cache dataset, hash every cache file, verify the hashes.
+
+    Returns the directory to export as ABR_CACHE_DIR (or None)."""
+    if not TOKEN_CACHE:
+        return None
+    import hashlib
+    files = sorted(f for f in glob.glob(os.path.join(INPUT, "**", "wikitext103_*_gpt2.pt"),
+                                        recursive=True) if os.path.isfile(f))
+    slug = TOKEN_CACHE["ref"].split("/")[-1]
+    files = [f for f in files if slug in f] or files
+    info = {"ref": TOKEN_CACHE["ref"], "expected_sha256": TOKEN_CACHE.get("expected_sha256") or {},
+            "files": {}}
+    ENV["token_cache"] = info
+    if not files:
+        raise RuntimeError(f"token cache dataset {TOKEN_CACHE['ref']} not found under {INPUT}")
+    dirs = {os.path.dirname(f) for f in files}
+    if len(dirs) != 1:
+        raise RuntimeError(f"token cache files are in several directories: {sorted(dirs)}")
+    for f in files:
+        h = hashlib.sha256()
+        with open(f, "rb") as fh:
+            for chunk in iter(lambda: fh.read(1 << 20), b""):
+                h.update(chunk)
+        info["files"][os.path.basename(f)] = {"sha256": h.hexdigest(), "bytes": os.path.getsize(f)}
+    bad = {k: (v, info["files"].get(k, {}).get("sha256")) for k, v in info["expected_sha256"].items()
+           if info["files"].get(k, {}).get("sha256") != v}
+    info["verified"] = not bad and bool(info["expected_sha256"])
+    if bad:
+        raise RuntimeError(f"token cache SHA-256 mismatch (expected, found): {bad}")
+    info["dir"] = dirs.pop()
+    log(f"token cache {TOKEN_CACHE['ref']} at {info['dir']}: {sorted(info['files'])} "
+        f"(verified={info['verified']})")
+    return info["dir"]
 
 
 # ---------------------------------------------------------------------------------
@@ -397,6 +435,7 @@ def main():
     save_env()
     try:
         locate_and_copy_code()
+        cache_dir = setup_token_cache()
         save_env()
         gpu_info()
         torch = torch_info()
@@ -427,6 +466,8 @@ def main():
             "ABR_RESUME_DIRS": ":".join(os.path.join(INPUT, s.split("/")[-1]) for s in RESUME_SOURCES),
             "PYTHONUNBUFFERED": "1",
         })
+        if cache_dir:
+            env["ABR_CACHE_DIR"] = cache_dir
         # Kaggle does not tell a running kernel its own version number; the launcher
         # records the real one in results/kaggle/<name>/launch.json. Pass one through
         # only if the platform provides it.

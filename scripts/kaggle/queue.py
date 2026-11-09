@@ -123,7 +123,7 @@ class Queue:
 
     # ---- building ----------------------------------------------------------------
     def init(self, commit: str, sweep: str | None = None, exclude_non_mamba: bool = False,
-             max_hours: float = 11.0, force: bool = False):
+             max_hours: float = 11.0, force: bool = False, token_cache: dict | None = None):
         if self.state and not force:
             raise SystemExit(f"{self.path} exists; use --force to overwrite")
         sha = L.resolve_commit(self.repo, commit)
@@ -136,7 +136,7 @@ class Queue:
         ordered = order_runs(planned, set(C.KEY_CONFIGS))
         self.state = {"version": 1, "commit": sha, "user": self.cli.user if self.cli else L.DEFAULT_USER,
                       "max_hours": max_hours, "created_utc": L.utcnow(), "next_session": 1,
-                      "order": [], "runs": {}, "sessions": {}}
+                      "token_cache": token_cache, "order": [], "runs": {}, "sessions": {}}
         for lab, seed, bs in ordered:
             self._add(lab, seed, bs)
         self.save()
@@ -224,7 +224,8 @@ class Queue:
             rec = L.launch_session(repo=self.repo, cli=self.cli, name=name,
                                    commit=self.state["commit"], runs=runs, gpu=gpu,
                                    resume_from=resume, timeout=timeout, dry_run=dry_run,
-                                   rec_path=self.repo / SESSIONS_REL / name / "launch.json")
+                                   rec_path=self.repo / SESSIONS_REL / name / "launch.json",
+                                   token_cache=self.state.get("token_cache"))
             if dry_run:
                 print(f"[queue] dry run: would launch {name} with {group} (resume {resume})")
                 launched.append(name)
@@ -271,6 +272,10 @@ def main(argv=None) -> int:
                    help="leave Transformer-Only out (PRD §0.3 lets it run locally)")
     p.add_argument("--max-hours", type=float, default=11.0,
                    help="train.py --max-hours per session (session limit is 12 h)")
+    p.add_argument("--cache-dataset", metavar="OWNER/SLUG",
+                   help="token-cache dataset to mount (ABR_CACHE_DIR); expected SHA-256s are "
+                        "taken from --cache-local now and stored in the queue")
+    p.add_argument("--cache-local", default=str(L.DEFAULT_LOCAL_CACHE))
     p.add_argument("--force", action="store_true")
     p = sp.add_parser("add-sweep")
     p.add_argument("label")
@@ -292,7 +297,8 @@ def main(argv=None) -> int:
     q = Queue(repo, L.KaggleCLI(a.kaggle_bin, a.user))
     try:
         if a.cmd == "init":
-            st = q.init(a.commit, a.sweep, a.exclude_non_mamba, a.max_hours, a.force)
+            st = q.init(a.commit, a.sweep, a.exclude_non_mamba, a.max_hours, a.force,
+                        L.token_cache_spec(a.cache_dataset, Path(a.cache_local)))
             print(f"[queue] {len(st['runs'])} runs, commit {st['commit']} -> {q.path}")
             return 0
         if q.state is None:
