@@ -154,3 +154,11 @@ None yet. No reportable experiment has been run under the new pipeline.
   - The Phase 2 plan is 71 runs, about 100+ T4 GPU-hours. The budget needs the owner's sign-off.
 - **Next:** merge the Kaggle pipeline and its GPU check, run the GPU tests on Kaggle, then the P1.6 smoke runs on real Mamba.
 
+
+### 2026-11-09 — Lead: token cache dataset
+- Built the WikiText-103 GPT-2 token cache locally (`dataset.py`, commit 8c30683): train 117,920,140 tokens, validation and test splits, vocab 50,258.
+- Uploaded it as the **private** Kaggle dataset `parthgarg101/abr-wikitext103-gpt2-tokens`, so Kaggle sessions don't re-tokenize. SHA-256:
+  - train `7896d3b921ae6741135a54aba6e1f060e7306e7e58a7110cac8618d235af2f6d`
+  - validation `a6091ca4a7f0bd4caae7e4d7eb895cf01a1891bf32e1aa64587c26c877e222ea`
+  - test `84bb27f5bcebc4b63e77725bee2e0d318f79cab1ba34b10e9413612630b29b64`
+- Kaggle kernels must check these hashes before training (recorded per run in `kaggle_env.json`).
