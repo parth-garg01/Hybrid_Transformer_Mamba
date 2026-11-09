@@ -1,0 +1,62 @@
+{
+  "archive_sha256": "60dde50f9a8a13928c9990973cc6ad5cdc6e34c6e845572eb80b93476b1d3dfa",
+  "cmd": null,
+  "commit": "3d051a8673ae73ecb2d882f4db83cab33f29206a",
+  "commit_ref": "3d051a8",
+  "dataset": {
+    "is_private": true,
+    "notes": "commit 3d051a8673ae73ecb2d882f4db83cab33f29206a (ref 3d051a8) for kernel abr-gputest-t4x2",
+    "ref": "parthgarg101/abr-code",
+    "version": 2
+  },
+  "failure_message": "",
+  "final_status": "error",
+  "finished_utc": "2026-11-09T22:06:40Z",
+  "git_snapshot": true,
+  "gpu_requested": "t4x2",
+  "kaggle_user": "parthgarg101",
+  "kernel_ref": "parthgarg101/abr-gputest-t4x2",
+  "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-gputest-t4x2",
+  "kernel_version": 1,
+  "kernel_version_url": "https://www.kaggle.com/code/parthgarg101/abr-gputest-t4x2",
+  "launched_utc": "2026-11-09T21:35:37Z",
+  "name": "gputest-t4x2",
+  "pushed_utc": "2026-11-09T21:36:03Z",
+  "resume_from": [],
+  "runs": [
+    {
+      "cmd": "python scripts/kaggle/time_train.py --config ABR-4L-CBSC",
+      "name": "time_ABR-4L-CBSC"
+    },
+    {
+      "cmd": "python scripts/kaggle/time_train.py --config Transformer-Only",
+      "name": "time_Transformer-Only"
+    },
+    {
+      "cmd": "python scripts/kaggle/time_train.py --config ABR-4L-gatedCBSC",
+      "name": "time_ABR-4L-gatedCBSC"
+    },
+    {
+      "cmd": "python scripts/kaggle/time_train.py --config Mamba-Only",
+      "name": "time_Mamba-Only"
+    },
+    {
+      "cmd": "pip install -q pytest && python -m pytest -q tests/ -rs -p no:cacheprovider --junitxml=$ABR_OUTPUT_DIR/junit.xml",
+      "name": "pytest"
+    }
+  ],
+  "server_settings": {
+    "enable_gpu": true,
+    "enable_internet": true,
+    "is_private": true
+  },
+  "timeout_s": 5400,
+  "token_cache": {
+    "expected_sha256": {
+      "wikitext103_test_gpt2.pt": "84bb27f5bcebc4b63e77725bee2e0d318f79cab1ba34b10e9413612630b29b64",
+      "wikitext103_train_gpt2.pt": "7896d3b921ae6741135a54aba6e1f060e7306e7e58a7110cac8618d235af2f6d",
+      "wikitext103_validation_gpt2.pt": "a6091ca4a7f0bd4caae7e4d7eb895cf01a1891bf32e1aa64587c26c877e222ea"
+    },
+    "ref": "parthgarg101/abr-wikitext103-gpt2-tokens"
+  }
+}

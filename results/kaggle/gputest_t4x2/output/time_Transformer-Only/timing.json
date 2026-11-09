@@ -1,0 +1,63 @@
+{
+  "config": "Transformer-Only",
+  "seed": 42,
+  "exit_code": 0,
+  "cmd": [
+    "/usr/bin/python3",
+    "-u",
+    "experiments/full_scale/train.py",
+    "--config",
+    "Transformer-Only",
+    "--seed",
+    "42",
+    "--stop-after-steps",
+    "300",
+    "--eval-every",
+    "50",
+    "--eval-batches",
+    "2",
+    "--out",
+    "/kaggle/working/output/time_Transformer-Only/train_out",
+    "--device",
+    "cuda",
+    "--wandb",
+    "disabled",
+    "--debug"
+  ],
+  "wall_s": 44.9,
+  "marks": [
+    [
+      50,
+      20.504097938537598
+    ],
+    [
+      100,
+      24.956766366958618
+    ],
+    [
+      150,
+      29.44118595123291
+    ],
+    [
+      200,
+      33.934741735458374
+    ],
+    [
+      250,
+      38.46880054473877
+    ],
+    [
+      300,
+      43.06045317649841
+    ]
+  ],
+  "gpu": "1",
+  "gpu_name": "Tesla T4",
+  "steps_per_s": 11.047,
+  "window": [
+    100,
+    300
+  ],
+  "est_hours_per_run": 1.51,
+  "time_to_first_step_s": 20.5
+}

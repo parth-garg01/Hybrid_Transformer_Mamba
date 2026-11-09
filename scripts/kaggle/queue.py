@@ -53,6 +53,8 @@ STATE_REL = Path("results") / "kaggle" / "queue.json"
 SESSIONS_REL = Path("results") / "kaggle" / "queue"
 TRAIN = "experiments/full_scale/train.py"
 COSTS_PATH = HERE / "run_costs.json"
+DEFAULT_TOKEN_DATASET = "parthgarg101/abr-wikitext103-gpt2-tokens"
+DEFAULT_WHEELS_DATASET = "parthgarg101/abr-mamba-wheels"
 MAX_HOURS_TOKEN = "{max_hours}"   # replaced by the runner with the lane's remaining hours
 
 
@@ -215,7 +217,8 @@ class Queue:
             s.update(kernel_status=status, failure_message=msg, finished_utc=L.utcnow())
             dest = self.repo / SESSIONS_REL / name
             try:
-                s["download"] = L.download_outputs(self.cli, s["kernel_ref"], dest, self.cli.user)
+                s["download"] = L.download_outputs(self.cli, s["kernel_ref"], dest, self.cli.user,
+                                                   exclude=L.QUEUE_DOWNLOAD_EXCLUDE)
                 s["download_dir"] = str(dest.relative_to(self.repo))
             except L.LaunchError as e:
                 s["download_error"] = str(e)
@@ -377,12 +380,12 @@ def main(argv=None) -> int:
     p.add_argument("--sweep", metavar="LABEL", help="also add the block-size sweep for this config")
     p.add_argument("--exclude-non-mamba", action="store_true",
                    help="leave Transformer-Only out (PRD §0.3 lets it run locally)")
-    p.add_argument("--cache-dataset", metavar="OWNER/SLUG",
+    p.add_argument("--cache-dataset", metavar="OWNER/SLUG", default=DEFAULT_TOKEN_DATASET,
                    help="token-cache dataset to mount (ABR_CACHE_DIR); expected SHA-256s are "
                         "taken from --cache-local now and stored in the queue")
     p.add_argument("--cache-local", default=str(L.DEFAULT_LOCAL_CACHE))
-    p.add_argument("--wheels-dataset", metavar="OWNER/SLUG",
-                   help="prebuilt mamba/causal-conv1d wheels dataset (fast installs)")
+    p.add_argument("--wheels-dataset", metavar="OWNER/SLUG", default=DEFAULT_WHEELS_DATASET,
+                   help="prebuilt mamba/causal-conv1d wheels dataset (fast installs); '' for none")
     p.add_argument("--force", action="store_true")
     p = sp.add_parser("add-sweep")
     p.add_argument("label")
@@ -406,7 +409,8 @@ def main(argv=None) -> int:
     try:
         if a.cmd == "init":
             st = q.init(a.commit, a.sweep, a.exclude_non_mamba, None, a.force,
-                        L.token_cache_spec(a.cache_dataset, Path(a.cache_local)), a.wheels_dataset)
+                        L.token_cache_spec(a.cache_dataset or None, Path(a.cache_local)),
+                        a.wheels_dataset or None)
             print(f"[queue] {len(st['runs'])} runs, commit {st['commit']} -> {q.path}")
             return 0
         if q.state is None:

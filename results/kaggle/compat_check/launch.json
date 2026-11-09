@@ -1,0 +1,42 @@
+{
+  "archive_sha256": "bd5b92f074689da262a60deeef67fbcf53f228d40d19bceb37698c55b024f766",
+  "cmd": "python scripts/kaggle/compat_check.py",
+  "commit": "80303ecfd7b781b5a60d0e4e4af8bae8d866d3bb",
+  "commit_ref": "80303ec",
+  "dataset": {
+    "is_private": true,
+    "notes": "commit 80303ecfd7b781b5a60d0e4e4af8bae8d866d3bb (ref 80303ec) for kernel abr-compat-check",
+    "ref": "parthgarg101/abr-code",
+    "version": 1
+  },
+  "download": {
+    "dest": "/Users/parthgarg/Documents/papers/hybrid_mamba-wt/kaggle/results/kaggle/compat_check",
+    "files": [
+      "abr-compat-check.log",
+      "output/compat_check.json",
+      "output/kaggle_env.json",
+      "output/pip_freeze.txt",
+      "output/run.log"
+    ],
+    "gpu": "Tesla T4"
+  },
+  "downloaded_utc": "2026-11-09T17:02:01Z",
+  "failure_message": "",
+  "final_status": "complete",
+  "finished_utc": "2026-11-09T17:01:43Z",
+  "gpu_requested": "t4",
+  "kernel_ref": "parthgarg101/abr-compat-check",
+  "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-compat-check",
+  "kernel_version": 1,
+  "kernel_version_url": "https://www.kaggle.com/code/parthgarg101/abr-compat-check",
+  "launched_utc": "2026-11-09T15:13:02Z",
+  "name": "compat-check",
+  "pushed_utc": "2026-11-09T15:13:46Z",
+  "resume_from": [],
+  "server_settings": {
+    "enable_gpu": true,
+    "enable_internet": true,
+    "is_private": true
+  },
+  "timeout_s": 3600
+}

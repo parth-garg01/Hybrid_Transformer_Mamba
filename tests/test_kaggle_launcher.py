@@ -240,6 +240,11 @@ class FakeCLI:
     def kernel_pull_metadata(self, ref, folder):
         return self.server_meta
 
+    def kernel_output_selective(self, ref, folder, exclude):
+        self.calls.append(("output_selective", tuple(exclude)))
+        self.kernel_output(ref, folder)
+        return {"downloaded": [], "skipped": []}
+
 
 def test_upload_creates_then_versions(repo, tmp_path):
     pkg = launch.build_code_archive(repo, "HEAD", tmp_path / "ds")
@@ -527,6 +532,7 @@ def test_queue_advance_launch_settle_resume(qrepo, monkeypatch):
     assert runs[partial]["resume_from"] == "u/abr-q001" and runs[partial]["hours_done"] == 4.0
     assert runs[never]["resume_from"] is None and runs[never]["failures"] == 0
     assert launched == ["q002"] and q.state["sessions"]["q001"]["status"] == "downloaded"
+    assert ("output_selective", tuple(kq.L.QUEUE_DOWNLOAD_EXCLUDE)) in cli.calls
     plan2 = q.state["sessions"]["q002"]["plan"]
     assert partial in [lane[0]["run"] for lane in plan2["lanes"]]
     assert q.state["sessions"]["q002"]["resume_from"] == ["u/abr-q001"]
@@ -645,3 +651,22 @@ def test_runner_lanes_max_hours_and_skip(repo, tmp_path):
     assert r.returncode == 0, r.stdout + r.stderr
     assert not (out / "a").exists() and not (out / "b").exists()
     assert json.loads((out / "kaggle_env.json").read_text())["skipped_runs"] == ["a", "b"]
+
+
+def test_mounted_wheels_kaggle_renamed(tmp_path, monkeypatch):
+    src = launch.RUNNER_TEMPLATE.read_text()
+    ns = {"__name__": "x"}
+    pre = src[:src.index("def mounted_wheels")]
+    pre = pre.replace('"__ABR_SESSION_HOURS__"', "11.5")
+    monkeypatch.setenv("ABR_RUNNER_WORK", str(tmp_path / "w"))
+    monkeypatch.setenv("ABR_RUNNER_INPUT", str(tmp_path / "in"))
+    d = tmp_path / "in" / "datasets" / "u" / "abr-mamba-wheels"
+    d.mkdir(parents=True)
+    (d / "mamba_ssm-2.3.2.post1cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl").write_bytes(b"m")
+    (d / "causal_conv1d-1.7.0+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl").write_bytes(b"c")
+    (d / "mamba_ssm-2.3.2.post1cu130torch2.11sm80-cp313-cp313-linux_x86_64.whl").write_bytes(b"x")
+    exec(pre + src[src.index("def mounted_wheels"):src.index("def patch_setup_for_arch")], ns)
+    found = ns["mounted_wheels"]("cu130torch2.11sm75", "cp313")
+    assert Path(found["mamba_ssm"]).name == "mamba_ssm-2.3.2.post1+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl"
+    assert Path(found["mamba_ssm"]).read_bytes() == b"m"
+    assert Path(found["causal_conv1d"]).read_bytes() == b"c"

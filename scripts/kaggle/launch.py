@@ -389,8 +389,11 @@ class KaggleCLI:
 
     def run(self, *args: str, check: bool = True, timeout: int = 1800) -> subprocess.CompletedProcess:
         env = dict(os.environ, PYTHONWARNINGS="ignore")
-        r = subprocess.run([self.binary, *args], capture_output=True, text=True,
-                           env=env, timeout=timeout)
+        try:
+            r = subprocess.run([self.binary, *args], capture_output=True, text=True,
+                               env=env, timeout=timeout)
+        except subprocess.TimeoutExpired:
+            raise LaunchError(f"kaggle {' '.join(args)} timed out after {timeout}s")
         r.stdout = _strip_noise(r.stdout)
         r.stderr = _strip_noise(r.stderr)
         if check and r.returncode != 0:
@@ -456,7 +459,60 @@ class KaggleCLI:
 
     def kernel_output(self, ref: str, folder: Path) -> str:
         folder.mkdir(parents=True, exist_ok=True)
-        return self.run("kernels", "output", ref, "-p", str(folder), "-o", timeout=3600).stdout
+        return self.run("kernels", "output", ref, "-p", str(folder), "-o", timeout=4 * 3600).stdout
+
+    def kernel_output_selective(self, ref: str, folder: Path, exclude: list[str]) -> dict:
+        """Download only output files not matching the `exclude` globs (e.g. checkpoints).
+
+        Lists the files with the Kaggle API (in the CLI's venv) and fetches each signed URL
+        with urllib. URLs are never printed. Returns {'downloaded': [...], 'skipped': [...]}.
+        """
+        import fnmatch
+        import urllib.request
+        owner, slug = ref.split("/")
+        code = (
+            "import json,sys\n"
+            "from kaggle.api.kaggle_api_extended import KaggleApi\n"
+            "from kagglesdk.kernels.types.kernels_api_service import ApiListKernelSessionOutputRequest\n"
+            "api=KaggleApi(); api.authenticate(); files=[]; log=None; tok=None\n"
+            "with api.build_kaggle_client() as k:\n"
+            "    while True:\n"
+            "        r=ApiListKernelSessionOutputRequest(); r.user_name=sys.argv[1]; r.kernel_slug=sys.argv[2]\n"
+            "        if tok: r.page_token=tok\n"
+            "        o=k.kernels.kernels_api_client.list_kernel_session_output(r)\n"
+            "        files += [[f.file_name, f.url] for f in o.files]; log = log or o.log\n"
+            "        tok=o.next_page_token\n"
+            "        if not tok: break\n"
+            "json.dump({'files': files, 'log': log}, open(sys.argv[3], 'w'))\n"
+        )
+        folder.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory() as td:
+            listing = Path(td) / "listing.json"
+            r = subprocess.run([self.python, "-W", "ignore", "-c", code, owner, slug, str(listing)],
+                               capture_output=True, text=True, timeout=1800)
+            if r.returncode != 0 or not listing.exists():
+                raise LaunchError(f"could not list outputs of {ref}: {r.stderr[-800:]}")
+            data = json.loads(listing.read_text())
+        done, skipped = [], []
+        for name, url in data["files"]:
+            if any(fnmatch.fnmatch(name, pat) for pat in exclude) or ".." in Path(name).parts:
+                skipped.append(name)
+                continue
+            dst = folder / name
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            for attempt in range(3):
+                try:
+                    with urllib.request.urlopen(url, timeout=600) as resp, open(dst, "wb") as f:
+                        shutil.copyfileobj(resp, f)
+                    break
+                except Exception as e:
+                    if attempt == 2:
+                        raise LaunchError(f"download of {name} failed: {type(e).__name__}")
+                    time.sleep(5)
+            done.append(name)
+        if data.get("log"):
+            (folder / f"{slug}.log").write_text(data["log"])
+        return {"downloaded": done, "skipped": skipped}
 
 
 def _strip_noise(s: str) -> str:
@@ -591,11 +647,23 @@ def write_launch_record(path: Path, record: dict) -> None:
     path.write_text(json.dumps(record, indent=2, sort_keys=True) + "\n")
 
 
-def download_outputs(cli: KaggleCLI, ref: str, dest: Path, user: str) -> dict:
-    print(f"[launch] downloading outputs of {ref} -> {dest}")
-    cli.kernel_output(ref, dest)
+# Big, reproducible or Kaggle-only files that the queue does not need locally. They stay
+# in the kernel version on Kaggle (and are what the next session resumes from).
+QUEUE_DOWNLOAD_EXCLUDE = ["*.pt", "*/wheels/*", "*triton_cache*"]
+
+
+def download_outputs(cli: KaggleCLI, ref: str, dest: Path, user: str,
+                     exclude: list[str] | None = None) -> dict:
+    print(f"[launch] downloading outputs of {ref} -> {dest}"
+          + (f" (excluding {exclude})" if exclude else ""))
+    sel = None
+    if exclude:
+        sel = cli.kernel_output_selective(ref, dest, exclude)
+    else:
+        cli.kernel_output(ref, dest)
     env_files = list(dest.rglob("kaggle_env.json"))
-    summary = {"dest": str(dest), "files": sorted(str(p.relative_to(dest)) for p in dest.rglob("*") if p.is_file())}
+    summary = {"dest": str(dest), "skipped_remote": (sel or {}).get("skipped", []),
+               "files": sorted(str(p.relative_to(dest)) for p in dest.rglob("*") if p.is_file())}
     if env_files:
         env = json.loads(env_files[0].read_text())
         summary["gpu"] = env.get("gpu_name")

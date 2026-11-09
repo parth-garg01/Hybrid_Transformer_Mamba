@@ -277,13 +277,24 @@ def local_tag(torch):
 
 
 def mounted_wheels(tag, cp):
-    """Wheels built earlier by this runner and uploaded as a private dataset."""
+    """Wheels built earlier by this runner and uploaded as a private dataset.
+
+    Kaggle strips the '+' from uploaded file names (mamba_ssm-2.3.2.post1cu130torch2.11sm75-...),
+    which pip rejects, so matching files are copied to a local dir under their real name."""
     found = {}
-    for pkg in PINNED:
-        hits = sorted(w for w in glob.glob(os.path.join(INPUT, "**", f"{pkg}-*.whl"), recursive=True)
-                      if f"+{tag}-{cp}-" in os.path.basename(w))
+    dst = os.path.join(WORK, "_mounted_wheels")
+    for pkg, (_, ver, _) in PINNED.items():
+        hits = []
+        for w in glob.glob(os.path.join(INPUT, "**", f"{pkg}-*.whl"), recursive=True):
+            b = os.path.basename(w)
+            for sep in ("+", ""):
+                if b == f"{pkg}-{ver}{sep}{tag}-{cp}-{cp}-linux_x86_64.whl":
+                    hits.append(w)
         if hits:
-            found[pkg] = hits[-1]
+            os.makedirs(dst, exist_ok=True)
+            fixed = os.path.join(dst, f"{pkg}-{ver}+{tag}-{cp}-{cp}-linux_x86_64.whl")
+            shutil.copy(sorted(hits)[-1], fixed)
+            found[pkg] = fixed
     return found
 
 
@@ -345,6 +356,10 @@ def install_mamba(torch):
     # 1. wheels from a mounted private dataset (built by an earlier session of this runner)
     mw = mounted_wheels(tag, cp)
     info["mounted_wheels"] = mw
+    if mw:
+        import hashlib
+        info["mounted_wheels_sha256"] = {
+            k: hashlib.sha256(open(v, "rb").read()).hexdigest() for k, v in mw.items()}
     if len(mw) == len(PINNED):
         rc, _ = sh(f"pip install {mw['causal_conv1d']} {mw['mamba_ssm']}")
         if rc == 0:
@@ -384,7 +399,9 @@ def install_mamba(torch):
 # ---------------------------------------------------------------------------------
 # Triton kernel cache (Mamba-2 kernels take minutes to JIT-compile on a T4)
 # ---------------------------------------------------------------------------------
-TRITON_CACHE = os.path.join(WORK, "triton_cache")
+# Outside /kaggle/working, so its thousands of small files are not kernel outputs
+# (they made `kaggle kernels output` take > 1 h); only the tarball is saved.
+TRITON_CACHE = os.environ.get("ABR_TRITON_CACHE", "/tmp/abr_triton_cache")
 
 
 def restore_triton_cache():
@@ -392,13 +409,20 @@ def restore_triton_cache():
     for tgz in sorted(glob.glob(os.path.join(INPUT, "**", "triton_cache.tar.gz"), recursive=True)):
         try:
             with tarfile.open(tgz) as t:
-                t.extractall(WORK)
+                t.extractall(os.path.dirname(TRITON_CACHE) or "/tmp")
+                src = os.path.join(os.path.dirname(TRITON_CACHE) or "/tmp", "triton_cache")
+                if os.path.isdir(src) and src != TRITON_CACHE:
+                    shutil.copytree(src, TRITON_CACHE, dirs_exist_ok=True)
+                    shutil.rmtree(src, ignore_errors=True)
             log(f"restored Triton cache from {tgz}")
             return tgz
         except Exception as e:
             log(f"could not restore Triton cache {tgz}: {e}")
     # Kaggle may have auto-extracted the archive into a directory
     for d in sorted(glob.glob(os.path.join(INPUT, "**", "triton_cache"), recursive=True)):
+        inner = os.path.join(d, "triton_cache")   # tarball extracted by Kaggle: triton_cache/triton_cache/
+        if os.path.isdir(inner):
+            d = inner
         if os.path.isdir(d) and d != TRITON_CACHE:
             shutil.copytree(d, TRITON_CACHE, dirs_exist_ok=True)
             log(f"restored Triton cache from {d}")

@@ -72,31 +72,43 @@ new `output/<run>/`, moves the old `run.log` to `previous_sessions/run.session<N
 sets `ABR_RESUMED=1`. `train.py` then resumes from
 `$ABR_OUTPUT_DIR/checkpoints/<run_name>/ckpt.pt` by itself.
 
-## Job queue
+## Job queue (packed sessions)
 
 ```bash
-python scripts/kaggle/queue.py init --commit <sha> [--sweep ABR-4L-gatedCBSC] [--exclude-non-mamba]
+python scripts/kaggle/queue.py init --commit <sha> [--sweep <LABEL>] [--exclude-non-mamba]
+python scripts/kaggle/queue.py plan       # next session's lane plan + estimated session count
+python scripts/kaggle/queue.py advance    # THE command: run it whenever (cron, by hand)
 python scripts/kaggle/queue.py status
-python scripts/kaggle/queue.py step  [--max-sessions 1]     # one pass (cron-friendly)
-python scripts/kaggle/queue.py watch [--interval 900]       # loop until all done/failed
-python scripts/kaggle/queue.py add-sweep ABR-4L-gatedCBSC  # later, once the sweep config is chosen
+python scripts/kaggle/queue.py add-sweep <LABEL>   # once the sweep config is chosen
 python scripts/kaggle/queue.py retry <run_id>
 ```
 
-* The default queue is `config.planned_runs()` (40 runs), ordered key 5-seed configs first,
-  seed-major (every key config gets seed 42 before any gets seed 123), then the 2-seed
-  configs, then the 6 block-sweep runs (`BLOCK_SWEEP_TRAIN` x `BLOCK_SWEEP_SEEDS`).
-  `--exclude-non-mamba` drops Transformer-Only (PRD §0.3 allows it locally, but the speed
-  numbers must come from the same Kaggle GPU).
-* Slots = `--max-sessions` (default 1) x `--gpus-per-session` (2). Each session is a new
-  kernel `abr-qNNN`; every session uses the queue's commit.
-* State: `results/kaggle/queue.json`; per-session outputs and `launch.json` in
-  `results/kaggle/queue/qNNN/`.
-* After a session ends the queue downloads it and settles each run: **done** if exit 0 and
-  a `result.json` exists; **pending** with `resume_from = that kernel` if it stopped on its
-  budget or was killed; a non-zero exit (or a kernel error before the run started) counts
-  as a failure, and after `--max-failures` (2) it is **failed**. Failed runs stay listed
-  (PRD §0.4 B: report every run started).
+* `init` builds the queue from `config.planned_runs()` (40 runs), ordered key 5-seed configs
+  first, seed-major (every key config gets seed 42 before any gets seed 123), then the 2-seed
+  configs, then the 6 block-sweep runs. Defaults: `--cache-dataset
+  parthgarg101/abr-wikitext103-gpt2-tokens` (expected SHA-256s read from `~/.cache/abr` and
+  stored in the queue), `--wheels-dataset parthgarg101/abr-mamba-wheels`. All sessions use
+  the queue's commit.
+* **Packed sessions.** Each session is one T4 x2 kernel `abr-qNNN` with two GPU lanes. A lane
+  runs its runs back to back until `--session-hours` (11.5) is used up. A run's
+  `--max-hours` is the lane's remaining budget when it starts, so the run cut off at the end
+  checkpoints cleanly; a lane does not start a run with < 20 min left (that run stays
+  pending, untouched). The plan takes partial runs first, then the queue order, until both
+  lanes are full, and splits them longest-job-first using `run_costs.json` (steps/s measured
+  on Kaggle). Partial runs go first in their lane. The plan is stored in the session's
+  `launch.json` (`session_plan`) and in `queue.json`.
+* **`advance`** is idempotent: it checks the active session; if the kernel finished and is not
+  downloaded yet it downloads it (small files only: logs, `run_status.json`, `result.json`,
+  `kaggle_env.json`, W&B files; checkpoints, wheels and the Triton cache stay on Kaggle) and
+  settles each run; then, if fewer than `--max-sessions` (default 1) sessions run and runs
+  remain, it launches the next packed session. Running it again while a session runs does
+  nothing.
+* Settling a run: **done** if exit 0 and a `result.json` exists; **pending** with
+  `resume_from = that kernel` if it stopped on its budget or was killed (the next session
+  copies its `output/<run>/` back, and `train.py` resumes from its checkpoint); a non-zero exit
+  (or a kernel error before it started) counts as a failure, and after `--max-failures` (2)
+  it is **failed**. Failed runs stay listed (PRD §0.4 B).
+* State: `results/kaggle/queue.json`; per-session outputs in `results/kaggle/queue/qNNN/`.
 
 ## Re-attach, wait and download later
 
@@ -183,8 +195,10 @@ After download, sync W&B locally: `wandb sync results/kaggle/<name>/wandb/offlin
 * T4 x2 runs two jobs per session, so 30 GPU h/week is about 30 h of wall time for 2 runs
   if Kaggle counts session hours rather than per-GPU hours. Check the quota meter on the
   settings page after the first T4 x2 session to confirm.
-* Install takes a few minutes per kernel (prebuilt wheels). A source build can take 30+ min:
-  if `kaggle_env.json` shows `"method": "pip_no_build_isolation"`, check `run.log`.
+* Install cost per session: about 1 min from the wheels dataset; 13 min building for sm_75
+  only; 75 min with the stock all-arch build. Check `kaggle_env.json["mamba_install"]["method"]`.
+* `kaggle kernels output` downloads everything (1 GB and > 1 h for a session with checkpoints
+  and a Triton cache directory). The queue downloads selectively (about 20 s).
 
 ## Errors
 

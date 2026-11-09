@@ -1,0 +1,25 @@
+{
+  "cmd": "pip install -q pytest && python -m pytest -q tests/ -rs -p no:cacheprovider --junitxml=$ABR_OUTPUT_DIR/junit.xml",
+  "commit": "3d051a8673ae73ecb2d882f4db83cab33f29206a",
+  "dataset_version": 2,
+  "exit_code": 1,
+  "finished_utc": "2026-11-09T22:02:10Z",
+  "gpu_slot": 0,
+  "history": [
+    {
+      "exit_code": 1,
+      "finished_utc": "2026-11-09T22:02:10Z",
+      "kernel_ref": "parthgarg101/abr-gputest-t4x2",
+      "session": 1,
+      "started_utc": "2026-11-09T21:57:19Z",
+      "state": "failed"
+    }
+  ],
+  "kernel_ref": "parthgarg101/abr-gputest-t4x2",
+  "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-gputest-t4x2",
+  "name": "pytest",
+  "resumed_from": null,
+  "sessions": 1,
+  "started_utc": "2026-11-09T21:57:19Z",
+  "state": "failed"
+}
