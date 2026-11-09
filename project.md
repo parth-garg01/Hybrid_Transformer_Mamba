@@ -5,7 +5,7 @@ Plan: see `prd.md`. This file is the single source of truth for progress (PRD §
 ## Status board
 | Task | Status | Owner | Last update |
 |------|--------|-------|-------------|
-| P1.0 Tests + project.md | in progress | lead | 2026-11-09 |
+| P1.0 Tests + project.md | done | lead | 2026-11-09 |
 | P1.0 Provenance, CI, signing (PRD §0.4) | done | agent: provenance | 2026-11-09 |
 | P1.1 Router gradient | done | agent: model | 2026-11-09 |
 | P1.2 Cross-block context | done | agent: model | 2026-11-09 |
@@ -131,3 +131,22 @@ None yet. No reportable experiment has been run under the new pipeline.
   3. `test_cbsc_equivalence` with real Mamba-1 and Mamba-2.
   4. The manual Mamba-2 forward with `init_state=None` matches `Mamba2.forward`.
   5. Gradients flow through `initial_states`.
+
+### 2026-11-09 — Lead: merge of provenance, model and train-eval branches
+- **Done:**
+  - Merged `p1/provenance`, `p1/model` and `p1/train-eval` into `fixes`. The `project.md` conflicts were resolved by keeping every entry, and each status row took the version with progress.
+  - Fixed an integration bug: `config.LEGACY_CONFIGS` encodes old "CBSC on" as `cbsc_mode="legacy_inject"` with `legacy=True`, which `build_model` rejected. `build_model` now accepts it.
+  - Added `test_legacy_configs_all_build`, which builds every legacy config through the real model code.
+  - Un-ignored `results/**/*.log` and `results/**/*.png` so logs and figures are committed with results (PRD §0.4 C), and ignored the generated `git_snapshot.json`.
+- **Files changed:** `experiments/full_scale/models_scaled.py`, `tests/test_models.py`, `.gitignore`, `project.md`
+- **Results:**
+  - Full suite: 107 passed, 4 skipped (GPU-only real-Mamba tests, to run on Kaggle).
+  - Smoke check: every Phase 2 config (10 configs incl. all baselines and 2L/4L ABR) trained 6 steps on synthetic tokens, with the GRU stand-in on MPS, debug mode and W&B disabled. All configs ran train → periodic eval → full val/test eval → `result.json` with provenance meta (commit, dataset hashes, `reportable=false`). Legacy configs also run.
+  - On the ABR runs the router's routing fraction and entropy now move during training, and tau updates once per step.
+  - These smoke outputs are not results and were not kept.
+- **Problems / notes:**
+  - **Parameter mismatch to resolve before Phase 2 (P2.1).** On the stand-in, ABR-4L (~25M) is much larger than Transformer-4L (~17M), because each ABR layer holds both experts. Matching within ±5% needs a size adjustment (e.g. smaller d_model for ABR, or more layers for the baselines). To decide with real-Mamba counts from Kaggle.
+  - The Mamba-2 recommendation from the model agent (use `mamba_version: 2` for all ABR variants) waits on the Kaggle compatibility check.
+  - The Phase 2 plan is 71 runs, about 100+ T4 GPU-hours. The budget needs the owner's sign-off.
+- **Next:** merge the Kaggle pipeline and its GPU check, run the GPU tests on Kaggle, then the P1.6 smoke runs on real Mamba.
+

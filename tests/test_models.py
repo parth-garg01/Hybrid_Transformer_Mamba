@@ -997,3 +997,16 @@ def test_gpu_cbsc_equivalence(version):
     out, _, _ = layer(x)
     ref, _ = layer.mamba(x)
     assert torch.allclose(out, ref, atol=1e-4), (out - ref).abs().max()
+
+
+def test_legacy_configs_all_build():
+    """Every config.LEGACY_CONFIGS entry must build (integration with config.py)."""
+    import config as C
+    from models_scaled import build_model, LegacyABRLayer
+    for cfg in C.LEGACY_CONFIGS:
+        m = build_model(cfg, 100, d_model=32, n_heads=4, block_size=8, max_seq_len=80)
+        if cfg["expert_type"] == "abr":
+            assert all(isinstance(l, LegacyABRLayer) for l in m.layers), cfg["label"]
+            want_state = cfg["cbsc_mode"] != "none"
+            assert all(l.use_cross_block_state == want_state for l in m.layers), cfg["label"]
+            assert all(l.use_gated_cbsc == (cfg["cbsc_mode"] == "gated_state") for l in m.layers), cfg["label"]

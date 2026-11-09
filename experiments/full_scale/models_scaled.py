@@ -1025,8 +1025,9 @@ def build_model(cfg, vocab_size, d_model=256, n_heads=8, block_size=8,
     if opts["legacy"]:
         if opts["routing_mode"] != "learned":
             raise ValueError("legacy=True only supports routing_mode='learned'")
-        if cbsc == "legacy_inject":
-            raise ValueError("use legacy=True OR cbsc_mode='legacy_inject', not both")
+        # With legacy=True any cbsc_mode other than "none" means the old
+        # (output-injection) CBSC; "legacy_inject" is the explicit spelling
+        # used by config.LEGACY_CONFIGS, "gated_state" the old gated variant.
         return ABRLM(vocab_size, arch["d_model"], arch["n_heads"], n_layers,
                      arch["block_size"], use_cross_block_state=(cbsc != "none"),
                      use_gated_cbsc=(cbsc == "gated_state"), ffn_mult=arch["ffn_mult"],
