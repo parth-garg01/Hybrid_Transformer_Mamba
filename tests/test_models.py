@@ -1010,3 +1010,22 @@ def test_legacy_configs_all_build():
             want_state = cfg["cbsc_mode"] != "none"
             assert all(l.use_cross_block_state == want_state for l in m.layers), cfg["label"]
             assert all(l.use_gated_cbsc == (cfg["cbsc_mode"] == "gated_state") for l in m.layers), cfg["label"]
+
+
+@needs_mamba1
+def test_gpu_phase2_param_match():
+    """P2.1: every Phase 2 baseline is within PARAM_MATCH_TOL of ABR-4L (real backend)."""
+    import config as C
+    from models_scaled import build_model, count_params
+
+    def n(label):
+        m = build_model(C.get_config(label), 50258, d_model=C.D_MODEL, n_heads=C.N_HEADS,
+                        block_size=C.BLOCK_SIZE, max_seq_len=1024)
+        return count_params(m)
+
+    target = n(C.PARAM_MATCH_TARGET)
+    for c in C.PHASE2_CONFIGS:
+        if c["n_layers"] == 2:
+            continue                       # 2L pair is an internal depth check
+        r = n(c["label"]) / target - 1
+        assert abs(r) <= C.PARAM_MATCH_TOL, (c["label"], f"{r:+.1%}")

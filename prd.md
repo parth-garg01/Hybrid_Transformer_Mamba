@@ -227,17 +227,17 @@ These were confirmed by running the code (CPU, GRU fallback) and checking gradie
 
 ### P2.1 Matched comparison
 - All models trained for the **same number of tokens** and the same steps, LR schedule and batch size.
-- Match **parameter count** within ±5% and report **FLOPs per token** for each model (`fvcore` or analytic). If a model is larger, say so in the table.
+- Match **parameter count** within ±5% and report **FLOPs per token** for each model (`fvcore` or analytic). If a model is larger, say so in the table. Matching is done by baseline depth (see `config.py`, project.md 2026-11-09).
 - Everyone gets 60k steps (or more). No model is compared at a different budget.
 
 ### P2.2 Models to run
 
 | Name | Description |
 |------|-------------|
-| Transformer-Only | 4 layers |
-| Mamba-Only | 4 layers |
-| Jamba-1:1 | fixed T-M-T-M |
-| Jamba-1:3 | fixed T-M-M-M |
+| Transformer-Only | 6 layers (param-matched to ABR-4L) |
+| Mamba-Only | 13 layers (param-matched) |
+| Jamba-1:1 | fixed (T-M) x4, 8 layers (param-matched) |
+| Jamba-1:3 | fixed T-M-M-M T-M-M-M T-M, 10 layers (param-matched) |
 | Alternate-Blocks | ABR layer with fixed alternating block assignment (T,M,T,M…) |
 | Random-Routing | ABR layer with random assignment (same expected attention fraction as the learned router) |
 | ABR (no CBSC) | learned routing, fixed code |

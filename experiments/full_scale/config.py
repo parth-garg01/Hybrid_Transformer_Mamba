@@ -72,11 +72,20 @@ def _cfg(label, n_layers, expert_type, routing_mode="learned", cbsc_mode="none",
 # Alternate-Blocks and Random-Routing use true state CBSC ("state"), so that
 # learned-vs-random differs from ABR+CBSC only in the routing.
 PHASE2_CONFIGS = [
-    _cfg("Transformer-Only", 4, "transformer", attn_frac=1.0),
-    _cfg("Mamba-Only",       4, "mamba",       attn_frac=0.0),
-    _cfg("Jamba-1:1",        4, "jamba-1:1",   attn_frac=0.5),    # T-M-T-M
-    _cfg("Jamba-1:3",        4, "jamba-1:3",   attn_frac=0.25),   # T-M-M-M
+    # Baselines are PARAMETER-MATCHED to ABR-4L (19.05M with real Mamba) by depth,
+    # within +-5% (P2.1, decided 2026-11-09 before any Phase 2 run):
+    #   Transformer 6L 19.42M (+1.9%), Mamba 13L 18.74M (-1.6%),
+    #   Jamba-1:1 8L 19.05M (0%), Jamba-1:3 10L 19.30M (+1.3%).
+    # This gives the baselines MORE compute per token than ABR-4L (conservative
+    # for ABR). Routing baselines (Random/Alternate) share ABR's exact layout.
+    _cfg("Transformer-Only", 6,  "transformer", attn_frac=1.0),
+    _cfg("Mamba-Only",       13, "mamba",       attn_frac=0.0),
+    _cfg("Jamba-1:1",        8,  "jamba-1:1",   attn_frac=0.5),    # (T-M) x4
+    _cfg("Jamba-1:3",        10, "jamba-1:3",   attn_frac=0.25),   # T-M-M-M T-M-M-M T-M
 ]
+# Real-backend total params of ABR-4L, used by the GPU param-match test.
+PARAM_MATCH_TARGET = "ABR-4L-CBSC"
+PARAM_MATCH_TOL    = 0.05
 for _L in (2, 4):
     PHASE2_CONFIGS += [
         _cfg(f"Alternate-Blocks-{_L}L", _L, "abr", "alternate", "state"),
