@@ -155,6 +155,9 @@ def test_extra_cannot_overwrite_recorded_fields(repo):
 
 
 def test_kaggle_detection(repo, monkeypatch):
+    for name in list(os.environ):            # on a real Kaggle box, start clean
+        if name.startswith("KAGGLE_"):
+            monkeypatch.delenv(name)
     monkeypatch.setenv("KAGGLE_KERNEL_RUN_TYPE", "Batch")
     monkeypatch.setenv("KAGGLE_KERNEL_URL", "https://www.kaggle.com/code/u/k?scriptVersionId=1")
     meta = prov.start_run(CONFIG, repo_root=str(repo))
