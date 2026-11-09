@@ -203,3 +203,10 @@ None yet. No reportable experiment has been run under the new pipeline.
   - Gated CBSC on real Mamba must use Mamba-2: run each Mamba block through the layer's own ops (in_proj, causal conv, `mamba_chunk_scan_combined` with `initial_states`/`return_final_states`, norm, out_proj), carrying the SSM state `(B, nheads, headdim, d_state)` = `(B, 8, 64, 64)` per layer **and** the conv state `(B, conv_dim, d_conv-1)` = `(B, 640, 3)`; gate only the SSM state. Mamba-1 cannot take an initial state; plain CBSC with Mamba-1 has to use the concatenate-the-Mamba-blocks approach.
 - **Next:** lead merges `p1/kaggle`; fix the CPU tests to force the GRU stand-in when run on a GPU box; `queue.py init --commit <tag>` and `queue.py advance` to start Phase 2; update `run_costs.json` after the first real session.
 
+
+### 2026-11-10 — Lead: merged Kaggle pipeline, Phase 2 launched
+- Merged `p1/kaggle` (c343f17). Compat check on 2× T4: Mamba-1 and Mamba-2 forward/backward OK; Mamba-2 initial-state passing OK. All 5 `test_gpu_*` pass on Kaggle, including the param-match test.
+- Fixed the CPU tests that failed on Kaggle (they built real Mamba because `mamba_ssm` is installed); they now force the GRU stand-in (1b0a5b2). Local: 161 passed, 5 skipped.
+- Measured T4 speed (fp32, B=8, T=256, two runs in parallel): Transformer 6L 11.05 steps/s (1.5 h/run), Mamba 13L 9.40 (1.8 h), ABR-4L-CBSC 7.92 (2.1 h), ABR-4L-gatedCBSC 3.75 (4.4 h).
+- Queue initialised at commit 1b0a5b2 with the 40 main runs; the 6 block-sweep runs are added after the main results pick the best 4L ABR variant (rule fixed in prd.md). The estimate is 5 packed sessions.
+- **Session q001 launched** 2026-11-09T23:26Z: https://www.kaggle.com/code/parthgarg101/abr-q001 (10 runs across 2 lanes).
