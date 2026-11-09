@@ -331,7 +331,9 @@ class KaggleCLI:
             "    print(json.dumps({'version': d.current_version_number, 'is_private': d.is_private}))\n"
             "except Exception as e:\n"
             "    s=str(e)\n"
-            "    print(json.dumps({'error': s[:500], 'missing': ('404' in s or 'Not Found' in s)}))\n"
+            # Kaggle answers 403 (not 404) for a dataset that doesn't exist yet; if it
+            # exists but isn't ours, the subsequent `datasets create` fails loudly.
+            "    print(json.dumps({'error': s[:500], 'missing': any(c in s for c in ('404', '403', 'Not Found'))}))\n"
         )
         r = subprocess.run([self.python, "-W", "ignore", "-c", code, owner, slug],
                            capture_output=True, text=True, timeout=300)
