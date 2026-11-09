@@ -57,3 +57,10 @@ paper/main.pdf
 # Paper is kept locally only, never committed or pushed
 paper/
 Hybrid Transformer Mamba.pdf
+
+# Results are evidence: keep their logs and figures (PRD 0.4 C)
+!results/**/train.log
+!results/**/*.log
+!results/**/*.png
+# Kaggle code snapshot is generated per upload
+git_snapshot.json
