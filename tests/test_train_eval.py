@@ -278,8 +278,15 @@ def test_configs():
     assert len(C.LEGACY_CONFIGS) == 9 and all(c["legacy"] for c in C.LEGACY_CONFIGS)
     assert not any(c["legacy"] for c in C.PHASE2_CONFIGS)
     assert C.seeds_for("ABR-4L-CBSC") == C.SEEDS_KEY
-    assert C.seeds_for("Mamba-Only") == C.SEEDS_OTHER
+    assert C.seeds_for("Mamba-Only") == C.SEEDS_KEY[:2]
+    assert C.seeds_for("Random-Routing-2L") == []
+    assert set(C.SEED_COUNT) == set(labels)
     assert C.KEY_CONFIGS <= set(labels)
+    # pre-registered budget: 40 main runs + 6 sweep runs
+    assert len(C.planned_runs()) == 40
+    assert len(C.BLOCK_SWEEP_TRAIN) * len(C.BLOCK_SWEEP_SEEDS) == 6
+    # every key pair compares configs that are actually run
+    assert all(C.SEED_COUNT[a] >= 2 and C.SEED_COUNT[b] >= 2 for a, b, _ in C.KEY_PAIRS)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -410,7 +417,8 @@ def test_sweep_wrapper_runs_and_aggregates(env, tmp_path):
     a = argparse_ns(legacy=True)
     assert len(train_ablation.plan(a)) == 9 * 3
     b = argparse_ns(block_size_sweep="ABR-4L-CBSC")
-    assert sorted({blk for _, _, blk in train_ablation.plan(b)}) == C.BLOCK_SIZE_SWEEP
+    assert sorted({blk for _, _, blk in train_ablation.plan(b)}) == [8, 16, 64]
+    assert len(train_ablation.plan(argparse_ns())) == 40
     assert callable(train_abr_long.main)
 
 

@@ -60,10 +60,13 @@ Rules:
 - **GPU type:** Kaggle offers T4 or P100.
   - The first Kaggle job is a short **compatibility check**: does Mamba-1, and Mamba-2 (needed for gated CBSC state passing), work on the assigned GPU?
   - If Mamba-2 kernels fail, use the block-by-block state-passing fallback from P1.3 and record the decision.
-- **Seed budget**, to fit the weekly quota:
-  - 5 seeds for the key comparisons: ABR+CBSC, ABR+gated CBSC, ABR no-CBSC, Random-Routing, Jamba-1:3 and Transformer-Only.
-  - 3 seeds for the other baselines and the block-size sweep.
-  - Record any change to this in `project.md`.
+- **Seed budget** (trimmed 2026-11-09 to 46 runs, before any Phase 2 result; the source of truth is `SEED_COUNT` in `experiments/full_scale/config.py`):
+  - 5 seeds `{42, 123, 7, 2024, 31337}` for the key comparisons, all 4-layer: ABR+CBSC, ABR+gated CBSC, ABR no-CBSC, Random-Routing, Jamba-1:3 and Transformer-Only (30 runs).
+  - 2 seeds `{42, 123}` for the secondary baselines: Mamba-Only, Jamba-1:1, Alternate-Blocks-4L (6 runs).
+  - 2 seeds for the exploratory 2-layer check, ABR-2L-CBSC vs ABR-2L-noCBSC (4 runs). Other 2L variants are dropped.
+  - Block-size sweep: blocks 8, 16, 64 with 2 seeds (6 runs); block 32 reuses the main runs.
+  - **Kaggle T4 x2:** each session runs two jobs at once, one per GPU, so the quota covers twice as many runs.
+  - Record any further change in `project.md`.
 - Phase 3 scale-up (125M–350M) needs A100-class GPUs and does not fit Kaggle's free tier. Decide the compute source (Colab Pro, academic credits, or a reduced scale) before starting P3.2.
 
 ### 0.4 Research integrity and provenance (mandatory, applies to every task)
@@ -244,11 +247,12 @@ These were confirmed by running the code (CPU, GRU fallback) and checking gradie
 Run 2-layer and 4-layer versions of the ABR variants.
 
 ### P2.3 Seeds and statistics
-- **5 seeds** per configuration: `{42, 123, 7, 2024, 31337}`.
+- Seeds per configuration as in §0.3: 5 for the key 4-layer comparisons, 2 for the rest.
+- Confirmatory tests use the 5-seed pairs only; the 2-layer pair is reported as exploratory.
 - Report mean ± std (ddof=1), 95% CI, and Welch t-tests for the key pairs (CBSC vs no-CBSC, gated vs plain, ABR vs Jamba, learned vs random routing).
 
 ### P2.4 Block-size sweep
-- Block sizes **8, 16, 32, 64** for the best ABR variant (3 seeds is fine here). Plot perplexity and throughput against block size.
+- Block sizes **8, 16, 32, 64** for the best 4L ABR variant (lowest mean validation perplexity among the three 4L ABR configs; rule fixed in advance), 2 seeds; block 32 reuses the main runs. Plot perplexity and throughput against block size.
 
 ### P2.5 Throughput and memory (fixes B7)
 - Benchmark **every** model in P2.2 at sequence lengths 256, 512, 1k, 2k, 4k (as far as memory allows): tokens/sec and peak memory, forward-only and training.

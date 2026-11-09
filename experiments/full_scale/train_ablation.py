@@ -31,13 +31,15 @@ def plan(args):
     """List of (label, seed, block_size)."""
     if args.block_size_sweep:
         seeds = args.seeds or C.BLOCK_SWEEP_SEEDS
-        return [(args.block_size_sweep, s, b) for b in C.BLOCK_SIZE_SWEEP for s in seeds]
+        return [(args.block_size_sweep, s, b) for b in C.BLOCK_SWEEP_TRAIN for s in seeds]
     pool = C.LEGACY_CONFIGS if args.legacy else C.PHASE2_CONFIGS
     labels = args.configs or [c["label"] for c in pool]
     runs = []
     for label in labels:
         C.get_config(label, legacy=args.legacy)            # validate early
         seeds = args.seeds or (C.SEEDS_OTHER if args.legacy else C.seeds_for(label))
+        if not seeds and args.configs:
+            raise SystemExit(f"{label} is not in the run plan; pass --seeds explicitly")
         runs += [(label, s, None) for s in seeds]
     return runs
 

@@ -87,30 +87,41 @@ for _L in (2, 4):
     ]
 del _L
 
-# Key comparisons get 5 seeds (PRD §0.3): ABR+CBSC, ABR+gated CBSC, ABR no-CBSC,
-# Random-Routing, Jamba-1:3, Transformer-Only. Everything else gets 3.
-KEY_CONFIGS = {"Transformer-Only", "Jamba-1:3"} | {
-    n for L in (2, 4) for n in (f"Random-Routing-{L}L", f"ABR-{L}L-noCBSC",
-                                f"ABR-{L}L-CBSC", f"ABR-{L}L-gatedCBSC")}
+# ── Run plan (PRD §0.3, trimmed 2026-11-09 BEFORE any Phase 2 result) ───────
+# Number of seeds per config; seeds are SEEDS_KEY[:n]. 0 = defined but not in
+# the default plan (still runnable with explicit --seeds). Total = 40 main runs
+# + 6 block-size-sweep runs = 46.
+#   Key comparisons, 5 seeds: the 4L ABR variants, Random-Routing-4L,
+#     Jamba-1:3, Transformer-Only.
+#   Secondary baselines, 2 seeds: Mamba-Only, Jamba-1:1, Alternate-Blocks-4L.
+#   2L depth check, 2 seeds (exploratory): ABR-2L-CBSC vs ABR-2L-noCBSC.
+SEED_COUNT = {
+    "ABR-4L-CBSC": 5, "ABR-4L-noCBSC": 5, "ABR-4L-gatedCBSC": 5,
+    "Random-Routing-4L": 5, "Jamba-1:3": 5, "Transformer-Only": 5,
+    "Mamba-Only": 2, "Jamba-1:1": 2, "Alternate-Blocks-4L": 2,
+    "ABR-2L-CBSC": 2, "ABR-2L-noCBSC": 2,
+    "ABR-2L-gatedCBSC": 0, "Random-Routing-2L": 0, "Alternate-Blocks-2L": 0,
+}
+KEY_CONFIGS = {k for k, n in SEED_COUNT.items() if n == len(SEEDS_KEY)}
 
 # Key pairs for Welch tests (PRD P2.3): (a, b, description). Positive t: a > b.
-KEY_PAIRS = []
-for _L in (2, 4):
-    KEY_PAIRS += [
-        (f"ABR-{_L}L-CBSC",      f"ABR-{_L}L-noCBSC",      f"CBSC vs no-CBSC ({_L}L)"),
-        (f"ABR-{_L}L-gatedCBSC", f"ABR-{_L}L-CBSC",        f"gated vs plain CBSC ({_L}L)"),
-        (f"ABR-{_L}L-CBSC",      f"Random-Routing-{_L}L",  f"learned vs random routing ({_L}L)"),
-    ]
-del _L
-KEY_PAIRS += [
-    ("ABR-4L-CBSC",      "Jamba-1:3",        "ABR+CBSC vs Jamba-1:3 (4L)"),
-    ("ABR-4L-gatedCBSC", "Jamba-1:3",        "ABR+gated CBSC vs Jamba-1:3 (4L)"),
-    ("ABR-4L-CBSC",      "Transformer-Only", "ABR+CBSC vs Transformer (4L)"),
+# The 4L pairs are confirmatory (5 v 5 seeds); the 2L pair is exploratory (2 v 2).
+KEY_PAIRS = [
+    ("ABR-4L-CBSC",      "ABR-4L-noCBSC",     "CBSC vs no-CBSC (4L)"),
+    ("ABR-4L-gatedCBSC", "ABR-4L-CBSC",       "gated vs plain CBSC (4L)"),
+    ("ABR-4L-CBSC",      "Random-Routing-4L", "learned vs random routing (4L)"),
+    ("ABR-4L-CBSC",      "Jamba-1:3",         "ABR+CBSC vs Jamba-1:3 (4L)"),
+    ("ABR-4L-gatedCBSC", "Jamba-1:3",         "ABR+gated CBSC vs Jamba-1:3 (4L)"),
+    ("ABR-4L-CBSC",      "Transformer-Only",  "ABR+CBSC vs Transformer (4L)"),
+    ("ABR-2L-CBSC",      "ABR-2L-noCBSC",     "CBSC vs no-CBSC (2L, exploratory)"),
 ]
 
-# ── Block-size sweep (PRD P2.4): best ABR variant, 3 seeds ───────────────────
+# ── Block-size sweep (PRD P2.4): best 4L ABR variant (lowest mean val PPL among
+# the three 4L ABR configs, rule fixed in advance), 2 seeds. Block 32 reuses the
+# main runs, so only 8/16/64 are trained.
 BLOCK_SIZE_SWEEP  = [8, 16, 32, 64]
-BLOCK_SWEEP_SEEDS = SEEDS_OTHER
+BLOCK_SWEEP_TRAIN = [b for b in BLOCK_SIZE_SWEEP if b != BLOCK_SIZE]
+BLOCK_SWEEP_SEEDS = SEEDS_KEY[:2]
 
 # ── Legacy configs: the 9 old ABLATION_CONFIGS, reproducing today's code ──────
 # Old tuple: (label, n_layers, use_routing, use_cross_block_state, expert_type)
@@ -164,7 +175,14 @@ def get_config(label, legacy=False):
 
 
 def seeds_for(label):
-    return list(SEEDS_KEY if label in KEY_CONFIGS else SEEDS_OTHER)
+    """Planned seeds for a Phase 2 config ([] if it is not in the default plan)."""
+    return list(SEEDS_KEY[:SEED_COUNT[label]])
+
+
+def planned_runs():
+    """The full pre-registered Phase 2 plan as (label, seed, block_size|None)."""
+    runs = [(c["label"], s, None) for c in PHASE2_CONFIGS for s in seeds_for(c["label"])]
+    return runs
 
 
 def contains_mamba(cfg):
