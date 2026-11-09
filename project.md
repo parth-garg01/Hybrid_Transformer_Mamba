@@ -37,6 +37,7 @@ None yet. No reportable experiment has been run under the new pipeline.
 - 2026-11-09 — (agent: model) P1.1–P1.4 landed as one code commit because all four changes live in one file (`models_scaled.py`) and depend on each other. The commit message lists each task.
 - 2026-11-09 — **Phase 2 plan trimmed to 46 runs (pre-registered, before any Phase 2 run).** The original budget (71+ runs) did not fit Kaggle's free quota. New plan: 6 key 4L configs × 5 seeds = 30; Mamba-Only, Jamba-1:1, Alternate-Blocks-4L × 2 seeds = 6; ABR-2L-CBSC vs noCBSC × 2 seeds = 4 (exploratory); block sweep {8,16,64} × 2 seeds = 6. Dropped from the default plan: ABR-2L-gatedCBSC, Random-Routing-2L, Alternate-Blocks-2L. Key pairs reduced to the 4L pairs plus one exploratory 2L pair. Source of truth: `SEED_COUNT`, `KEY_PAIRS`, `BLOCK_SWEEP_*` in `config.py`.
 - 2026-11-09 — Kaggle runs use the GPU T4 x2 accelerator with two jobs per session (one per GPU). Only the owner's Kaggle account is used; no second account.
+- 2026-11-09 — GitHub Actions CI is not used (owner's decision). The workflow file stays in the repo but does not run. Instead, the full test suite (`~/.venvs/abr/bin/python -m pytest -q`) is run locally before each commit, and the pass count goes into the log entry. GPU tests run on Kaggle.
 - 2026-11-09 — Local dev environment: `~/.venvs/abr` (Python 3.13, PyTorch with MPS). Kaggle CLI: `~/.venvs/kaggle`.
 
 ## Log
