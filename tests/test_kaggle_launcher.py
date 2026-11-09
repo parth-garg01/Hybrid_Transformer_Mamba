@@ -345,7 +345,7 @@ def test_cmds_file(tmp_path):
         launch.load_cmds_file(f)
 
 
-def _run_runner(tmp_path, repo, runs, resume_sources=None, prev=None):
+def _run_runner(tmp_path, repo, runs, resume_sources=None, prev=None, extra_env=None):
     """Execute the generated runner locally against a fake /kaggle tree (no installs)."""
     pkg = launch.build_code_archive(repo, "HEAD", tmp_path / "ds")
     inp = tmp_path / "input"
@@ -361,7 +361,7 @@ def _run_runner(tmp_path, repo, runs, resume_sources=None, prev=None):
                                    kernel_sources=resume_sources)
     work = tmp_path / "work"
     env = dict(__import__("os").environ, ABR_RUNNER_WORK=str(work), ABR_RUNNER_INPUT=str(inp),
-               ABR_RUNNER_SKIP_INSTALL="1")
+               ABR_RUNNER_SKIP_INSTALL="1", **(extra_env or {}))
     r = subprocess.run([sys.executable, str(kdir / "runner.py")], env=env, capture_output=True,
                        text=True, timeout=300)
     return r, work / "output"
@@ -452,42 +452,87 @@ def test_queue_exclude_non_mamba(qrepo):
     assert not any(r.startswith("Transformer") for r in st["order"])
 
 
-def test_queue_step_launch_settle_resume(qrepo, monkeypatch):
+COSTS = {"total_steps": 60000, "default_steps_per_s": 2.0, "per_run_overhead_hours": 0.0,
+         "session_overhead_hours": 0.5, "min_start_hours": 0.34,
+         "steps_per_s": {"Transformer-Only": 4.0, "Jamba-1:3": 2.0, "ABR-4L-CBSC": 1.0,
+                         "Mamba-Only": 2.0}}
+# est hours: Transformer 4.17, Jamba 8.33, ABR 16.67, Mamba 8.33
+
+
+def test_pack_lanes_lpt():
+    lanes = kq.pack_lanes([("a", 5), ("b", 4), ("c", 3), ("d", 3), ("e", 1)], 2)
+    loads = sorted(sum(h for _, h in l) for l in lanes)
+    assert loads == [8, 8]
+
+
+def test_plan_session_partial_first_and_budget(qrepo):
+    q = kq.Queue(qrepo, FakeCLI())
+    q.init("HEAD")
+    q.state["runs"]["ABR-4L-CBSC_s123"].update(resume_from="u/abr-q001", hours_done=10.0)
+    plan = q.plan_session(COSTS, session_hours=11.5, lanes=2)
+    first = [lane[0]["run"] for lane in plan["lanes"]]
+    assert "ABR-4L-CBSC_s123" in first                     # partial run resumes first
+    flat = [x["run"] for lane in plan["lanes"] for x in lane]
+    assert flat.count("ABR-4L-CBSC_s123") == 1
+    picked = sum(plan["est_load_hours"])
+    assert picked >= 2 * 11.0                               # both lanes filled
+    assert picked - max(x["est_hours"] for l in plan["lanes"] for x in l) < 2 * 11.0
+    assert abs(plan["est_load_hours"][0] - plan["est_load_hours"][1]) <= 17
+    assert plan["lanes"][0][0]["est_hours"] > 0
+
+
+def test_simulate_session_count(qrepo):
+    q = kq.Queue(qrepo, FakeCLI())
+    q.init("HEAD")
+    total = sum(q.remaining_hours(r, COSTS) for r in q.state["order"])
+    n = q.simulate(COSTS, 11.5, 2)
+    assert n >= total / (2 * 11.0)
+    assert n <= total / (2 * 11.0) + 3
+
+
+def test_queue_advance_launch_settle_resume(qrepo, monkeypatch):
     cli = FakeCLI()
     q = kq.Queue(qrepo, cli)
     q.init("HEAD")
     monkeypatch.setattr(kq.L.time, "sleep", lambda s: None)
-    launched = q.step(max_sessions=1)
-    assert launched == ["q001"]
+    kw = dict(costs=COSTS, max_sessions=1, session_hours=11.5, lanes=2)
+    assert q.advance(**kw) == ["q001"]
     s = q.state["sessions"]["q001"]
-    assert s["runs"] == ["Transformer-Only_s42", "Jamba-1_3_s42"] and s["status"] == "running"
-    assert q.state["runs"]["Jamba-1_3_s42"]["status"] == "running"
-    # slot is busy: a second step launches nothing while the kernel runs
-    cli.statuses = [("running", "")]
-    assert q.step(max_sessions=1) == []
+    rec = json.loads((qrepo / "results/kaggle/queue/q001/launch.json").read_text())
+    assert rec["session_plan"]["lanes"] == s["plan"]["lanes"] and rec["session_hours"] == 11.5
+    lanes = {r["name"]: r["lane"] for r in rec["runs"]}
+    assert set(lanes.values()) == {0, 1}
+    assert all("{max_hours}" in r["cmd"] for r in rec["runs"])
+    group = s["runs"]
+    assert all(q.state["runs"][g]["status"] == "running" for g in group)
+    # idempotent while the kernel runs
+    cli.statuses = [("running", "")] * 3
+    assert q.advance(**kw) == [] and q.advance(**kw) == []
+    done, partial, never = group[0], group[1], group[-1]
 
-    # session ends: run A finished, run B hit its budget (incomplete, exit 0, no result)
     def fake_output(ref, folder):
-        a, b = folder / "Transformer-Only_s42", folder / "Jamba-1_3_s42"
+        a, b = folder / done, folder / partial
         (a / "x").mkdir(parents=True)
         (a / "x" / "result.json").write_text("{}")
-        (a / "run_status.json").write_text(json.dumps({"exit_code": 0, "state": "done"}))
+        hist = [{"started_utc": "2026-11-10T00:00:00Z", "finished_utc": "2026-11-10T04:00:00Z"}]
+        (a / "run_status.json").write_text(json.dumps({"exit_code": 0, "state": "done", "history": hist}))
         b.mkdir(parents=True)
-        (b / "run_status.json").write_text(json.dumps({"exit_code": 0, "state": "done"}))
-        return ""
+        (b / "run_status.json").write_text(json.dumps({"exit_code": 0, "state": "done", "history": hist}))
+        return ""            # `never` was skipped by the runner: no output dir
     cli.kernel_output = fake_output
     cli.statuses = [("complete", "")]
-    launched = q.step(max_sessions=1)
+    launched = q.advance(**kw)
     runs = q.state["runs"]
-    assert runs["Transformer-Only_s42"]["status"] == "done"
-    jb = runs["Jamba-1_3_s42"]
-    assert jb["status"] == "running" and jb["resume_from"] == "u/abr-q001"
-    assert launched == ["q002"]
-    # the incomplete run is relaunched first (it keeps its place in the order)
-    assert q.state["sessions"]["q002"]["runs"] == ["Jamba-1_3_s42", "ABR-4L-CBSC_s42"]
+    assert runs[done]["status"] == "done"
+    assert runs[partial]["resume_from"] == "u/abr-q001" and runs[partial]["hours_done"] == 4.0
+    assert runs[never]["resume_from"] is None and runs[never]["failures"] == 0
+    assert launched == ["q002"] and q.state["sessions"]["q001"]["status"] == "downloaded"
+    plan2 = q.state["sessions"]["q002"]["plan"]
+    assert partial in [lane[0]["run"] for lane in plan2["lanes"]]
     assert q.state["sessions"]["q002"]["resume_from"] == ["u/abr-q001"]
-    rec = json.loads((qrepo / "results/kaggle/queue/q002/launch.json").read_text())
-    assert rec["resume_from"] == ["u/abr-q001"] and len(rec["runs"]) == 2
+    # downloading again is a no-op
+    cli.statuses = [("running", "")]
+    assert q.advance(**kw) == []
 
 
 def test_queue_failures(qrepo):
@@ -574,3 +619,29 @@ def test_patch_setup_for_arch(tmp_path):
     assert g["cc_flag"] == ["-gencode", "arch=compute_75,code=sm_75"]
     with pytest.raises(RuntimeError):
         ns["patch_setup_for_arch"](str(setup), "60")
+
+
+def test_kernel_dir_extra_datasets(tmp_path):
+    d = launch.build_kernel_dir(tmp_path / "k", user="u", name="n", cmd="echo", commit="c",
+                                dataset_version=1, gpu="t4x2",
+                                token_cache={"ref": "u/tok", "expected_sha256": {}},
+                                wheels_dataset="u/whl")
+    meta = json.loads((d / "kernel-metadata.json").read_text())
+    assert meta["dataset_sources"] == ["u/abr-code", "u/tok", "u/whl"]
+
+
+def test_runner_lanes_max_hours_and_skip(repo, tmp_path):
+    runs = [{"name": "a", "cmd": "echo hours={max_hours} lane=$ABR_MAX_HOURS", "lane": 1},
+            {"name": "b", "cmd": "echo b", "lane": 1}]
+    r, out = _run_runner(tmp_path, repo, launch.normalize_runs(runs),
+                         extra_env={"ABR_SESSION_BUDGET_S": "7200"})
+    assert r.returncode == 0, r.stdout + r.stderr
+    a = json.loads((out / "a" / "run_status.json").read_text())
+    assert a["lane"] == 1 and 1.9 < a["max_hours"] <= 2.0
+    assert f"hours={a['max_hours']:.3f}" in (out / "a" / "run.log").read_text()
+    # budget too small to start anything: runs are skipped, no output dirs, exit 0
+    r, out = _run_runner(tmp_path / "2", repo, launch.normalize_runs(runs),
+                         extra_env={"ABR_SESSION_BUDGET_S": "600"})
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert not (out / "a").exists() and not (out / "b").exists()
+    assert json.loads((out / "kaggle_env.json").read_text())["skipped_runs"] == ["a", "b"]

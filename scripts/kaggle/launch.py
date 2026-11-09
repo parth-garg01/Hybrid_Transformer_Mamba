@@ -262,7 +262,8 @@ def normalize_runs(cmds, names=None) -> list[dict]:
     runs = []
     for i, c in enumerate(cmds):
         if isinstance(c, dict):
-            runs.append({"name": c.get("name"), "cmd": c["cmd"]})
+            runs.append({k: v for k, v in c.items() if k in ("name", "cmd", "lane")})
+            runs[-1].setdefault("name", None)
         else:
             runs.append({"name": (names[i] if names and i < len(names) else None), "cmd": c})
     if not runs or any(not r["cmd"] for r in runs):
@@ -286,7 +287,7 @@ def load_cmds_file(path: Path) -> list[dict]:
 
 def render_runner(template: str, *, cmd, commit: str, user: str, name: str,
                   dataset_version, gpu: str, resume_sources: list[str] | None = None,
-                  token_cache: dict | None = None) -> str:
+                  token_cache: dict | None = None, session_hours: float = 11.5) -> str:
     runs = cmd if isinstance(cmd, list) and cmd and isinstance(cmd[0], dict) else normalize_runs(cmd)
     values = {
         "__ABR_RUNS__": runs,
@@ -298,6 +299,7 @@ def render_runner(template: str, *, cmd, commit: str, user: str, name: str,
         "__ABR_GPU_REQUESTED__": gpu,
         "__ABR_RESUME_SOURCES__": list(resume_sources or []),
         "__ABR_TOKEN_CACHE__": token_cache,
+        "__ABR_SESSION_HOURS__": float(session_hours),
     }
     out = template
     for key, val in values.items():
@@ -340,13 +342,15 @@ def token_cache_spec(ref: str | None, local_dir: Path | None = DEFAULT_LOCAL_CAC
 
 def build_kernel_dir(out_dir: Path, *, user: str, name: str, cmd, commit: str,
                      dataset_version, gpu: str, kernel_sources: list[str] | None = None,
-                     token_cache: dict | None = None) -> Path:
+                     token_cache: dict | None = None, wheels_dataset: str | None = None,
+                     session_hours: float = 11.5) -> Path:
     out_dir.mkdir(parents=True, exist_ok=True)
-    meta = make_kernel_metadata(user, name, gpu, kernel_sources=kernel_sources,
-                                extra_datasets=[token_cache["ref"]] if token_cache else None)
+    extra = ([token_cache["ref"]] if token_cache else []) + ([wheels_dataset] if wheels_dataset else [])
+    meta = make_kernel_metadata(user, name, gpu, kernel_sources=kernel_sources, extra_datasets=extra)
     runner = render_runner(RUNNER_TEMPLATE.read_text(), cmd=cmd, commit=commit, user=user,
                            name=name, dataset_version=dataset_version, gpu=gpu,
-                           resume_sources=kernel_sources, token_cache=token_cache)
+                           resume_sources=kernel_sources, token_cache=token_cache,
+                           session_hours=session_hours)
     (out_dir / meta["code_file"]).write_text(runner)
     (out_dir / "kernel-metadata.json").write_text(json.dumps(meta, indent=2) + "\n")
     return out_dir
@@ -603,7 +607,9 @@ def download_outputs(cli: KaggleCLI, ref: str, dest: Path, user: str) -> dict:
 def launch_session(*, repo: Path, cli: "KaggleCLI", name: str, commit: str, runs: list[dict],
                    gpu: str = "t4", resume_from: list[str] | None = None, timeout: int | None = None,
                    rec_path: Path | None = None, staging: Path | None = None,
-                   dry_run: bool = False, token_cache: dict | None = None) -> dict:
+                   dry_run: bool = False, token_cache: dict | None = None,
+                   wheels_dataset: str | None = None, session_hours: float = 11.5,
+                   plan: dict | None = None) -> dict:
     """Package `commit`, upload it, push kernel abr-<name> and write launch.json. Returns the record."""
     user = cli.user
     ref = kernel_ref(user, name)
@@ -622,14 +628,16 @@ def launch_session(*, repo: Path, cli: "KaggleCLI", name: str, commit: str, runs
         "gpu_requested": gpu, "kaggle_user": user,
         "kernel_ref": ref, "kernel_url": kernel_url(user, name),
         "launched_utc": utcnow(), "resume_from": list(resume_from or []),
-        "token_cache": token_cache,
+        "token_cache": token_cache, "wheels_dataset": wheels_dataset,
+        "session_hours": session_hours, "session_plan": plan,
     }
     if timeout:
         record["timeout_s"] = timeout
     if dry_run:
         build_kernel_dir(k_dir, user=user, name=name, cmd=runs, commit=pkg["commit"],
                          dataset_version=None, gpu=gpu, kernel_sources=resume_from,
-                         token_cache=token_cache)
+                         token_cache=token_cache, wheels_dataset=wheels_dataset,
+                         session_hours=session_hours)
         record["staging"] = str(staging_root)
         print(f"[launch] dry run: staging in {staging_root}")
         return record
@@ -638,7 +646,8 @@ def launch_session(*, repo: Path, cli: "KaggleCLI", name: str, commit: str, runs
     print(f"[launch] dataset {ds['ref']} v{ds['version']} ready")
     build_kernel_dir(k_dir, user=user, name=name, cmd=runs, commit=pkg["commit"],
                      dataset_version=ds["version"], gpu=gpu, kernel_sources=resume_from,
-                     token_cache=token_cache)
+                     token_cache=token_cache, wheels_dataset=wheels_dataset,
+                     session_hours=session_hours)
     pushed = push_kernel(cli, k_dir, user, name, timeout=timeout)
     record["kernel_version"] = pushed["version"]
     record["kernel_version_url"] = pushed["url"]
@@ -675,11 +684,16 @@ def main(argv=None) -> int:
                    help="attach a previous kernel's output as input (e.g. parthgarg101/abr-run-s1); "
                         "each named run's previous output/<run>/ is copied back before it starts")
     p.add_argument("--timeout", type=int, default=None, help="kernel run-time limit in seconds")
+    p.add_argument("--session-hours", type=float, default=11.5,
+                   help="named runs stop starting / get SIGTERM after this (Kaggle limit is 12 h); "
+                        "'{max_hours}' in a command is replaced by the lane's remaining hours")
     p.add_argument("--cache-dataset", metavar="OWNER/SLUG",
                    help="private dataset with wikitext103_*_gpt2.pt token caches; mounted and "
                         "exported as ABR_CACHE_DIR, SHA-256 checked against --cache-local")
     p.add_argument("--cache-local", default=str(DEFAULT_LOCAL_CACHE),
                    help="local cache dir the dataset was uploaded from (expected hashes)")
+    p.add_argument("--wheels-dataset", metavar="OWNER/SLUG",
+                   help="private dataset with prebuilt mamba_ssm/causal_conv1d wheels (+ Triton cache)")
     p.add_argument("--repo", default=None, help="repo root (default: git toplevel of this file)")
     p.add_argument("--user", default=DEFAULT_USER)
     p.add_argument("--kaggle-bin", default=DEFAULT_KAGGLE_BIN)
@@ -712,6 +726,7 @@ def main(argv=None) -> int:
                 repo=repo, cli=cli, name=a.name, commit=a.commit, runs=runs, gpu=a.gpu,
                 resume_from=a.resume_from, timeout=a.timeout, rec_path=rec_path,
                 token_cache=token_cache_spec(a.cache_dataset, Path(a.cache_local)),
+                wheels_dataset=a.wheels_dataset, session_hours=a.session_hours,
                 staging=Path(a.keep_staging) if a.keep_staging else None, dry_run=a.dry_run)
             if a.dry_run:
                 print(json.dumps(record, indent=2))

@@ -9,6 +9,7 @@ an exact commit of this repo to a Kaggle GPU kernel.
 | `launch.py` | CLI: package a commit, upload it, push the kernel, wait, download |
 | `runner_template.py` | The kernel script (placeholders filled in by `launch.py`) |
 | `compat_check.py` | Mamba-1/Mamba-2 GPU compatibility check (runs on Kaggle) |
+| `time_train.py` | steps/s of a short `train.py` run (real schedule, `--stop-after-steps`) |
 | `queue.py` | Job queue for the Phase 2 runs: 2 runs per T4 x2 session, resume across sessions |
 
 Prerequisites: Kaggle CLI at `~/.venvs/kaggle/bin/kaggle`, authenticated through
@@ -36,7 +37,11 @@ python scripts/kaggle/launch.py --name compat-check --commit HEAD \
   server substitutes T4 x2). Kaggle CLI 1.7.4.5 (the newest that installs on the CLI venv's
   Python 3.9) does not send `machine_shape` at all, so every GPU kernel gets the default.
   The real GPU(s) are logged in `kaggle_env.json`.
-* `--timeout SECONDS` caps the kernel run time.
+* `--timeout SECONDS` caps the kernel run time (passed to `kaggle kernels push -t`).
+* `--cache-dataset parthgarg101/abr-wikitext103-gpt2-tokens` mounts the token cache, exports
+  `ABR_CACHE_DIR`, records each file's SHA-256 in `kaggle_env.json["token_cache"]` and refuses
+  to run if a hash differs from the local `~/.cache/abr` copy (`--cache-local`).
+* `--wheels-dataset OWNER/SLUG` mounts prebuilt mamba/causal-conv1d wheels (and Triton cache).
 * `--dry-run --keep-staging DIR` builds the archive and kernel folder without network.
 
 The launcher prints the kernel URL and writes `results/kaggle/<name>/launch.json` with the
@@ -125,12 +130,22 @@ of a run.
    `/kaggle/working/repo` and **refuses to run** if its `COMMIT` file differs from the
    commit the launcher packaged.
 2. Logs `nvidia-smi`, torch/CUDA/cxx11abi.
-3. Installs `causal-conv1d` and `mamba-ssm`: looks up the newest GitHub release wheel that
-   matches the preinstalled torch major.minor, CUDA major, Python tag and cxx11abi, and
-   `pip install --no-deps`s it. If no wheel matches, falls back to
-   `pip install --no-build-isolation` (which itself tries the release wheel, then compiles;
-   compiling is slow). Then installs `datasets`, `transformers<5`, `wandb`, and saves
-   `pip_freeze.txt`.
+3. Installs `causal-conv1d` 1.7.0 and `mamba-ssm` 2.3.2.post1 (the versions the compat
+   check validated), trying in order:
+   1. wheels found under `/kaggle/input` whose local version matches this environment, e.g.
+      `mamba_ssm-2.3.2.post1+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl` (attach a
+      wheels dataset, see below): seconds;
+   2. GitHub release wheels matching torch/CUDA/Python/cxx11abi (none exist for Kaggle's
+      torch 2.11 + CUDA 13 + Python 3.13 as of 2026-11-09);
+   3. a source build of the pinned sdists **for the running GPU's arch only** (setup.py is
+      patched to emit one `-gencode`), saved to `output/wheels/`: about 10 min on a T4;
+   4. stock `pip install --no-build-isolation` (all 9 archs): **75 min** on Kaggle.
+   Then `datasets`, `transformers<5`, `wandb`, and `pip_freeze.txt`.
+   The Triton cache (`TRITON_CACHE_DIR`) is restored from any mounted `triton_cache.tar.gz`
+   and saved to `output/triton_cache.tar.gz` (Mamba-2 kernels JIT-compile for minutes on a T4).
+   Make the install fast for every later session by uploading `output/wheels/*.whl` and
+   `output/triton_cache.tar.gz` of one finished kernel as a private dataset and attaching it
+   with `--wheels-dataset <owner>/<slug>`.
 4. Sets `WANDB_MODE=offline`, `WANDB_DIR=$ABR_OUTPUT_DIR/wandb`, `KAGGLE_KERNEL_URL`,
    `CODE_COMMIT`, `KAGGLE_DATASET_VERSION`, `ABR_OUTPUT_DIR`, `ABR_RESUME_DIRS`
    (and `KAGGLE_KERNEL_VERSION` only if the platform exposes it, which it normally does not).

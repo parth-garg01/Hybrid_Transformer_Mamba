@@ -44,7 +44,10 @@ INPUT = os.environ.get("ABR_RUNNER_INPUT", "/kaggle/input")
 SKIP_INSTALL = os.environ.get("ABR_RUNNER_SKIP_INSTALL") == "1"
 # Kaggle stops a session at 12 h. Named runs get SIGTERM at this budget (from runner
 # start) so they can checkpoint; they are then marked resumable for the next session.
-SESSION_BUDGET_S = float(os.environ.get("ABR_SESSION_BUDGET_S", 11.5 * 3600))
+SESSION_HOURS = "__ABR_SESSION_HOURS__"
+SESSION_BUDGET_S = float(os.environ.get("ABR_SESSION_BUDGET_S", SESSION_HOURS * 3600))
+# A lane does not start another run with less than this left (it waits for the next session).
+MIN_RUN_S = float(os.environ.get("ABR_MIN_RUN_S", 20 * 60))
 T_START = time.time()
 os.makedirs(OUT, exist_ok=True)
 LOG_PATH = os.path.join(OUT, "run.log")
@@ -461,6 +464,13 @@ def write_status(path, st):
 def run_named(run, gpu_slot, base_env):
     name = run["name"]
     rdir = os.path.join(OUT, name)
+    remaining = T_START + SESSION_BUDGET_S - time.time()
+    if remaining < MIN_RUN_S:
+        # Not started: no output dir, so the queue keeps it pending with its old resume source.
+        log(f"[{name}] skipped: only {remaining / 60:.0f} min of the session budget left")
+        ENV.setdefault("skipped_runs", []).append(name)
+        return name, None
+    max_hours = remaining / 3600.0
     prev = find_previous_run_dir(name)
     prev_status = {}
     if prev:
@@ -478,7 +488,9 @@ def run_named(run, gpu_slot, base_env):
     os.makedirs(rdir, exist_ok=True)
     status_path = os.path.join(rdir, "run_status.json")
     sessions = int(prev_status.get("sessions", 0)) + 1
-    st = {"name": name, "cmd": run["cmd"], "commit": ENV.get("commit"), "kernel_ref": KERNEL_REF,
+    cmd = run["cmd"].replace("{max_hours}", f"{max_hours:.3f}")
+    st = {"name": name, "cmd": cmd, "max_hours": round(max_hours, 3), "lane": run.get("lane"),
+          "commit": ENV.get("commit"), "kernel_ref": KERNEL_REF,
           "kernel_url": KERNEL_URL, "dataset_version": DATASET_VERSION, "sessions": sessions,
           "gpu_slot": gpu_slot, "resumed_from": prev, "state": "running", "exit_code": None,
           "started_utc": utcnow(),
@@ -488,7 +500,8 @@ def run_named(run, gpu_slot, base_env):
     env.update({"ABR_OUTPUT_DIR": rdir, "ABR_RUN_NAME": name, "ABR_RESUME_DIR": rdir,
                 "ABR_RESUMED": "1" if prev else "0", "ABR_SESSION_INDEX": str(sessions),
                 "WANDB_DIR": os.path.join(rdir, "wandb"),
-                "ABR_SESSION_DEADLINE": str(int(T_START + SESSION_BUDGET_S))})
+                "ABR_SESSION_DEADLINE": str(int(T_START + SESSION_BUDGET_S)),
+                "ABR_MAX_HOURS": f"{max_hours:.3f}"})
     if gpu_slot is not None:
         env["CUDA_VISIBLE_DEVICES"] = str(gpu_slot)
     os.makedirs(env["WANDB_DIR"], exist_ok=True)
@@ -508,7 +521,7 @@ def run_named(run, gpu_slot, base_env):
                     pass
     threading.Thread(target=watchdog, daemon=True).start()
     with open(os.path.join(rdir, "run.log"), "a", buffering=1) as lf:
-        rc, _ = sh(run["cmd"], cwd=REPO, env=env, logfile=lf, prefix=f"[{name}] ",
+        rc, _ = sh(cmd, cwd=REPO, env=env, logfile=lf, prefix=f"[{name}] ",
                    on_start=lambda p: procs.__setitem__("p", p))
     stopped.set()
     st["exit_code"] = rc
@@ -525,7 +538,8 @@ def run_all_named(base_env, n_gpus):
     slots = list(range(n_gpus)) if n_gpus > 0 else [None]
     queues = {i: [] for i in range(len(slots))}
     for k, run in enumerate(RUNS):
-        queues[k % len(slots)].append(run)
+        lane = run.get("lane")
+        queues[(k if lane is None else int(lane)) % len(slots)].append(run)
     results = {}
 
     def worker(i):
@@ -606,7 +620,7 @@ def main():
             log(f"running {len(RUNS)} named runs on {n_gpus} GPU(s)")
             res = run_all_named(env, n_gpus)
             ENV["run_exit_codes"] = res
-            rc = 0 if all(v == 0 for v in res.values()) else 1
+            rc = 0 if all(v in (0, None) for v in res.values()) else 1
     except Exception:
         ENV["runner_error"] = traceback.format_exc()
         log(ENV["runner_error"])
