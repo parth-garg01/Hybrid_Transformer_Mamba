@@ -1,0 +1,8 @@
+# CPU test dependencies (used by CI and for local tests).
+# torch is installed separately in CI from the CPU index:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# mamba_ssm is NOT installed: CPU tests use the GRU stand-in (PRD section 0.3).
+pytest>=8.0
+numpy>=1.24
+scipy>=1.10
+PyYAML>=6.0

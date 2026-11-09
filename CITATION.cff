@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+type: software
+title: "Adaptive Block Routing with Cross-Block State Continuity in Hybrid Transformer-Mamba Language Models"
+authors:
+  - family-names: Garg
+    given-names: Parth
+    affiliation: "Vellore Institute of Technology (VIT), Vellore"
+repository-code: "https://github.com/parth-garg01/Hybrid_Transformer_Mamba"
+url: "https://github.com/parth-garg01/Hybrid_Transformer_Mamba"
+license: MIT
+keywords:
+  - hybrid language models
+  - Mamba
+  - state space models
+  - Transformer
+  - adaptive routing
