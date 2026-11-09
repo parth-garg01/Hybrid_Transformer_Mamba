@@ -7,10 +7,10 @@ Plan: see `prd.md`. This file is the single source of truth for progress (PRD §
 |------|--------|-------|-------------|
 | P1.0 Tests + project.md | in progress | lead | 2026-11-09 |
 | P1.0 Provenance, CI, signing (PRD §0.4) | done | agent: provenance | 2026-11-09 |
-| P1.1 Router gradient | todo | agent: model | |
-| P1.2 Cross-block context | todo | agent: model | |
-| P1.3 True CBSC | todo | agent: model | |
-| P1.4 Aux losses + temperature | todo | agent: model | |
+| P1.1 Router gradient | done | agent: model | 2026-11-09 |
+| P1.2 Cross-block context | done | agent: model | 2026-11-09 |
+| P1.3 True CBSC | in progress (CPU done; real Mamba-2 gated path unverified, needs Kaggle GPU check) | agent: model | 2026-11-09 |
+| P1.4 Aux losses + temperature | done (model side; training loop must call the new API) | agent: model | 2026-11-09 |
 | P1.5 Full evaluation + stats | todo | agent: train-eval | |
 | P1.6 Smoke runs | todo | lead | |
 | Kaggle pipeline + Mamba compatibility check | todo | agent: kaggle | |
@@ -30,6 +30,11 @@ None yet. No reportable experiment has been run under the new pipeline.
 - 2026-11-09 — The paper (`paper/`) is kept locally only and excluded via `.gitignore`. An earlier commit that briefly contained it was removed from the `fixes` branch before any experiment work began. The commit may still be reachable on GitHub by its exact hash until GitHub purges it.
 - 2026-11-09 — Weights & Biases is required for all reportable runs. Kaggle runs log offline and are synced locally (PRD §0.4 C).
 - 2026-11-09 — Work is parallelised across agents in separate git worktrees (PRD §0.5).
+- 2026-11-09 — (agent: model) **Router input made causal.** The old router summarised a block by the mean of all its tokens, so the routing decision (and, with the P1.1 straight-through weight, the gradient) for position t depended on later tokens in the same block. The fixed router uses the layer input at the block's **first token** (`router_input="first_token"`, default; `"prev_block_mean"` also available). Legacy mode keeps the old mean (its gradient is zero because of argmax, but the hard decision still uses future tokens of the block; legacy results therefore carry a small within-block look-ahead).
+- 2026-11-09 — (agent: model) Gated CBSC gate size. GRU stand-in: full `d_inner x d_inner` gate on the GRU state `(1, B, d_inner)`. Real Mamba-2: the state is `(B, nheads, headdim, d_state)`; a full linear map over the flattened state would have ~1e9 parameters, so `W_g` is one `d_state x d_state` matrix per head (shared over headdim), with bias `(nheads, headdim, d_state)`. `W_g` is zero-initialised and the bias is +4 (gate = sigmoid(4) ~ 0.982, nearly open). Only the recurrent state is gated; the conv state is carried ungated.
+- 2026-11-09 — (agent: model) On the real backend, `cbsc_mode="gated_state"` uses Mamba-2 (state passing needs `mamba_chunk_scan_combined`), while the other modes default to Mamba-1 (`mamba_ssm.Mamba`). This confounds gated vs plain CBSC. **Recommendation:** pass `"mamba_version": 2` for all ABR variants (and ideally the Mamba/Jamba baselines) in Phase 2. Lead to decide before pre-registered runs start.
+- 2026-11-09 — (agent: model) Legacy tuples passed to `build_model` now build the **fixed** model by default (PRD: new behaviour is the default); `legacy=True` reproduces the old code bit-for-bit.
+- 2026-11-09 — (agent: model) P1.1–P1.4 landed as one code commit because all four changes live in one file (`models_scaled.py`) and depend on each other. The commit message lists each task.
 - 2026-11-09 — Local dev environment: `~/.venvs/abr` (Python 3.13, PyTorch with MPS). Kaggle CLI: `~/.venvs/kaggle`.
 
 ## Log
@@ -59,3 +64,52 @@ None yet. No reportable experiment has been run under the new pipeline.
   - CI checks out with `fetch-depth: 0` so the verifier can find result commits; results must only reference pushed commits.
   - Deviations: `extra` keys are merged into the top level of `meta` (they may not overwrite recorded fields, except `mamba_backend`). Extra meta keys beyond the agreed list: `schema_version`, `debug`, `git_tags`, `git_source`, `git_changed_files`, `git_untracked_files`, `python_executable`, `cwd`, `start_unix`, `cudnn_version`, `gpu_count`, `gpu_driver`, `causal_conv1d_version`. `kaggle` is always a dict with `on_kaggle` (false locally). The verifier treats non-reportable runs as warnings unless `--strict`.
 - **Next:** training loop (agent: train-eval) calls `start_run`/`finish_run` and passes `dataset_sha256` and `param_count` via `extra`; Kaggle launcher writes the git snapshot and sets `KAGGLE_KERNEL_URL`.
+
+### 2026-11-09 — P1.1, P1.2, P1.3, P1.4: model fixes (agent: model)
+- **Done:**
+  - **P1.1:** The new `GumbelRouter` returns a straight-through `z`. The chosen expert's block output is multiplied by `z[..., chosen]` (exactly 1 in forward), so the router gets a gradient. The old code is kept as `LegacyGumbelRouter` + `LegacyABRLayer` (`legacy=True`).
+  - **P1.2:** The Transformer expert takes queries from attention-routed blocks only, with keys/values from **all** earlier tokens of the layer input. The efficient path (`attn_impl="gather"`) gathers the routed queries and applies a causal `attn_mask` in SDPA. The reference path (`attn_impl="reference"`) runs full causal attention, then selects. Both are tested to be equal. The router input was made causal (see Decisions).
+  - **P1.3:** New `MambaExpert.forward(x, init_state=None) -> (y, final_state)`.
+    - `cbsc_mode="state"` packs each sample's Mamba blocks in order (right-padded), runs the expert once, and scatters back.
+    - `"gated_state"` loops block by block with `h_init = sigmoid(W_g h_prev + b_g) * h_prev`, bias +4.
+    - `"none"` starts each Mamba block from zero state.
+    - `"legacy_inject"` is the old injection.
+    - The real Mamba-2 path is written with `mamba_chunk_scan_combined(initial_states=..., return_final_states=True)` and is marked `# UNVERIFIED: needs Kaggle GPU check`.
+  - **P1.4:**
+    - `model.routing_probs` holds the non-detached `z_soft` of every ABR layer. `model.last_routing` is the detached z_soft of the last layer.
+    - The temperature update moved to `router.update_temperature()`, which uses the entropy recorded on the last training forward and is consumed once. The training loop calls `model.update_router_temperatures()` once per optimizer step.
+    - `get_routing_stats()` gives overall stats (all layers), `per_layer` stats and `tau`.
+  - **Also:**
+    - Routing modes `learned` / `random` (`attn_frac`) / `alternate`.
+    - `JambaLM(pattern="jamba-1:1"|"jamba-1:3")`.
+    - `MAMBA_BACKEND` and `require_real_mamba(allow_fallback)`.
+    - `build_model` accepts both legacy tuples and the dict format.
+- **Files changed:** `experiments/full_scale/models_scaled.py`, `tests/test_models.py`, `tests/conftest.py`
+- **Results:**
+  - `pytest tests/test_models.py -q`: **63 passed, 4 skipped in ~10 s** (CPU, GRU stand-in; the 4 skipped are GPU-only real-Mamba checks `test_gpu_*`, to be run on Kaggle). The tests cover router gradient (none/state/gated), STE forward unchanged, no future leakage (17 variants incl. legacy, random, alternate, Jamba, ragged T), cross-block dependency (20 forced patterns per mode, exact expected paths), gather == reference attention, CBSC equivalence (all-Mamba state mode == expert over the whole sequence), gate fully open == state, M-T-M state skip, temperature once per step, aux-loss-only router gradient, legacy bit-exact vs the original code (`fixes` copy embedded in the test; 3 training steps + eval), and parameter counts.
+  - A mutation check confirmed that the leakage test catches a non-causal router and unmasked attention.
+  - **Parameter overhead of the gate:**
+    - GRU stand-in: `d_inner^2 + d_inner` per layer (262,656 at d_model=256).
+    - Mamba-2: `nheads*d_state*(d_state+headdim)` per layer (65,536 at d_model=256, headdim=64, d_state=64; unverified).
+    - Legacy gate: `d_model^2 + d_model` (65,792).
+  - The fix adds no other parameters. Random/alternate routing has no router (-2·d_model per layer).
+  - **Full-size parameter counts** (vocab 50257, d_model 256, **GRU stand-in, so the Mamba-containing numbers differ on real Mamba**):
+
+    | Model | Params |
+    |-------|--------|
+    | Transformer-4L | 17.13M |
+    | Mamba-4L | 20.82M |
+    | Jamba-1:1 | 18.98M |
+    | Jamba-1:3 | 19.90M |
+    | ABR-4L state | 25.02M |
+    | ABR-4L gated | 26.07M |
+- **Problems / notes:**
+  - Within one layer, a Mamba block preceded only by Transformer blocks gets no context from them; with cbsc none it gets no cross-block context at all. Context mixes across layers via the Transformer blocks. This is the PRD's optional "Mamba gets a summary of intervening Transformer blocks" ablation; it is not implemented.
+  - The Mamba-1 backend cannot take or return state, so on real hardware `gated_state` requires Mamba-2.
+  - The training loops (`train_ablation.py`, `train_abr_long.py`) still use `model.last_routing` for aux losses and must be switched to `model.routing_probs` + `model.update_router_temperatures()` (owned by the train-eval agent).
+- **Next:** Kaggle GPU check of the real-Mamba paths. It must confirm:
+  1. `import mamba_ssm.Mamba2` and `mamba_chunk_scan_combined` work on the assigned GPU.
+  2. `MambaExpert(backend="mamba2")` over `[a; b]` equals `a`, then `b` from `a`'s final state (tol ~1e-3 in fp32). Run `test_mamba_expert_state_continuation` with the mamba2 backend.
+  3. `test_cbsc_equivalence` with real Mamba-1 and Mamba-2.
+  4. The manual Mamba-2 forward with `init_state=None` matches `Mamba2.forward`.
+  5. Gradients flow through `initial_states`.
