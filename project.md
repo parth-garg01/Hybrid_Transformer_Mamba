@@ -214,6 +214,6 @@ None yet. No reportable experiment has been run under the new pipeline.
 ### 2026-11-10 — Lead: session q001 finished; queue bug; q002 discarded
 - **q001** (11:07Z, complete): 9 runs finished at 60k steps; 1 was cut off by the budget and resumes next session (Transformer-Only s123, 0.70 h done). Outputs are in `results/kaggle/queue/q001/output/`. Measured hours per run: ABR-4L 2.2–2.3, gated 4.2, Jamba-1:3 10L 2.0, Transformer 6L 1.7.
 - **Bug:** `queue.py` settled runs from `<session>/<run>/`, but the runner writes `<session>/output/<run>/`. Every q001 run therefore looked unstarted, and `advance` launched **q002 at 11:09Z with the same 10 runs from scratch**. Fixed in `_settle`; the test now uses the real layout, and it fails on the old code.
-- **q002** is marked `discarded` in `queue.json` and was cancelled in the Kaggle UI. None of its outputs are used; it is a duplicate launch, not a re-run picked for a better result. The queue state was rebuilt from q001's outputs with the fixed code.
+- **q002** is marked `discarded` in `queue.json`; it has to be cancelled in the Kaggle UI (the CLI has no cancel command). None of its outputs are used; it is a duplicate launch, not a re-run picked for a better result. The queue state was rebuilt from q001's outputs with the fixed code.
 - Mounted wheel binaries are excluded from downloads and git.
 - **Early numbers, 1–2 seeds each, not yet analysed** (val PPL): Jamba-1:3 10L 70.4–70.9; Transformer 6L 78.4; ABR-4L-CBSC 104.0; ABR-4L-gatedCBSC 104.5; ABR-4L-noCBSC 110.2–113.6; Random-Routing-4L 110.3–110.4.
