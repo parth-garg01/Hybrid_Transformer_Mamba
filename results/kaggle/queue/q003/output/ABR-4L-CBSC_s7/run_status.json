@@ -1,0 +1,27 @@
+{
+  "cmd": "python experiments/full_scale/train.py --config ABR-4L-CBSC --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 4.025",
+  "commit": "1b0a5b238582048d75652a65f00f9fc65096c0d0",
+  "dataset_version": 5,
+  "exit_code": 0,
+  "finished_utc": "2026-11-10T22:08:01Z",
+  "gpu_slot": 1,
+  "history": [
+    {
+      "exit_code": 0,
+      "finished_utc": "2026-11-10T22:08:01Z",
+      "kernel_ref": "parthgarg101/abr-q003",
+      "session": 1,
+      "started_utc": "2026-11-10T19:47:37Z",
+      "state": "done"
+    }
+  ],
+  "kernel_ref": "parthgarg101/abr-q003",
+  "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-q003",
+  "lane": 1,
+  "max_hours": 4.025,
+  "name": "ABR-4L-CBSC_s7",
+  "resumed_from": null,
+  "sessions": 1,
+  "started_utc": "2026-11-10T19:47:37Z",
+  "state": "done"
+}

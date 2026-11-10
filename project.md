@@ -218,3 +218,9 @@ None yet. No reportable experiment has been run under the new pipeline.
 - Mounted wheel binaries are excluded from downloads and git.
 - **Early numbers, 1–2 seeds each, not yet analysed** (val PPL): Jamba-1:3 10L 70.4–70.9; Transformer 6L 78.4; ABR-4L-CBSC 104.0; ABR-4L-gatedCBSC 104.5; ABR-4L-noCBSC 110.2–113.6; Random-Routing-4L 110.3–110.4.
 - **q003** launched 11:17:35Z: 9 runs; Transformer-Only s123 resumes from q001's checkpoints (`resume_from: parthgarg101/abr-q001`). Queue: 9 done, 9 running, 22 pending; about 4 sessions left.
+
+### 2026-11-11 — Lead: session q003 finished; q004 launched
+- **q003** complete (about 23:50Z): 8 runs finished, including Transformer-Only s123, which resumed from q001. `verify_provenance --strict` passes (8 results, manifest ok). Transformer-Only s7 was cut off by the budget and resumes in q004.
+- Queue: 17 of 40 main runs done.
+- **q004** launched 2026-11-10T23:55:15Z with 11 runs (seed 2024 of the key configs, plus Transformer-Only s7 resuming).
+- **Quota risk:** this week's GPU use is about 25 h (compat check and GPU test 2.1 h, q001 11.5 h, q002 0.1 h, q003 11.5 h), against Kaggle's ~30 h per week. q004 may hit the limit about 5 h in. Runs checkpoint every 2k steps, so the next session can resume them if Kaggle keeps the outputs of a quota-stopped session.
