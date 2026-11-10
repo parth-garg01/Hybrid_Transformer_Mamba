@@ -1,0 +1,83 @@
+{
+  "causal_conv1d": "1.7.0",
+  "cmd": "python scripts/kaggle/compat_check.py",
+  "cmd_exit_code": 0,
+  "cmd_started_utc": "2026-11-09T16:29:52Z",
+  "code_source": "/kaggle/input/datasets/parthgarg101/abr-code/repo",
+  "commit": "80303ecfd7b781b5a60d0e4e4af8bae8d866d3bb",
+  "commit_expected": "80303ecfd7b781b5a60d0e4e4af8bae8d866d3bb",
+  "cuda_available": true,
+  "cudnn": 92700,
+  "cxx11abi": true,
+  "dataset_ref": "parthgarg101/abr-code",
+  "dataset_version": 1,
+  "driver_cuda_version": "13.0",
+  "driver_version": "580.178.04",
+  "finished_utc": "2026-11-09T16:53:30Z",
+  "git_snapshot_present": false,
+  "gpu_compute_cap": "7.5",
+  "gpu_count": 2,
+  "gpu_memory_total": "15360 MiB",
+  "gpu_name": "Tesla T4",
+  "gpu_requested": "t4",
+  "kaggle_env_vars": {
+    "KAGGLE_CONTAINER_NAME": "kaggle_l3NwzbhkIp2KUlD6Vv883XV2Xm9gflapBfk425dKY-367571154-webtier",
+    "KAGGLE_DATA_PROXY_PROJECT": "kaggle-161607",
+    "KAGGLE_DATA_PROXY_URL": "https://dp.kaggle.net",
+    "KAGGLE_DOCKER_IMAGE": "gcr.io/kaggle-gpu-images/python@sha256:de153e6d303881930c51286216393d56f56b26458d0661350305a1e8144eea01",
+    "KAGGLE_GCP_ZONE": "us-central1-f",
+    "KAGGLE_GRPC_DATA_PROXY_URL": "dp.kaggle.net:443",
+    "KAGGLE_KERNEL_INTEGRATIONS": "",
+    "KAGGLE_KERNEL_RUN_TYPE": "Batch",
+    "KAGGLE_URL_BASE": "https://www.kaggle.com"
+  },
+  "kaggle_kernel_version_env": null,
+  "kernel_ref": "parthgarg101/abr-compat-check",
+  "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-compat-check",
+  "mamba_install": {
+    "install_seconds": 4511.0,
+    "match_key": {
+      "cuda_major": "13",
+      "cxx11abi": "TRUE",
+      "python": "cp313",
+      "torch": "2.11"
+    },
+    "method": "pip_no_build_isolation",
+    "wheels": {
+      "causal_conv1d": null,
+      "mamba_ssm": null
+    }
+  },
+  "mamba_ssm": "2.3.2.post1",
+  "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+  "python": "3.13.16 (main, Oct  1 2026, 15:40:24) [GCC 13.3.0]",
+  "started_utc": "2026-11-09T15:13:46Z",
+  "torch": "2.11.0+cu130",
+  "torch_arch_list": [
+    "sm_75",
+    "sm_80",
+    "sm_86",
+    "sm_90",
+    "sm_100",
+    "sm_120"
+  ],
+  "torch_compute_capability": [
+    7,
+    5
+  ],
+  "torch_cuda": "13.0",
+  "torch_gpu_name": "Tesla T4",
+  "versions": {
+    "causal-conv1d": "1.7.0",
+    "causal_conv1d_import": "ok 1.7.0",
+    "datasets": "4.8.5",
+    "einops": "0.8.2",
+    "mamba-ssm": "2.3.2.post1",
+    "mamba_ssm_import": "ok 2.3.2.post1",
+    "numpy": "2.1.3",
+    "torch": "2.11.0+cu130",
+    "transformers": "4.57.6",
+    "triton": "3.6.0",
+    "wandb": "0.28.1"
+  }
+}

@@ -1,0 +1,13 @@
+
+===== session start 2026-11-09T21:50:37+00:00 | run_id=Transformer-Only_seed42_20261109T215036Z | run=Transformer-Only_s42 | device=cuda | mamba_backend=None | reportable=False =====
+[train] Transformer-Only seed=42 params=19,230,464 steps=60000 B=8 T=256 block=32
+/usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:900.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  [Transformer-Only s=42] step=    50 lr=3.00e-05 train=10.6810 val~=10.3791 (ppl 32181.5)
+  [Transformer-Only s=42] step=   100 lr=6.00e-05 train=10.1021 val~=9.7671 (ppl 17450.1)
+  [Transformer-Only s=42] step=   150 lr=9.00e-05 train=9.3631 val~=8.8767 (ppl 7162.9)
+  [Transformer-Only s=42] step=   200 lr=1.20e-04 train=8.3870 val~=7.8811 (ppl 2646.8)
+  [Transformer-Only s=42] step=   250 lr=1.50e-04 train=7.5744 val~=7.2686 (ppl 1434.6)
+  [Transformer-Only s=42] step=   300 lr=1.80e-04 train=7.1896 val~=7.0649 (ppl 1170.2)
+[train] session budget reached at step 300; checkpoint saved. Run the same command again to resume.
+===== session end 2026-11-09T21:51:07+00:00 | status=incomplete =====

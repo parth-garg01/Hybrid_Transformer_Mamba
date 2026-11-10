@@ -1,0 +1,640 @@
+{
+  "started_utc": "2026-11-09T16:29:52Z",
+  "checks": {
+    "env": {
+      "ok": true,
+      "python": "3.13.16 (main, Oct  1 2026, 15:40:24) [GCC 13.3.0]",
+      "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+      "torch": "2.11.0+cu130",
+      "torch_cuda": "13.0",
+      "cuda_available": true,
+      "nvidia_smi": "Tesla T4, 580.178.04, 15360 MiB, 7.5\nTesla T4, 580.178.04, 15360 MiB, 7.5",
+      "driver_cuda_version": "13.0",
+      "driver_version": "580.178.04",
+      "gpu_name": "Tesla T4",
+      "compute_capability": [
+        7,
+        5
+      ],
+      "gpu_count": 2,
+      "total_memory_gb": 14.56,
+      "bf16_native": false,
+      "torch_arch_list": [
+        "sm_75",
+        "sm_80",
+        "sm_86",
+        "sm_90",
+        "sm_100",
+        "sm_120"
+      ],
+      "torch_is_bf16_supported": true,
+      "versions": {
+        "mamba-ssm": "2.3.2.post1",
+        "causal-conv1d": "1.7.0",
+        "triton": "3.6.0",
+        "transformers": "4.57.6",
+        "einops": "0.8.2",
+        "numpy": "2.1.3"
+      },
+      "seconds": 3.87
+    },
+    "mamba1_fwd_bwd": {
+      "ok": true,
+      "config": {
+        "d_model": 256,
+        "d_state": 16,
+        "d_conv": 4,
+        "expand": 2,
+        "seq": 256,
+        "batch": 8
+      },
+      "cases": {
+        "fp32": {
+          "ok": true,
+          "out_dtype": "torch.float32",
+          "out_shape": [
+            8,
+            256,
+            256
+          ],
+          "out_finite": true,
+          "input_grad_finite": true,
+          "input_grad_abs_mean": 2.0822479740445488e-08,
+          "param_grads_finite": true,
+          "n_params_with_grad": 9,
+          "n_params": 9,
+          "peak_mem_mb": 70.4
+        },
+        "fp16_autocast": {
+          "ok": true,
+          "out_dtype": "torch.float16",
+          "out_shape": [
+            8,
+            256,
+            256
+          ],
+          "out_finite": true,
+          "input_grad_finite": true,
+          "input_grad_abs_mean": 1.353168954665307e-08,
+          "param_grads_finite": true,
+          "n_params_with_grad": 9,
+          "n_params": 9,
+          "peak_mem_mb": 49.3,
+          "max_abs_diff_vs_fp32": 0.0001630038022994995
+        },
+        "bf16_autocast_not_native": {
+          "ok": true,
+          "out_dtype": "torch.bfloat16",
+          "out_shape": [
+            8,
+            256,
+            256
+          ],
+          "out_finite": true,
+          "input_grad_finite": true,
+          "input_grad_abs_mean": 2.0824344915126858e-08,
+          "param_grads_finite": true,
+          "n_params_with_grad": 9,
+          "n_params": 9,
+          "peak_mem_mb": 49.3,
+          "max_abs_diff_vs_fp32": 0.0013675317168235779
+        }
+      },
+      "all_ok": true,
+      "seconds": 8.26
+    },
+    "mamba1_fast_vs_ref": {
+      "ok": true,
+      "max_abs_diff": 0.0,
+      "out_abs_mean": 0.03360692411661148,
+      "seconds": 0.02
+    },
+    "mamba2_fwd_bwd": {
+      "ok": true,
+      "config": {
+        "d_model": 256,
+        "d_state": 64,
+        "d_conv": 4,
+        "expand": 2,
+        "headdim": 64,
+        "nheads": 8,
+        "ngroups": 1,
+        "chunk_size": 256,
+        "d_ssm": 512,
+        "seq": 256,
+        "batch": 8,
+        "ssm_state_shape_per_layer": [
+          "batch",
+          8,
+          64,
+          64
+        ],
+        "conv_state_shape_per_layer": [
+          "batch",
+          640,
+          3
+        ]
+      },
+      "cases": {
+        "fp32": {
+          "ok": true,
+          "out_dtype": "torch.float32",
+          "out_shape": [
+            8,
+            256,
+            256
+          ],
+          "out_finite": true,
+          "input_grad_finite": true,
+          "input_grad_abs_mean": 1.2827783848479157e-06,
+          "param_grads_finite": true,
+          "n_params_with_grad": 8,
+          "n_params": 8,
+          "peak_mem_mb": 340.0
+        },
+        "fp16_autocast": {
+          "ok": true,
+          "out_dtype": "torch.float16",
+          "out_shape": [
+            8,
+            256,
+            256
+          ],
+          "out_finite": true,
+          "input_grad_finite": true,
+          "input_grad_abs_mean": 1.2830296327592805e-06,
+          "param_grads_finite": true,
+          "n_params_with_grad": 8,
+          "n_params": 8,
+          "peak_mem_mb": 320.2,
+          "max_abs_diff_vs_fp32": 0.0017996430397033691
+        },
+        "bf16_autocast_not_native": {
+          "ok": true,
+          "out_dtype": "torch.bfloat16",
+          "out_shape": [
+            8,
+            256,
+            256
+          ],
+          "out_finite": true,
+          "input_grad_finite": true,
+          "input_grad_abs_mean": 1.2827199498133268e-06,
+          "param_grads_finite": true,
+          "n_params_with_grad": 8,
+          "n_params": 8,
+          "peak_mem_mb": 320.2,
+          "max_abs_diff_vs_fp32": 0.016571879386901855
+        }
+      },
+      "all_ok": true,
+      "seconds": 1016.43
+    },
+    "chunk_scan_initial_states": {
+      "ok": true,
+      "signature": "(x, dt, A, B, C, chunk_size, D=None, z=None, dt_bias=None, initial_states=None, seq_idx=None, cu_seqlens=None, dt_softplus=False, dt_limit=(0.0, inf), return_final_states=False, return_varlen_states=False)",
+      "y_shape": [
+        2,
+        256,
+        8,
+        64
+      ],
+      "final_state_shape": [
+        2,
+        8,
+        64,
+        64
+      ],
+      "max_abs_diff_y_vs_naive": 2.002716064453125e-05,
+      "max_abs_diff_final_state_vs_naive": 9.655952453613281e-06,
+      "y_abs_max": 33.412017822265625,
+      "grad_initial_states_is_none": false,
+      "grad_initial_states_abs_mean": 0.33917978405952454,
+      "grad_initial_states_nonzero": true,
+      "grad_initial_states_finite": true,
+      "max_abs_diff_grad_initial_states_vs_naive": 1.9073486328125e-06,
+      "grad_initial_states_ref_abs_max": 3.8783087730407715,
+      "max_abs_diff_grad_x_vs_naive": 3.814697265625e-05,
+      "gate_grad_abs_mean": 1.6223528120917763e-07,
+      "gate_grad_nonzero": true,
+      "dtype_cases": {
+        "fp16": {
+          "ok": true,
+          "max_abs_diff_y_vs_fp32_naive": 0.025453567504882812,
+          "grad_initial_states_finite": true,
+          "final_state_dtype": "torch.float32"
+        },
+        "bf16": {
+          "ok": true,
+          "max_abs_diff_y_vs_fp32_naive": 0.2035808563232422,
+          "grad_initial_states_finite": true,
+          "final_state_dtype": "torch.float32"
+        }
+      },
+      "seconds": 330.42
+    },
+    "chunked_vs_single_kernel": {
+      "ok": true,
+      "zero_initial_states_vs_none_max_abs_diff": 0.0,
+      "y_abs_max": 40.07651901245117,
+      "two_chunks_at_256": {
+        "ok": true,
+        "max_abs_diff_y": 0.0,
+        "max_abs_diff_final_state": 0.0
+      },
+      "two_chunks_at_200_unaligned": {
+        "ok": true,
+        "max_abs_diff_y": 5.435943603515625e-05,
+        "max_abs_diff_final_state": 1.5735626220703125e-05
+      },
+      "sixteen_blocks_of_32": {
+        "ok": true,
+        "max_abs_diff_y": 3.2901763916015625e-05,
+        "max_abs_diff_final_state": 5.841255187988281e-06
+      },
+      "seconds": 3.83
+    },
+    "chunked_vs_single_mamba2_module": {
+      "ok": true,
+      "manual_full_vs_module_max_abs_diff": 7.152557373046875e-07,
+      "y_abs_max": 2.6626014709472656,
+      "two_chunks_256_ssm_and_conv_state": {
+        "ok": true,
+        "max_abs_diff_vs_module_full": 2.384185791015625e-06
+      },
+      "blocks_of_32_ssm_and_conv_state": {
+        "ok": true,
+        "max_abs_diff_vs_module_full": 1.1920928955078125e-06
+      },
+      "blocks_of_32_ssm_state_only_no_conv_state": {
+        "ok": true,
+        "max_abs_diff_vs_module_full": 1.742079496383667
+      },
+      "gated_handoff_gradient": {
+        "ok": true,
+        "grad_block2_wrt_block1_input_abs_mean": 8.867860969985486e-07,
+        "grad_nonzero": true,
+        "gate_grad_abs_mean": 1.9010255591922487e-09,
+        "gate_shape": [
+          8,
+          64,
+          64
+        ],
+        "gate_params": 32768
+      },
+      "seconds": 17.9
+    },
+    "mamba1_initial_state_api": {
+      "ok": true,
+      "mamba_ssm_file": "/usr/local/lib/python3.13/dist-packages/mamba_ssm/__init__.py",
+      "signatures": {
+        "selective_scan_fn": "(u, delta, A, B, C, D=None, z=None, delta_bias=None, delta_softplus=False, return_last_state=False)",
+        "selective_scan_ref": "(u, delta, A, B, C, D=None, z=None, delta_bias=None, delta_softplus=False, return_last_state=False)",
+        "mamba_inner_fn": "(xz, conv1d_weight, conv1d_bias, x_proj_weight, delta_proj_weight, out_proj_weight, out_proj_bias, A, B=None, C=None, D=None, delta_bias=None, B_proj_bias=None, C_proj_bias=None, delta_softplus=True, checkpoint_lvl=1, b_rms_weight=None, c_rms_weight=None, dt_rms_weight=None, b_c_dt_rms_eps=1e-06)",
+        "mamba_inner_ref": "(xz, conv1d_weight, conv1d_bias, x_proj_weight, delta_proj_weight, out_proj_weight, out_proj_bias, A, B=None, C=None, D=None, delta_bias=None, B_proj_bias=None, C_proj_bias=None, delta_softplus=True)",
+        "Mamba.forward": "(self, hidden_states, inference_params=None)",
+        "Mamba.step": "(self, hidden_states, conv_state, ssm_state)",
+        "selective_state_update": "(state, x, dt, A, B, C, D=None, z=None, dt_bias=None, dt_softplus=False, state_batch_indices=None)"
+      },
+      "selective_scan_cuda_fwd_doc": "fwd(arg0: torch.Tensor, arg1: torch.Tensor, arg2: torch.Tensor, arg3: torch.Tensor, arg4: torch.Tensor, arg5: torch.Tensor | None, arg6: torch.Tensor | None, arg7: torch.Tensor | None, arg8: bool) -> list[torch.Tensor]\n\nSelective scan forward\n",
+      "selective_scan_cuda_bwd_doc": "bwd(arg0: torch.Tensor, arg1: torch.Tensor, arg2: torch.Tensor, arg3: torch.Tensor, arg4: torch.Tensor, arg5: torch.Tensor | None, arg6: torch.Tensor | None, arg7: torch.Tensor | None, arg8: torch.Tensor, arg9: torch.Tensor | None, arg10: torch.Tensor | None, arg11: torch.Tensor | None, arg12: bool, arg13: bool) -> list[torch.Tensor]\n\nSelective scan backward\n",
+      "selective_scan_interface_matches": [
+        "27: return_last_state=False):",
+        "49: last_state = x[:, :, -1, 1::2]  # (batch, dim, dstate)",
+        "52: return out if not return_last_state else (out, last_state)",
+        "56: return out_z if not return_last_state else (out_z, last_state)",
+        "107: return_last_state=False):",
+        "108: \"\"\"if return_last_state is True, returns (out, last_state)",
+        "109: last_state has shape (batch, dim, dstate). Note that the gradient of the last state is",
+        "112: return SelectiveScanFn.apply(u, delta, A, B, C, D, z, delta_bias, delta_softplus, return_last_state)",
+        "116: return_last_state=False):",
+        "128: last_state (optional): r(B D dstate) or c(B D dstate)",
+        "161: last_state = None",
+        "172: last_state = x",
+        "181: return out if not return_last_state else (out, last_state)"
+      ],
+      "mamba_simple_matches": [
+        "96: conv_state, ssm_state = None, None",
+        "98: conv_state, ssm_state = self._get_states_from_cache(inference_params, batch)",
+        "101: out, _, _ = self.step(hidden_states, conv_state, ssm_state)",
+        "169: return_last_state=ssm_state is not None,",
+        "171: if ssm_state is not None:",
+        "172: y, last_state = y",
+        "173: ssm_state.copy_(last_state)",
+        "178: def step(self, hidden_states, conv_state, ssm_state):",
+        "213: ssm_state.copy_(ssm_state * dA + rearrange(x, \"b d -> b d 1\") * dB)",
+        "214: y = torch.einsum(\"bdn,bn->bd\", ssm_state.to(dtype), C)",
+        "219: ssm_state, x, dt, A, B, C, self.D, z=z, dt_bias=self.dt_proj.bias, dt_softplus=True",
+        "223: return out.unsqueeze(1), conv_state, ssm_state",
+        "233: ssm_state = torch.zeros(",
+        "236: return conv_state, ssm_state",
+        "249: ssm_state = torch.zeros(",
+        "257: inference_params.key_value_memory_dict[self.layer_idx] = (conv_state, ssm_state)",
+        "259: conv_state, ssm_state = inference_params.key_value_memory_dict[self.layer_idx]",
+        "263: ssm_state.zero_()",
+        "264: return conv_state, ssm_state"
+      ],
+      "selective_scan_fn_accepts_initial_state": false,
+      "selective_scan_fn_returns_last_state": true,
+      "mamba_forward_params": [
+        "self",
+        "hidden_states",
+        "inference_params"
+      ],
+      "seconds": 0.01
+    },
+    "throughput": {
+      "ok": true,
+      "d_model": 256,
+      "tokens_per_batch": 32768,
+      "iters": 10,
+      "rows": [
+        {
+          "layer": "mamba1",
+          "seq": 256,
+          "batch": 128,
+          "dtype": "fp32",
+          "mode": "fwd",
+          "ok": true,
+          "ms_per_iter": 17.64,
+          "tokens_per_s": 1857991,
+          "peak_mem_mb": 452.0
+        },
+        {
+          "layer": "mamba1",
+          "seq": 256,
+          "batch": 128,
+          "dtype": "fp32",
+          "mode": "fwd_bwd",
+          "ok": true,
+          "ms_per_iter": 65.62,
+          "tokens_per_s": 499371,
+          "peak_mem_mb": 882.2
+        },
+        {
+          "layer": "mamba1",
+          "seq": 256,
+          "batch": 128,
+          "dtype": "fp16_autocast",
+          "mode": "fwd",
+          "ok": true,
+          "ms_per_iter": 5.53,
+          "tokens_per_s": 5924399,
+          "peak_mem_mb": 257.4
+        },
+        {
+          "layer": "mamba1",
+          "seq": 256,
+          "batch": 128,
+          "dtype": "fp16_autocast",
+          "mode": "fwd_bwd",
+          "ok": true,
+          "ms_per_iter": 30.65,
+          "tokens_per_s": 1069150,
+          "peak_mem_mb": 504.6
+        },
+        {
+          "layer": "mamba1",
+          "seq": 1024,
+          "batch": 32,
+          "dtype": "fp32",
+          "mode": "fwd",
+          "ok": true,
+          "ms_per_iter": 16.23,
+          "tokens_per_s": 2018694,
+          "peak_mem_mb": 447.6
+        },
+        {
+          "layer": "mamba1",
+          "seq": 1024,
+          "batch": 32,
+          "dtype": "fp32",
+          "mode": "fwd_bwd",
+          "ok": true,
+          "ms_per_iter": 59.82,
+          "tokens_per_s": 547776,
+          "peak_mem_mb": 876.2
+        },
+        {
+          "layer": "mamba1",
+          "seq": 1024,
+          "batch": 32,
+          "dtype": "fp16_autocast",
+          "mode": "fwd",
+          "ok": true,
+          "ms_per_iter": 5.37,
+          "tokens_per_s": 6106091,
+          "peak_mem_mb": 251.4
+        },
+        {
+          "layer": "mamba1",
+          "seq": 1024,
+          "batch": 32,
+          "dtype": "fp16_autocast",
+          "mode": "fwd_bwd",
+          "ok": true,
+          "ms_per_iter": 24.92,
+          "tokens_per_s": 1315022,
+          "peak_mem_mb": 498.5
+        },
+        {
+          "layer": "mamba1",
+          "seq": 4096,
+          "batch": 8,
+          "dtype": "fp32",
+          "mode": "fwd",
+          "ok": true,
+          "ms_per_iter": 15.59,
+          "tokens_per_s": 2101597,
+          "peak_mem_mb": 446.6
+        },
+        {
+          "layer": "mamba1",
+          "seq": 4096,
+          "batch": 8,
+          "dtype": "fp32",
+          "mode": "fwd_bwd",
+          "ok": true,
+          "ms_per_iter": 58.54,
+          "tokens_per_s": 559799,
+          "peak_mem_mb": 875.2
+        },
+        {
+          "layer": "mamba1",
+          "seq": 4096,
+          "batch": 8,
+          "dtype": "fp16_autocast",
+          "mode": "fwd",
+          "ok": true,
+          "ms_per_iter": 5.44,
+          "tokens_per_s": 6018126,
+          "peak_mem_mb": 250.4
+        },
+        {
+          "layer": "mamba1",
+          "seq": 4096,
+          "batch": 8,
+          "dtype": "fp16_autocast",
+          "mode": "fwd_bwd",
+          "ok": true,
+          "ms_per_iter": 27.02,
+          "tokens_per_s": 1212812,
+          "peak_mem_mb": 496.8
+        },
+        {
+          "layer": "mamba2",
+          "seq": 256,
+          "batch": 128,
+          "dtype": "fp32",
+          "mode": "fwd",
+          "ok": true,
+          "ms_per_iter": 19.62,
+          "tokens_per_s": 1669904,
+          "peak_mem_mb": 470.8
+        },
+        {
+          "layer": "mamba2",
+          "seq": 256,
+          "batch": 128,
+          "dtype": "fp32",
+          "mode": "fwd_bwd",
+          "ok": true,
+          "ms_per_iter": 62.53,
+          "tokens_per_s": 524039,
+          "peak_mem_mb": 1022.4
+        },
+        {
+          "layer": "mamba2",
+          "seq": 256,
+          "batch": 128,
+          "dtype": "fp16_autocast",
+          "mode": "fwd",
+          "ok": true,
+          "ms_per_iter": 20.91,
+          "tokens_per_s": 1566976,
+          "peak_mem_mb": 272.6
+        },
+        {
+          "layer": "mamba2",
+          "seq": 256,
+          "batch": 128,
+          "dtype": "fp16_autocast",
+          "mode": "fwd_bwd",
+          "ok": true,
+          "ms_per_iter": 62.47,
+          "tokens_per_s": 524571,
+          "peak_mem_mb": 636.6
+        },
+        {
+          "layer": "mamba2",
+          "seq": 1024,
+          "batch": 32,
+          "dtype": "fp32",
+          "mode": "fwd",
+          "ok": true,
+          "ms_per_iter": 18.36,
+          "tokens_per_s": 1784375,
+          "peak_mem_mb": 460.4
+        },
+        {
+          "layer": "mamba2",
+          "seq": 1024,
+          "batch": 32,
+          "dtype": "fp32",
+          "mode": "fwd_bwd",
+          "ok": true,
+          "ms_per_iter": 62.82,
+          "tokens_per_s": 521607,
+          "peak_mem_mb": 1010.4
+        },
+        {
+          "layer": "mamba2",
+          "seq": 1024,
+          "batch": 32,
+          "dtype": "fp16_autocast",
+          "mode": "fwd",
+          "ok": true,
+          "ms_per_iter": 19.39,
+          "tokens_per_s": 1690158,
+          "peak_mem_mb": 260.6
+        },
+        {
+          "layer": "mamba2",
+          "seq": 1024,
+          "batch": 32,
+          "dtype": "fp16_autocast",
+          "mode": "fwd_bwd",
+          "ok": true,
+          "ms_per_iter": 61.66,
+          "tokens_per_s": 531443,
+          "peak_mem_mb": 624.6
+        },
+        {
+          "layer": "mamba2",
+          "seq": 4096,
+          "batch": 8,
+          "dtype": "fp32",
+          "mode": "fwd",
+          "ok": true,
+          "ms_per_iter": 18.65,
+          "tokens_per_s": 1757044,
+          "peak_mem_mb": 457.4
+        },
+        {
+          "layer": "mamba2",
+          "seq": 4096,
+          "batch": 8,
+          "dtype": "fp32",
+          "mode": "fwd_bwd",
+          "ok": true,
+          "ms_per_iter": 64.75,
+          "tokens_per_s": 506092,
+          "peak_mem_mb": 1007.4
+        },
+        {
+          "layer": "mamba2",
+          "seq": 4096,
+          "batch": 8,
+          "dtype": "fp16_autocast",
+          "mode": "fwd",
+          "ok": true,
+          "ms_per_iter": 19.65,
+          "tokens_per_s": 1667613,
+          "peak_mem_mb": 257.6
+        },
+        {
+          "layer": "mamba2",
+          "seq": 4096,
+          "batch": 8,
+          "dtype": "fp16_autocast",
+          "mode": "fwd_bwd",
+          "ok": true,
+          "ms_per_iter": 62.63,
+          "tokens_per_s": 523203,
+          "peak_mem_mb": 621.6
+        }
+      ],
+      "seconds": 35.81
+    }
+  },
+  "code_commit": "80303ecfd7b781b5a60d0e4e4af8bae8d866d3bb",
+  "kaggle_kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-compat-check",
+  "updated_utc": "2026-11-09T16:53:28Z",
+  "gpu_name": "Tesla T4",
+  "compute_capability": [
+    7,
+    5
+  ],
+  "finished_utc": "2026-11-09T16:53:28Z",
+  "summary": {
+    "env": true,
+    "mamba1_fwd_bwd": true,
+    "mamba1_fast_vs_ref": true,
+    "mamba2_fwd_bwd": true,
+    "chunk_scan_initial_states": true,
+    "chunked_vs_single_kernel": true,
+    "chunked_vs_single_mamba2_module": true,
+    "mamba1_initial_state_api": true,
+    "throughput": true
+  }
+}

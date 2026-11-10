@@ -1,0 +1,25 @@
+{
+  "cmd": "python scripts/kaggle/time_train.py --config ABR-4L-gatedCBSC",
+  "commit": "3d051a8673ae73ecb2d882f4db83cab33f29206a",
+  "dataset_version": 2,
+  "exit_code": 0,
+  "finished_utc": "2026-11-09T21:57:19Z",
+  "gpu_slot": 0,
+  "history": [
+    {
+      "exit_code": 0,
+      "finished_utc": "2026-11-09T21:57:19Z",
+      "kernel_ref": "parthgarg101/abr-gputest-t4x2",
+      "session": 1,
+      "started_utc": "2026-11-09T21:51:22Z",
+      "state": "done"
+    }
+  ],
+  "kernel_ref": "parthgarg101/abr-gputest-t4x2",
+  "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-gputest-t4x2",
+  "name": "time_ABR-4L-gatedCBSC",
+  "resumed_from": null,
+  "sessions": 1,
+  "started_utc": "2026-11-09T21:51:22Z",
+  "state": "done"
+}

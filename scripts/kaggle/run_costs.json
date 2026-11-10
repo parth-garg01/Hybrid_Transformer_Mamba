@@ -1,0 +1,23 @@
+{
+  "_comment": "Per-config training speed on Kaggle T4 (fp32, train.py defaults B=8 T=256), used by queue.py to pack sessions. 'measured' values come from results/kaggle/gputest_t4x2 (kernel parthgarg101/abr-gputest-t4x2 v1, commit 3d051a8, two runs in parallel on T4 x2, steps 100-300 of the real 60k schedule, cheap evals every 50 steps). 'estimated' values use step_ms = 30 ms (embedding + 50k-vocab head + optimizer) + 10.1 ms per attention layer + 5.9 ms per Mamba-1 layer, fitted to Transformer 6L and Mamba 13L, or copy the ABR-4L-CBSC layout for routing baselines. Update after the first real session.",
+  "total_steps": 60000,
+  "per_run_overhead_hours": 0.15,
+  "session_overhead_hours": 0.3,
+  "min_resume_hours": 0.25,
+  "min_start_hours": 0.34,
+  "default_steps_per_s": 3.75,
+  "steps_per_s": {
+    "Transformer-Only":    {"value": 11.047, "source": "measured"},
+    "Mamba-Only":          {"value": 9.399,  "source": "measured"},
+    "ABR-4L-CBSC":         {"value": 7.915,  "source": "measured"},
+    "ABR-4L-gatedCBSC":    {"value": 3.75,   "source": "measured (Mamba-2 Triton path; 4.8 min JIT before step 1)"},
+    "ABR-4L-noCBSC":       {"value": 7.915,  "source": "estimated = ABR-4L-CBSC"},
+    "Random-Routing-4L":   {"value": 7.915,  "source": "estimated = ABR-4L-CBSC (same layout, state CBSC)"},
+    "Alternate-Blocks-4L": {"value": 7.915,  "source": "estimated = ABR-4L-CBSC (same layout, state CBSC)"},
+    "Jamba-1:1":           {"value": 10.7,   "source": "estimated, 4 attn + 4 Mamba layers"},
+    "Jamba-1:3":           {"value": 9.9,    "source": "estimated, 3 attn + 7 Mamba layers"},
+    "ABR-2L-CBSC":         {"value": 12.8,   "source": "estimated, half of ABR-4L's per-layer cost"},
+    "ABR-2L-noCBSC":       {"value": 12.8,   "source": "estimated, half of ABR-4L's per-layer cost"},
+    "ABR-2L-gatedCBSC":    {"value": 6.5,    "source": "estimated"}
+  }
+}

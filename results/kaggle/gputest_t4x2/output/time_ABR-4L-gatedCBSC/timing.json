@@ -1,0 +1,63 @@
+{
+  "config": "ABR-4L-gatedCBSC",
+  "seed": 42,
+  "exit_code": 0,
+  "cmd": [
+    "/usr/bin/python3",
+    "-u",
+    "experiments/full_scale/train.py",
+    "--config",
+    "ABR-4L-gatedCBSC",
+    "--seed",
+    "42",
+    "--stop-after-steps",
+    "300",
+    "--eval-every",
+    "50",
+    "--eval-batches",
+    "2",
+    "--out",
+    "/kaggle/working/output/time_ABR-4L-gatedCBSC/train_out",
+    "--device",
+    "cuda",
+    "--wandb",
+    "disabled",
+    "--debug"
+  ],
+  "wall_s": 355.5,
+  "marks": [
+    [
+      50,
+      286.1362953186035
+    ],
+    [
+      100,
+      300.11274886131287
+    ],
+    [
+      150,
+      313.56329321861267
+    ],
+    [
+      200,
+      326.9272928237915
+    ],
+    [
+      250,
+      340.03704953193665
+    ],
+    [
+      300,
+      353.4512662887573
+    ]
+  ],
+  "gpu": "0",
+  "gpu_name": "Tesla T4",
+  "steps_per_s": 3.75,
+  "window": [
+    100,
+    300
+  ],
+  "est_hours_per_run": 4.44,
+  "time_to_first_step_s": 286.1
+}

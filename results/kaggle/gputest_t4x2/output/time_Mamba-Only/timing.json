@@ -1,0 +1,63 @@
+{
+  "config": "Mamba-Only",
+  "seed": 42,
+  "exit_code": 0,
+  "cmd": [
+    "/usr/bin/python3",
+    "-u",
+    "experiments/full_scale/train.py",
+    "--config",
+    "Mamba-Only",
+    "--seed",
+    "42",
+    "--stop-after-steps",
+    "300",
+    "--eval-every",
+    "50",
+    "--eval-batches",
+    "2",
+    "--out",
+    "/kaggle/working/output/time_Mamba-Only/train_out",
+    "--device",
+    "cuda",
+    "--wandb",
+    "disabled",
+    "--debug"
+  ],
+  "wall_s": 48.5,
+  "marks": [
+    [
+      50,
+      20.03140687942505
+    ],
+    [
+      100,
+      25.255526542663574
+    ],
+    [
+      150,
+      30.517680644989014
+    ],
+    [
+      200,
+      35.78215956687927
+    ],
+    [
+      250,
+      41.12801122665405
+    ],
+    [
+      300,
+      46.53544783592224
+    ]
+  ],
+  "gpu": "1",
+  "gpu_name": "Tesla T4",
+  "steps_per_s": 9.399,
+  "window": [
+    100,
+    300
+  ],
+  "est_hours_per_run": 1.77,
+  "time_to_first_step_s": 20.0
+}
