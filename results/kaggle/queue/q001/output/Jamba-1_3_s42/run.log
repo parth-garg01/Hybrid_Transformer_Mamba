@@ -1,0 +1,104 @@
+
+===== session start 2026-11-10T06:04:34+00:00 | run_id=Jamba-1-3_seed42_20261110T060433Z | run=Jamba-1_3_s42 | device=cuda | mamba_backend=mamba_ssm | reportable=True =====
+[train] Jamba-1:3 seed=42 params=19,149,312 steps=60000 B=8 T=256 block=32
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id 9e0vv21y.
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /kaggle/working/output/Jamba-1_3_s42/Jamba-1-3_seed42_20261110T060433Z/wandb/offline-run-20261110_060434-9e0vv21y
+wandb: View this run in the terminal with `wandb leet`
+/usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:900.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  [Jamba-1:3 s=42] step=  1000 lr=3.00e-04 train=7.1636 val~=6.0234 (ppl 413.0)
+  [Jamba-1:3 s=42] step=  2000 lr=3.00e-04 train=5.8852 val~=5.6451 (ppl 282.9)
+  [Jamba-1:3 s=42] step=  3000 lr=2.99e-04 train=5.6348 val~=5.4409 (ppl 230.6)
+  [Jamba-1:3 s=42] step=  4000 lr=2.97e-04 train=5.4719 val~=5.3155 (ppl 203.5)
+  [Jamba-1:3 s=42] step=  5000 lr=2.96e-04 train=5.3655 val~=5.2085 (ppl 182.8)
+  [Jamba-1:3 s=42] step=  6000 lr=2.94e-04 train=5.2550 val~=5.1255 (ppl 168.3)
+  [Jamba-1:3 s=42] step=  7000 lr=2.91e-04 train=5.1830 val~=5.0447 (ppl 155.2)
+  [Jamba-1:3 s=42] step=  8000 lr=2.88e-04 train=5.1184 val~=4.9817 (ppl 145.7)
+  [Jamba-1:3 s=42] step=  9000 lr=2.85e-04 train=5.0562 val~=4.9205 (ppl 137.1)
+  [Jamba-1:3 s=42] step= 10000 lr=2.82e-04 train=5.0071 val~=4.8805 (ppl 131.7)
+  [Jamba-1:3 s=42] step= 11000 lr=2.78e-04 train=4.9424 val~=4.8385 (ppl 126.3)
+  [Jamba-1:3 s=42] step= 12000 lr=2.73e-04 train=4.9011 val~=4.7968 (ppl 121.1)
+  [Jamba-1:3 s=42] step= 13000 lr=2.68e-04 train=4.8748 val~=4.7648 (ppl 117.3)
+  [Jamba-1:3 s=42] step= 14000 lr=2.63e-04 train=4.8507 val~=4.7320 (ppl 113.5)
+  [Jamba-1:3 s=42] step= 15000 lr=2.58e-04 train=4.8111 val~=4.7024 (ppl 110.2)
+  [Jamba-1:3 s=42] step= 16000 lr=2.53e-04 train=4.7855 val~=4.6787 (ppl 107.6)
+  [Jamba-1:3 s=42] step= 17000 lr=2.47e-04 train=4.7667 val~=4.6647 (ppl 106.1)
+  [Jamba-1:3 s=42] step= 18000 lr=2.40e-04 train=4.7443 val~=4.6353 (ppl 103.1)
+  [Jamba-1:3 s=42] step= 19000 lr=2.34e-04 train=4.7298 val~=4.6219 (ppl 101.7)
+  [Jamba-1:3 s=42] step= 20000 lr=2.27e-04 train=4.7058 val~=4.6059 (ppl 100.1)
+  [Jamba-1:3 s=42] step= 21000 lr=2.20e-04 train=4.6936 val~=4.6009 (ppl 99.6)
+  [Jamba-1:3 s=42] step= 22000 lr=2.13e-04 train=4.6724 val~=4.5854 (ppl 98.0)
+  [Jamba-1:3 s=42] step= 23000 lr=2.06e-04 train=4.6640 val~=4.5603 (ppl 95.6)
+  [Jamba-1:3 s=42] step= 24000 lr=1.99e-04 train=4.6550 val~=4.5481 (ppl 94.5)
+  [Jamba-1:3 s=42] step= 25000 lr=1.91e-04 train=4.6393 val~=4.5383 (ppl 93.5)
+  [Jamba-1:3 s=42] step= 26000 lr=1.83e-04 train=4.6204 val~=4.5186 (ppl 91.7)
+  [Jamba-1:3 s=42] step= 27000 lr=1.76e-04 train=4.6134 val~=4.5100 (ppl 90.9)
+  [Jamba-1:3 s=42] step= 28000 lr=1.68e-04 train=4.5981 val~=4.5017 (ppl 90.2)
+  [Jamba-1:3 s=42] step= 29000 lr=1.60e-04 train=4.5858 val~=4.4796 (ppl 88.2)
+  [Jamba-1:3 s=42] step= 30000 lr=1.52e-04 train=4.5755 val~=4.4679 (ppl 87.2)
+  [Jamba-1:3 s=42] step= 31000 lr=1.44e-04 train=4.5723 val~=4.4636 (ppl 86.8)
+  [Jamba-1:3 s=42] step= 32000 lr=1.36e-04 train=4.5489 val~=4.4554 (ppl 86.1)
+  [Jamba-1:3 s=42] step= 33000 lr=1.28e-04 train=4.5497 val~=4.4414 (ppl 84.9)
+  [Jamba-1:3 s=42] step= 34000 lr=1.20e-04 train=4.5348 val~=4.4279 (ppl 83.8)
+  [Jamba-1:3 s=42] step= 35000 lr=1.13e-04 train=4.5240 val~=4.4302 (ppl 83.9)
+  [Jamba-1:3 s=42] step= 36000 lr=1.05e-04 train=4.5321 val~=4.4179 (ppl 82.9)
+  [Jamba-1:3 s=42] step= 37000 lr=9.77e-05 train=4.5062 val~=4.4109 (ppl 82.3)
+  [Jamba-1:3 s=42] step= 38000 lr=9.03e-05 train=4.5040 val~=4.4027 (ppl 81.7)
+  [Jamba-1:3 s=42] step= 39000 lr=8.31e-05 train=4.4758 val~=4.3950 (ppl 81.0)
+  [Jamba-1:3 s=42] step= 40000 lr=7.61e-05 train=4.4832 val~=4.3874 (ppl 80.4)
+  [Jamba-1:3 s=42] step= 41000 lr=6.94e-05 train=4.4734 val~=4.3792 (ppl 79.8)
+  [Jamba-1:3 s=42] step= 42000 lr=6.28e-05 train=4.4744 val~=4.3709 (ppl 79.1)
+  [Jamba-1:3 s=42] step= 43000 lr=5.65e-05 train=4.4591 val~=4.3659 (ppl 78.7)
+  [Jamba-1:3 s=42] step= 44000 lr=5.04e-05 train=4.4590 val~=4.3617 (ppl 78.4)
+  [Jamba-1:3 s=42] step= 45000 lr=4.46e-05 train=4.4528 val~=4.3520 (ppl 77.6)
+  [Jamba-1:3 s=42] step= 46000 lr=3.91e-05 train=4.4368 val~=4.3434 (ppl 77.0)
+  [Jamba-1:3 s=42] step= 47000 lr=3.40e-05 train=4.4336 val~=4.3354 (ppl 76.4)
+  [Jamba-1:3 s=42] step= 48000 lr=2.91e-05 train=4.4112 val~=4.3306 (ppl 76.0)
+  [Jamba-1:3 s=42] step= 49000 lr=2.46e-05 train=4.4070 val~=4.3227 (ppl 75.4)
+  [Jamba-1:3 s=42] step= 50000 lr=2.04e-05 train=4.4073 val~=4.3216 (ppl 75.3)
+  [Jamba-1:3 s=42] step= 51000 lr=1.66e-05 train=4.4060 val~=4.3161 (ppl 74.9)
+  [Jamba-1:3 s=42] step= 52000 lr=1.32e-05 train=4.3939 val~=4.3115 (ppl 74.5)
+  [Jamba-1:3 s=42] step= 53000 lr=1.01e-05 train=4.4063 val~=4.3068 (ppl 74.2)
+  [Jamba-1:3 s=42] step= 54000 lr=7.46e-06 train=4.3900 val~=4.3052 (ppl 74.1)
+  [Jamba-1:3 s=42] step= 55000 lr=5.20e-06 train=4.3784 val~=4.3016 (ppl 73.8)
+  [Jamba-1:3 s=42] step= 56000 lr=3.33e-06 train=4.3803 val~=4.2997 (ppl 73.7)
+  [Jamba-1:3 s=42] step= 57000 lr=1.88e-06 train=4.3784 val~=4.2990 (ppl 73.6)
+  [Jamba-1:3 s=42] step= 58000 lr=8.36e-07 train=4.3913 val~=4.2977 (ppl 73.5)
+  [Jamba-1:3 s=42] step= 59000 lr=2.09e-07 train=4.3747 val~=4.2973 (ppl 73.5)
+  [Jamba-1:3 s=42] step= 60000 lr=0.00e+00 train=4.3734 val~=4.2972 (ppl 73.5)
+[train] full evaluation on validation and test splits ...
+[train] FINAL val loss=4.2605 ppl=70.85 | test loss=4.2656 ppl=71.21 | wall=1.96 h
+wandb: 
+wandb: Run history:
+wandb:             lr ██████████▇▇▇▇▇▇▇▆▆▆▆▅▅▅▅▅▃▃▃▃▂▂▂▂▂▁▁▁▁▁
+wandb:    tokens_seen ▁▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▇▇▇████
+wandb:     train/loss ██▄▅▄▄▅▄▄▄▂▂▃▃▃▂▃▃▄▃▃▃▃▂▃▃▄▁▃▂▂▃▂▃▃▂▃▂▃▁
+wandb: train/loss_avg █▅▄▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   val/loss_est █▆▆▅▄▄▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:    val/ppl_est █▅▄▄▃▃▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: 
+wandb: Run summary:
+wandb:      gpu_hours 1.96379
+wandb:             lr 0
+wandb:         params 19149312
+wandb:      test_loss 4.26563
+wandb:       test_ppl 71.20943
+wandb:    tokens_seen 122880000
+wandb:     train/loss 4.30375
+wandb: train/loss_avg 4.37335
+wandb:   val/loss_est 4.29718
+wandb:    val/ppl_est 73.49251
+wandb:             +3 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /kaggle/working/output/Jamba-1_3_s42/Jamba-1-3_seed42_20261110T060433Z/wandb/offline-run-20261110_060434-9e0vv21y
+wandb: Find logs at: /kaggle/working/output/Jamba-1_3_s42/Jamba-1-3_seed42_20261110T060433Z/wandb/offline-run-20261110_060434-9e0vv21y/logs
+===== session end 2026-11-10T08:02:22+00:00 | status=done =====
+[train] result -> /kaggle/working/output/Jamba-1_3_s42/Jamba-1-3_seed42_20261110T060433Z/result.json
+Exception ignored in: <provenance._Tee object at 0x78bd7ee86980>
+Traceback (most recent call last):
+  File "/kaggle/working/repo/experiments/full_scale/provenance.py", line 531, in flush
+    st.flush()
+ValueError: I/O operation on closed file.

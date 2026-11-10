@@ -649,7 +649,7 @@ def write_launch_record(path: Path, record: dict) -> None:
 
 # Big, reproducible or Kaggle-only files that the queue does not need locally. They stay
 # in the kernel version on Kaggle (and are what the next session resumes from).
-QUEUE_DOWNLOAD_EXCLUDE = ["*.pt", "*/wheels/*", "*triton_cache*"]
+QUEUE_DOWNLOAD_EXCLUDE = ["_mounted_wheels/*", "*.pt", "*/wheels/*", "*triton_cache*"]
 
 
 def download_outputs(cli: KaggleCLI, ref: str, dest: Path, user: str,

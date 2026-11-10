@@ -64,3 +64,6 @@ Hybrid Transformer Mamba.pdf
 !results/**/*.png
 # Kaggle code snapshot is generated per upload
 git_snapshot.json
+
+# Kaggle wheels mounted into sessions (binaries; kept in the Kaggle dataset)
+results/kaggle/**/_mounted_wheels/

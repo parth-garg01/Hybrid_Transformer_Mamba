@@ -1,0 +1,104 @@
+
+===== session start 2026-11-10T08:36:02+00:00 | run_id=Transformer-Only_seed42_20261110T083601Z | run=Transformer-Only_s42 | device=cuda | mamba_backend=None | reportable=True =====
+[train] Transformer-Only seed=42 params=19,230,464 steps=60000 B=8 T=256 block=32
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id m9zoicps.
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /kaggle/working/output/Transformer-Only_s42/Transformer-Only_seed42_20261110T083601Z/wandb/offline-run-20261110_083602-m9zoicps
+wandb: View this run in the terminal with `wandb leet`
+/usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:900.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  [Transformer-Only s=42] step=  1000 lr=3.00e-04 train=7.2679 val~=6.2194 (ppl 502.4)
+  [Transformer-Only s=42] step=  2000 lr=3.00e-04 train=6.0812 val~=5.8476 (ppl 346.4)
+  [Transformer-Only s=42] step=  3000 lr=2.99e-04 train=5.8136 val~=5.6187 (ppl 275.5)
+  [Transformer-Only s=42] step=  4000 lr=2.97e-04 train=5.6320 val~=5.4798 (ppl 239.8)
+  [Transformer-Only s=42] step=  5000 lr=2.96e-04 train=5.5184 val~=5.3647 (ppl 213.7)
+  [Transformer-Only s=42] step=  6000 lr=2.94e-04 train=5.4094 val~=5.2798 (ppl 196.3)
+  [Transformer-Only s=42] step=  7000 lr=2.91e-04 train=5.3450 val~=5.2141 (ppl 183.8)
+  [Transformer-Only s=42] step=  8000 lr=2.88e-04 train=5.2911 val~=5.1559 (ppl 173.5)
+  [Transformer-Only s=42] step=  9000 lr=2.85e-04 train=5.2381 val~=5.0983 (ppl 163.7)
+  [Transformer-Only s=42] step= 10000 lr=2.82e-04 train=5.1949 val~=5.0576 (ppl 157.2)
+  [Transformer-Only s=42] step= 11000 lr=2.78e-04 train=5.1358 val~=5.0186 (ppl 151.2)
+  [Transformer-Only s=42] step= 12000 lr=2.73e-04 train=5.0974 val~=4.9871 (ppl 146.5)
+  [Transformer-Only s=42] step= 13000 lr=2.68e-04 train=5.0687 val~=4.9421 (ppl 140.1)
+  [Transformer-Only s=42] step= 14000 lr=2.63e-04 train=5.0408 val~=4.9079 (ppl 135.4)
+  [Transformer-Only s=42] step= 15000 lr=2.58e-04 train=4.9944 val~=4.8762 (ppl 131.1)
+  [Transformer-Only s=42] step= 16000 lr=2.53e-04 train=4.9620 val~=4.8475 (ppl 127.4)
+  [Transformer-Only s=42] step= 17000 lr=2.47e-04 train=4.9368 val~=4.8293 (ppl 125.1)
+  [Transformer-Only s=42] step= 18000 lr=2.40e-04 train=4.9051 val~=4.7954 (ppl 121.0)
+  [Transformer-Only s=42] step= 19000 lr=2.34e-04 train=4.8838 val~=4.7799 (ppl 119.1)
+  [Transformer-Only s=42] step= 20000 lr=2.27e-04 train=4.8574 val~=4.7540 (ppl 116.0)
+  [Transformer-Only s=42] step= 21000 lr=2.20e-04 train=4.8396 val~=4.7423 (ppl 114.7)
+  [Transformer-Only s=42] step= 22000 lr=2.13e-04 train=4.8125 val~=4.7247 (ppl 112.7)
+  [Transformer-Only s=42] step= 23000 lr=2.06e-04 train=4.8028 val~=4.6966 (ppl 109.6)
+  [Transformer-Only s=42] step= 24000 lr=1.99e-04 train=4.7907 val~=4.6856 (ppl 108.4)
+  [Transformer-Only s=42] step= 25000 lr=1.91e-04 train=4.7735 val~=4.6670 (ppl 106.4)
+  [Transformer-Only s=42] step= 26000 lr=1.83e-04 train=4.7499 val~=4.6535 (ppl 105.0)
+  [Transformer-Only s=42] step= 27000 lr=1.76e-04 train=4.7415 val~=4.6380 (ppl 103.3)
+  [Transformer-Only s=42] step= 28000 lr=1.68e-04 train=4.7266 val~=4.6312 (ppl 102.6)
+  [Transformer-Only s=42] step= 29000 lr=1.60e-04 train=4.7115 val~=4.6064 (ppl 100.1)
+  [Transformer-Only s=42] step= 30000 lr=1.52e-04 train=4.6998 val~=4.5926 (ppl 98.8)
+  [Transformer-Only s=42] step= 31000 lr=1.44e-04 train=4.6952 val~=4.5860 (ppl 98.1)
+  [Transformer-Only s=42] step= 32000 lr=1.36e-04 train=4.6698 val~=4.5807 (ppl 97.6)
+  [Transformer-Only s=42] step= 33000 lr=1.28e-04 train=4.6683 val~=4.5643 (ppl 96.0)
+  [Transformer-Only s=42] step= 34000 lr=1.20e-04 train=4.6511 val~=4.5496 (ppl 94.6)
+  [Transformer-Only s=42] step= 35000 lr=1.13e-04 train=4.6390 val~=4.5460 (ppl 94.3)
+  [Transformer-Only s=42] step= 36000 lr=1.05e-04 train=4.6442 val~=4.5343 (ppl 93.2)
+  [Transformer-Only s=42] step= 37000 lr=9.77e-05 train=4.6162 val~=4.5259 (ppl 92.4)
+  [Transformer-Only s=42] step= 38000 lr=9.03e-05 train=4.6124 val~=4.5091 (ppl 90.8)
+  [Transformer-Only s=42] step= 39000 lr=8.31e-05 train=4.5824 val~=4.5034 (ppl 90.3)
+  [Transformer-Only s=42] step= 40000 lr=7.61e-05 train=4.5890 val~=4.4954 (ppl 89.6)
+  [Transformer-Only s=42] step= 41000 lr=6.94e-05 train=4.5807 val~=4.4842 (ppl 88.6)
+  [Transformer-Only s=42] step= 42000 lr=6.28e-05 train=4.5793 val~=4.4795 (ppl 88.2)
+  [Transformer-Only s=42] step= 43000 lr=5.65e-05 train=4.5644 val~=4.4680 (ppl 87.2)
+  [Transformer-Only s=42] step= 44000 lr=5.04e-05 train=4.5630 val~=4.4661 (ppl 87.0)
+  [Transformer-Only s=42] step= 45000 lr=4.46e-05 train=4.5571 val~=4.4536 (ppl 85.9)
+  [Transformer-Only s=42] step= 46000 lr=3.91e-05 train=4.5406 val~=4.4487 (ppl 85.5)
+  [Transformer-Only s=42] step= 47000 lr=3.40e-05 train=4.5371 val~=4.4395 (ppl 84.7)
+  [Transformer-Only s=42] step= 48000 lr=2.91e-05 train=4.5135 val~=4.4332 (ppl 84.2)
+  [Transformer-Only s=42] step= 49000 lr=2.46e-05 train=4.5093 val~=4.4254 (ppl 83.5)
+  [Transformer-Only s=42] step= 50000 lr=2.04e-05 train=4.5084 val~=4.4217 (ppl 83.2)
+  [Transformer-Only s=42] step= 51000 lr=1.66e-05 train=4.5073 val~=4.4165 (ppl 82.8)
+  [Transformer-Only s=42] step= 52000 lr=1.32e-05 train=4.4944 val~=4.4115 (ppl 82.4)
+  [Transformer-Only s=42] step= 53000 lr=1.01e-05 train=4.5064 val~=4.4063 (ppl 82.0)
+  [Transformer-Only s=42] step= 54000 lr=7.46e-06 train=4.4904 val~=4.4041 (ppl 81.8)
+  [Transformer-Only s=42] step= 55000 lr=5.20e-06 train=4.4791 val~=4.4009 (ppl 81.5)
+  [Transformer-Only s=42] step= 56000 lr=3.33e-06 train=4.4781 val~=4.3992 (ppl 81.4)
+  [Transformer-Only s=42] step= 57000 lr=1.88e-06 train=4.4774 val~=4.3979 (ppl 81.3)
+  [Transformer-Only s=42] step= 58000 lr=8.36e-07 train=4.4916 val~=4.3970 (ppl 81.2)
+  [Transformer-Only s=42] step= 59000 lr=2.09e-07 train=4.4746 val~=4.3965 (ppl 81.2)
+  [Transformer-Only s=42] step= 60000 lr=0.00e+00 train=4.4730 val~=4.3965 (ppl 81.2)
+[train] full evaluation on validation and test splits ...
+[train] FINAL val loss=4.3615 ppl=78.37 | test loss=4.3585 ppl=78.14 | wall=1.73 h
+wandb: 
+wandb: Run history:
+wandb:             lr ▃██████▇▇▇▇▇▇▆▆▆▆▆▆▆▅▅▅▅▅▄▃▃▃▂▂▂▂▂▁▁▁▁▁▁
+wandb:    tokens_seen ▁▁▁▁▂▂▂▂▂▂▃▃▃▃▃▃▃▃▃▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇██
+wandb:     train/loss █▆▆▅▅▅▅▄▃▂▄▂▃▃▂▃▂▃▃▄▂▃▃▂▃▂▃▃▃▁▃▂▁▃▃▃▂▂▂▂
+wandb: train/loss_avg █▅▄▄▃▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   val/loss_est █▆▅▅▄▄▄▃▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:    val/ppl_est █▇▆▆▅▄▄▃▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: 
+wandb: Run summary:
+wandb:      gpu_hours 1.72891
+wandb:             lr 0
+wandb:         params 19230464
+wandb:      test_loss 4.35848
+wandb:       test_ppl 78.13791
+wandb:    tokens_seen 122880000
+wandb:     train/loss 4.40422
+wandb: train/loss_avg 4.47298
+wandb:   val/loss_est 4.39646
+wandb:    val/ppl_est 81.16332
+wandb:             +3 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /kaggle/working/output/Transformer-Only_s42/Transformer-Only_seed42_20261110T083601Z/wandb/offline-run-20261110_083602-m9zoicps
+wandb: Find logs at: /kaggle/working/output/Transformer-Only_s42/Transformer-Only_seed42_20261110T083601Z/wandb/offline-run-20261110_083602-m9zoicps/logs
+===== session end 2026-11-10T10:19:44+00:00 | status=done =====
+[train] result -> /kaggle/working/output/Transformer-Only_s42/Transformer-Only_seed42_20261110T083601Z/result.json
+Exception ignored in: <provenance._Tee object at 0x7c544ac6e6b0>
+Traceback (most recent call last):
+  File "/kaggle/working/repo/experiments/full_scale/provenance.py", line 531, in flush
+    st.flush()
+ValueError: I/O operation on closed file.

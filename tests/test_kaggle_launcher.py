@@ -516,7 +516,7 @@ def test_queue_advance_launch_settle_resume(qrepo, monkeypatch):
     done, partial, never = group[0], group[1], group[-1]
 
     def fake_output(ref, folder):
-        a, b = folder / done, folder / partial
+        a, b = folder / "output" / done, folder / "output" / partial   # real Kaggle layout
         (a / "x").mkdir(parents=True)
         (a / "x" / "result.json").write_text("{}")
         hist = [{"started_utc": "2026-11-10T00:00:00Z", "finished_utc": "2026-11-10T04:00:00Z"}]

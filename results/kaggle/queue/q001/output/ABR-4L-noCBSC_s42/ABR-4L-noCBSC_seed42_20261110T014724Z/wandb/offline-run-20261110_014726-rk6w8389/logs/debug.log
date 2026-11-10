@@ -1,0 +1,23 @@
+2026-11-10 01:47:26,298 INFO    MainThread:339 [wandb_setup.py:_flush():81] Current SDK version is 0.28.1
+2026-11-10 01:47:26,298 INFO    MainThread:339 [wandb_setup.py:_flush():81] Configure stats pid to 339
+2026-11-10 01:47:26,298 INFO    MainThread:339 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2026-11-10 01:47:26,298 INFO    MainThread:339 [wandb_init.py:setup_run_log_directory():729] Logging user logs to /kaggle/working/output/ABR-4L-noCBSC_s42/ABR-4L-noCBSC_seed42_20261110T014724Z/wandb/offline-run-20261110_014726-rk6w8389/logs/debug.log
+2026-11-10 01:47:26,298 INFO    MainThread:339 [wandb_init.py:setup_run_log_directory():730] Logging internal logs to /kaggle/working/output/ABR-4L-noCBSC_s42/ABR-4L-noCBSC_seed42_20261110T014724Z/wandb/offline-run-20261110_014726-rk6w8389/logs/debug-internal.log
+2026-11-10 01:47:26,298 INFO    MainThread:339 [wandb_init.py:init():772] calling init triggers
+2026-11-10 01:47:26,298 INFO    MainThread:339 [wandb_init.py:init():777] wandb.init called with sweep_config: {}
+config: {'model_cfg': {'label': 'ABR-4L-noCBSC', 'n_layers': 4, 'expert_type': 'abr', 'routing_mode': 'learned', 'cbsc_mode': 'none', 'legacy': False, 'attn_frac': 0.5}, 'seed': 42, 'steps': 60000, 'block_size': 32, 'batch_size': 8, 'seq_len': 256, 'd_model': 256, 'n_heads': 8, 'ffn_mult': 4, 'lr': 0.0003, 'lr_warmup': 500, 'weight_decay': 0.1, 'betas': [0.9, 0.95], 'grad_clip': 1.0, 'lambda_lb': 0.01, 'lambda_ent': 0.001, 'eval_every': 1000, 'eval_batches': 50, 'eval_seed': 1234, 'full_eval': {'seq_len': 256, 'stride': 128}, 'max_train_tokens': None, 'legacy': False, 'dataset': 'wikitext/wikitext-103-raw-v1', 'tokenizer': 'gpt2', 'run_id': 'ABR-4L-noCBSC_seed42_20261110T014724Z', 'run_name': 'ABR-4L-noCBSC_s42_b32', 'params': 18886400, 'mamba_backend': 'mamba_ssm', 'git_commit': '1b0a5b238582048d75652a65f00f9fc65096c0d0', 'dataset_sha256': {'train': '08ed01c3c3f123b1c6070649637c2438059804fa04b45b9d46f49f096316e3f3', 'validation': '71eeb54c40958160f1026591d24e5161fffcf767e71de89999869091285e498f', 'test': 'f571ffeb95ad772ba3eb9868523b5cd07e22396095de96d5bfff23ad29800123'}, 'reportable': True, '_wandb': {}}
+2026-11-10 01:47:26,298 INFO    MainThread:339 [wandb_init.py:init():820] starting backend
+2026-11-10 01:47:26,561 INFO    MainThread:339 [wandb_init.py:init():835] sending inform_init request
+2026-11-10 01:47:26,673 INFO    MainThread:339 [wandb_init.py:init():840] backend started and connected
+2026-11-10 01:47:26,676 INFO    MainThread:339 [wandb_init.py:init():910] updated telemetry
+2026-11-10 01:47:26,680 INFO    MainThread:339 [wandb_init.py:init():933] communicating run to backend with 90.0 second timeout
+2026-11-10 01:47:26,684 INFO    MainThread:339 [wandb_init.py:init():978] starting run threads in backend
+2026-11-10 01:47:27,408 INFO    MainThread:339 [wandb_run.py:_console_start():2621] atexit reg
+2026-11-10 01:47:27,408 INFO    MainThread:339 [wandb_run.py:_redirect():2471] redirect: wrap_raw
+2026-11-10 01:47:27,408 INFO    MainThread:339 [wandb_run.py:_redirect():2540] Wrapping output streams.
+2026-11-10 01:47:27,408 INFO    MainThread:339 [wandb_run.py:_redirect():2563] Redirects installed.
+2026-11-10 01:47:27,410 INFO    MainThread:339 [wandb_init.py:init():1016] run started, returning control to user process
+2026-11-10 04:01:49,296 INFO    MainThread:339 [wandb_run.py:_finish():2383] finishing run parth-garg10012007/abr-cbsc/rk6w8389
+2026-11-10 04:01:49,296 INFO    MainThread:339 [wandb_run.py:_atexit_cleanup():2588] got exitcode: 0
+2026-11-10 04:01:49,297 INFO    MainThread:339 [wandb_run.py:_restore():2570] restore
+2026-11-10 04:01:49,297 INFO    MainThread:339 [wandb_run.py:_restore():2576] restore done

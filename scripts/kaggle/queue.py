@@ -231,7 +231,11 @@ class Queue:
 
     def _settle(self, rid, s, dest: Path, max_failures):
         r = self.state["runs"][rid]
-        rdir = dest / rid
+        # Kernel outputs land under <dest>/output/<run>/ (the runner writes to
+        # /kaggle/working/output); accept a flat <dest>/<run>/ too.
+        rdir = dest / "output" / rid
+        if not rdir.exists():
+            rdir = dest / rid
         st = {}
         if (rdir / "run_status.json").exists():
             st = json.loads((rdir / "run_status.json").read_text())

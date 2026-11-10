@@ -210,3 +210,10 @@ None yet. No reportable experiment has been run under the new pipeline.
 - Measured T4 speed (fp32, B=8, T=256, two runs in parallel): Transformer 6L 11.05 steps/s (1.5 h/run), Mamba 13L 9.40 (1.8 h), ABR-4L-CBSC 7.92 (2.1 h), ABR-4L-gatedCBSC 3.75 (4.4 h).
 - Queue initialised at commit 1b0a5b2 with the 40 main runs; the 6 block-sweep runs are added after the main results pick the best 4L ABR variant (rule fixed in prd.md). The estimate is 5 packed sessions.
 - **Session q001 launched** 2026-11-09T23:26Z: https://www.kaggle.com/code/parthgarg101/abr-q001 (10 runs across 2 lanes).
+
+### 2026-11-10 — Lead: session q001 finished; queue bug; q002 discarded
+- **q001** (11:07Z, complete): 9 runs finished at 60k steps; 1 was cut off by the budget and resumes next session (Transformer-Only s123, 0.70 h done). Outputs are in `results/kaggle/queue/q001/output/`. Measured hours per run: ABR-4L 2.2–2.3, gated 4.2, Jamba-1:3 10L 2.0, Transformer 6L 1.7.
+- **Bug:** `queue.py` settled runs from `<session>/<run>/`, but the runner writes `<session>/output/<run>/`. Every q001 run therefore looked unstarted, and `advance` launched **q002 at 11:09Z with the same 10 runs from scratch**. Fixed in `_settle`; the test now uses the real layout, and it fails on the old code.
+- **q002** is marked `discarded` in `queue.json` and was cancelled in the Kaggle UI. None of its outputs are used; it is a duplicate launch, not a re-run picked for a better result. The queue state was rebuilt from q001's outputs with the fixed code.
+- Mounted wheel binaries are excluded from downloads and git.
+- **Early numbers, 1–2 seeds each, not yet analysed** (val PPL): Jamba-1:3 10L 70.4–70.9; Transformer 6L 78.4; ABR-4L-CBSC 104.0; ABR-4L-gatedCBSC 104.5; ABR-4L-noCBSC 110.2–113.6; Random-Routing-4L 110.3–110.4.

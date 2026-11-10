@@ -1,0 +1,247 @@
+[runner 2026-11-09T23:26:33Z] copying extracted snapshot /kaggle/input/datasets/parthgarg101/abr-code/repo
+[runner 2026-11-09T23:26:38Z] code snapshot at /kaggle/working/repo, commit 1b0a5b238582048d75652a65f00f9fc65096c0d0, git_snapshot.json present: True
+[runner 2026-11-09T23:26:44Z] token cache parthgarg101/abr-wikitext103-gpt2-tokens at /kaggle/input/datasets/parthgarg101/abr-wikitext103-gpt2-tokens: ['wikitext103_test_gpt2.pt', 'wikitext103_train_gpt2.pt', 'wikitext103_validation_gpt2.pt'] (verified=True)
+[runner 2026-11-09T23:26:44Z] $ nvidia-smi --query-gpu=name,driver_version,memory.total,compute_cap --format=csv,noheader
+Tesla T4, 580.178.04, 15360 MiB, 7.5
+Tesla T4, 580.178.04, 15360 MiB, 7.5
+[runner 2026-11-09T23:26:44Z] exit 0
+[runner 2026-11-09T23:26:44Z] $ nvidia-smi
+Mon Nov  9 23:26:44 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla T4                       Off |   00000000:00:04.0 Off |                    0 |
+| N/A   39C    P8             10W /   70W |       0MiB /  15360MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  Tesla T4                       Off |   00000000:00:05.0 Off |                    0 |
+| N/A   39C    P8             10W /   70W |       0MiB /  15360MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+[runner 2026-11-09T23:26:44Z] exit 0
+[runner 2026-11-09T23:26:54Z] $ pip install einops ninja packaging
+Requirement already satisfied: einops in /usr/local/lib/python3.13/dist-packages (0.8.2)
+Requirement already satisfied: ninja in /usr/local/lib/python3.13/dist-packages (1.13.2)
+Requirement already satisfied: packaging in /usr/local/lib/python3.13/dist-packages (26.3)
+[runner 2026-11-09T23:26:57Z] exit 0
+[runner 2026-11-09T23:26:59Z] $ pip install /kaggle/working/_mounted_wheels/causal_conv1d-1.7.0+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl /kaggle/working/_mounted_wheels/mamba_ssm-2.3.2.post1+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl
+Processing ./_mounted_wheels/causal_conv1d-1.7.0+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl
+Processing ./_mounted_wheels/mamba_ssm-2.3.2.post1+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl
+Requirement already satisfied: torch in /usr/local/lib/python3.13/dist-packages (from causal-conv1d==1.7.0+cu130torch2.11sm75) (2.11.0+cu130)
+Requirement already satisfied: packaging in /usr/local/lib/python3.13/dist-packages (from causal-conv1d==1.7.0+cu130torch2.11sm75) (26.3)
+Requirement already satisfied: ninja in /usr/local/lib/python3.13/dist-packages (from causal-conv1d==1.7.0+cu130torch2.11sm75) (1.13.2)
+Collecting tilelang==0.1.8 (from mamba-ssm==2.3.2.post1+cu130torch2.11sm75)
+  Downloading tilelang-0.1.8-cp38-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (15 kB)
+Collecting apache-tvm-ffi<=0.1.9 (from mamba-ssm==2.3.2.post1+cu130torch2.11sm75)
+  Downloading apache_tvm_ffi-0.1.9-cp312-abi3-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (6.1 kB)
+Collecting quack-kernels>=0.3.4 (from mamba-ssm==2.3.2.post1+cu130torch2.11sm75)
+  Downloading quack_kernels-0.6.5-py3-none-any.whl.metadata (834 bytes)
+Requirement already satisfied: triton>=3.5.0 in /usr/local/lib/python3.13/dist-packages (from mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (3.6.0)
+Requirement already satisfied: einops in /usr/local/lib/python3.13/dist-packages (from mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.8.2)
+Requirement already satisfied: transformers in /usr/local/lib/python3.13/dist-packages (from mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (5.20.2)
+Requirement already satisfied: setuptools>=61.0.0 in /usr/local/lib/python3.13/dist-packages (from mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (81.0.0)
+Collecting torch-c-dlpack-ext (from tilelang==0.1.8->mamba-ssm==2.3.2.post1+cu130torch2.11sm75)
+  Downloading torch_c_dlpack_ext-0.1.5-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (14 kB)
+Requirement already satisfied: cloudpickle in /usr/local/lib/python3.13/dist-packages (from tilelang==0.1.8->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (3.1.2)
+Requirement already satisfied: ml-dtypes in /usr/local/lib/python3.13/dist-packages (from tilelang==0.1.8->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.6.0)
+Requirement already satisfied: numpy>=1.23.5 in /usr/local/lib/python3.13/dist-packages (from tilelang==0.1.8->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (2.1.3)
+Requirement already satisfied: psutil in /usr/local/lib/python3.13/dist-packages (from tilelang==0.1.8->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (5.9.5)
+Requirement already satisfied: tqdm>=4.62.3 in /usr/local/lib/python3.13/dist-packages (from tilelang==0.1.8->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (4.67.3)
+Requirement already satisfied: typing-extensions>=4.10.0 in /usr/local/lib/python3.13/dist-packages (from tilelang==0.1.8->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (4.16.0)
+Collecting z3-solver<4.15.5,>=4.13.0 (from tilelang==0.1.8->mamba-ssm==2.3.2.post1+cu130torch2.11sm75)
+  Downloading z3_solver-4.15.4.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (602 bytes)
+Collecting nvidia-cutlass-dsl>=4.7 (from quack-kernels>=0.3.4->mamba-ssm==2.3.2.post1+cu130torch2.11sm75)
+  Downloading nvidia_cutlass_dsl-4.8.1-py3-none-any.whl.metadata (3.1 kB)
+Collecting nvidia-cutlass-dsl-libs-base==4.8.1 (from nvidia-cutlass-dsl>=4.7->quack-kernels>=0.3.4->mamba-ssm==2.3.2.post1+cu130torch2.11sm75)
+  Downloading nvidia_cutlass_dsl_libs_base-4.8.1-cp313-cp313-manylinux_2_28_x86_64.whl.metadata (2.9 kB)
+Collecting nvidia-cutlass-dsl-libs-cu12==4.8.1 (from nvidia-cutlass-dsl>=4.7->quack-kernels>=0.3.4->mamba-ssm==2.3.2.post1+cu130torch2.11sm75)
+  Downloading nvidia_cutlass_dsl_libs_cu12-4.8.1-cp313-cp313-manylinux_2_28_x86_64.whl.metadata (2.9 kB)
+Requirement already satisfied: cuda-bindings>=12.8 in /usr/local/lib/python3.13/dist-packages (from nvidia-cutlass-dsl-libs-base==4.8.1->nvidia-cutlass-dsl>=4.7->quack-kernels>=0.3.4->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (13.0.3)
+Requirement already satisfied: protobuf>=4.21.12 in /usr/local/lib/python3.13/dist-packages (from nvidia-cutlass-dsl-libs-base==4.8.1->nvidia-cutlass-dsl>=4.7->quack-kernels>=0.3.4->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (7.36.2)
+Collecting nvidia-cutlass-dsl-libs-core==4.8.1 (from nvidia-cutlass-dsl-libs-base==4.8.1->nvidia-cutlass-dsl>=4.7->quack-kernels>=0.3.4->mamba-ssm==2.3.2.post1+cu130torch2.11sm75)
+  Downloading nvidia_cutlass_dsl_libs_core-4.8.1-py3-none-any.whl.metadata (2.9 kB)
+Requirement already satisfied: cuda-pathfinder~=1.1 in /usr/local/lib/python3.13/dist-packages (from cuda-bindings>=12.8->nvidia-cutlass-dsl-libs-base==4.8.1->nvidia-cutlass-dsl>=4.7->quack-kernels>=0.3.4->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (1.8.4)
+Requirement already satisfied: filelock in /usr/local/lib/python3.13/dist-packages (from torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (4.2.4)
+Requirement already satisfied: sympy>=1.13.3 in /usr/local/lib/python3.13/dist-packages (from torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in /usr/local/lib/python3.13/dist-packages (from torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (3.7)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.13/dist-packages (from torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in /usr/local/lib/python3.13/dist-packages (from torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (2025.12.0)
+Requirement already satisfied: cuda-toolkit==13.0.2 in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (13.0.2)
+Requirement already satisfied: nvidia-cudnn-cu13==9.19.0.56 in /usr/local/lib/python3.13/dist-packages (from torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (9.19.0.56)
+Requirement already satisfied: nvidia-cusparselt-cu13==0.8.0 in /usr/local/lib/python3.13/dist-packages (from torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (0.8.0)
+Requirement already satisfied: nvidia-nccl-cu13==2.28.9 in /usr/local/lib/python3.13/dist-packages (from torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (2.28.9)
+Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /usr/local/lib/python3.13/dist-packages (from torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (3.4.5)
+Requirement already satisfied: nvidia-cublas==13.1.0.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (13.1.0.3)
+Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (13.0.96)
+Requirement already satisfied: nvidia-cufft==12.0.0.61.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (12.0.0.61)
+Requirement already satisfied: nvidia-cufile==1.15.1.6.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (1.15.1.6)
+Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (13.0.85)
+Requirement already satisfied: nvidia-curand==10.4.0.35.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (10.4.0.35)
+Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (12.0.4.66)
+Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (12.6.3.3)
+Requirement already satisfied: nvidia-nvjitlink==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (13.0.88)
+Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (13.0.88)
+Requirement already satisfied: nvidia-nvtx==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == "Linux"->torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (13.0.85)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /usr/local/lib/python3.13/dist-packages (from sympy>=1.13.3->torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.13/dist-packages (from jinja2->torch->causal-conv1d==1.7.0+cu130torch2.11sm75) (3.0.4)
+Requirement already satisfied: huggingface-hub<3.0,>=1.31.0 in /usr/local/lib/python3.13/dist-packages (from transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (1.33.0)
+Requirement already satisfied: pyyaml>=5.1 in /usr/local/lib/python3.13/dist-packages (from transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (6.0.3)
+Requirement already satisfied: regex>=2025.10.22 in /usr/local/lib/python3.13/dist-packages (from transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (2025.11.3)
+Requirement already satisfied: tokenizers<0.24.0,>=0.23.1 in /usr/local/lib/python3.13/dist-packages (from transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.23.3)
+Requirement already satisfied: typer in /usr/local/lib/python3.13/dist-packages (from transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.27.3)
+Requirement already satisfied: safetensors>=0.8.0 in /usr/local/lib/python3.13/dist-packages (from transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.8.0)
+Requirement already satisfied: click<9.0.0,>=8.4.2 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub<3.0,>=1.31.0->transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (8.5.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.6.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub<3.0,>=1.31.0->transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (1.7.0)
+Requirement already satisfied: httpx<1,>=0.23.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub<3.0,>=1.31.0->transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.28.1)
+Requirement already satisfied: anyio in /usr/local/lib/python3.13/dist-packages (from httpx<1,>=0.23.0->huggingface-hub<3.0,>=1.31.0->transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (4.15.1)
+Requirement already satisfied: certifi in /usr/local/lib/python3.13/dist-packages (from httpx<1,>=0.23.0->huggingface-hub<3.0,>=1.31.0->transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (2026.10.23)
+Requirement already satisfied: httpcore==1.* in /usr/local/lib/python3.13/dist-packages (from httpx<1,>=0.23.0->huggingface-hub<3.0,>=1.31.0->transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (1.0.9)
+Requirement already satisfied: idna in /usr/local/lib/python3.13/dist-packages (from httpx<1,>=0.23.0->huggingface-hub<3.0,>=1.31.0->transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (3.20)
+Requirement already satisfied: h11>=0.16 in /usr/local/lib/python3.13/dist-packages (from httpcore==1.*->httpx<1,>=0.23.0->huggingface-hub<3.0,>=1.31.0->transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.16.0)
+Requirement already satisfied: shellingham>=1.3.0 in /usr/local/lib/python3.13/dist-packages (from typer->transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (1.5.4)
+Requirement already satisfied: rich>=13.8.0 in /usr/local/lib/python3.13/dist-packages (from typer->transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (13.9.4)
+Requirement already satisfied: annotated-doc>=0.0.2 in /usr/local/lib/python3.13/dist-packages (from typer->transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.0.5)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /usr/local/lib/python3.13/dist-packages (from rich>=13.8.0->typer->transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (4.2.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /usr/local/lib/python3.13/dist-packages (from rich>=13.8.0->typer->transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (2.21.0)
+Requirement already satisfied: mdurl~=0.1 in /usr/local/lib/python3.13/dist-packages (from markdown-it-py>=2.2.0->rich>=13.8.0->typer->transformers->mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.1.2)
+Downloading tilelang-0.1.8-cp38-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (43.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.5/43.5 MB 116.2 MB/s  0:00:00
+Downloading apache_tvm_ffi-0.1.9-cp312-abi3-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (2.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.3/2.3 MB 65.4 MB/s  0:00:00
+Downloading z3_solver-4.15.4.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (29.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 29.3/29.3 MB 159.9 MB/s  0:00:00
+Downloading quack_kernels-0.6.5-py3-none-any.whl (729 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 729.6/729.6 kB 24.7 MB/s  0:00:00
+Downloading nvidia_cutlass_dsl-4.8.1-py3-none-any.whl (10 kB)
+Downloading nvidia_cutlass_dsl_libs_base-4.8.1-cp313-cp313-manylinux_2_28_x86_64.whl (3.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 64.1 MB/s  0:00:00
+Downloading nvidia_cutlass_dsl_libs_core-4.8.1-py3-none-any.whl (1.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 68.1 MB/s  0:00:00
+Downloading nvidia_cutlass_dsl_libs_cu12-4.8.1-cp313-cp313-manylinux_2_28_x86_64.whl (91.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 91.7/91.7 MB 92.7 MB/s  0:00:00
+Downloading torch_c_dlpack_ext-0.1.5-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (755 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 755.0/755.0 kB 24.4 MB/s  0:00:00
+Installing collected packages: z3-solver, apache-tvm-ffi, nvidia-cutlass-dsl-libs-core, nvidia-cutlass-dsl-libs-base, nvidia-cutlass-dsl-libs-cu12, torch-c-dlpack-ext, nvidia-cutlass-dsl, causal-conv1d, tilelang, quack-kernels, mamba-ssm
+
+Successfully installed apache-tvm-ffi-0.1.9 causal-conv1d-1.7.0+cu130torch2.11sm75 mamba-ssm-2.3.2.post1+cu130torch2.11sm75 nvidia-cutlass-dsl-4.8.1 nvidia-cutlass-dsl-libs-base-4.8.1 nvidia-cutlass-dsl-libs-core-4.8.1 nvidia-cutlass-dsl-libs-cu12-4.8.1 quack-kernels-0.6.5 tilelang-0.1.8 torch-c-dlpack-ext-0.1.5 z3-solver-4.15.4.0
+[runner 2026-11-09T23:27:13Z] exit 0
+[runner 2026-11-09T23:27:13Z] $ pip install "datasets" "transformers<5" "wandb"
+Requirement already satisfied: datasets in /usr/local/lib/python3.13/dist-packages (4.8.5)
+Collecting transformers<5
+  Downloading transformers-4.57.6-py3-none-any.whl.metadata (43 kB)
+Requirement already satisfied: wandb in /usr/local/lib/python3.13/dist-packages (0.28.1)
+Requirement already satisfied: filelock in /usr/local/lib/python3.13/dist-packages (from transformers<5) (4.2.4)
+Collecting huggingface-hub<1.0,>=0.34.0 (from transformers<5)
+  Downloading huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)
+Requirement already satisfied: numpy>=1.17 in /usr/local/lib/python3.13/dist-packages (from transformers<5) (2.1.3)
+Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.13/dist-packages (from transformers<5) (26.3)
+Requirement already satisfied: pyyaml>=5.1 in /usr/local/lib/python3.13/dist-packages (from transformers<5) (6.0.3)
+Requirement already satisfied: regex!=2019.12.17 in /usr/local/lib/python3.13/dist-packages (from transformers<5) (2025.11.3)
+Requirement already satisfied: requests in /usr/local/lib/python3.13/dist-packages (from transformers<5) (2.34.2)
+Collecting tokenizers<=0.23.0,>=0.22.0 (from transformers<5)
+  Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)
+Requirement already satisfied: safetensors>=0.4.3 in /usr/local/lib/python3.13/dist-packages (from transformers<5) (0.8.0)
+Requirement already satisfied: tqdm>=4.27 in /usr/local/lib/python3.13/dist-packages (from transformers<5) (4.67.3)
+Requirement already satisfied: fsspec>=2023.5.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub<1.0,>=0.34.0->transformers<5) (2025.12.0)
+Requirement already satisfied: hf-xet<2.0.0,>=1.1.3 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub<1.0,>=0.34.0->transformers<5) (1.7.0)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub<1.0,>=0.34.0->transformers<5) (4.16.0)
+Requirement already satisfied: pyarrow>=21.0.0 in /usr/local/lib/python3.13/dist-packages (from datasets) (23.0.1)
+Requirement already satisfied: dill<0.4.2,>=0.3.0 in /usr/local/lib/python3.13/dist-packages (from datasets) (0.4.1)
+Requirement already satisfied: pandas in /usr/local/lib/python3.13/dist-packages (from datasets) (2.3.3)
+Requirement already satisfied: httpx<1.0.0 in /usr/local/lib/python3.13/dist-packages (from datasets) (0.28.1)
+Requirement already satisfied: xxhash in /usr/local/lib/python3.13/dist-packages (from datasets) (4.0.2)
+Requirement already satisfied: multiprocess<0.70.20 in /usr/local/lib/python3.13/dist-packages (from datasets) (0.70.19)
+Requirement already satisfied: aiohttp!=4.0.0a0,!=4.0.0a1 in /usr/local/lib/python3.13/dist-packages (from fsspec[http]<=2026.2.0,>=2023.1.0->datasets) (3.14.5)
+Requirement already satisfied: anyio in /usr/local/lib/python3.13/dist-packages (from httpx<1.0.0->datasets) (4.15.1)
+Requirement already satisfied: certifi in /usr/local/lib/python3.13/dist-packages (from httpx<1.0.0->datasets) (2026.10.23)
+Requirement already satisfied: httpcore==1.* in /usr/local/lib/python3.13/dist-packages (from httpx<1.0.0->datasets) (1.0.9)
+Requirement already satisfied: idna in /usr/local/lib/python3.13/dist-packages (from httpx<1.0.0->datasets) (3.20)
+Requirement already satisfied: h11>=0.16 in /usr/local/lib/python3.13/dist-packages (from httpcore==1.*->httpx<1.0.0->datasets) (0.16.0)
+Requirement already satisfied: click>=8.2.0 in /usr/local/lib/python3.13/dist-packages (from wandb) (8.5.0)
+Requirement already satisfied: platformdirs in /usr/local/lib/python3.13/dist-packages (from wandb) (4.13.5)
+Requirement already satisfied: protobuf!=5.28.0,!=5.29.0,<8,>=5 in /usr/local/lib/python3.13/dist-packages (from wandb) (7.36.2)
+Requirement already satisfied: pydantic<3,>=2.6 in /usr/local/lib/python3.13/dist-packages (from wandb) (2.14.1)
+Requirement already satisfied: sentry-sdk>=2.0.0 in /usr/local/lib/python3.13/dist-packages (from wandb) (2.73.0)
+Requirement already satisfied: annotated-types>=0.6.0 in /usr/local/lib/python3.13/dist-packages (from pydantic<3,>=2.6->wandb) (0.8.0)
+Requirement already satisfied: pydantic-core==2.50.1 in /usr/local/lib/python3.13/dist-packages (from pydantic<3,>=2.6->wandb) (2.50.1)
+Requirement already satisfied: typing-inspection>=0.4.4 in /usr/local/lib/python3.13/dist-packages (from pydantic<3,>=2.6->wandb) (0.4.4)
+Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.13/dist-packages (from requests->transformers<5) (3.4.9)
+Requirement already satisfied: urllib3<3,>=1.26 in /usr/local/lib/python3.13/dist-packages (from requests->transformers<5) (2.8.0)
+Requirement already satisfied: aiohappyeyeballs>=2.5.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets) (2.7.1)
+Requirement already satisfied: aiosignal>=1.4.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets) (1.4.0)
+Requirement already satisfied: attrs>=17.3.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets) (26.1.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets) (1.8.0)
+Requirement already satisfied: multidict<8.0,>=4.5 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets) (6.9.1)
+Requirement already satisfied: propcache>=0.2.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets) (0.5.4)
+Requirement already satisfied: yarl<2.0,>=1.25.1 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.2.0,>=2023.1.0->datasets) (1.25.1)
+Requirement already satisfied: python-dateutil>=2.8.2 in /usr/local/lib/python3.13/dist-packages (from pandas->datasets) (2.9.0.post0)
+Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.13/dist-packages (from pandas->datasets) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in /usr/local/lib/python3.13/dist-packages (from pandas->datasets) (2026.5)
+Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.13/dist-packages (from python-dateutil>=2.8.2->pandas->datasets) (1.17.0)
+Downloading transformers-4.57.6-py3-none-any.whl (12.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 5.9 MB/s  0:00:02
+Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 1.6 MB/s  0:00:00
+Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 1.9 MB/s  0:00:01
+Installing collected packages: huggingface-hub, tokenizers, transformers
+  Attempting uninstall: huggingface-hub
+    Found existing installation: huggingface_hub 1.33.0
+    Uninstalling huggingface_hub-1.33.0:
+      Successfully uninstalled huggingface_hub-1.33.0
+  Attempting uninstall: tokenizers
+    Found existing installation: tokenizers 0.23.3
+    Uninstalling tokenizers-0.23.3:
+      Successfully uninstalled tokenizers-0.23.3
+  Attempting uninstall: transformers
+    Found existing installation: transformers 5.20.2
+    Uninstalling transformers-5.20.2:
+      Successfully uninstalled transformers-5.20.2
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+gradio-client 2.7.2 requires huggingface-hub<3.0,>=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.
+gradio 6.30.0 requires huggingface-hub<3.0,>=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.
+gradio 6.30.0 requires pillow<13.0,>=8.0, but you have pillow 13.0.0 which is incompatible.
+diffusers 0.42.0 requires huggingface-hub<3.0,>=1.32.0, but you have huggingface-hub 0.36.2 which is incompatible.
+Successfully installed huggingface-hub-0.36.2 tokenizers-0.22.2 transformers-4.57.6
+[runner 2026-11-09T23:27:32Z] exit 0
+[runner 2026-11-09T23:27:32Z] $ /usr/bin/python3 /kaggle/working/_versions.py
+VERSIONS_JSON={"torch": "2.11.0+cu130", "triton": "3.6.0", "mamba-ssm": "2.3.2.post1+cu130torch2.11sm75", "causal-conv1d": "1.7.0+cu130torch2.11sm75", "transformers": "4.57.6", "datasets": "4.8.5", "wandb": "0.28.1", "einops": "0.8.2", "numpy": "2.1.3", "mamba_ssm_import": "ok 2.3.2.post1", "causal_conv1d_import": "ok 1.7.0"}
+[runner 2026-11-09T23:27:52Z] exit 0
+[runner 2026-11-09T23:27:52Z] $ /usr/bin/python3 -m pip freeze > /kaggle/working/output/pip_freeze.txt
+[runner 2026-11-09T23:27:53Z] exit 0
+[runner 2026-11-09T23:29:37Z] restored Triton cache from /kaggle/input/datasets/parthgarg101/abr-mamba-wheels/triton_cache/triton_cache
+[runner 2026-11-09T23:29:37Z] running 10 named runs on 2 GPU(s)
+[runner 2026-11-09T23:29:37Z] [ABR-4L-gatedCBSC_s42] $ python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 11.444
+[runner 2026-11-09T23:29:37Z] [Random-Routing-4L_s42] $ python experiments/full_scale/train.py --config Random-Routing-4L --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 11.444
+[runner 2026-11-10T01:47:12Z] exit 0
+[runner 2026-11-10T01:47:12Z] [ABR-4L-noCBSC_s42] $ python experiments/full_scale/train.py --config ABR-4L-noCBSC --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 9.151
+[runner 2026-11-10T03:42:15Z] exit 0
+[runner 2026-11-10T03:42:15Z] [Random-Routing-4L_s123] $ python experiments/full_scale/train.py --config Random-Routing-4L --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 7.234
+[runner 2026-11-10T04:01:51Z] exit 0
+[runner 2026-11-10T04:01:51Z] [ABR-4L-CBSC_s42] $ python experiments/full_scale/train.py --config ABR-4L-CBSC --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 6.907
+[runner 2026-11-10T06:04:20Z] exit 0
+[runner 2026-11-10T06:04:20Z] [Jamba-1_3_s42] $ python experiments/full_scale/train.py --config Jamba-1:3 --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 4.866
+[runner 2026-11-10T06:21:33Z] exit 0
+[runner 2026-11-10T06:21:33Z] [ABR-4L-noCBSC_s123] $ python experiments/full_scale/train.py --config ABR-4L-noCBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 4.579
+[runner 2026-11-10T08:02:24Z] exit 0
+[runner 2026-11-10T08:02:24Z] [Jamba-1_3_s123] $ python experiments/full_scale/train.py --config Jamba-1:3 --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 2.898
+[runner 2026-11-10T08:35:48Z] exit 0
+[runner 2026-11-10T08:35:48Z] [Transformer-Only_s42] $ python experiments/full_scale/train.py --config Transformer-Only --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 2.341
+[runner 2026-11-10T09:59:40Z] exit 0
+[runner 2026-11-10T09:59:40Z] [Transformer-Only_s123] $ python experiments/full_scale/train.py --config Transformer-Only --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 0.943
+[runner 2026-11-10T10:19:46Z] exit 0
+[runner 2026-11-10T10:41:29Z] exit 0
+[runner 2026-11-10T10:42:04Z] done, exit code 0

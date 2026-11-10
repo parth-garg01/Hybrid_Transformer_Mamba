@@ -1,0 +1,27 @@
+{
+  "cmd": "python experiments/full_scale/train.py --config Random-Routing-4L --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 11.444",
+  "commit": "1b0a5b238582048d75652a65f00f9fc65096c0d0",
+  "dataset_version": 3,
+  "exit_code": 0,
+  "finished_utc": "2026-11-10T01:47:12Z",
+  "gpu_slot": 1,
+  "history": [
+    {
+      "exit_code": 0,
+      "finished_utc": "2026-11-10T01:47:12Z",
+      "kernel_ref": "parthgarg101/abr-q001",
+      "session": 1,
+      "started_utc": "2026-11-09T23:29:37Z",
+      "state": "done"
+    }
+  ],
+  "kernel_ref": "parthgarg101/abr-q001",
+  "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-q001",
+  "lane": 1,
+  "max_hours": 11.444,
+  "name": "Random-Routing-4L_s42",
+  "resumed_from": null,
+  "sessions": 1,
+  "started_utc": "2026-11-09T23:29:37Z",
+  "state": "done"
+}
