@@ -1,0 +1,138 @@
+{
+  "archive_sha256": "be7a2ca2739d5920f359dc939a88d1763b542b906e45c511e2df56484ad289d0",
+  "cmd": null,
+  "commit": "1b0a5b238582048d75652a65f00f9fc65096c0d0",
+  "commit_ref": "1b0a5b238582048d75652a65f00f9fc65096c0d0",
+  "dataset": {
+    "is_private": true,
+    "notes": "commit 1b0a5b238582048d75652a65f00f9fc65096c0d0 (ref 1b0a5b238582048d75652a65f00f9fc65096c0d0) for kernel abr-q003",
+    "ref": "parthgarg101/abr-code",
+    "version": 5
+  },
+  "git_snapshot": true,
+  "gpu_requested": "t4x2",
+  "kaggle_user": "parthgarg101",
+  "kernel_ref": "parthgarg101/abr-q003",
+  "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-q003",
+  "kernel_version": 1,
+  "kernel_version_url": "https://www.kaggle.com/code/parthgarg101/abr-q003",
+  "launched_utc": "2026-11-10T11:17:10Z",
+  "name": "q003",
+  "pushed_utc": "2026-11-10T11:17:34Z",
+  "resume_from": [
+    "parthgarg101/abr-q001"
+  ],
+  "runs": [
+    {
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 0,
+      "name": "ABR-4L-gatedCBSC_s123"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-CBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 0,
+      "name": "ABR-4L-CBSC_s123"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-noCBSC --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 0,
+      "name": "ABR-4L-noCBSC_s7"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config Jamba-1:3 --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 0,
+      "name": "Jamba-1_3_s7"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config Transformer-Only --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 1,
+      "name": "Transformer-Only_s123"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 1,
+      "name": "ABR-4L-gatedCBSC_s7"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config Random-Routing-4L --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 1,
+      "name": "Random-Routing-4L_s7"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-CBSC --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 1,
+      "name": "ABR-4L-CBSC_s7"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config Transformer-Only --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 1,
+      "name": "Transformer-Only_s7"
+    }
+  ],
+  "server_settings": {
+    "enable_gpu": true,
+    "enable_internet": true,
+    "is_private": true
+  },
+  "session_hours": 11.5,
+  "session_plan": {
+    "est_load_hours": [
+      10.94,
+      11.73
+    ],
+    "lanes": [
+      [
+        {
+          "est_hours": 4.59,
+          "run": "ABR-4L-gatedCBSC_s123"
+        },
+        {
+          "est_hours": 2.26,
+          "run": "ABR-4L-CBSC_s123"
+        },
+        {
+          "est_hours": 2.26,
+          "run": "ABR-4L-noCBSC_s7"
+        },
+        {
+          "est_hours": 1.83,
+          "run": "Jamba-1_3_s7"
+        }
+      ],
+      [
+        {
+          "est_hours": 0.96,
+          "run": "Transformer-Only_s123"
+        },
+        {
+          "est_hours": 4.59,
+          "run": "ABR-4L-gatedCBSC_s7"
+        },
+        {
+          "est_hours": 2.26,
+          "run": "Random-Routing-4L_s7"
+        },
+        {
+          "est_hours": 2.26,
+          "run": "ABR-4L-CBSC_s7"
+        },
+        {
+          "est_hours": 1.66,
+          "run": "Transformer-Only_s7"
+        }
+      ]
+    ],
+    "name": "q003",
+    "overhead_hours": 0.3,
+    "session_hours": 11.5
+  },
+  "token_cache": {
+    "expected_sha256": {
+      "wikitext103_test_gpt2.pt": "84bb27f5bcebc4b63e77725bee2e0d318f79cab1ba34b10e9413612630b29b64",
+      "wikitext103_train_gpt2.pt": "7896d3b921ae6741135a54aba6e1f060e7306e7e58a7110cac8618d235af2f6d",
+      "wikitext103_validation_gpt2.pt": "a6091ca4a7f0bd4caae7e4d7eb895cf01a1891bf32e1aa64587c26c877e222ea"
+    },
+    "ref": "parthgarg101/abr-wikitext103-gpt2-tokens"
+  },
+  "wheels_dataset": "parthgarg101/abr-mamba-wheels"
+}

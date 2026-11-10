@@ -4,7 +4,7 @@
   "user": "parthgarg101",
   "max_hours": null,
   "created_utc": "2026-11-09T23:25:41Z",
-  "next_session": 3,
+  "next_session": 4,
   "token_cache": {
     "ref": "parthgarg101/abr-wikitext103-gpt2-tokens",
     "expected_sha256": {
@@ -164,15 +164,16 @@
       "seed": 123,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config Transformer-Only --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "pending",
-      "kernel": null,
+      "status": "running",
+      "kernel": "parthgarg101/abr-q003",
       "sessions": [
-        "q001"
+        "q001",
+        "q003"
       ],
       "resume_from": "parthgarg101/abr-q001",
       "failures": 0,
       "hours_done": 0.697,
-      "updated_utc": "2026-11-10T11:11:51Z",
+      "updated_utc": "2026-11-10T11:17:35Z",
       "last_exit_code": 0,
       "last_state": "done"
     },
@@ -232,104 +233,120 @@
       "seed": 123,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config ABR-4L-CBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "pending",
-      "kernel": null,
-      "sessions": [],
+      "status": "running",
+      "kernel": "parthgarg101/abr-q003",
+      "sessions": [
+        "q003"
+      ],
       "resume_from": null,
       "failures": 0,
       "hours_done": 0.0,
-      "updated_utc": "2026-11-09T23:25:41Z"
+      "updated_utc": "2026-11-10T11:17:35Z"
     },
     "ABR-4L-gatedCBSC_s123": {
       "config": "ABR-4L-gatedCBSC",
       "seed": 123,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "pending",
-      "kernel": null,
-      "sessions": [],
+      "status": "running",
+      "kernel": "parthgarg101/abr-q003",
+      "sessions": [
+        "q003"
+      ],
       "resume_from": null,
       "failures": 0,
       "hours_done": 0.0,
-      "updated_utc": "2026-11-09T23:25:41Z"
+      "updated_utc": "2026-11-10T11:17:35Z"
     },
     "Transformer-Only_s7": {
       "config": "Transformer-Only",
       "seed": 7,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config Transformer-Only --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "pending",
-      "kernel": null,
-      "sessions": [],
+      "status": "running",
+      "kernel": "parthgarg101/abr-q003",
+      "sessions": [
+        "q003"
+      ],
       "resume_from": null,
       "failures": 0,
       "hours_done": 0.0,
-      "updated_utc": "2026-11-09T23:25:41Z"
+      "updated_utc": "2026-11-10T11:17:35Z"
     },
     "Jamba-1_3_s7": {
       "config": "Jamba-1:3",
       "seed": 7,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config Jamba-1:3 --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "pending",
-      "kernel": null,
-      "sessions": [],
+      "status": "running",
+      "kernel": "parthgarg101/abr-q003",
+      "sessions": [
+        "q003"
+      ],
       "resume_from": null,
       "failures": 0,
       "hours_done": 0.0,
-      "updated_utc": "2026-11-09T23:25:41Z"
+      "updated_utc": "2026-11-10T11:17:35Z"
     },
     "Random-Routing-4L_s7": {
       "config": "Random-Routing-4L",
       "seed": 7,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config Random-Routing-4L --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "pending",
-      "kernel": null,
-      "sessions": [],
+      "status": "running",
+      "kernel": "parthgarg101/abr-q003",
+      "sessions": [
+        "q003"
+      ],
       "resume_from": null,
       "failures": 0,
       "hours_done": 0.0,
-      "updated_utc": "2026-11-09T23:25:41Z"
+      "updated_utc": "2026-11-10T11:17:35Z"
     },
     "ABR-4L-noCBSC_s7": {
       "config": "ABR-4L-noCBSC",
       "seed": 7,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config ABR-4L-noCBSC --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "pending",
-      "kernel": null,
-      "sessions": [],
+      "status": "running",
+      "kernel": "parthgarg101/abr-q003",
+      "sessions": [
+        "q003"
+      ],
       "resume_from": null,
       "failures": 0,
       "hours_done": 0.0,
-      "updated_utc": "2026-11-09T23:25:41Z"
+      "updated_utc": "2026-11-10T11:17:35Z"
     },
     "ABR-4L-CBSC_s7": {
       "config": "ABR-4L-CBSC",
       "seed": 7,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config ABR-4L-CBSC --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "pending",
-      "kernel": null,
-      "sessions": [],
+      "status": "running",
+      "kernel": "parthgarg101/abr-q003",
+      "sessions": [
+        "q003"
+      ],
       "resume_from": null,
       "failures": 0,
       "hours_done": 0.0,
-      "updated_utc": "2026-11-09T23:25:41Z"
+      "updated_utc": "2026-11-10T11:17:35Z"
     },
     "ABR-4L-gatedCBSC_s7": {
       "config": "ABR-4L-gatedCBSC",
       "seed": 7,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "pending",
-      "kernel": null,
-      "sessions": [],
+      "status": "running",
+      "kernel": "parthgarg101/abr-q003",
+      "sessions": [
+        "q003"
+      ],
       "resume_from": null,
       "failures": 0,
       "hours_done": 0.0,
-      "updated_utc": "2026-11-09T23:25:41Z"
+      "updated_utc": "2026-11-10T11:17:35Z"
     },
     "Transformer-Only_s2024": {
       "config": "Transformer-Only",
@@ -880,6 +897,79 @@
       "status": "discarded",
       "launched_utc": "2026-11-10T11:09:24Z",
       "note": "Launched by mistake on 2026-11-10 because of a settle-path bug (outputs are under output/<run>/); it repeats q001's runs from scratch. To be cancelled in the Kaggle UI; none of its outputs are used."
+    },
+    "q003": {
+      "kernel_ref": "parthgarg101/abr-q003",
+      "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-q003",
+      "kernel_version": 1,
+      "dataset_version": 5,
+      "runs": [
+        "ABR-4L-gatedCBSC_s123",
+        "ABR-4L-CBSC_s123",
+        "ABR-4L-noCBSC_s7",
+        "Jamba-1_3_s7",
+        "Transformer-Only_s123",
+        "ABR-4L-gatedCBSC_s7",
+        "Random-Routing-4L_s7",
+        "ABR-4L-CBSC_s7",
+        "Transformer-Only_s7"
+      ],
+      "plan": {
+        "session_hours": 11.5,
+        "overhead_hours": 0.3,
+        "lanes": [
+          [
+            {
+              "run": "ABR-4L-gatedCBSC_s123",
+              "est_hours": 4.59
+            },
+            {
+              "run": "ABR-4L-CBSC_s123",
+              "est_hours": 2.26
+            },
+            {
+              "run": "ABR-4L-noCBSC_s7",
+              "est_hours": 2.26
+            },
+            {
+              "run": "Jamba-1_3_s7",
+              "est_hours": 1.83
+            }
+          ],
+          [
+            {
+              "run": "Transformer-Only_s123",
+              "est_hours": 0.96
+            },
+            {
+              "run": "ABR-4L-gatedCBSC_s7",
+              "est_hours": 4.59
+            },
+            {
+              "run": "Random-Routing-4L_s7",
+              "est_hours": 2.26
+            },
+            {
+              "run": "ABR-4L-CBSC_s7",
+              "est_hours": 2.26
+            },
+            {
+              "run": "Transformer-Only_s7",
+              "est_hours": 1.66
+            }
+          ]
+        ],
+        "est_load_hours": [
+          10.94,
+          11.73
+        ],
+        "name": "q003"
+      },
+      "resume_from": [
+        "parthgarg101/abr-q001"
+      ],
+      "status": "running",
+      "launched_utc": "2026-11-10T11:17:10Z"
     }
   }
 }
