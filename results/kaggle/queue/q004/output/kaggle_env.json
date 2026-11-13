@@ -1,0 +1,184 @@
+{
+  "causal_conv1d": "1.7.0+cu130torch2.11sm75",
+  "cmd": null,
+  "cmd_started_utc": "2026-11-10T23:58:05Z",
+  "code_source": "/kaggle/input/datasets/parthgarg101/abr-code/repo",
+  "commit": "1b0a5b238582048d75652a65f00f9fc65096c0d0",
+  "commit_expected": "1b0a5b238582048d75652a65f00f9fc65096c0d0",
+  "cuda_available": true,
+  "cudnn": 92700,
+  "cxx11abi": true,
+  "dataset_ref": "parthgarg101/abr-code",
+  "dataset_version": 6,
+  "driver_cuda_version": "13.0",
+  "driver_version": "580.178.04",
+  "finished_utc": "2026-11-11T11:11:35Z",
+  "git_snapshot_present": true,
+  "git_snapshot_sha256": "c470a1ea062ba9833aa98c379ccf0e26606f96e54e58775d7446f1bb5e986b5c",
+  "gpu_compute_cap": "7.5",
+  "gpu_count": 2,
+  "gpu_memory_total": "15360 MiB",
+  "gpu_name": "Tesla T4",
+  "gpu_requested": "t4x2",
+  "kaggle_env_vars": {
+    "KAGGLE_CONTAINER_NAME": "kaggle_XK1IsV7pcx5w2c5kdRoh95Y01bcGSSo3n922ryIXIA-368230109-webtier",
+    "KAGGLE_DATA_PROXY_PROJECT": "kaggle-161607",
+    "KAGGLE_DATA_PROXY_URL": "https://dp.kaggle.net",
+    "KAGGLE_DOCKER_IMAGE": "gcr.io/kaggle-gpu-images/python@sha256:de153e6d303881930c51286216393d56f56b26458d0661350305a1e8144eea01",
+    "KAGGLE_GCP_ZONE": "us-central1-b",
+    "KAGGLE_GRPC_DATA_PROXY_URL": "dp.kaggle.net:443",
+    "KAGGLE_KERNEL_INTEGRATIONS": "",
+    "KAGGLE_KERNEL_RUN_TYPE": "Batch",
+    "KAGGLE_URL_BASE": "https://www.kaggle.com"
+  },
+  "kaggle_kernel_version_env": null,
+  "kernel_ref": "parthgarg101/abr-q004",
+  "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-q004",
+  "mamba_install": {
+    "install_seconds": 18.5,
+    "match_key": {
+      "cuda_major": "13",
+      "cxx11abi": "TRUE",
+      "local_tag": "cu130torch2.11sm75",
+      "python": "cp313",
+      "torch": "2.11"
+    },
+    "method": "mounted_wheels",
+    "mounted_wheels": {
+      "causal_conv1d": "/kaggle/working/_mounted_wheels/causal_conv1d-1.7.0+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl",
+      "mamba_ssm": "/kaggle/working/_mounted_wheels/mamba_ssm-2.3.2.post1+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl"
+    },
+    "mounted_wheels_sha256": {
+      "causal_conv1d": "c13ca5ad79884dfe7d276a9fb2611c3e8972da76484c4bef217d6d0e8067edb9",
+      "mamba_ssm": "33994f83d2198f53d75e2790ea3c6e273143d3a97ea50afadfba941ce3b72ccc"
+    }
+  },
+  "mamba_ssm": "2.3.2.post1+cu130torch2.11sm75",
+  "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+  "python": "3.13.16 (main, Oct  1 2026, 15:40:24) [GCC 13.3.0]",
+  "run_exit_codes": {
+    "ABR-4L-CBSC_s2024": 0,
+    "ABR-4L-gatedCBSC_s2024": 0,
+    "ABR-4L-noCBSC_s2024": 0,
+    "ABR-4L-noCBSC_s31337": 0,
+    "Jamba-1_3_s2024": 0,
+    "Jamba-1_3_s31337": 0,
+    "Random-Routing-4L_s2024": 0,
+    "Random-Routing-4L_s31337": 0,
+    "Transformer-Only_s2024": 0,
+    "Transformer-Only_s31337": 0,
+    "Transformer-Only_s7": 0
+  },
+  "runs": [
+    {
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 2024 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 0,
+      "name": "ABR-4L-gatedCBSC_s2024"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config Random-Routing-4L --seed 31337 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 0,
+      "name": "Random-Routing-4L_s31337"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config Jamba-1:3 --seed 2024 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 0,
+      "name": "Jamba-1_3_s2024"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config Jamba-1:3 --seed 31337 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 0,
+      "name": "Jamba-1_3_s31337"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config Transformer-Only --seed 31337 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 0,
+      "name": "Transformer-Only_s31337"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config Transformer-Only --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 1,
+      "name": "Transformer-Only_s7"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config Random-Routing-4L --seed 2024 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 1,
+      "name": "Random-Routing-4L_s2024"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-noCBSC --seed 2024 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 1,
+      "name": "ABR-4L-noCBSC_s2024"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-CBSC --seed 2024 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 1,
+      "name": "ABR-4L-CBSC_s2024"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-noCBSC --seed 31337 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 1,
+      "name": "ABR-4L-noCBSC_s31337"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config Transformer-Only --seed 2024 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 1,
+      "name": "Transformer-Only_s2024"
+    }
+  ],
+  "started_utc": "2026-11-10T23:55:17Z",
+  "token_cache": {
+    "dir": "/kaggle/input/datasets/parthgarg101/abr-wikitext103-gpt2-tokens",
+    "expected_sha256": {
+      "wikitext103_test_gpt2.pt": "84bb27f5bcebc4b63e77725bee2e0d318f79cab1ba34b10e9413612630b29b64",
+      "wikitext103_train_gpt2.pt": "7896d3b921ae6741135a54aba6e1f060e7306e7e58a7110cac8618d235af2f6d",
+      "wikitext103_validation_gpt2.pt": "a6091ca4a7f0bd4caae7e4d7eb895cf01a1891bf32e1aa64587c26c877e222ea"
+    },
+    "files": {
+      "wikitext103_test_gpt2.pt": {
+        "bytes": 2268192,
+        "sha256": "84bb27f5bcebc4b63e77725bee2e0d318f79cab1ba34b10e9413612630b29b64"
+      },
+      "wikitext103_train_gpt2.pt": {
+        "bytes": 943362983,
+        "sha256": "7896d3b921ae6741135a54aba6e1f060e7306e7e58a7110cac8618d235af2f6d"
+      },
+      "wikitext103_validation_gpt2.pt": {
+        "bytes": 1980298,
+        "sha256": "a6091ca4a7f0bd4caae7e4d7eb895cf01a1891bf32e1aa64587c26c877e222ea"
+      }
+    },
+    "ref": "parthgarg101/abr-wikitext103-gpt2-tokens",
+    "verified": true
+  },
+  "torch": "2.11.0+cu130",
+  "torch_arch_list": [
+    "sm_75",
+    "sm_80",
+    "sm_86",
+    "sm_90",
+    "sm_100",
+    "sm_120"
+  ],
+  "torch_compute_capability": [
+    7,
+    5
+  ],
+  "torch_cuda": "13.0",
+  "torch_device_count": 2,
+  "torch_gpu_name": "Tesla T4",
+  "triton_cache_restored_from": "/kaggle/input/notebooks/parthgarg101/abr-q003/output/triton_cache.tar.gz",
+  "versions": {
+    "causal-conv1d": "1.7.0+cu130torch2.11sm75",
+    "causal_conv1d_import": "ok 1.7.0",
+    "datasets": "4.8.5",
+    "einops": "0.8.2",
+    "mamba-ssm": "2.3.2.post1+cu130torch2.11sm75",
+    "mamba_ssm_import": "ok 2.3.2.post1",
+    "numpy": "2.1.3",
+    "torch": "2.11.0+cu130",
+    "transformers": "4.57.6",
+    "triton": "3.6.0",
+    "wandb": "0.28.1"
+  }
+}

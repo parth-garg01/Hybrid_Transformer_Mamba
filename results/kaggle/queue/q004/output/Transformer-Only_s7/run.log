@@ -1,0 +1,57 @@
+
+===== session start 2026-11-10T23:58:56+00:00 | run_id=Transformer-Only_seed7_20261110T220819Z | run=Transformer-Only_s7 | device=cuda | mamba_backend=None | reportable=True =====
+[train] resumed from step 48390
+[train] Transformer-Only seed=7 params=19,230,464 steps=60000 B=8 T=256 block=32
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id 15i82d1w.
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /kaggle/working/output/Transformer-Only_s7/Transformer-Only_seed7_20261110T220819Z/wandb/offline-run-20261110_235857-15i82d1w
+wandb: View this run in the terminal with `wandb leet`
+/usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:900.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  [Transformer-Only s=7] step= 49000 lr=2.46e-05 train=4.5084 val~=4.4389 (ppl 84.7)
+  [Transformer-Only s=7] step= 50000 lr=2.04e-05 train=4.5247 val~=4.4334 (ppl 84.2)
+  [Transformer-Only s=7] step= 51000 lr=1.66e-05 train=4.5143 val~=4.4291 (ppl 83.9)
+  [Transformer-Only s=7] step= 52000 lr=1.32e-05 train=4.5130 val~=4.4241 (ppl 83.4)
+  [Transformer-Only s=7] step= 53000 lr=1.01e-05 train=4.5049 val~=4.4202 (ppl 83.1)
+  [Transformer-Only s=7] step= 54000 lr=7.46e-06 train=4.5040 val~=4.4167 (ppl 82.8)
+  [Transformer-Only s=7] step= 55000 lr=5.20e-06 train=4.5040 val~=4.4143 (ppl 82.6)
+  [Transformer-Only s=7] step= 56000 lr=3.33e-06 train=4.4918 val~=4.4124 (ppl 82.5)
+  [Transformer-Only s=7] step= 57000 lr=1.88e-06 train=4.4857 val~=4.4112 (ppl 82.4)
+  [Transformer-Only s=7] step= 58000 lr=8.36e-07 train=4.5089 val~=4.4105 (ppl 82.3)
+  [Transformer-Only s=7] step= 59000 lr=2.09e-07 train=4.4987 val~=4.4101 (ppl 82.3)
+  [Transformer-Only s=7] step= 60000 lr=0.00e+00 train=4.4880 val~=4.4100 (ppl 82.3)
+[train] full evaluation on validation and test splits ...
+[train] FINAL val loss=4.3747 ppl=79.42 | test loss=4.3771 ppl=79.61 | wall=1.77 h
+wandb: 
+wandb: Run history:
+wandb:             lr █▇▇▇▇▆▆▅▅▅▅▅▄▄▄▄▄▄▄▄▃▃▃▃▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb:    tokens_seen ▁▁▁▂▂▂▂▂▂▂▂▃▃▃▃▃▄▄▄▅▅▅▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇▇▇█
+wandb:     train/loss ▆▅▄▆▁▄▆▅▅▃▆▅▄▅▅▂▄▂▅▂█▄▅▄▃▅▅▁▅▄▅▅▄▄█▄▄▇▅▄
+wandb: train/loss_avg ▅█▆▆▄▄▄▂▁▅▃▁
+wandb:   val/loss_est █▇▆▄▃▃▂▂▁▁▁▁
+wandb:    val/ppl_est █▇▆▄▃▃▂▂▁▁▁▁
+wandb: 
+wandb: Run summary:
+wandb:      gpu_hours 1.77257
+wandb:             lr 0
+wandb:         params 19230464
+wandb:      test_loss 4.37713
+wandb:       test_ppl 79.60918
+wandb:    tokens_seen 122880000
+wandb:     train/loss 4.29222
+wandb: train/loss_avg 4.48797
+wandb:   val/loss_est 4.41004
+wandb:    val/ppl_est 82.27316
+wandb:             +3 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /kaggle/working/output/Transformer-Only_s7/Transformer-Only_seed7_20261110T220819Z/wandb/offline-run-20261110_235857-15i82d1w
+wandb: Find logs at: /kaggle/working/output/Transformer-Only_s7/Transformer-Only_seed7_20261110T220819Z/wandb/offline-run-20261110_235857-15i82d1w/logs
+===== session end 2026-11-11T00:19:17+00:00 | status=done =====
+[train] result -> /kaggle/working/output/Transformer-Only_s7/Transformer-Only_seed7_20261110T220819Z/result.json
+Exception ignored in: <provenance._Tee object at 0x7a72082ebf10>
+Traceback (most recent call last):
+  File "/kaggle/working/repo/experiments/full_scale/provenance.py", line 531, in flush
+    st.flush()
+ValueError: I/O operation on closed file.

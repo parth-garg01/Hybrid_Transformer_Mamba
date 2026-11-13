@@ -224,3 +224,9 @@ None yet. No reportable experiment has been run under the new pipeline.
 - Queue: 17 of 40 main runs done.
 - **q004** launched 2026-11-10T23:55:15Z with 11 runs (seed 2024 of the key configs, plus Transformer-Only s7 resuming).
 - **Quota risk:** this week's GPU use is about 25 h (compat check and GPU test 2.1 h, q001 11.5 h, q002 0.1 h, q003 11.5 h), against Kaggle's ~30 h per week. q004 may hit the limit about 5 h in. Runs checkpoint every 2k steps, so the next session can resume them if Kaggle keeps the outputs of a quota-stopped session.
+
+### 2026-11-14 — Lead: session q004 finished; q005 blocked by GPU quota
+- **q004** complete (2026-11-11 about 11:25Z): 9 runs finished (seed 2024 and seed 31337 of Jamba-1:3, Random-Routing-4L and ABR-4L-noCBSC; seed 2024 of ABR-4L-CBSC and ABR-4L-gatedCBSC; Transformer-Only s7, which resumed from q003). `verify_provenance --strict` passes (9 results, manifest ok). Transformer-Only s2024 and s31337 were cut off by the budget and resume from q004 next session.
+- Queue: 26 of 40 main runs done, 14 pending; then the 6-run block sweep.
+- The first `advance` download stalled on a dead connection (no socket timeout) and was stopped after about 9 min; the re-run finished. Queue state had not changed, so no duplicate launch was possible.
+- **q005 not launched:** Kaggle refused the kernel push with "Maximum weekly GPU quota of 30.00 hours reached" (2026-11-13 about 20:50Z). The `abr-code` v7 dataset version was created but no kernel uses it yet. q004 ran its full 11.5 h, so the weekly reset happened somewhere in the q001–q004 window; the exact reset time is still unknown.

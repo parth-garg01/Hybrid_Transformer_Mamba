@@ -1,0 +1,103 @@
+
+===== session start 2026-11-11T03:59:09+00:00 | run_id=Random-Routing-4L_seed31337_20261111T035908Z | run=Random-Routing-4L_s31337_b32 | device=cuda | mamba_backend=mamba_ssm | reportable=True =====
+[train] Random-Routing-4L seed=31337 params=18,884,352 steps=60000 B=8 T=256 block=32
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id otdkaln4.
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /kaggle/working/output/Random-Routing-4L_s31337/Random-Routing-4L_seed31337_20261111T035908Z/wandb/offline-run-20261111_035910-otdkaln4
+wandb: View this run in the terminal with `wandb leet`
+/usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:900.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  [Random-Routing-4L s=31337] step=  1000 lr=3.00e-04 train=7.3123 val~=6.2118 (ppl 498.6) | transformer_pct=0.512 mamba_pct=0.488 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.512
+  [Random-Routing-4L s=31337] step=  2000 lr=3.00e-04 train=6.0970 val~=5.8989 (ppl 364.6) | transformer_pct=0.516 mamba_pct=0.484 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.516
+  [Random-Routing-4L s=31337] step=  3000 lr=2.99e-04 train=5.8793 val~=5.7208 (ppl 305.2) | transformer_pct=0.473 mamba_pct=0.527 entropy=0.692 block_entropy=-0.000 transformer_frac_hard=0.473
+  [Random-Routing-4L s=31337] step=  4000 lr=2.97e-04 train=5.7513 val~=5.6051 (ppl 271.8) | transformer_pct=0.496 mamba_pct=0.504 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.496
+  [Random-Routing-4L s=31337] step=  5000 lr=2.96e-04 train=5.6658 val~=5.5131 (ppl 247.9) | transformer_pct=0.559 mamba_pct=0.441 entropy=0.686 block_entropy=-0.000 transformer_frac_hard=0.559
+  [Random-Routing-4L s=31337] step=  6000 lr=2.94e-04 train=5.5804 val~=5.4509 (ppl 233.0) | transformer_pct=0.535 mamba_pct=0.465 entropy=0.691 block_entropy=-0.000 transformer_frac_hard=0.535
+  [Random-Routing-4L s=31337] step=  7000 lr=2.91e-04 train=5.5117 val~=5.3930 (ppl 219.9) | transformer_pct=0.539 mamba_pct=0.461 entropy=0.690 block_entropy=-0.000 transformer_frac_hard=0.539
+  [Random-Routing-4L s=31337] step=  8000 lr=2.88e-04 train=5.4485 val~=5.3260 (ppl 205.6) | transformer_pct=0.543 mamba_pct=0.457 entropy=0.689 block_entropy=-0.000 transformer_frac_hard=0.543
+  [Random-Routing-4L s=31337] step=  9000 lr=2.85e-04 train=5.4162 val~=5.2924 (ppl 198.8) | transformer_pct=0.539 mamba_pct=0.461 entropy=0.690 block_entropy=-0.000 transformer_frac_hard=0.539
+  [Random-Routing-4L s=31337] step= 10000 lr=2.82e-04 train=5.3616 val~=5.2356 (ppl 187.8) | transformer_pct=0.520 mamba_pct=0.480 entropy=0.692 block_entropy=-0.000 transformer_frac_hard=0.520
+  [Random-Routing-4L s=31337] step= 11000 lr=2.78e-04 train=5.3267 val~=5.2207 (ppl 185.1) | transformer_pct=0.477 mamba_pct=0.523 entropy=0.692 block_entropy=-0.000 transformer_frac_hard=0.477
+  [Random-Routing-4L s=31337] step= 12000 lr=2.73e-04 train=5.2944 val~=5.1763 (ppl 177.0) | transformer_pct=0.449 mamba_pct=0.551 entropy=0.688 block_entropy=-0.000 transformer_frac_hard=0.449
+  [Random-Routing-4L s=31337] step= 13000 lr=2.68e-04 train=5.2775 val~=5.1728 (ppl 176.4) | transformer_pct=0.512 mamba_pct=0.488 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.512
+  [Random-Routing-4L s=31337] step= 14000 lr=2.63e-04 train=5.2434 val~=5.1353 (ppl 169.9) | transformer_pct=0.496 mamba_pct=0.504 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.496
+  [Random-Routing-4L s=31337] step= 15000 lr=2.58e-04 train=5.2187 val~=5.1110 (ppl 165.8) | transformer_pct=0.441 mamba_pct=0.559 entropy=0.686 block_entropy=-0.000 transformer_frac_hard=0.441
+  [Random-Routing-4L s=31337] step= 16000 lr=2.53e-04 train=5.1997 val~=5.0832 (ppl 161.3) | transformer_pct=0.531 mamba_pct=0.469 entropy=0.691 block_entropy=-0.000 transformer_frac_hard=0.531
+  [Random-Routing-4L s=31337] step= 17000 lr=2.47e-04 train=5.1856 val~=5.0599 (ppl 157.6) | transformer_pct=0.461 mamba_pct=0.539 entropy=0.690 block_entropy=-0.000 transformer_frac_hard=0.461
+  [Random-Routing-4L s=31337] step= 18000 lr=2.40e-04 train=5.1589 val~=5.0489 (ppl 155.9) | transformer_pct=0.516 mamba_pct=0.484 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.516
+  [Random-Routing-4L s=31337] step= 19000 lr=2.34e-04 train=5.1349 val~=5.0236 (ppl 152.0) | transformer_pct=0.461 mamba_pct=0.539 entropy=0.690 block_entropy=-0.000 transformer_frac_hard=0.461
+  [Random-Routing-4L s=31337] step= 20000 lr=2.27e-04 train=5.1285 val~=5.0140 (ppl 150.5) | transformer_pct=0.488 mamba_pct=0.512 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.488
+  [Random-Routing-4L s=31337] step= 21000 lr=2.20e-04 train=5.0984 val~=4.9902 (ppl 147.0) | transformer_pct=0.457 mamba_pct=0.543 entropy=0.689 block_entropy=-0.000 transformer_frac_hard=0.457
+  [Random-Routing-4L s=31337] step= 22000 lr=2.13e-04 train=5.1035 val~=4.9877 (ppl 146.6) | transformer_pct=0.539 mamba_pct=0.461 entropy=0.690 block_entropy=-0.000 transformer_frac_hard=0.539
+  [Random-Routing-4L s=31337] step= 23000 lr=2.06e-04 train=5.0756 val~=4.9795 (ppl 145.4) | transformer_pct=0.496 mamba_pct=0.504 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.496
+  [Random-Routing-4L s=31337] step= 24000 lr=1.99e-04 train=5.0584 val~=4.9673 (ppl 143.6) | transformer_pct=0.512 mamba_pct=0.488 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.512
+  [Random-Routing-4L s=31337] step= 25000 lr=1.91e-04 train=5.0507 val~=4.9404 (ppl 139.8) | transformer_pct=0.504 mamba_pct=0.496 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.504
+  [Random-Routing-4L s=31337] step= 26000 lr=1.83e-04 train=5.0267 val~=4.9491 (ppl 141.0) | transformer_pct=0.484 mamba_pct=0.516 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.484
+  [Random-Routing-4L s=31337] step= 27000 lr=1.76e-04 train=5.0280 val~=4.9228 (ppl 137.4) | transformer_pct=0.531 mamba_pct=0.469 entropy=0.691 block_entropy=-0.000 transformer_frac_hard=0.531
+  [Random-Routing-4L s=31337] step= 28000 lr=1.68e-04 train=5.0163 val~=4.9097 (ppl 135.6) | transformer_pct=0.477 mamba_pct=0.523 entropy=0.692 block_entropy=-0.000 transformer_frac_hard=0.477
+  [Random-Routing-4L s=31337] step= 29000 lr=1.60e-04 train=4.9894 val~=4.9069 (ppl 135.2) | transformer_pct=0.477 mamba_pct=0.523 entropy=0.692 block_entropy=-0.000 transformer_frac_hard=0.477
+  [Random-Routing-4L s=31337] step= 30000 lr=1.52e-04 train=4.9888 val~=4.8878 (ppl 132.7) | transformer_pct=0.508 mamba_pct=0.492 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.508
+  [Random-Routing-4L s=31337] step= 31000 lr=1.44e-04 train=4.9739 val~=4.8820 (ppl 131.9) | transformer_pct=0.504 mamba_pct=0.496 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.504
+  [Random-Routing-4L s=31337] step= 32000 lr=1.36e-04 train=4.9695 val~=4.8717 (ppl 130.5) | transformer_pct=0.531 mamba_pct=0.469 entropy=0.691 block_entropy=-0.000 transformer_frac_hard=0.531
+  [Random-Routing-4L s=31337] step= 33000 lr=1.28e-04 train=4.9446 val~=4.8648 (ppl 129.7) | transformer_pct=0.516 mamba_pct=0.484 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.516
+  [Random-Routing-4L s=31337] step= 34000 lr=1.20e-04 train=4.9592 val~=4.8509 (ppl 127.9) | transformer_pct=0.480 mamba_pct=0.520 entropy=0.692 block_entropy=-0.000 transformer_frac_hard=0.480
+  [Random-Routing-4L s=31337] step= 35000 lr=1.13e-04 train=4.9404 val~=4.8397 (ppl 126.4) | transformer_pct=0.520 mamba_pct=0.480 entropy=0.692 block_entropy=-0.000 transformer_frac_hard=0.520
+  [Random-Routing-4L s=31337] step= 36000 lr=1.05e-04 train=4.9418 val~=4.8247 (ppl 124.6) | transformer_pct=0.449 mamba_pct=0.551 entropy=0.688 block_entropy=-0.000 transformer_frac_hard=0.449
+  [Random-Routing-4L s=31337] step= 37000 lr=9.77e-05 train=4.9152 val~=4.8271 (ppl 124.8) | transformer_pct=0.484 mamba_pct=0.516 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.484
+  [Random-Routing-4L s=31337] step= 38000 lr=9.03e-05 train=4.9129 val~=4.8137 (ppl 123.2) | transformer_pct=0.469 mamba_pct=0.531 entropy=0.691 block_entropy=-0.000 transformer_frac_hard=0.469
+  [Random-Routing-4L s=31337] step= 39000 lr=8.31e-05 train=4.9050 val~=4.8064 (ppl 122.3) | transformer_pct=0.531 mamba_pct=0.469 entropy=0.691 block_entropy=-0.000 transformer_frac_hard=0.531
+  [Random-Routing-4L s=31337] step= 40000 lr=7.61e-05 train=4.9032 val~=4.7965 (ppl 121.1) | transformer_pct=0.508 mamba_pct=0.492 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.508
+  [Random-Routing-4L s=31337] step= 41000 lr=6.94e-05 train=4.8973 val~=4.7927 (ppl 120.6) | transformer_pct=0.516 mamba_pct=0.484 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.516
+  [Random-Routing-4L s=31337] step= 42000 lr=6.28e-05 train=4.8722 val~=4.7843 (ppl 119.6) | transformer_pct=0.453 mamba_pct=0.547 entropy=0.689 block_entropy=-0.000 transformer_frac_hard=0.453
+  [Random-Routing-4L s=31337] step= 43000 lr=5.65e-05 train=4.8714 val~=4.7727 (ppl 118.2) | transformer_pct=0.496 mamba_pct=0.504 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.496
+  [Random-Routing-4L s=31337] step= 44000 lr=5.04e-05 train=4.8684 val~=4.7690 (ppl 117.8) | transformer_pct=0.477 mamba_pct=0.523 entropy=0.692 block_entropy=-0.000 transformer_frac_hard=0.477
+  [Random-Routing-4L s=31337] step= 45000 lr=4.46e-05 train=4.8628 val~=4.7595 (ppl 116.7) | transformer_pct=0.523 mamba_pct=0.477 entropy=0.692 block_entropy=-0.000 transformer_frac_hard=0.523
+  [Random-Routing-4L s=31337] step= 46000 lr=3.91e-05 train=4.8526 val~=4.7596 (ppl 116.7) | transformer_pct=0.570 mamba_pct=0.430 entropy=0.683 block_entropy=-0.000 transformer_frac_hard=0.570
+  [Random-Routing-4L s=31337] step= 47000 lr=3.40e-05 train=4.8449 val~=4.7503 (ppl 115.6) | transformer_pct=0.473 mamba_pct=0.527 entropy=0.692 block_entropy=-0.000 transformer_frac_hard=0.473
+  [Random-Routing-4L s=31337] step= 48000 lr=2.91e-05 train=4.8429 val~=4.7465 (ppl 115.2) | transformer_pct=0.453 mamba_pct=0.547 entropy=0.689 block_entropy=-0.000 transformer_frac_hard=0.453
+  [Random-Routing-4L s=31337] step= 49000 lr=2.46e-05 train=4.8395 val~=4.7393 (ppl 114.4) | transformer_pct=0.523 mamba_pct=0.477 entropy=0.692 block_entropy=-0.000 transformer_frac_hard=0.523
+  [Random-Routing-4L s=31337] step= 50000 lr=2.04e-05 train=4.8381 val~=4.7349 (ppl 113.9) | transformer_pct=0.508 mamba_pct=0.492 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.508
+  [Random-Routing-4L s=31337] step= 51000 lr=1.66e-05 train=4.8123 val~=4.7309 (ppl 113.4) | transformer_pct=0.484 mamba_pct=0.516 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.484
+  [Random-Routing-4L s=31337] step= 52000 lr=1.32e-05 train=4.8187 val~=4.7251 (ppl 112.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Random-Routing-4L s=31337] step= 53000 lr=1.01e-05 train=4.8300 val~=4.7234 (ppl 112.6) | transformer_pct=0.512 mamba_pct=0.488 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.512
+  [Random-Routing-4L s=31337] step= 54000 lr=7.46e-06 train=4.8202 val~=4.7182 (ppl 112.0) | transformer_pct=0.461 mamba_pct=0.539 entropy=0.690 block_entropy=-0.000 transformer_frac_hard=0.461
+  [Random-Routing-4L s=31337] step= 55000 lr=5.20e-06 train=4.8188 val~=4.7161 (ppl 111.7) | transformer_pct=0.516 mamba_pct=0.484 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.516
+  [Random-Routing-4L s=31337] step= 56000 lr=3.33e-06 train=4.8110 val~=4.7154 (ppl 111.7) | transformer_pct=0.480 mamba_pct=0.520 entropy=0.692 block_entropy=-0.000 transformer_frac_hard=0.480
+  [Random-Routing-4L s=31337] step= 57000 lr=1.88e-06 train=4.8189 val~=4.7134 (ppl 111.4) | transformer_pct=0.523 mamba_pct=0.477 entropy=0.692 block_entropy=-0.000 transformer_frac_hard=0.523
+  [Random-Routing-4L s=31337] step= 58000 lr=8.36e-07 train=4.8027 val~=4.7150 (ppl 111.6) | transformer_pct=0.449 mamba_pct=0.551 entropy=0.688 block_entropy=-0.000 transformer_frac_hard=0.449
+  [Random-Routing-4L s=31337] step= 59000 lr=2.09e-07 train=4.8114 val~=4.7125 (ppl 111.3) | transformer_pct=0.496 mamba_pct=0.504 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.496
+  [Random-Routing-4L s=31337] step= 60000 lr=0.00e+00 train=4.8105 val~=4.7124 (ppl 111.3) | transformer_pct=0.484 mamba_pct=0.516 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.484
+[train] full evaluation on validation and test splits ...
+[train] FINAL val loss=4.7097 ppl=111.02 | test loss=4.7204 ppl=112.21 | wall=2.30 h
+wandb: 
+wandb: Run history:
+wandb:                            lr ██████▇▇▇▇▆▆▆▅▅▅▅▄▄▃▃▃▃▃▃▃▂▂▂▂▂▂▁▁▁▁▁▁▁▁
+wandb:         routing/block_entropy ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:               routing/entropy ██▃▆▅▇▄██▃▆█▆▅▆██▇▇▇█▇▇▇▄▇██▅█▇▁███▆█▇▇█
+wandb:             routing/mamba_pct ▄▇▅▁▂▃▆█▄▅▇▄▇▅▅▆▃▆▆▄▃▄▆█▆▃▄▄█▆█▃▄▆▅▇▄▆█▆
+wandb: routing/transformer_frac_hard ▅▅▃▄█▇▅▁▅▄▆▂▅▁▄▅▃▆▃▃▅▆▅▅▁▆▅▅▁▆▃▁▆▅▃▅▂▅▆▄
+wandb:       routing/transformer_pct ▅▃▄█▇▇▇▅▃▁▆▂▅▂▃▇▄▅▅▃▆▅▅▁▃▆▅▅▁▄▆▁▆▅▃▅▂▅▃▄
+wandb:                   tokens_seen ▁▁▁▁▂▂▃▃▃▃▃▃▄▄▄▄▄▄▄▄▅▅▅▅▅▅▅▆▆▆▆▆▆▆▆▇▇▇▇█
+wandb:                     train/aux ▅▄▃▂▂▃▁▃▆▁▄▄▂▂▁▅▂▁▃▅▄▁▄▁▅▂▂▅▆▅▃▂▁▃█▂▁▁▃▄
+wandb:                 train/aux_ent ▆▆▇▅▇▄▆▄▆█▇▄▅▇▆▅▆▄▄█▆▆▇█▇▁▄▄▅▃▇▇▇▆▇▆▆▅▆█
+wandb:                  train/aux_lb █▂▂▅▃▄▆▂▂▄▃▂▁▃▁▂▄▄▂▅▁▁▄▁▂▂▃▁▆▂▃▃▃▅▃▃▁▃▁▅
+wandb:                            +4 ...
+wandb: 
+wandb: Run summary:
+wandb:                     gpu_hours 2.29852
+wandb:                            lr 0
+wandb:                        params 18884352
+wandb:         routing/block_entropy 0
+wandb:               routing/entropy 0.69266
+wandb:             routing/mamba_pct 0.51562
+wandb: routing/transformer_frac_hard 0.48438
+wandb:       routing/transformer_pct 0.48438
+wandb:                     test_loss 4.72042
+wandb:                      test_ppl 112.21499
+wandb:                           +11 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /kaggle/working/output/Random-Routing-4L_s31337/Random-Routing-4L_seed31337_20261111T035908Z/wandb/offline-run-20261111_035910-otdkaln4
+wandb: Find logs at: /kaggle/working/output/Random-Routing-4L_s31337/Random-Routing-4L_seed31337_20261111T035908Z/wandb/offline-run-20261111_035910-otdkaln4/logs
+===== session end 2026-11-11T06:17:02+00:00 | status=done =====

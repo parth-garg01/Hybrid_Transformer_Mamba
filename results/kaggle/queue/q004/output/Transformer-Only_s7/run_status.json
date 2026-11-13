@@ -1,0 +1,35 @@
+{
+  "cmd": "python experiments/full_scale/train.py --config Transformer-Only --seed 7 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 11.453",
+  "commit": "1b0a5b238582048d75652a65f00f9fc65096c0d0",
+  "dataset_version": 6,
+  "exit_code": 0,
+  "finished_utc": "2026-11-11T00:19:19Z",
+  "gpu_slot": 1,
+  "history": [
+    {
+      "exit_code": 0,
+      "finished_utc": "2026-11-10T23:34:20Z",
+      "kernel_ref": "parthgarg101/abr-q003",
+      "session": 1,
+      "started_utc": "2026-11-10T22:08:07Z",
+      "state": "done"
+    },
+    {
+      "exit_code": 0,
+      "finished_utc": "2026-11-11T00:19:19Z",
+      "kernel_ref": "parthgarg101/abr-q004",
+      "session": 2,
+      "started_utc": "2026-11-10T23:58:42Z",
+      "state": "done"
+    }
+  ],
+  "kernel_ref": "parthgarg101/abr-q004",
+  "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-q004",
+  "lane": 1,
+  "max_hours": 11.453,
+  "name": "Transformer-Only_s7",
+  "resumed_from": "/kaggle/input/notebooks/parthgarg101/abr-q003/output/Transformer-Only_s7",
+  "sessions": 2,
+  "started_utc": "2026-11-10T23:58:42Z",
+  "state": "done"
+}
