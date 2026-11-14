@@ -1,0 +1,27 @@
+{
+  "cmd": "python experiments/full_scale/train.py --config Jamba-1:1 --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 4.183",
+  "commit": "1b0a5b238582048d75652a65f00f9fc65096c0d0",
+  "dataset_version": 8,
+  "exit_code": 0,
+  "finished_utc": "2026-11-14T10:00:01Z",
+  "gpu_slot": 1,
+  "history": [
+    {
+      "exit_code": 0,
+      "finished_utc": "2026-11-14T10:00:01Z",
+      "kernel_ref": "parthgarg101/abr-q005",
+      "session": 1,
+      "started_utc": "2026-11-14T08:10:19Z",
+      "state": "done"
+    }
+  ],
+  "kernel_ref": "parthgarg101/abr-q005",
+  "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-q005",
+  "lane": 1,
+  "max_hours": 4.183,
+  "name": "Jamba-1_1_s42",
+  "resumed_from": null,
+  "sessions": 1,
+  "started_utc": "2026-11-14T08:10:19Z",
+  "state": "done"
+}

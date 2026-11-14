@@ -1,0 +1,96 @@
+
+===== session start 2026-11-14T05:12:13+00:00 | run_id=Mamba-Only_seed123_20261114T051212Z | run=Mamba-Only_s123 | device=cuda | mamba_backend=mamba_ssm | reportable=True =====
+[train] Mamba-Only seed=123 params=18,630,144 steps=60000 B=8 T=256 block=32
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id oaaptjzg.
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /kaggle/working/output/Mamba-Only_s123/Mamba-Only_seed123_20261114T051212Z/wandb/offline-run-20261114_051213-oaaptjzg
+wandb: View this run in the terminal with `wandb leet`
+  [Mamba-Only s=123] step=  1000 lr=3.00e-04 train=7.1755 val~=6.0242 (ppl 413.3)
+  [Mamba-Only s=123] step=  2000 lr=3.00e-04 train=5.8549 val~=5.6277 (ppl 278.0)
+  [Mamba-Only s=123] step=  3000 lr=2.99e-04 train=5.5890 val~=5.4186 (ppl 225.6)
+  [Mamba-Only s=123] step=  4000 lr=2.97e-04 train=5.4545 val~=5.2949 (ppl 199.3)
+  [Mamba-Only s=123] step=  5000 lr=2.96e-04 train=5.3248 val~=5.1797 (ppl 177.6)
+  [Mamba-Only s=123] step=  6000 lr=2.94e-04 train=5.2347 val~=5.1057 (ppl 165.0)
+  [Mamba-Only s=123] step=  7000 lr=2.91e-04 train=5.1719 val~=5.0469 (ppl 155.5)
+  [Mamba-Only s=123] step=  8000 lr=2.88e-04 train=5.1202 val~=4.9976 (ppl 148.1)
+  [Mamba-Only s=123] step=  9000 lr=2.85e-04 train=5.0686 val~=4.9477 (ppl 140.9)
+  [Mamba-Only s=123] step= 10000 lr=2.82e-04 train=5.0224 val~=4.9153 (ppl 136.4)
+  [Mamba-Only s=123] step= 11000 lr=2.78e-04 train=5.0071 val~=4.8817 (ppl 131.9)
+  [Mamba-Only s=123] step= 12000 lr=2.73e-04 train=4.9624 val~=4.8565 (ppl 128.6)
+  [Mamba-Only s=123] step= 13000 lr=2.68e-04 train=4.9512 val~=4.8265 (ppl 124.8)
+  [Mamba-Only s=123] step= 14000 lr=2.63e-04 train=4.9176 val~=4.8047 (ppl 122.1)
+  [Mamba-Only s=123] step= 15000 lr=2.58e-04 train=4.8977 val~=4.7937 (ppl 120.7)
+  [Mamba-Only s=123] step= 16000 lr=2.53e-04 train=4.8691 val~=4.7750 (ppl 118.5)
+  [Mamba-Only s=123] step= 17000 lr=2.47e-04 train=4.8672 val~=4.7525 (ppl 115.9)
+  [Mamba-Only s=123] step= 18000 lr=2.40e-04 train=4.8425 val~=4.7406 (ppl 114.5)
+  [Mamba-Only s=123] step= 19000 lr=2.34e-04 train=4.8224 val~=4.7136 (ppl 111.5)
+  [Mamba-Only s=123] step= 20000 lr=2.27e-04 train=4.7921 val~=4.7146 (ppl 111.6)
+  [Mamba-Only s=123] step= 21000 lr=2.20e-04 train=4.7918 val~=4.6882 (ppl 108.7)
+  [Mamba-Only s=123] step= 22000 lr=2.13e-04 train=4.7741 val~=4.6762 (ppl 107.4)
+  [Mamba-Only s=123] step= 23000 lr=2.06e-04 train=4.7602 val~=4.6602 (ppl 105.7)
+  [Mamba-Only s=123] step= 24000 lr=1.99e-04 train=4.7496 val~=4.6423 (ppl 103.8)
+  [Mamba-Only s=123] step= 25000 lr=1.91e-04 train=4.7287 val~=4.6367 (ppl 103.2)
+  [Mamba-Only s=123] step= 26000 lr=1.83e-04 train=4.7252 val~=4.6215 (ppl 101.7)
+  [Mamba-Only s=123] step= 27000 lr=1.76e-04 train=4.7191 val~=4.6246 (ppl 102.0)
+  [Mamba-Only s=123] step= 28000 lr=1.68e-04 train=4.6989 val~=4.6094 (ppl 100.4)
+  [Mamba-Only s=123] step= 29000 lr=1.60e-04 train=4.6928 val~=4.6009 (ppl 99.6)
+  [Mamba-Only s=123] step= 30000 lr=1.52e-04 train=4.6853 val~=4.5854 (ppl 98.0)
+  [Mamba-Only s=123] step= 31000 lr=1.44e-04 train=4.6697 val~=4.5749 (ppl 97.0)
+  [Mamba-Only s=123] step= 32000 lr=1.36e-04 train=4.6549 val~=4.5697 (ppl 96.5)
+  [Mamba-Only s=123] step= 33000 lr=1.28e-04 train=4.6464 val~=4.5607 (ppl 95.6)
+  [Mamba-Only s=123] step= 34000 lr=1.20e-04 train=4.6471 val~=4.5489 (ppl 94.5)
+  [Mamba-Only s=123] step= 35000 lr=1.13e-04 train=4.6425 val~=4.5362 (ppl 93.3)
+  [Mamba-Only s=123] step= 36000 lr=1.05e-04 train=4.6144 val~=4.5231 (ppl 92.1)
+  [Mamba-Only s=123] step= 37000 lr=9.77e-05 train=4.6110 val~=4.5223 (ppl 92.0)
+  [Mamba-Only s=123] step= 38000 lr=9.03e-05 train=4.6052 val~=4.5097 (ppl 90.9)
+  [Mamba-Only s=123] step= 39000 lr=8.31e-05 train=4.5993 val~=4.5009 (ppl 90.1)
+  [Mamba-Only s=123] step= 40000 lr=7.61e-05 train=4.5922 val~=4.4989 (ppl 89.9)
+  [Mamba-Only s=123] step= 41000 lr=6.94e-05 train=4.5838 val~=4.4860 (ppl 88.8)
+  [Mamba-Only s=123] step= 42000 lr=6.28e-05 train=4.5657 val~=4.4806 (ppl 88.3)
+  [Mamba-Only s=123] step= 43000 lr=5.65e-05 train=4.5633 val~=4.4720 (ppl 87.5)
+  [Mamba-Only s=123] step= 44000 lr=5.04e-05 train=4.5676 val~=4.4641 (ppl 86.8)
+  [Mamba-Only s=123] step= 45000 lr=4.46e-05 train=4.5523 val~=4.4608 (ppl 86.6)
+  [Mamba-Only s=123] step= 46000 lr=3.91e-05 train=4.5379 val~=4.4527 (ppl 85.9)
+  [Mamba-Only s=123] step= 47000 lr=3.40e-05 train=4.5442 val~=4.4486 (ppl 85.5)
+  [Mamba-Only s=123] step= 48000 lr=2.91e-05 train=4.5303 val~=4.4417 (ppl 84.9)
+  [Mamba-Only s=123] step= 49000 lr=2.46e-05 train=4.5179 val~=4.4380 (ppl 84.6)
+  [Mamba-Only s=123] step= 50000 lr=2.04e-05 train=4.5119 val~=4.4341 (ppl 84.3)
+  [Mamba-Only s=123] step= 51000 lr=1.66e-05 train=4.5070 val~=4.4288 (ppl 83.8)
+  [Mamba-Only s=123] step= 52000 lr=1.32e-05 train=4.4956 val~=4.4258 (ppl 83.6)
+  [Mamba-Only s=123] step= 53000 lr=1.01e-05 train=4.5068 val~=4.4212 (ppl 83.2)
+  [Mamba-Only s=123] step= 54000 lr=7.46e-06 train=4.4974 val~=4.4178 (ppl 82.9)
+  [Mamba-Only s=123] step= 55000 lr=5.20e-06 train=4.4973 val~=4.4156 (ppl 82.7)
+  [Mamba-Only s=123] step= 56000 lr=3.33e-06 train=4.4936 val~=4.4141 (ppl 82.6)
+  [Mamba-Only s=123] step= 57000 lr=1.88e-06 train=4.4882 val~=4.4128 (ppl 82.5)
+  [Mamba-Only s=123] step= 58000 lr=8.36e-07 train=4.4915 val~=4.4116 (ppl 82.4)
+  [Mamba-Only s=123] step= 59000 lr=2.09e-07 train=4.4958 val~=4.4113 (ppl 82.4)
+  [Mamba-Only s=123] step= 60000 lr=0.00e+00 train=4.4754 val~=4.4113 (ppl 82.4)
+[train] full evaluation on validation and test splits ...
+[train] FINAL val loss=4.4065 ppl=81.99 | test loss=4.4298 ppl=83.91 | wall=1.92 h
+wandb: 
+wandb: Run history:
+wandb:             lr █████████▇▇▇▇▇▆▆▆▆▅▅▅▄▄▄▄▄▃▃▃▃▃▂▂▂▂▁▁▁▁▁
+wandb:    tokens_seen ▁▁▁▁▂▂▂▂▂▂▂▃▃▃▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▇▇▇▇█
+wandb:     train/loss █▂▂▂▂▂▂▃▂▂▂▂▂▂▂▁▂▂▁▂▂▂▂▂▂▁▂▂▁▂▂▂▂▁▂▂▁▁▁▁
+wandb: train/loss_avg █▅▄▄▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   val/loss_est █▆▅▄▄▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:    val/ppl_est █▄▃▃▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: 
+wandb: Run summary:
+wandb:      gpu_hours 1.91575
+wandb:             lr 0
+wandb:         params 18630144
+wandb:      test_loss 4.42975
+wandb:       test_ppl 83.91054
+wandb:    tokens_seen 122880000
+wandb:     train/loss 4.37136
+wandb: train/loss_avg 4.47538
+wandb:   val/loss_est 4.41128
+wandb:    val/ppl_est 82.37498
+wandb:             +3 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /kaggle/working/output/Mamba-Only_s123/Mamba-Only_seed123_20261114T051212Z/wandb/offline-run-20261114_051213-oaaptjzg
+wandb: Find logs at: /kaggle/working/output/Mamba-Only_s123/Mamba-Only_seed123_20261114T051212Z/wandb/offline-run-20261114_051213-oaaptjzg/logs
+===== session end 2026-11-14T07:07:08+00:00 | status=done =====

@@ -1,0 +1,61 @@
+
+===== session start 2026-11-14T11:41:57+00:00 | run_id=ABR-2L-noCBSC_seed123_20261114T114156Z | run=ABR-2L-noCBSC_s123_b32 | device=cuda | mamba_backend=mamba_ssm | reportable=True =====
+[train] ABR-2L-noCBSC seed=123 params=15,911,168 steps=60000 B=8 T=256 block=32
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id 52iru8xc.
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /kaggle/working/output/ABR-2L-noCBSC_s123/ABR-2L-noCBSC_seed123_20261114T114156Z/wandb/offline-run-20261114_114158-52iru8xc
+wandb: View this run in the terminal with `wandb leet`
+/usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:900.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  [ABR-2L-noCBSC s=123] step=  1000 lr=3.00e-04 train=7.3533 val~=6.2553 (ppl 520.8) | transformer_pct=0.496 mamba_pct=0.504 entropy=0.693 block_entropy=0.320 transformer_frac_hard=0.484
+  [ABR-2L-noCBSC s=123] step=  2000 lr=3.00e-04 train=6.1532 val~=5.9345 (ppl 377.9) | transformer_pct=0.492 mamba_pct=0.508 entropy=0.693 block_entropy=0.134 transformer_frac_hard=0.477
+  [ABR-2L-noCBSC s=123] step=  3000 lr=2.99e-04 train=5.9424 val~=5.7927 (ppl 327.9) | transformer_pct=0.464 mamba_pct=0.536 entropy=0.691 block_entropy=0.076 transformer_frac_hard=0.461
+  [ABR-2L-noCBSC s=123] step=  4000 lr=2.97e-04 train=5.8394 val~=5.6760 (ppl 291.8) | transformer_pct=0.522 mamba_pct=0.478 entropy=0.692 block_entropy=0.074 transformer_frac_hard=0.523
+  [ABR-2L-noCBSC s=123] step=  5000 lr=2.96e-04 train=5.7352 val~=5.5963 (ppl 269.4) | transformer_pct=0.472 mamba_pct=0.528 entropy=0.692 block_entropy=0.057 transformer_frac_hard=0.477
+  [ABR-2L-noCBSC s=123] step=  6000 lr=2.94e-04 train=5.6655 val~=5.5418 (ppl 255.1) | transformer_pct=0.468 mamba_pct=0.532 entropy=0.691 block_entropy=0.086 transformer_frac_hard=0.453
+  [ABR-2L-noCBSC s=123] step=  7000 lr=2.91e-04 train=5.6135 val~=5.4984 (ppl 244.3) | transformer_pct=0.476 mamba_pct=0.524 entropy=0.692 block_entropy=0.064 transformer_frac_hard=0.477
+  [ABR-2L-noCBSC s=123] step=  8000 lr=2.88e-04 train=5.5692 val~=5.4397 (ppl 230.4) | transformer_pct=0.401 mamba_pct=0.599 entropy=0.673 block_entropy=0.084 transformer_frac_hard=0.406
+  [ABR-2L-noCBSC s=123] step=  9000 lr=2.85e-04 train=5.5224 val~=5.3901 (ppl 219.2) | transformer_pct=0.488 mamba_pct=0.512 entropy=0.693 block_entropy=0.080 transformer_frac_hard=0.484
+  [ABR-2L-noCBSC s=123] step= 10000 lr=2.82e-04 train=5.4783 val~=5.3610 (ppl 212.9) | transformer_pct=0.498 mamba_pct=0.502 entropy=0.693 block_entropy=0.080 transformer_frac_hard=0.500
+  [ABR-2L-noCBSC s=123] step= 11000 lr=2.78e-04 train=5.4629 val~=5.3351 (ppl 207.5) | transformer_pct=0.549 mamba_pct=0.451 entropy=0.688 block_entropy=0.083 transformer_frac_hard=0.562
+  [ABR-2L-noCBSC s=123] step= 12000 lr=2.73e-04 train=5.4246 val~=5.3090 (ppl 202.1) | transformer_pct=0.468 mamba_pct=0.532 entropy=0.691 block_entropy=0.070 transformer_frac_hard=0.461
+  [ABR-2L-noCBSC s=123] step= 13000 lr=2.68e-04 train=5.4156 val~=5.2931 (ppl 199.0) | transformer_pct=0.507 mamba_pct=0.493 entropy=0.693 block_entropy=0.078 transformer_frac_hard=0.523
+  [ABR-2L-noCBSC s=123] step= 14000 lr=2.63e-04 train=5.3858 val~=5.2727 (ppl 194.9) | transformer_pct=0.536 mamba_pct=0.464 entropy=0.691 block_entropy=0.076 transformer_frac_hard=0.555
+[train] session budget reached at step 14591; checkpoint saved. Run the same command again to resume.
+wandb: 
+wandb: Run history:
+wandb:                            lr ██████▇▇▇▇▇▇▇▇▇▆▆▆▆▆▅▅▅▅▅▄▄▄▄▄▄▃▃▃▃▂▂▂▂▁
+wandb:         routing/block_entropy █▃▁▁▁▂▁▂▂▂▂▁▂▂
+wandb:               routing/entropy ██▇█▇▇█▁██▆▇█▇
+wandb:             routing/mamba_pct ▄▄▅▂▅▅▄█▄▃▁▅▃▂
+wandb:                 routing/tau/0 █▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                 routing/tau/1 █▂▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: routing/transformer_frac_hard ▅▄▃▆▄▃▄▁▅▅█▃▆█
+wandb:       routing/transformer_pct ▅▅▄▇▄▄▅▁▅▆█▄▆▇
+wandb:           tau/layers.0.router █▆▅▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:           tau/layers.1.router █▇▅▅▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                            +8 ...
+wandb: 
+wandb: Run summary:
+wandb:                            lr 0.00026
+wandb:         routing/block_entropy 0.07617
+wandb:               routing/entropy 0.69051
+wandb:             routing/mamba_pct 0.46369
+wandb:                 routing/tau/0 0.1
+wandb:                 routing/tau/1 0.1
+wandb: routing/transformer_frac_hard 0.55469
+wandb:       routing/transformer_pct 0.53631
+wandb:           tau/layers.0.router 0.1
+wandb:           tau/layers.1.router 0.1
+wandb:                            +8 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /kaggle/working/output/ABR-2L-noCBSC_s123/ABR-2L-noCBSC_seed123_20261114T114156Z/wandb/offline-run-20261114_114158-52iru8xc
+wandb: Find logs at: /kaggle/working/output/ABR-2L-noCBSC_s123/ABR-2L-noCBSC_seed123_20261114T114156Z/wandb/offline-run-20261114_114158-52iru8xc/logs
+===== session end 2026-11-14T12:06:32+00:00 | status=incomplete =====
+Exception ignored in: <provenance._Tee object at 0x7d1493c8cd60>
+Traceback (most recent call last):
+  File "/kaggle/working/repo/experiments/full_scale/provenance.py", line 531, in flush
+    st.flush()
+ValueError: I/O operation on closed file.

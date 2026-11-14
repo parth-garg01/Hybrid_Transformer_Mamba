@@ -1,0 +1,131 @@
+
+===== session start 2026-11-11T10:12:56+00:00 | run_id=Transformer-Only_seed31337_20261111T101255Z | run=Transformer-Only_s31337 | device=cuda | mamba_backend=None | reportable=True =====
+[train] Transformer-Only seed=31337 params=19,230,464 steps=60000 B=8 T=256 block=32
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id t4atbfv1.
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /kaggle/working/output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/wandb/offline-run-20261111_101257-t4atbfv1
+wandb: View this run in the terminal with `wandb leet`
+/usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:900.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  [Transformer-Only s=31337] step=  1000 lr=3.00e-04 train=7.2704 val~=6.2169 (ppl 501.2)
+  [Transformer-Only s=31337] step=  2000 lr=3.00e-04 train=6.0801 val~=5.8603 (ppl 350.8)
+  [Transformer-Only s=31337] step=  3000 lr=2.99e-04 train=5.8092 val~=5.6224 (ppl 276.5)
+  [Transformer-Only s=31337] step=  4000 lr=2.97e-04 train=5.6358 val~=5.4721 (ppl 238.0)
+  [Transformer-Only s=31337] step=  5000 lr=2.96e-04 train=5.5220 val~=5.3562 (ppl 211.9)
+  [Transformer-Only s=31337] step=  6000 lr=2.94e-04 train=5.4158 val~=5.2856 (ppl 197.5)
+  [Transformer-Only s=31337] step=  7000 lr=2.91e-04 train=5.3367 val~=5.2072 (ppl 182.6)
+  [Transformer-Only s=31337] step=  8000 lr=2.88e-04 train=5.2653 val~=5.1371 (ppl 170.2)
+  [Transformer-Only s=31337] step=  9000 lr=2.85e-04 train=5.2280 val~=5.0921 (ppl 162.7)
+  [Transformer-Only s=31337] step= 10000 lr=2.82e-04 train=5.1628 val~=5.0425 (ppl 154.9)
+  [Transformer-Only s=31337] step= 11000 lr=2.78e-04 train=5.1214 val~=5.0032 (ppl 148.9)
+  [Transformer-Only s=31337] step= 12000 lr=2.73e-04 train=5.0816 val~=4.9503 (ppl 141.2)
+  [Transformer-Only s=31337] step= 13000 lr=2.68e-04 train=5.0535 val~=4.9389 (ppl 139.6)
+  [Transformer-Only s=31337] step= 14000 lr=2.63e-04 train=5.0043 val~=4.9015 (ppl 134.5)
+  [Transformer-Only s=31337] step= 15000 lr=2.58e-04 train=4.9724 val~=4.8511 (ppl 127.9)
+  [Transformer-Only s=31337] step= 16000 lr=2.53e-04 train=4.9426 val~=4.8216 (ppl 124.2)
+  [Transformer-Only s=31337] step= 17000 lr=2.47e-04 train=4.9188 val~=4.7878 (ppl 120.0)
+  [Transformer-Only s=31337] step= 18000 lr=2.40e-04 train=4.8866 val~=4.7652 (ppl 117.3)
+  [Transformer-Only s=31337] step= 19000 lr=2.34e-04 train=4.8587 val~=4.7519 (ppl 115.8)
+  [Transformer-Only s=31337] step= 20000 lr=2.27e-04 train=4.8501 val~=4.7369 (ppl 114.1)
+  [Transformer-Only s=31337] step= 21000 lr=2.20e-04 train=4.8210 val~=4.7147 (ppl 111.6)
+  [Transformer-Only s=31337] step= 22000 lr=2.13e-04 train=4.8229 val~=4.7054 (ppl 110.5)
+  [Transformer-Only s=31337] step= 23000 lr=2.06e-04 train=4.7937 val~=4.7012 (ppl 110.1)
+  [Transformer-Only s=31337] step= 24000 lr=1.99e-04 train=4.7759 val~=4.6790 (ppl 107.7)
+  [Transformer-Only s=31337] step= 25000 lr=1.91e-04 train=4.7682 val~=4.6590 (ppl 105.5)
+  [Transformer-Only s=31337] step= 26000 lr=1.83e-04 train=4.7426 val~=4.6469 (ppl 104.3)
+  [Transformer-Only s=31337] step= 27000 lr=1.76e-04 train=4.7422 val~=4.6355 (ppl 103.1)
+  [Transformer-Only s=31337] step= 28000 lr=1.68e-04 train=4.7291 val~=4.6178 (ppl 101.3)
+  [Transformer-Only s=31337] step= 29000 lr=1.60e-04 train=4.7029 val~=4.6133 (ppl 100.8)
+  [Transformer-Only s=31337] step= 30000 lr=1.52e-04 train=4.6974 val~=4.5987 (ppl 99.4)
+  [Transformer-Only s=31337] step= 31000 lr=1.44e-04 train=4.6838 val~=4.5895 (ppl 98.4)
+  [Transformer-Only s=31337] step= 32000 lr=1.36e-04 train=4.6783 val~=4.5766 (ppl 97.2)
+[train] session budget reached at step 32669; checkpoint saved. Run the same command again to resume.
+wandb: 
+wandb: Run history:
+wandb:             lr ▄██████████▇▇▇▇▇▆▆▆▆▆▆▆▆▅▅▅▄▄▄▃▃▃▂▂▂▁▁▁▁
+wandb:    tokens_seen ▁▁▁▁▁▁▂▂▂▂▃▃▃▃▃▃▃▃▄▄▄▄▄▅▅▆▆▆▆▆▇▇▇▇▇▇▇███
+wandb:     train/loss █▇▆▄▅▅▆▄▆▅▅▄▅▅▄▄▄▄▃▄▅▃▄▄▃▃▄▃▃▃▂▄▃▄▃▃▁▂▃▃
+wandb: train/loss_avg █▅▄▄▃▃▃▃▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   val/loss_est █▆▅▅▄▄▄▃▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:    val/ppl_est █▅▄▃▃▃▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: 
+wandb: Run summary:
+wandb:             lr 0.00013
+wandb:    tokens_seen 66867200
+wandb:     train/loss 4.67898
+wandb: train/loss_avg 4.67825
+wandb:   val/loss_est 4.57661
+wandb:    val/ppl_est 97.18453
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /kaggle/working/output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/wandb/offline-run-20261111_101257-t4atbfv1
+wandb: Find logs at: /kaggle/working/output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/wandb/offline-run-20261111_101257-t4atbfv1/logs
+===== session end 2026-11-11T11:10:56+00:00 | status=incomplete =====
+
+===== session start 2026-11-14T00:54:00+00:00 | run_id=Transformer-Only_seed31337_20261111T101255Z | run=Transformer-Only_s31337 | device=cuda | mamba_backend=None | reportable=True =====
+[train] resumed from step 32669
+[train] Transformer-Only seed=31337 params=19,230,464 steps=60000 B=8 T=256 block=32
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id t4atbfv1.
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /kaggle/working/output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/wandb/offline-run-20261114_005401-t4atbfv1
+wandb: View this run in the terminal with `wandb leet`
+/usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:900.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  [Transformer-Only s=31337] step= 33000 lr=1.28e-04 train=4.6497 val~=4.5715 (ppl 96.7)
+  [Transformer-Only s=31337] step= 34000 lr=1.20e-04 train=4.6647 val~=4.5567 (ppl 95.3)
+  [Transformer-Only s=31337] step= 35000 lr=1.13e-04 train=4.6455 val~=4.5410 (ppl 93.8)
+  [Transformer-Only s=31337] step= 36000 lr=1.05e-04 train=4.6429 val~=4.5318 (ppl 92.9)
+  [Transformer-Only s=31337] step= 37000 lr=9.77e-05 train=4.6142 val~=4.5234 (ppl 92.2)
+  [Transformer-Only s=31337] step= 38000 lr=9.03e-05 train=4.6094 val~=4.5132 (ppl 91.2)
+  [Transformer-Only s=31337] step= 39000 lr=8.31e-05 train=4.6025 val~=4.5080 (ppl 90.7)
+  [Transformer-Only s=31337] step= 40000 lr=7.61e-05 train=4.5989 val~=4.4932 (ppl 89.4)
+  [Transformer-Only s=31337] step= 41000 lr=6.94e-05 train=4.5902 val~=4.4898 (ppl 89.1)
+  [Transformer-Only s=31337] step= 42000 lr=6.28e-05 train=4.5669 val~=4.4821 (ppl 88.4)
+  [Transformer-Only s=31337] step= 43000 lr=5.65e-05 train=4.5638 val~=4.4716 (ppl 87.5)
+  [Transformer-Only s=31337] step= 44000 lr=5.04e-05 train=4.5611 val~=4.4650 (ppl 86.9)
+  [Transformer-Only s=31337] step= 45000 lr=4.46e-05 train=4.5563 val~=4.4551 (ppl 86.1)
+  [Transformer-Only s=31337] step= 46000 lr=3.91e-05 train=4.5435 val~=4.4503 (ppl 85.7)
+  [Transformer-Only s=31337] step= 47000 lr=3.40e-05 train=4.5350 val~=4.4426 (ppl 85.0)
+  [Transformer-Only s=31337] step= 48000 lr=2.91e-05 train=4.5315 val~=4.4384 (ppl 84.6)
+  [Transformer-Only s=31337] step= 49000 lr=2.46e-05 train=4.5261 val~=4.4305 (ppl 84.0)
+  [Transformer-Only s=31337] step= 50000 lr=2.04e-05 train=4.5248 val~=4.4225 (ppl 83.3)
+  [Transformer-Only s=31337] step= 51000 lr=1.66e-05 train=4.4954 val~=4.4178 (ppl 82.9)
+  [Transformer-Only s=31337] step= 52000 lr=1.32e-05 train=4.5039 val~=4.4147 (ppl 82.7)
+  [Transformer-Only s=31337] step= 53000 lr=1.01e-05 train=4.5148 val~=4.4105 (ppl 82.3)
+  [Transformer-Only s=31337] step= 54000 lr=7.46e-06 train=4.5015 val~=4.4060 (ppl 81.9)
+  [Transformer-Only s=31337] step= 55000 lr=5.20e-06 train=4.4995 val~=4.4036 (ppl 81.7)
+  [Transformer-Only s=31337] step= 56000 lr=3.33e-06 train=4.4920 val~=4.4020 (ppl 81.6)
+  [Transformer-Only s=31337] step= 57000 lr=1.88e-06 train=4.4997 val~=4.4012 (ppl 81.6)
+  [Transformer-Only s=31337] step= 58000 lr=8.36e-07 train=4.4834 val~=4.4002 (ppl 81.5)
+  [Transformer-Only s=31337] step= 59000 lr=2.09e-07 train=4.4911 val~=4.4000 (ppl 81.4)
+  [Transformer-Only s=31337] step= 60000 lr=0.00e+00 train=4.4935 val~=4.3998 (ppl 81.4)
+[train] full evaluation on validation and test splits ...
+[train] FINAL val loss=4.3643 ppl=78.60 | test loss=4.3678 ppl=78.87 | wall=1.77 h
+wandb: 
+wandb: Run history:
+wandb:             lr ████▇▇▆▆▆▅▅▅▃▃▃▃▃▃▃▃▃▃▃▃▃▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb:    tokens_seen ▁▁▁▁▁▂▂▂▂▃▃▃▃▃▃▃▄▄▄▅▅▅▅▅▅▆▆▆▇▇▇▇▇▇██████
+wandb:     train/loss ▇▄▅▆█▂▆▃▅▅▃▄█▇▃▄▅▁▁▅▂▅▂▄▆▄▆▃▄▅▃▆▅▄▂▁▃▄▄▆
+wandb: train/loss_avg ▇█▇▇▆▆▆▅▅▄▄▄▄▃▃▃▃▃▁▂▂▂▂▁▂▁▁▁
+wandb:   val/loss_est █▇▇▆▆▆▅▅▅▄▄▄▃▃▃▃▂▂▂▂▁▁▁▁▁▁▁▁
+wandb:    val/ppl_est █▇▇▆▆▅▅▅▅▄▄▄▃▃▃▂▂▂▂▂▁▁▁▁▁▁▁▁
+wandb: 
+wandb: Run summary:
+wandb:      gpu_hours 1.76947
+wandb:             lr 0
+wandb:         params 19230464
+wandb:      test_loss 4.36778
+wandb:       test_ppl 78.86819
+wandb:    tokens_seen 122880000
+wandb:     train/loss 4.60829
+wandb: train/loss_avg 4.49353
+wandb:   val/loss_est 4.39982
+wandb:    val/ppl_est 81.43657
+wandb:             +3 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /kaggle/working/output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/wandb/offline-run-20261114_005401-t4atbfv1
+wandb: Find logs at: /kaggle/working/output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/wandb/offline-run-20261114_005401-t4atbfv1/logs
+===== session end 2026-11-14T01:42:07+00:00 | status=done =====

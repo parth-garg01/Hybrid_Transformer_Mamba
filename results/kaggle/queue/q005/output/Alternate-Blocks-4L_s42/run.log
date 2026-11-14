@@ -1,0 +1,109 @@
+
+===== session start 2026-11-14T04:04:38+00:00 | run_id=Alternate-Blocks-4L_seed42_20261114T040437Z | run=Alternate-Blocks-4L_s42_b32 | device=cuda | mamba_backend=mamba_ssm | reportable=True =====
+[train] Alternate-Blocks-4L seed=42 params=18,884,352 steps=60000 B=8 T=256 block=32
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id 949z9ctk.
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /kaggle/working/output/Alternate-Blocks-4L_s42/Alternate-Blocks-4L_seed42_20261114T040437Z/wandb/offline-run-20261114_040439-949z9ctk
+wandb: View this run in the terminal with `wandb leet`
+/usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:900.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  [Alternate-Blocks-4L s=42] step=  1000 lr=3.00e-04 train=7.3075 val~=6.2363 (ppl 511.0) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step=  2000 lr=3.00e-04 train=6.1327 val~=5.9183 (ppl 371.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step=  3000 lr=2.99e-04 train=5.9060 val~=5.7352 (ppl 309.6) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step=  4000 lr=2.97e-04 train=5.7567 val~=5.6088 (ppl 272.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step=  5000 lr=2.96e-04 train=5.6653 val~=5.5224 (ppl 250.2) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step=  6000 lr=2.94e-04 train=5.5704 val~=5.4542 (ppl 233.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step=  7000 lr=2.91e-04 train=5.5169 val~=5.4013 (ppl 221.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step=  8000 lr=2.88e-04 train=5.4758 val~=5.3541 (ppl 211.5) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step=  9000 lr=2.85e-04 train=5.4370 val~=5.3114 (ppl 202.6) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 10000 lr=2.82e-04 train=5.4025 val~=5.2798 (ppl 196.3) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 11000 lr=2.78e-04 train=5.3499 val~=5.2445 (ppl 189.5) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 12000 lr=2.73e-04 train=5.3210 val~=5.2141 (ppl 183.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 13000 lr=2.68e-04 train=5.3022 val~=5.1841 (ppl 178.4) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 14000 lr=2.63e-04 train=5.2833 val~=5.1578 (ppl 173.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 15000 lr=2.58e-04 train=5.2428 val~=5.1284 (ppl 168.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 16000 lr=2.53e-04 train=5.2180 val~=5.1061 (ppl 165.0) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 17000 lr=2.47e-04 train=5.1986 val~=5.0946 (ppl 163.1) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 18000 lr=2.40e-04 train=5.1738 val~=5.0670 (ppl 158.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 19000 lr=2.34e-04 train=5.1581 val~=5.0452 (ppl 155.3) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 20000 lr=2.27e-04 train=5.1403 val~=5.0351 (ppl 153.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 21000 lr=2.20e-04 train=5.1283 val~=5.0220 (ppl 151.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 22000 lr=2.13e-04 train=5.1065 val~=5.0225 (ppl 151.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 23000 lr=2.06e-04 train=5.0977 val~=4.9927 (ppl 147.3) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 24000 lr=1.99e-04 train=5.0903 val~=4.9833 (ppl 146.0) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 25000 lr=1.91e-04 train=5.0776 val~=4.9766 (ppl 145.0) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 26000 lr=1.83e-04 train=5.0588 val~=4.9546 (ppl 141.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 27000 lr=1.76e-04 train=5.0557 val~=4.9463 (ppl 140.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 28000 lr=1.68e-04 train=5.0372 val~=4.9392 (ppl 139.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 29000 lr=1.60e-04 train=5.0272 val~=4.9195 (ppl 136.9) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 30000 lr=1.52e-04 train=5.0139 val~=4.9111 (ppl 135.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 31000 lr=1.44e-04 train=5.0114 val~=4.8982 (ppl 134.0) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 32000 lr=1.36e-04 train=4.9848 val~=4.8878 (ppl 132.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 33000 lr=1.28e-04 train=4.9852 val~=4.8769 (ppl 131.2) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 34000 lr=1.20e-04 train=4.9708 val~=4.8739 (ppl 130.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 35000 lr=1.13e-04 train=4.9597 val~=4.8668 (ppl 129.9) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 36000 lr=1.05e-04 train=4.9678 val~=4.8584 (ppl 128.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 37000 lr=9.77e-05 train=4.9447 val~=4.8526 (ppl 128.1) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 38000 lr=9.03e-05 train=4.9398 val~=4.8413 (ppl 126.6) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 39000 lr=8.31e-05 train=4.9160 val~=4.8336 (ppl 125.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 40000 lr=7.61e-05 train=4.9253 val~=4.8298 (ppl 125.2) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 41000 lr=6.94e-05 train=4.9203 val~=4.8231 (ppl 124.4) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 42000 lr=6.28e-05 train=4.9183 val~=4.8141 (ppl 123.2) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 43000 lr=5.65e-05 train=4.9062 val~=4.8063 (ppl 122.3) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 44000 lr=5.04e-05 train=4.9058 val~=4.8054 (ppl 122.2) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 45000 lr=4.46e-05 train=4.8992 val~=4.7974 (ppl 121.2) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 46000 lr=3.91e-05 train=4.8840 val~=4.7919 (ppl 120.5) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 47000 lr=3.40e-05 train=4.8794 val~=4.7815 (ppl 119.3) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 48000 lr=2.91e-05 train=4.8585 val~=4.7732 (ppl 118.3) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 49000 lr=2.46e-05 train=4.8565 val~=4.7695 (ppl 117.9) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 50000 lr=2.04e-05 train=4.8553 val~=4.7666 (ppl 117.5) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 51000 lr=1.66e-05 train=4.8553 val~=4.7612 (ppl 116.9) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 52000 lr=1.32e-05 train=4.8420 val~=4.7577 (ppl 116.5) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 53000 lr=1.01e-05 train=4.8565 val~=4.7537 (ppl 116.0) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 54000 lr=7.46e-06 train=4.8396 val~=4.7521 (ppl 115.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 55000 lr=5.20e-06 train=4.8279 val~=4.7494 (ppl 115.5) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 56000 lr=3.33e-06 train=4.8307 val~=4.7467 (ppl 115.2) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 57000 lr=1.88e-06 train=4.8300 val~=4.7455 (ppl 115.1) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 58000 lr=8.36e-07 train=4.8429 val~=4.7445 (ppl 114.9) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 59000 lr=2.09e-07 train=4.8260 val~=4.7443 (ppl 114.9) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+  [Alternate-Blocks-4L s=42] step= 60000 lr=0.00e+00 train=4.8254 val~=4.7442 (ppl 114.9) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500
+[train] full evaluation on validation and test splits ...
+[train] FINAL val loss=4.7342 ppl=113.77 | test loss=4.7433 ppl=114.81 | wall=2.07 h
+wandb: 
+wandb: Run history:
+wandb:                            lr ▄██▇▇▇▇▇▇▆▆▆▆▅▅▅▄▄▄▄▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁
+wandb:         routing/block_entropy ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:               routing/entropy ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:             routing/mamba_pct ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: routing/transformer_frac_hard ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       routing/transformer_pct ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                   tokens_seen ▁▁▁▂▂▂▂▂▂▂▃▃▃▃▃▃▃▃▄▄▄▅▅▅▅▅▅▅▅▆▆▆▆▆▆▇▇▇██
+wandb:                     train/aux ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                 train/aux_ent ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                  train/aux_lb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                            +4 ...
+wandb: 
+wandb: Run summary:
+wandb:                     gpu_hours 2.06952
+wandb:                            lr 0
+wandb:                        params 18884352
+wandb:         routing/block_entropy 0
+wandb:               routing/entropy 0.69315
+wandb:             routing/mamba_pct 0.5
+wandb: routing/transformer_frac_hard 0.5
+wandb:       routing/transformer_pct 0.5
+wandb:                     test_loss 4.74328
+wandb:                      test_ppl 114.81028
+wandb:                           +11 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /kaggle/working/output/Alternate-Blocks-4L_s42/Alternate-Blocks-4L_seed42_20261114T040437Z/wandb/offline-run-20261114_040439-949z9ctk
+wandb: Find logs at: /kaggle/working/output/Alternate-Blocks-4L_s42/Alternate-Blocks-4L_seed42_20261114T040437Z/wandb/offline-run-20261114_040439-949z9ctk/logs
+===== session end 2026-11-14T06:08:47+00:00 | status=done =====
+[train] result -> /kaggle/working/output/Alternate-Blocks-4L_s42/Alternate-Blocks-4L_seed42_20261114T040437Z/result.json
+Exception ignored in: <provenance._Tee object at 0x7bdc881ff550>
+Traceback (most recent call last):
+  File "/kaggle/working/repo/experiments/full_scale/provenance.py", line 531, in flush
+    st.flush()
+ValueError: I/O operation on closed file.

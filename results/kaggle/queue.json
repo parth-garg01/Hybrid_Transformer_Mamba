@@ -4,7 +4,7 @@
   "user": "parthgarg101",
   "max_hours": null,
   "created_utc": "2026-11-09T23:25:41Z",
-  "next_session": 6,
+  "next_session": 7,
   "token_cache": {
     "ref": "parthgarg101/abr-wikitext103-gpt2-tokens",
     "expected_sha256": {
@@ -54,7 +54,13 @@
     "Jamba-1_1_s123",
     "ABR-2L-noCBSC_s123",
     "ABR-2L-CBSC_s123",
-    "Alternate-Blocks-4L_s123"
+    "Alternate-Blocks-4L_s123",
+    "ABR-4L-gatedCBSC_s42_b8",
+    "ABR-4L-gatedCBSC_s123_b8",
+    "ABR-4L-gatedCBSC_s42_b16",
+    "ABR-4L-gatedCBSC_s123_b16",
+    "ABR-4L-gatedCBSC_s42_b64",
+    "ABR-4L-gatedCBSC_s123_b64"
   ],
   "runs": {
     "Transformer-Only_s42": {
@@ -370,16 +376,16 @@
       "seed": 2024,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config Transformer-Only --seed 2024 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "running",
-      "kernel": "parthgarg101/abr-q005",
+      "status": "done",
+      "kernel": null,
       "sessions": [
         "q004",
         "q005"
       ],
-      "resume_from": "parthgarg101/abr-q004",
+      "resume_from": "parthgarg101/abr-q005",
       "failures": 0,
-      "hours_done": 1.649,
-      "updated_utc": "2026-11-14T00:51:03Z",
+      "hours_done": 1.736,
+      "updated_utc": "2026-11-14T15:34:03Z",
       "last_exit_code": 0,
       "last_state": "done"
     },
@@ -473,16 +479,16 @@
       "seed": 31337,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config Transformer-Only --seed 31337 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "running",
-      "kernel": "parthgarg101/abr-q005",
+      "status": "done",
+      "kernel": null,
       "sessions": [
         "q004",
         "q005"
       ],
-      "resume_from": "parthgarg101/abr-q004",
+      "resume_from": "parthgarg101/abr-q005",
       "failures": 0,
-      "hours_done": 0.971,
-      "updated_utc": "2026-11-14T00:51:03Z",
+      "hours_done": 1.778,
+      "updated_utc": "2026-11-14T15:34:03Z",
       "last_exit_code": 0,
       "last_state": "done"
     },
@@ -542,135 +548,153 @@
       "seed": 31337,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config ABR-4L-CBSC --seed 31337 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "running",
-      "kernel": "parthgarg101/abr-q005",
+      "status": "done",
+      "kernel": null,
       "sessions": [
         "q005"
       ],
-      "resume_from": null,
+      "resume_from": "parthgarg101/abr-q005",
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T00:51:03Z"
+      "hours_done": 2.363,
+      "updated_utc": "2026-11-14T15:34:03Z",
+      "last_exit_code": 0,
+      "last_state": "done"
     },
     "ABR-4L-gatedCBSC_s31337": {
       "config": "ABR-4L-gatedCBSC",
       "seed": 31337,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 31337 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "running",
-      "kernel": "parthgarg101/abr-q005",
+      "status": "done",
+      "kernel": null,
       "sessions": [
         "q005"
       ],
-      "resume_from": null,
+      "resume_from": "parthgarg101/abr-q005",
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T00:51:03Z"
+      "hours_done": 4.209,
+      "updated_utc": "2026-11-14T15:34:03Z",
+      "last_exit_code": 0,
+      "last_state": "done"
     },
     "Mamba-Only_s42": {
       "config": "Mamba-Only",
       "seed": 42,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config Mamba-Only --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "running",
-      "kernel": "parthgarg101/abr-q005",
+      "status": "done",
+      "kernel": null,
       "sessions": [
         "q005"
       ],
-      "resume_from": null,
+      "resume_from": "parthgarg101/abr-q005",
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T00:51:03Z"
+      "hours_done": 2.018,
+      "updated_utc": "2026-11-14T15:34:03Z",
+      "last_exit_code": 0,
+      "last_state": "done"
     },
     "Jamba-1_1_s42": {
       "config": "Jamba-1:1",
       "seed": 42,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config Jamba-1:1 --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "running",
-      "kernel": "parthgarg101/abr-q005",
+      "status": "done",
+      "kernel": null,
       "sessions": [
         "q005"
       ],
-      "resume_from": null,
+      "resume_from": "parthgarg101/abr-q005",
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T00:51:03Z"
+      "hours_done": 1.828,
+      "updated_utc": "2026-11-14T15:34:03Z",
+      "last_exit_code": 0,
+      "last_state": "done"
     },
     "ABR-2L-noCBSC_s42": {
       "config": "ABR-2L-noCBSC",
       "seed": 42,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config ABR-2L-noCBSC --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "running",
-      "kernel": "parthgarg101/abr-q005",
+      "status": "done",
+      "kernel": null,
       "sessions": [
         "q005"
       ],
-      "resume_from": null,
+      "resume_from": "parthgarg101/abr-q005",
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T00:51:03Z"
+      "hours_done": 1.688,
+      "updated_utc": "2026-11-14T15:34:03Z",
+      "last_exit_code": 0,
+      "last_state": "done"
     },
     "ABR-2L-CBSC_s42": {
       "config": "ABR-2L-CBSC",
       "seed": 42,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config ABR-2L-CBSC --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "running",
-      "kernel": "parthgarg101/abr-q005",
+      "status": "done",
+      "kernel": null,
       "sessions": [
         "q005"
       ],
-      "resume_from": null,
+      "resume_from": "parthgarg101/abr-q005",
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T00:51:03Z"
+      "hours_done": 1.628,
+      "updated_utc": "2026-11-14T15:34:03Z",
+      "last_exit_code": 0,
+      "last_state": "done"
     },
     "Alternate-Blocks-4L_s42": {
       "config": "Alternate-Blocks-4L",
       "seed": 42,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config Alternate-Blocks-4L --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "running",
-      "kernel": "parthgarg101/abr-q005",
+      "status": "done",
+      "kernel": null,
       "sessions": [
         "q005"
       ],
-      "resume_from": null,
+      "resume_from": "parthgarg101/abr-q005",
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T00:51:03Z"
+      "hours_done": 2.074,
+      "updated_utc": "2026-11-14T15:34:03Z",
+      "last_exit_code": 0,
+      "last_state": "done"
     },
     "Mamba-Only_s123": {
       "config": "Mamba-Only",
       "seed": 123,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config Mamba-Only --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "running",
-      "kernel": "parthgarg101/abr-q005",
+      "status": "done",
+      "kernel": null,
       "sessions": [
         "q005"
       ],
-      "resume_from": null,
+      "resume_from": "parthgarg101/abr-q005",
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T00:51:03Z"
+      "hours_done": 1.921,
+      "updated_utc": "2026-11-14T15:34:03Z",
+      "last_exit_code": 0,
+      "last_state": "done"
     },
     "Jamba-1_1_s123": {
       "config": "Jamba-1:1",
       "seed": 123,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config Jamba-1:1 --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
-      "status": "running",
-      "kernel": "parthgarg101/abr-q005",
+      "status": "done",
+      "kernel": null,
       "sessions": [
         "q005"
       ],
-      "resume_from": null,
+      "resume_from": "parthgarg101/abr-q005",
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T00:51:03Z"
+      "hours_done": 1.732,
+      "updated_utc": "2026-11-14T15:34:03Z",
+      "last_exit_code": 0,
+      "last_state": "done"
     },
     "ABR-2L-noCBSC_s123": {
       "config": "ABR-2L-noCBSC",
@@ -678,14 +702,17 @@
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config ABR-2L-noCBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
       "status": "running",
-      "kernel": "parthgarg101/abr-q005",
+      "kernel": "parthgarg101/abr-q006",
       "sessions": [
-        "q005"
+        "q005",
+        "q006"
       ],
-      "resume_from": null,
+      "resume_from": "parthgarg101/abr-q005",
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T00:51:03Z"
+      "hours_done": 0.414,
+      "updated_utc": "2026-11-14T15:34:28Z",
+      "last_exit_code": 0,
+      "last_state": "done"
     },
     "ABR-2L-CBSC_s123": {
       "config": "ABR-2L-CBSC",
@@ -693,27 +720,110 @@
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config ABR-2L-CBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
       "status": "running",
-      "kernel": "parthgarg101/abr-q005",
+      "kernel": "parthgarg101/abr-q006",
       "sessions": [
-        "q005"
+        "q005",
+        "q006"
       ],
-      "resume_from": null,
+      "resume_from": "parthgarg101/abr-q005",
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T00:51:03Z"
+      "hours_done": 1.618,
+      "updated_utc": "2026-11-14T15:34:28Z",
+      "last_exit_code": 0,
+      "last_state": "done"
     },
     "Alternate-Blocks-4L_s123": {
       "config": "Alternate-Blocks-4L",
       "seed": 123,
       "block_size": null,
       "cmd": "python experiments/full_scale/train.py --config Alternate-Blocks-4L --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "status": "running",
+      "kernel": "parthgarg101/abr-q006",
+      "sessions": [
+        "q006"
+      ],
+      "resume_from": null,
+      "failures": 0,
+      "hours_done": 0.0,
+      "updated_utc": "2026-11-14T15:34:28Z"
+    },
+    "ABR-4L-gatedCBSC_s42_b8": {
+      "config": "ABR-4L-gatedCBSC",
+      "seed": 42,
+      "block_size": 8,
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours} --block-size 8",
       "status": "pending",
       "kernel": null,
       "sessions": [],
       "resume_from": null,
       "failures": 0,
       "hours_done": 0.0,
-      "updated_utc": "2026-11-09T23:25:41Z"
+      "updated_utc": "2026-11-14T15:35:04Z"
+    },
+    "ABR-4L-gatedCBSC_s123_b8": {
+      "config": "ABR-4L-gatedCBSC",
+      "seed": 123,
+      "block_size": 8,
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours} --block-size 8",
+      "status": "pending",
+      "kernel": null,
+      "sessions": [],
+      "resume_from": null,
+      "failures": 0,
+      "hours_done": 0.0,
+      "updated_utc": "2026-11-14T15:35:04Z"
+    },
+    "ABR-4L-gatedCBSC_s42_b16": {
+      "config": "ABR-4L-gatedCBSC",
+      "seed": 42,
+      "block_size": 16,
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours} --block-size 16",
+      "status": "pending",
+      "kernel": null,
+      "sessions": [],
+      "resume_from": null,
+      "failures": 0,
+      "hours_done": 0.0,
+      "updated_utc": "2026-11-14T15:35:04Z"
+    },
+    "ABR-4L-gatedCBSC_s123_b16": {
+      "config": "ABR-4L-gatedCBSC",
+      "seed": 123,
+      "block_size": 16,
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours} --block-size 16",
+      "status": "pending",
+      "kernel": null,
+      "sessions": [],
+      "resume_from": null,
+      "failures": 0,
+      "hours_done": 0.0,
+      "updated_utc": "2026-11-14T15:35:04Z"
+    },
+    "ABR-4L-gatedCBSC_s42_b64": {
+      "config": "ABR-4L-gatedCBSC",
+      "seed": 42,
+      "block_size": 64,
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours} --block-size 64",
+      "status": "pending",
+      "kernel": null,
+      "sessions": [],
+      "resume_from": null,
+      "failures": 0,
+      "hours_done": 0.0,
+      "updated_utc": "2026-11-14T15:35:04Z"
+    },
+    "ABR-4L-gatedCBSC_s123_b64": {
+      "config": "ABR-4L-gatedCBSC",
+      "seed": 123,
+      "block_size": 64,
+      "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours} --block-size 64",
+      "status": "pending",
+      "kernel": null,
+      "sessions": [],
+      "resume_from": null,
+      "failures": 0,
+      "hours_done": 0.0,
+      "updated_utc": "2026-11-14T15:35:04Z"
     }
   },
   "sessions": {
@@ -1452,8 +1562,196 @@
       "resume_from": [
         "parthgarg101/abr-q004"
       ],
+      "status": "downloaded",
+      "launched_utc": "2026-11-14T00:50:38Z",
+      "kernel_status": "complete",
+      "failure_message": "",
+      "finished_utc": "2026-11-14T15:32:37Z",
+      "download": {
+        "dest": "/Users/parthgarg/Documents/papers/hybrid_mamba/results/kaggle/queue/q005",
+        "skipped_remote": [
+          "_mounted_wheels/causal_conv1d-1.7.0+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl",
+          "_mounted_wheels/mamba_ssm-2.3.2.post1+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl",
+          "output/ABR-2L-CBSC_s123/checkpoints/ABR-2L-CBSC_s123_b32/ckpt.pt",
+          "output/ABR-2L-CBSC_s42/checkpoints/ABR-2L-CBSC_s42_b32/ckpt.pt",
+          "output/ABR-2L-noCBSC_s123/checkpoints/ABR-2L-noCBSC_s123_b32/ckpt.pt",
+          "output/ABR-2L-noCBSC_s42/checkpoints/ABR-2L-noCBSC_s42_b32/ckpt.pt",
+          "output/ABR-4L-CBSC_s31337/checkpoints/ABR-4L-CBSC_s31337_b32/ckpt.pt",
+          "output/ABR-4L-gatedCBSC_s31337/checkpoints/ABR-4L-gatedCBSC_s31337_b32/ckpt.pt",
+          "output/Alternate-Blocks-4L_s42/checkpoints/Alternate-Blocks-4L_s42_b32/ckpt.pt",
+          "output/Jamba-1_1_s123/checkpoints/Jamba-1_1_s123/ckpt.pt",
+          "output/Jamba-1_1_s42/checkpoints/Jamba-1_1_s42/ckpt.pt",
+          "output/Mamba-Only_s123/checkpoints/Mamba-Only_s123/ckpt.pt",
+          "output/Mamba-Only_s42/checkpoints/Mamba-Only_s42/ckpt.pt",
+          "output/Transformer-Only_s2024/checkpoints/Transformer-Only_s2024/ckpt.pt",
+          "output/Transformer-Only_s31337/checkpoints/Transformer-Only_s31337/ckpt.pt",
+          "output/triton_cache.tar.gz"
+        ],
+        "files": [
+          "abr-q005.log",
+          "launch.json",
+          "output/ABR-2L-CBSC_s123/ABR-2L-CBSC_seed123_20261114T102939Z/train.log",
+          "output/ABR-2L-CBSC_s123/ABR-2L-CBSC_seed123_20261114T102939Z/wandb/offline-run-20261114_102940-hutlg4ho/files/requirements.txt",
+          "output/ABR-2L-CBSC_s123/ABR-2L-CBSC_seed123_20261114T102939Z/wandb/offline-run-20261114_102940-hutlg4ho/logs/debug-internal.log",
+          "output/ABR-2L-CBSC_s123/ABR-2L-CBSC_seed123_20261114T102939Z/wandb/offline-run-20261114_102940-hutlg4ho/logs/debug.log",
+          "output/ABR-2L-CBSC_s123/ABR-2L-CBSC_seed123_20261114T102939Z/wandb/offline-run-20261114_102940-hutlg4ho/run-hutlg4ho.wandb",
+          "output/ABR-2L-CBSC_s123/run.log",
+          "output/ABR-2L-CBSC_s123/run_status.json",
+          "output/ABR-2L-CBSC_s42/ABR-2L-CBSC_seed42_20261114T085144Z/result.json",
+          "output/ABR-2L-CBSC_s42/ABR-2L-CBSC_seed42_20261114T085144Z/train.log",
+          "output/ABR-2L-CBSC_s42/ABR-2L-CBSC_seed42_20261114T085144Z/wandb/offline-run-20261114_085145-qhdht5qt/files/requirements.txt",
+          "output/ABR-2L-CBSC_s42/ABR-2L-CBSC_seed42_20261114T085144Z/wandb/offline-run-20261114_085145-qhdht5qt/logs/debug-internal.log",
+          "output/ABR-2L-CBSC_s42/ABR-2L-CBSC_seed42_20261114T085144Z/wandb/offline-run-20261114_085145-qhdht5qt/logs/debug.log",
+          "output/ABR-2L-CBSC_s42/ABR-2L-CBSC_seed42_20261114T085144Z/wandb/offline-run-20261114_085145-qhdht5qt/run-qhdht5qt.wandb",
+          "output/ABR-2L-CBSC_s42/run.log",
+          "output/ABR-2L-CBSC_s42/run_status.json",
+          "output/ABR-2L-noCBSC_s123/ABR-2L-noCBSC_seed123_20261114T114156Z/train.log",
+          "output/ABR-2L-noCBSC_s123/ABR-2L-noCBSC_seed123_20261114T114156Z/wandb/offline-run-20261114_114158-52iru8xc/files/requirements.txt",
+          "output/ABR-2L-noCBSC_s123/ABR-2L-noCBSC_seed123_20261114T114156Z/wandb/offline-run-20261114_114158-52iru8xc/logs/debug-internal.log",
+          "output/ABR-2L-noCBSC_s123/ABR-2L-noCBSC_seed123_20261114T114156Z/wandb/offline-run-20261114_114158-52iru8xc/logs/debug.log",
+          "output/ABR-2L-noCBSC_s123/ABR-2L-noCBSC_seed123_20261114T114156Z/wandb/offline-run-20261114_114158-52iru8xc/run-52iru8xc.wandb",
+          "output/ABR-2L-noCBSC_s123/run.log",
+          "output/ABR-2L-noCBSC_s123/run_status.json",
+          "output/ABR-2L-noCBSC_s42/ABR-2L-noCBSC_seed42_20261114T100027Z/result.json",
+          "output/ABR-2L-noCBSC_s42/ABR-2L-noCBSC_seed42_20261114T100027Z/train.log",
+          "output/ABR-2L-noCBSC_s42/ABR-2L-noCBSC_seed42_20261114T100027Z/wandb/offline-run-20261114_100029-y1ukoj2s/files/requirements.txt",
+          "output/ABR-2L-noCBSC_s42/ABR-2L-noCBSC_seed42_20261114T100027Z/wandb/offline-run-20261114_100029-y1ukoj2s/logs/debug-internal.log",
+          "output/ABR-2L-noCBSC_s42/ABR-2L-noCBSC_seed42_20261114T100027Z/wandb/offline-run-20261114_100029-y1ukoj2s/logs/debug.log",
+          "output/ABR-2L-noCBSC_s42/ABR-2L-noCBSC_seed42_20261114T100027Z/wandb/offline-run-20261114_100029-y1ukoj2s/run-y1ukoj2s.wandb",
+          "output/ABR-2L-noCBSC_s42/run.log",
+          "output/ABR-2L-noCBSC_s42/run_status.json",
+          "output/ABR-4L-CBSC_s31337/ABR-4L-CBSC_seed31337_20261114T014235Z/result.json",
+          "output/ABR-4L-CBSC_s31337/ABR-4L-CBSC_seed31337_20261114T014235Z/train.log",
+          "output/ABR-4L-CBSC_s31337/ABR-4L-CBSC_seed31337_20261114T014235Z/wandb/offline-run-20261114_014237-gckblwyx/files/requirements.txt",
+          "output/ABR-4L-CBSC_s31337/ABR-4L-CBSC_seed31337_20261114T014235Z/wandb/offline-run-20261114_014237-gckblwyx/logs/debug-internal.log",
+          "output/ABR-4L-CBSC_s31337/ABR-4L-CBSC_seed31337_20261114T014235Z/wandb/offline-run-20261114_014237-gckblwyx/logs/debug.log",
+          "output/ABR-4L-CBSC_s31337/ABR-4L-CBSC_seed31337_20261114T014235Z/wandb/offline-run-20261114_014237-gckblwyx/run-gckblwyx.wandb",
+          "output/ABR-4L-CBSC_s31337/run.log",
+          "output/ABR-4L-CBSC_s31337/run_status.json",
+          "output/ABR-4L-gatedCBSC_s31337/ABR-4L-gatedCBSC_seed31337_20261114T005922Z/result.json",
+          "output/ABR-4L-gatedCBSC_s31337/ABR-4L-gatedCBSC_seed31337_20261114T005922Z/train.log",
+          "output/ABR-4L-gatedCBSC_s31337/ABR-4L-gatedCBSC_seed31337_20261114T005922Z/wandb/offline-run-20261114_005924-plsu16iv/files/requirements.txt",
+          "output/ABR-4L-gatedCBSC_s31337/ABR-4L-gatedCBSC_seed31337_20261114T005922Z/wandb/offline-run-20261114_005924-plsu16iv/logs/debug-internal.log",
+          "output/ABR-4L-gatedCBSC_s31337/ABR-4L-gatedCBSC_seed31337_20261114T005922Z/wandb/offline-run-20261114_005924-plsu16iv/logs/debug.log",
+          "output/ABR-4L-gatedCBSC_s31337/ABR-4L-gatedCBSC_seed31337_20261114T005922Z/wandb/offline-run-20261114_005924-plsu16iv/run-plsu16iv.wandb",
+          "output/ABR-4L-gatedCBSC_s31337/run.log",
+          "output/ABR-4L-gatedCBSC_s31337/run_status.json",
+          "output/Alternate-Blocks-4L_s42/Alternate-Blocks-4L_seed42_20261114T040437Z/result.json",
+          "output/Alternate-Blocks-4L_s42/Alternate-Blocks-4L_seed42_20261114T040437Z/train.log",
+          "output/Alternate-Blocks-4L_s42/Alternate-Blocks-4L_seed42_20261114T040437Z/wandb/offline-run-20261114_040439-949z9ctk/files/requirements.txt",
+          "output/Alternate-Blocks-4L_s42/Alternate-Blocks-4L_seed42_20261114T040437Z/wandb/offline-run-20261114_040439-949z9ctk/logs/debug-internal.log",
+          "output/Alternate-Blocks-4L_s42/Alternate-Blocks-4L_seed42_20261114T040437Z/wandb/offline-run-20261114_040439-949z9ctk/logs/debug.log",
+          "output/Alternate-Blocks-4L_s42/Alternate-Blocks-4L_seed42_20261114T040437Z/wandb/offline-run-20261114_040439-949z9ctk/run-949z9ctk.wandb",
+          "output/Alternate-Blocks-4L_s42/run.log",
+          "output/Alternate-Blocks-4L_s42/run_status.json",
+          "output/Jamba-1_1_s123/Jamba-1-1_seed123_20261114T070736Z/result.json",
+          "output/Jamba-1_1_s123/Jamba-1-1_seed123_20261114T070736Z/train.log",
+          "output/Jamba-1_1_s123/Jamba-1-1_seed123_20261114T070736Z/wandb/offline-run-20261114_070737-ogvh353e/files/requirements.txt",
+          "output/Jamba-1_1_s123/Jamba-1-1_seed123_20261114T070736Z/wandb/offline-run-20261114_070737-ogvh353e/logs/debug-internal.log",
+          "output/Jamba-1_1_s123/Jamba-1-1_seed123_20261114T070736Z/wandb/offline-run-20261114_070737-ogvh353e/logs/debug.log",
+          "output/Jamba-1_1_s123/Jamba-1-1_seed123_20261114T070736Z/wandb/offline-run-20261114_070737-ogvh353e/run-ogvh353e.wandb",
+          "output/Jamba-1_1_s123/run.log",
+          "output/Jamba-1_1_s123/run_status.json",
+          "output/Jamba-1_1_s42/Jamba-1-1_seed42_20261114T081032Z/result.json",
+          "output/Jamba-1_1_s42/Jamba-1-1_seed42_20261114T081032Z/train.log",
+          "output/Jamba-1_1_s42/Jamba-1-1_seed42_20261114T081032Z/wandb/offline-run-20261114_081033-58tji3z3/files/requirements.txt",
+          "output/Jamba-1_1_s42/Jamba-1-1_seed42_20261114T081032Z/wandb/offline-run-20261114_081033-58tji3z3/logs/debug-internal.log",
+          "output/Jamba-1_1_s42/Jamba-1-1_seed42_20261114T081032Z/wandb/offline-run-20261114_081033-58tji3z3/logs/debug.log",
+          "output/Jamba-1_1_s42/Jamba-1-1_seed42_20261114T081032Z/wandb/offline-run-20261114_081033-58tji3z3/run-58tji3z3.wandb",
+          "output/Jamba-1_1_s42/run.log",
+          "output/Jamba-1_1_s42/run_status.json",
+          "output/Mamba-Only_s123/Mamba-Only_seed123_20261114T051212Z/result.json",
+          "output/Mamba-Only_s123/Mamba-Only_seed123_20261114T051212Z/train.log",
+          "output/Mamba-Only_s123/Mamba-Only_seed123_20261114T051212Z/wandb/offline-run-20261114_051213-oaaptjzg/files/requirements.txt",
+          "output/Mamba-Only_s123/Mamba-Only_seed123_20261114T051212Z/wandb/offline-run-20261114_051213-oaaptjzg/logs/debug-internal.log",
+          "output/Mamba-Only_s123/Mamba-Only_seed123_20261114T051212Z/wandb/offline-run-20261114_051213-oaaptjzg/logs/debug.log",
+          "output/Mamba-Only_s123/Mamba-Only_seed123_20261114T051212Z/wandb/offline-run-20261114_051213-oaaptjzg/run-oaaptjzg.wandb",
+          "output/Mamba-Only_s123/run.log",
+          "output/Mamba-Only_s123/run_status.json",
+          "output/Mamba-Only_s42/Mamba-Only_seed42_20261114T060915Z/result.json",
+          "output/Mamba-Only_s42/Mamba-Only_seed42_20261114T060915Z/train.log",
+          "output/Mamba-Only_s42/Mamba-Only_seed42_20261114T060915Z/wandb/offline-run-20261114_060916-48k4zv6w/files/requirements.txt",
+          "output/Mamba-Only_s42/Mamba-Only_seed42_20261114T060915Z/wandb/offline-run-20261114_060916-48k4zv6w/logs/debug-internal.log",
+          "output/Mamba-Only_s42/Mamba-Only_seed42_20261114T060915Z/wandb/offline-run-20261114_060916-48k4zv6w/logs/debug.log",
+          "output/Mamba-Only_s42/Mamba-Only_seed42_20261114T060915Z/wandb/offline-run-20261114_060916-48k4zv6w/run-48k4zv6w.wandb",
+          "output/Mamba-Only_s42/run.log",
+          "output/Mamba-Only_s42/run_status.json",
+          "output/Transformer-Only_s2024/Transformer-Only_seed2024_20261111T093215Z/result.json",
+          "output/Transformer-Only_s2024/Transformer-Only_seed2024_20261111T093215Z/train.log",
+          "output/Transformer-Only_s2024/Transformer-Only_seed2024_20261111T093215Z/wandb/offline-run-20261111_093216-c71nusta/files/requirements.txt",
+          "output/Transformer-Only_s2024/Transformer-Only_seed2024_20261111T093215Z/wandb/offline-run-20261111_093216-c71nusta/logs/debug-internal.log",
+          "output/Transformer-Only_s2024/Transformer-Only_seed2024_20261111T093215Z/wandb/offline-run-20261111_093216-c71nusta/logs/debug.log",
+          "output/Transformer-Only_s2024/Transformer-Only_seed2024_20261111T093215Z/wandb/offline-run-20261111_093216-c71nusta/run-c71nusta.wandb",
+          "output/Transformer-Only_s2024/Transformer-Only_seed2024_20261111T093215Z/wandb/offline-run-20261114_005401-c71nusta/files/requirements.txt",
+          "output/Transformer-Only_s2024/Transformer-Only_seed2024_20261111T093215Z/wandb/offline-run-20261114_005401-c71nusta/logs/debug-internal.log",
+          "output/Transformer-Only_s2024/Transformer-Only_seed2024_20261111T093215Z/wandb/offline-run-20261114_005401-c71nusta/logs/debug.log",
+          "output/Transformer-Only_s2024/Transformer-Only_seed2024_20261111T093215Z/wandb/offline-run-20261114_005401-c71nusta/run-c71nusta.wandb",
+          "output/Transformer-Only_s2024/previous_sessions/run.session1.log",
+          "output/Transformer-Only_s2024/run.log",
+          "output/Transformer-Only_s2024/run_status.json",
+          "output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/result.json",
+          "output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/train.log",
+          "output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/wandb/offline-run-20261111_101257-t4atbfv1/files/requirements.txt",
+          "output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/wandb/offline-run-20261111_101257-t4atbfv1/logs/debug-internal.log",
+          "output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/wandb/offline-run-20261111_101257-t4atbfv1/logs/debug.log",
+          "output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/wandb/offline-run-20261111_101257-t4atbfv1/run-t4atbfv1.wandb",
+          "output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/wandb/offline-run-20261114_005401-t4atbfv1/files/requirements.txt",
+          "output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/wandb/offline-run-20261114_005401-t4atbfv1/logs/debug-internal.log",
+          "output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/wandb/offline-run-20261114_005401-t4atbfv1/logs/debug.log",
+          "output/Transformer-Only_s31337/Transformer-Only_seed31337_20261111T101255Z/wandb/offline-run-20261114_005401-t4atbfv1/run-t4atbfv1.wandb",
+          "output/Transformer-Only_s31337/previous_sessions/run.session1.log",
+          "output/Transformer-Only_s31337/run.log",
+          "output/Transformer-Only_s31337/run_status.json",
+          "output/kaggle_env.json",
+          "output/pip_freeze.txt",
+          "output/run.log"
+        ],
+        "gpu": "Tesla T4"
+      },
+      "download_dir": "results/kaggle/queue/q005"
+    },
+    "q006": {
+      "kernel_ref": "parthgarg101/abr-q006",
+      "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-q006",
+      "kernel_version": 1,
+      "dataset_version": 9,
+      "runs": [
+        "Alternate-Blocks-4L_s123",
+        "ABR-2L-noCBSC_s123",
+        "ABR-2L-CBSC_s123"
+      ],
+      "plan": {
+        "session_hours": 11.5,
+        "overhead_hours": 0.3,
+        "lanes": [
+          [
+            {
+              "run": "Alternate-Blocks-4L_s123",
+              "est_hours": 2.26
+            }
+          ],
+          [
+            {
+              "run": "ABR-2L-noCBSC_s123",
+              "est_hours": 1.04
+            },
+            {
+              "run": "ABR-2L-CBSC_s123",
+              "est_hours": 0.25
+            }
+          ]
+        ],
+        "est_load_hours": [
+          2.26,
+          1.29
+        ],
+        "name": "q006"
+      },
+      "resume_from": [
+        "parthgarg101/abr-q005"
+      ],
       "status": "running",
-      "launched_utc": "2026-11-14T00:50:38Z"
+      "launched_utc": "2026-11-14T15:34:03Z"
     }
   }
 }

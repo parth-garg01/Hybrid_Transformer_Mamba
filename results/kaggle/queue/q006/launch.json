@@ -1,0 +1,84 @@
+{
+  "archive_sha256": "fecd537c57f21d2b41e4903ba2533f272a0747f153eafd46894191c51d2ed4d2",
+  "cmd": null,
+  "commit": "1b0a5b238582048d75652a65f00f9fc65096c0d0",
+  "commit_ref": "1b0a5b238582048d75652a65f00f9fc65096c0d0",
+  "dataset": {
+    "is_private": true,
+    "notes": "commit 1b0a5b238582048d75652a65f00f9fc65096c0d0 (ref 1b0a5b238582048d75652a65f00f9fc65096c0d0) for kernel abr-q006",
+    "ref": "parthgarg101/abr-code",
+    "version": 9
+  },
+  "git_snapshot": true,
+  "gpu_requested": "t4x2",
+  "kaggle_user": "parthgarg101",
+  "kernel_ref": "parthgarg101/abr-q006",
+  "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-q006",
+  "kernel_version": 1,
+  "kernel_version_url": "https://www.kaggle.com/code/parthgarg101/abr-q006",
+  "launched_utc": "2026-11-14T15:34:03Z",
+  "name": "q006",
+  "pushed_utc": "2026-11-14T15:34:27Z",
+  "resume_from": [
+    "parthgarg101/abr-q005"
+  ],
+  "runs": [
+    {
+      "cmd": "python experiments/full_scale/train.py --config Alternate-Blocks-4L --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 0,
+      "name": "Alternate-Blocks-4L_s123"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config ABR-2L-noCBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 1,
+      "name": "ABR-2L-noCBSC_s123"
+    },
+    {
+      "cmd": "python experiments/full_scale/train.py --config ABR-2L-CBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours}",
+      "lane": 1,
+      "name": "ABR-2L-CBSC_s123"
+    }
+  ],
+  "server_settings": {
+    "enable_gpu": true,
+    "enable_internet": true,
+    "is_private": true
+  },
+  "session_hours": 11.5,
+  "session_plan": {
+    "est_load_hours": [
+      2.26,
+      1.29
+    ],
+    "lanes": [
+      [
+        {
+          "est_hours": 2.26,
+          "run": "Alternate-Blocks-4L_s123"
+        }
+      ],
+      [
+        {
+          "est_hours": 1.04,
+          "run": "ABR-2L-noCBSC_s123"
+        },
+        {
+          "est_hours": 0.25,
+          "run": "ABR-2L-CBSC_s123"
+        }
+      ]
+    ],
+    "name": "q006",
+    "overhead_hours": 0.3,
+    "session_hours": 11.5
+  },
+  "token_cache": {
+    "expected_sha256": {
+      "wikitext103_test_gpt2.pt": "84bb27f5bcebc4b63e77725bee2e0d318f79cab1ba34b10e9413612630b29b64",
+      "wikitext103_train_gpt2.pt": "7896d3b921ae6741135a54aba6e1f060e7306e7e58a7110cac8618d235af2f6d",
+      "wikitext103_validation_gpt2.pt": "a6091ca4a7f0bd4caae7e4d7eb895cf01a1891bf32e1aa64587c26c877e222ea"
+    },
+    "ref": "parthgarg101/abr-wikitext103-gpt2-tokens"
+  },
+  "wheels_dataset": "parthgarg101/abr-mamba-wheels"
+}
