@@ -82,11 +82,18 @@ def compare_table(values_by_label, pairs=None, metric="test_ppl"):
         va, vb = values_by_label.get(a, []), values_by_label.get(b, [])
         w = welch(va, vb)
         sa, sb = summarize(va), summarize(vb)
+        fam = "exploratory" if "exploratory" in desc.lower() else "confirmatory"
         rows.append({"comparison": desc, "a": a, "b": b, "metric": metric,
+                     "family": fam,
                      "mean_a": sa["mean"], "std_a": sa["std"],
                      "mean_b": sb["mean"], "std_b": sb["std"], **w})
-    for r, p in zip(rows, holm([r["p"] for r in rows])):
+    # Holm runs over the confirmatory family only (PRD P2.3); exploratory pairs
+    # get p_holm = NaN and do not enlarge the family.
+    conf = [r for r in rows if r["family"] == "confirmatory"]
+    for r, p in zip(conf, holm([r["p"] for r in conf])):
         r["p_holm"] = p
+    for r in rows:
+        r.setdefault("p_holm", float("nan"))
     return rows
 
 

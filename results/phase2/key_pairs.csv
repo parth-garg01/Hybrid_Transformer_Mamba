@@ -1,0 +1,8 @@
+comparison,a,b,metric,family,mean_a,std_a,mean_b,std_b,t,p,df,mean_diff,cohen_d,hedges_g,n_a,n_b,p_holm,val_mean_diff,val_p
+CBSC vs no-CBSC (4L),ABR-4L-CBSC,ABR-4L-noCBSC,test_ppl,confirmatory,103.514,2.35568,108.565,5.28257,-1.95254,0.102797,5.53034,-5.0506,-1.23489,-1.11539,5,5,0.103345,-4.37806,0.1044
+gated vs plain CBSC (4L),ABR-4L-gatedCBSC,ABR-4L-CBSC,test_ppl,confirmatory,98.9434,3.64893,103.514,2.35568,-2.35322,0.0516726,6.84075,-4.57081,-1.48831,-1.34428,5,5,0.103345,-4.37524,0.0452579
+learned vs random routing (4L),ABR-4L-CBSC,Random-Routing-4L,test_ppl,confirmatory,103.514,2.35568,110.898,0.84842,-6.59412,0.00118632,5.02055,-7.38366,-4.17049,-3.76689,5,5,0.00355897,-6.93861,0.00121338
+ABR+CBSC vs Jamba-1:3 (4L),ABR-4L-CBSC,Jamba-1:3,test_ppl,confirmatory,103.514,2.35568,71.1352,0.248077,30.5659,5.54871e-06,4.08871,32.379,19.3316,17.4608,5,5,3.32923e-05,32.7755,2.59227e-06
+ABR+gated CBSC vs Jamba-1:3 (4L),ABR-4L-gatedCBSC,Jamba-1:3,test_ppl,confirmatory,98.9434,3.64893,71.1352,0.248077,17.0016,6.57635e-05,4.03698,27.8082,10.7528,9.71218,5,5,0.000263054,28.4003,4.6247e-05
+ABR+CBSC vs Transformer (4L),ABR-4L-CBSC,Transformer-Only,test_ppl,confirmatory,103.514,2.35568,78.9272,0.533729,22.7617,9.64965e-06,4.4096,24.587,14.3958,13.0026,5,5,4.82483e-05,24.7827,4.76234e-06
+"CBSC vs no-CBSC (2L, exploratory)",ABR-2L-CBSC,ABR-2L-noCBSC,test_ppl,exploratory,128.393,13.6493,150.848,2.36589,-2.29237,0.250443,1.06003,-22.4548,-2.29237,-1.30993,2,2,nan,-21.333,0.20613

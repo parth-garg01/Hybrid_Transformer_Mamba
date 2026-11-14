@@ -259,6 +259,11 @@ def test_compare_table_and_holm():
     lo, hi = sorted(p)
     assert sorted([rows[0]["p_holm"], rows[1]["p_holm"]]) == \
         [pytest.approx(min(1, 2 * lo)), pytest.approx(max(min(1, 2 * lo), min(1, hi)))]
+    # an exploratory pair is not part of the Holm family
+    rows2 = S.compare_table(vals, pairs=[("A", "B", "a-b"), ("A", "C", "a-c"),
+                                         ("B", "C", "b-c (exploratory)")])
+    assert rows2[2]["family"] == "exploratory" and math.isnan(rows2[2]["p_holm"])
+    assert [r["p_holm"] for r in rows2[:2]] == [r["p_holm"] for r in rows[:2]]
     # every key pair names real configs
     labels = {c["label"] for c in C.PHASE2_CONFIGS}
     assert all(a in labels and b in labels for a, b, _ in C.KEY_PAIRS)
