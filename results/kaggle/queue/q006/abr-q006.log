@@ -1,0 +1,500 @@
+[{"stream_name":"stdout","time":23.834421393,"data":"[runner 2026-11-14T15:35:18Z] copying extracted snapshot /kaggle/input/datasets/parthgarg101/abr-code/repo\n"}
+,{"stream_name":"stdout","time":27.480601483,"data":"[runner 2026-11-14T15:35:22Z] code snapshot at /kaggle/working/repo, commit 1b0a5b238582048d75652a65f00f9fc65096c0d0, git_snapshot.json present: True\n"}
+,{"stream_name":"stdout","time":32.660758661,"data":"[runner 2026-11-14T15:35:27Z] token cache parthgarg101/abr-wikitext103-gpt2-tokens at /kaggle/input/datasets/parthgarg101/abr-wikitext103-gpt2-tokens: ['wikitext103_test_gpt2.pt', 'wikitext103_train_gpt2.pt', 'wikitext103_validation_gpt2.pt'] (verified=True)\n"}
+,{"stream_name":"stdout","time":32.661303883,"data":"[runner 2026-11-14T15:35:27Z] $ nvidia-smi --query-gpu=name,driver_version,memory.total,compute_cap --format=csv,noheader\n"}
+,{"stream_name":"stdout","time":32.69284971,"data":"Tesla T4, 580.178.04, 15360 MiB, 7.5\n"}
+,{"stream_name":"stdout","time":32.692875283,"data":"Tesla T4, 580.178.04, 15360 MiB, 7.5\n"}
+,{"stream_name":"stdout","time":32.698750283,"data":"[runner 2026-11-14T15:35:27Z] exit 0\n"}
+,{"stream_name":"stdout","time":32.698839358,"data":"[runner 2026-11-14T15:35:27Z] $ nvidia-smi\n"}
+,{"stream_name":"stdout","time":32.72964434,"data":"Sat Nov 14 15:35:27 2026       \n"}
+,{"stream_name":"stdout","time":32.7296638,"data":"+-----------------------------------------------------------------------------------------+\n"}
+,{"stream_name":"stdout","time":32.729669052,"data":"| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |\n"}
+,{"stream_name":"stdout","time":32.729673326,"data":"+-----------------------------------------+------------------------+----------------------+\n"}
+,{"stream_name":"stdout","time":32.729676821,"data":"| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n"}
+,{"stream_name":"stdout","time":32.729680279,"data":"| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n"}
+,{"stream_name":"stdout","time":32.729683731,"data":"|                                         |                        |               MIG M. |\n"}
+,{"stream_name":"stdout","time":32.729687389,"data":"|=========================================+========================+======================|\n"}
+,{"stream_name":"stdout","time":32.78007845,"data":"|   0  Tesla T4                       Off |   00000000:00:04.0 Off |                    0 |\n"}
+,{"stream_name":"stdout","time":32.78009666,"data":"| N/A   52C    P8             10W /   70W |       0MiB /  15360MiB |      0%      Default |\n"}
+,{"stream_name":"stdout","time":32.780113485,"data":"|                                         |                        |                  N/A |\n"}
+,{"stream_name":"stdout","time":32.780117887,"data":"+-----------------------------------------+------------------------+----------------------+\n"}
+,{"stream_name":"stdout","time":32.78012224,"data":"|   1  Tesla T4                       Off |   00000000:00:05.0 Off |                    0 |\n"}
+,{"stream_name":"stdout","time":32.78012572,"data":"| N/A   49C    P8             10W /   70W |       0MiB /  15360MiB |      0%      Default |\n"}
+,{"stream_name":"stdout","time":32.780129677,"data":"|                                         |                        |                  N/A |\n"}
+,{"stream_name":"stdout","time":32.780133858,"data":"+-----------------------------------------+------------------------+----------------------+\n"}
+,{"stream_name":"stdout","time":32.780706951,"data":"\n"}
+,{"stream_name":"stdout","time":32.780717079,"data":"+-----------------------------------------------------------------------------------------+\n"}
+,{"stream_name":"stdout","time":32.78073241,"data":"| Processes:                                                                              |\n"}
+,{"stream_name":"stdout","time":32.780736405,"data":"|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n"}
+,{"stream_name":"stdout","time":32.780743898,"data":"|        ID   ID                                                               Usage      |\n"}
+,{"stream_name":"stdout","time":32.780746203,"data":"|=========================================================================================|\n"}
+,{"stream_name":"stdout","time":32.78248039,"data":"|  No running processes found                                                             |\n"}
+,{"stream_name":"stdout","time":32.782492644,"data":"+-----------------------------------------------------------------------------------------+\n"}
+,{"stream_name":"stdout","time":33.112043691,"data":"[runner 2026-11-14T15:35:27Z] exit 0\n"}
+,{"stream_name":"stdout","time":41.841974149,"data":"[runner 2026-11-14T15:35:36Z] $ pip install einops ninja packaging\n"}
+,{"stream_name":"stdout","time":42.68243373,"data":"Requirement already satisfied: einops in /usr/local/lib/python3.13/dist-packages (0.8.2)\n"}
+,{"stream_name":"stdout","time":42.683007722,"data":"Requirement already satisfied: ninja in /usr/local/lib/python3.13/dist-packages (1.13.2)\n"}
+,{"stream_name":"stdout","time":42.683713867,"data":"Requirement already satisfied: packaging in /usr/local/lib/python3.13/dist-packages (26.3)\n"}
+,{"stream_name":"stdout","time":44.599566557,"data":"[runner 2026-11-14T15:35:39Z] exit 0\n"}
+,{"stream_name":"stdout","time":45.753316199,"data":"[runner 2026-11-14T15:35:40Z] $ pip install /kaggle/working/_mounted_wheels/causal_conv1d-1.7.0+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl /kaggle/working/_mounted_wheels/mamba_ssm-2.3.2.post1+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl\n"}
+,{"stream_name":"stdout","time":46.184825512,"data":"Processing ./_mounted_wheels/causal_conv1d-1.7.0+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl\n"}
+,{"stream_name":"stdout","time":46.274206368,"data":"Processing ./_mounted_wheels/mamba_ssm-2.3.2.post1+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl\n"}
+,{"stream_name":"stdout","time":46.39142192,"data":"Requirement already satisfied: torch in /usr/local/lib/python3.13/dist-packages (from causal-conv1d==1.7.0+cu130torch2.11sm75) (2.11.0+cu130)\n"}
+,{"stream_name":"stdout","time":46.391872626,"data":"Requirement already satisfied: packaging in /usr/local/lib/python3.13/dist-packages (from causal-conv1d==1.7.0+cu130torch2.11sm75) (26.3)\n"}
+,{"stream_name":"stdout","time":46.392512821,"data":"Requirement already satisfied: ninja in /usr/local/lib/python3.13/dist-packages (from causal-conv1d==1.7.0+cu130torch2.11sm75) (1.13.2)\n"}
+,{"stream_name":"stdout","time":46.528167823,"data":"Collecting tilelang==0.1.8 (from mamba-ssm==2.3.2.post1+cu130torch2.11sm75)\n"}
+,{"stream_name":"stdout","time":46.619788631,"data":"  Downloading tilelang-0.1.8-cp38-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (15 kB)\n"}
+,{"stream_name":"stdout","time":46.793388048,"data":"Collecting apache-tvm-ffi\u003c=0.1.9 (from mamba-ssm==2.3.2.post1+cu130torch2.11sm75)\n"}
+,{"stream_name":"stdout","time":46.801352915,"data":"  Downloading apache_tvm_ffi-0.1.9-cp312-abi3-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (6.1 kB)\n"}
+,{"stream_name":"stdout","time":46.848475074,"data":"Collecting quack-kernels\u003e=0.3.4 (from mamba-ssm==2.3.2.post1+cu130torch2.11sm75)\n"}
+,{"stream_name":"stdout","time":46.855969139,"data":"  Downloading quack_kernels-0.6.5-py3-none-any.whl.metadata (834 bytes)\n"}
+,{"stream_name":"stdout","time":46.86915386,"data":"Requirement already satisfied: triton\u003e=3.5.0 in /usr/local/lib/python3.13/dist-packages (from mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (3.6.0)\n"}
+,{"stream_name":"stdout","time":46.869812025,"data":"Requirement already satisfied: einops in /usr/local/lib/python3.13/dist-packages (from mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.8.2)\n"}
+,{"stream_name":"stdout","time":46.870445389,"data":"Requirement already satisfied: transformers in /usr/local/lib/python3.13/dist-packages (from mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (5.20.2)\n"}
+,{"stream_name":"stdout","time":46.871205401,"data":"Requirement already satisfied: setuptools\u003e=61.0.0 in /usr/local/lib/python3.13/dist-packages (from mamba-ssm==2.3.2.post1+cu130torch2.11sm75) (81.0.0)\n"}
+,{"stream_name":"stdout","time":46.909185213,"data":"Collecting torch-c-dlpack-ext (from tilelang==0.1.8-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75)\n"}
+,{"stream_name":"stdout","time":46.916255765,"data":"  Downloading torch_c_dlpack_ext-0.1.5-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (14 kB)\n"}
+,{"stream_name":"stdout","time":46.938711329,"data":"Requirement already satisfied: cloudpickle in /usr/local/lib/python3.13/dist-packages (from tilelang==0.1.8-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (3.1.2)\n"}
+,{"stream_name":"stdout","time":46.939396345,"data":"Requirement already satisfied: ml-dtypes in /usr/local/lib/python3.13/dist-packages (from tilelang==0.1.8-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.6.0)\n"}
+,{"stream_name":"stdout","time":46.940006624,"data":"Requirement already satisfied: numpy\u003e=1.23.5 in /usr/local/lib/python3.13/dist-packages (from tilelang==0.1.8-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (2.1.3)\n"}
+,{"stream_name":"stdout","time":46.940648946,"data":"Requirement already satisfied: psutil in /usr/local/lib/python3.13/dist-packages (from tilelang==0.1.8-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (5.9.5)\n"}
+,{"stream_name":"stdout","time":46.941421318,"data":"Requirement already satisfied: tqdm\u003e=4.62.3 in /usr/local/lib/python3.13/dist-packages (from tilelang==0.1.8-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (4.67.3)\n"}
+,{"stream_name":"stdout","time":46.942088737,"data":"Requirement already satisfied: typing-extensions\u003e=4.10.0 in /usr/local/lib/python3.13/dist-packages (from tilelang==0.1.8-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (4.16.0)\n"}
+,{"stream_name":"stdout","time":47.001059169,"data":"Collecting z3-solver\u003c4.15.5,\u003e=4.13.0 (from tilelang==0.1.8-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75)\n"}
+,{"stream_name":"stdout","time":47.007907058,"data":"  Downloading z3_solver-4.15.4.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (602 bytes)\n"}
+,{"stream_name":"stdout","time":47.065189677,"data":"Collecting nvidia-cutlass-dsl\u003e=4.7 (from quack-kernels\u003e=0.3.4-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75)\n"}
+,{"stream_name":"stdout","time":47.073606672,"data":"  Downloading nvidia_cutlass_dsl-4.8.1-py3-none-any.whl.metadata (3.1 kB)\n"}
+,{"stream_name":"stdout","time":47.136700833,"data":"Collecting nvidia-cutlass-dsl-libs-base==4.8.1 (from nvidia-cutlass-dsl\u003e=4.7-\u003equack-kernels\u003e=0.3.4-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75)\n"}
+,{"stream_name":"stdout","time":47.145066836,"data":"  Downloading nvidia_cutlass_dsl_libs_base-4.8.1-cp313-cp313-manylinux_2_28_x86_64.whl.metadata (2.9 kB)\n"}
+,{"stream_name":"stdout","time":47.193844906,"data":"Collecting nvidia-cutlass-dsl-libs-cu12==4.8.1 (from nvidia-cutlass-dsl\u003e=4.7-\u003equack-kernels\u003e=0.3.4-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75)\n"}
+,{"stream_name":"stdout","time":47.201600776,"data":"  Downloading nvidia_cutlass_dsl_libs_cu12-4.8.1-cp313-cp313-manylinux_2_28_x86_64.whl.metadata (2.9 kB)\n"}
+,{"stream_name":"stdout","time":47.214220399,"data":"Requirement already satisfied: cuda-bindings\u003e=12.8 in /usr/local/lib/python3.13/dist-packages (from nvidia-cutlass-dsl-libs-base==4.8.1-\u003envidia-cutlass-dsl\u003e=4.7-\u003equack-kernels\u003e=0.3.4-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (13.0.3)\n"}
+,{"stream_name":"stdout","time":47.21495953,"data":"Requirement already satisfied: protobuf\u003e=4.21.12 in /usr/local/lib/python3.13/dist-packages (from nvidia-cutlass-dsl-libs-base==4.8.1-\u003envidia-cutlass-dsl\u003e=4.7-\u003equack-kernels\u003e=0.3.4-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (7.36.2)\n"}
+,{"stream_name":"stdout","time":47.235748627,"data":"Collecting nvidia-cutlass-dsl-libs-core==4.8.1 (from nvidia-cutlass-dsl-libs-base==4.8.1-\u003envidia-cutlass-dsl\u003e=4.7-\u003equack-kernels\u003e=0.3.4-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75)\n"}
+,{"stream_name":"stdout","time":47.243618872,"data":"  Downloading nvidia_cutlass_dsl_libs_core-4.8.1-py3-none-any.whl.metadata (2.9 kB)\n"}
+,{"stream_name":"stdout","time":47.258376997,"data":"Requirement already satisfied: cuda-pathfinder~=1.1 in /usr/local/lib/python3.13/dist-packages (from cuda-bindings\u003e=12.8-\u003envidia-cutlass-dsl-libs-base==4.8.1-\u003envidia-cutlass-dsl\u003e=4.7-\u003equack-kernels\u003e=0.3.4-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (1.8.4)\n"}
+,{"stream_name":"stdout","time":47.275178244,"data":"Requirement already satisfied: filelock in /usr/local/lib/python3.13/dist-packages (from torch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (4.2.4)\n"}
+,{"stream_name":"stdout","time":47.275938076,"data":"Requirement already satisfied: sympy\u003e=1.13.3 in /usr/local/lib/python3.13/dist-packages (from torch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (1.14.0)\n"}
+,{"stream_name":"stdout","time":47.276690697,"data":"Requirement already satisfied: networkx\u003e=2.5.1 in /usr/local/lib/python3.13/dist-packages (from torch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (3.7)\n"}
+,{"stream_name":"stdout","time":47.277386361,"data":"Requirement already satisfied: jinja2 in /usr/local/lib/python3.13/dist-packages (from torch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (3.1.6)\n"}
+,{"stream_name":"stdout","time":47.278127328,"data":"Requirement already satisfied: fsspec\u003e=0.8.5 in /usr/local/lib/python3.13/dist-packages (from torch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (2025.12.0)\n"}
+,{"stream_name":"stdout","time":47.279526908,"data":"Requirement already satisfied: cuda-toolkit==13.0.2 in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (13.0.2)\n"}
+,{"stream_name":"stdout","time":47.280838588,"data":"Requirement already satisfied: nvidia-cudnn-cu13==9.19.0.56 in /usr/local/lib/python3.13/dist-packages (from torch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (9.19.0.56)\n"}
+,{"stream_name":"stdout","time":47.281723332,"data":"Requirement already satisfied: nvidia-cusparselt-cu13==0.8.0 in /usr/local/lib/python3.13/dist-packages (from torch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (0.8.0)\n"}
+,{"stream_name":"stdout","time":47.282606277,"data":"Requirement already satisfied: nvidia-nccl-cu13==2.28.9 in /usr/local/lib/python3.13/dist-packages (from torch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (2.28.9)\n"}
+,{"stream_name":"stdout","time":47.283553223,"data":"Requirement already satisfied: nvidia-nvshmem-cu13==3.4.5 in /usr/local/lib/python3.13/dist-packages (from torch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (3.4.5)\n"}
+,{"stream_name":"stdout","time":47.293702925,"data":"Requirement already satisfied: nvidia-cublas==13.1.0.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (13.1.0.3)\n"}
+,{"stream_name":"stdout","time":47.294994231,"data":"Requirement already satisfied: nvidia-cuda-runtime==13.0.96.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (13.0.96)\n"}
+,{"stream_name":"stdout","time":47.296033011,"data":"Requirement already satisfied: nvidia-cufft==12.0.0.61.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (12.0.0.61)\n"}
+,{"stream_name":"stdout","time":47.296997807,"data":"Requirement already satisfied: nvidia-cufile==1.15.1.6.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (1.15.1.6)\n"}
+,{"stream_name":"stdout","time":47.298063583,"data":"Requirement already satisfied: nvidia-cuda-cupti==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (13.0.85)\n"}
+,{"stream_name":"stdout","time":47.299170547,"data":"Requirement already satisfied: nvidia-curand==10.4.0.35.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (10.4.0.35)\n"}
+,{"stream_name":"stdout","time":47.30028446,"data":"Requirement already satisfied: nvidia-cusolver==12.0.4.66.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (12.0.4.66)\n"}
+,{"stream_name":"stdout","time":47.301422421,"data":"Requirement already satisfied: nvidia-cusparse==12.6.3.3.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (12.6.3.3)\n"}
+,{"stream_name":"stdout","time":47.303003332,"data":"Requirement already satisfied: nvidia-nvjitlink==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (13.0.88)\n"}
+,{"stream_name":"stdout","time":47.304585715,"data":"Requirement already satisfied: nvidia-cuda-nvrtc==13.0.88.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (13.0.88)\n"}
+,{"stream_name":"stdout","time":47.30606164,"data":"Requirement already satisfied: nvidia-nvtx==13.0.85.* in /usr/local/lib/python3.13/dist-packages (from cuda-toolkit[cublas,cudart,cufft,cufile,cupti,curand,cusolver,cusparse,nvjitlink,nvrtc,nvtx]==13.0.2; platform_system == \"Linux\"-\u003etorch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (13.0.85)\n"}
+,{"stream_name":"stdout","time":47.330927313,"data":"Requirement already satisfied: mpmath\u003c1.4,\u003e=1.1.0 in /usr/local/lib/python3.13/dist-packages (from sympy\u003e=1.13.3-\u003etorch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (1.3.0)\n"}
+,{"stream_name":"stdout","time":47.335023765,"data":"Requirement already satisfied: MarkupSafe\u003e=2.0 in /usr/local/lib/python3.13/dist-packages (from jinja2-\u003etorch-\u003ecausal-conv1d==1.7.0+cu130torch2.11sm75) (3.0.4)\n"}
+,{"stream_name":"stdout","time":47.339431672,"data":"Requirement already satisfied: huggingface-hub\u003c3.0,\u003e=1.31.0 in /usr/local/lib/python3.13/dist-packages (from transformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (1.33.0)\n"}
+,{"stream_name":"stdout","time":47.340207235,"data":"Requirement already satisfied: pyyaml\u003e=5.1 in /usr/local/lib/python3.13/dist-packages (from transformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (6.0.3)\n"}
+,{"stream_name":"stdout","time":47.340968828,"data":"Requirement already satisfied: regex\u003e=2025.10.22 in /usr/local/lib/python3.13/dist-packages (from transformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (2025.11.3)\n"}
+,{"stream_name":"stdout","time":47.34176734,"data":"Requirement already satisfied: tokenizers\u003c0.24.0,\u003e=0.23.1 in /usr/local/lib/python3.13/dist-packages (from transformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.23.3)\n"}
+,{"stream_name":"stdout","time":47.342529425,"data":"Requirement already satisfied: typer in /usr/local/lib/python3.13/dist-packages (from transformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.27.3)\n"}
+,{"stream_name":"stdout","time":47.343251267,"data":"Requirement already satisfied: safetensors\u003e=0.8.0 in /usr/local/lib/python3.13/dist-packages (from transformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.8.0)\n"}
+,{"stream_name":"stdout","time":47.358672523,"data":"Requirement already satisfied: click\u003c9.0.0,\u003e=8.4.2 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003c3.0,\u003e=1.31.0-\u003etransformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (8.5.0)\n"}
+,{"stream_name":"stdout","time":47.359923007,"data":"Requirement already satisfied: hf-xet\u003c2.0.0,\u003e=1.6.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003c3.0,\u003e=1.31.0-\u003etransformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (1.7.0)\n"}
+,{"stream_name":"stdout","time":47.360744622,"data":"Requirement already satisfied: httpx\u003c1,\u003e=0.23.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003c3.0,\u003e=1.31.0-\u003etransformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.28.1)\n"}
+,{"stream_name":"stdout","time":47.37017327,"data":"Requirement already satisfied: anyio in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003c3.0,\u003e=1.31.0-\u003etransformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (4.15.1)\n"}
+,{"stream_name":"stdout","time":47.370727743,"data":"Requirement already satisfied: certifi in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003c3.0,\u003e=1.31.0-\u003etransformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (2026.10.23)\n"}
+,{"stream_name":"stdout","time":47.371535778,"data":"Requirement already satisfied: httpcore==1.* in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003c3.0,\u003e=1.31.0-\u003etransformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (1.0.9)\n"}
+,{"stream_name":"stdout","time":47.372213302,"data":"Requirement already satisfied: idna in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003c3.0,\u003e=1.31.0-\u003etransformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (3.20)\n"}
+,{"stream_name":"stdout","time":47.375452535,"data":"Requirement already satisfied: h11\u003e=0.16 in /usr/local/lib/python3.13/dist-packages (from httpcore==1.*-\u003ehttpx\u003c1,\u003e=0.23.0-\u003ehuggingface-hub\u003c3.0,\u003e=1.31.0-\u003etransformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.16.0)\n"}
+,{"stream_name":"stdout","time":47.390804987,"data":"Requirement already satisfied: shellingham\u003e=1.3.0 in /usr/local/lib/python3.13/dist-packages (from typer-\u003etransformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (1.5.4)\n"}
+,{"stream_name":"stdout","time":47.391427359,"data":"Requirement already satisfied: rich\u003e=13.8.0 in /usr/local/lib/python3.13/dist-packages (from typer-\u003etransformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (13.9.4)\n"}
+,{"stream_name":"stdout","time":47.392091421,"data":"Requirement already satisfied: annotated-doc\u003e=0.0.2 in /usr/local/lib/python3.13/dist-packages (from typer-\u003etransformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.0.5)\n"}
+,{"stream_name":"stdout","time":47.395978636,"data":"Requirement already satisfied: markdown-it-py\u003e=2.2.0 in /usr/local/lib/python3.13/dist-packages (from rich\u003e=13.8.0-\u003etyper-\u003etransformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (4.2.0)\n"}
+,{"stream_name":"stdout","time":47.39679832,"data":"Requirement already satisfied: pygments\u003c3.0.0,\u003e=2.13.0 in /usr/local/lib/python3.13/dist-packages (from rich\u003e=13.8.0-\u003etyper-\u003etransformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (2.21.0)\n"}
+,{"stream_name":"stdout","time":47.40020079,"data":"Requirement already satisfied: mdurl~=0.1 in /usr/local/lib/python3.13/dist-packages (from markdown-it-py\u003e=2.2.0-\u003erich\u003e=13.8.0-\u003etyper-\u003etransformers-\u003emamba-ssm==2.3.2.post1+cu130torch2.11sm75) (0.1.2)\n"}
+,{"stream_name":"stdout","time":47.414293958,"data":"Downloading tilelang-0.1.8-cp38-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (43.5 MB)\n"}
+,{"stream_name":"stdout","time":47.752351642,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.5/43.5 MB 133.5 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":47.761647667,"data":"Downloading apache_tvm_ffi-0.1.9-cp312-abi3-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (2.3 MB)\n"}
+,{"stream_name":"stdout","time":47.790074383,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.3/2.3 MB 78.5 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":47.797245528,"data":"Downloading z3_solver-4.15.4.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (29.3 MB)\n"}
+,{"stream_name":"stdout","time":48.00303578,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 29.3/29.3 MB 142.9 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":48.010555162,"data":"Downloading quack_kernels-0.6.5-py3-none-any.whl (729 kB)\n"}
+,{"stream_name":"stdout","time":48.033855469,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 729.6/729.6 kB 22.4 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":48.042429994,"data":"Downloading nvidia_cutlass_dsl-4.8.1-py3-none-any.whl (10 kB)\n"}
+,{"stream_name":"stdout","time":48.060730121,"data":"Downloading nvidia_cutlass_dsl_libs_base-4.8.1-cp313-cp313-manylinux_2_28_x86_64.whl (3.1 MB)\n"}
+,{"stream_name":"stdout","time":48.094113606,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 90.3 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":48.101429056,"data":"Downloading nvidia_cutlass_dsl_libs_core-4.8.1-py3-none-any.whl (1.6 MB)\n"}
+,{"stream_name":"stdout","time":48.127558796,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/1.6 MB 58.0 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":48.136181313,"data":"Downloading nvidia_cutlass_dsl_libs_cu12-4.8.1-cp313-cp313-manylinux_2_28_x86_64.whl (91.7 MB)\n"}
+,{"stream_name":"stdout","time":48.970982846,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 91.7/91.7 MB 110.0 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":48.978858508,"data":"Downloading torch_c_dlpack_ext-0.1.5-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (755 kB)\n"}
+,{"stream_name":"stdout","time":49.005115628,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 755.0/755.0 kB 21.1 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":50.58949029,"data":"Installing collected packages: z3-solver, apache-tvm-ffi, nvidia-cutlass-dsl-libs-core, nvidia-cutlass-dsl-libs-base, nvidia-cutlass-dsl-libs-cu12, torch-c-dlpack-ext, nvidia-cutlass-dsl, causal-conv1d, tilelang, quack-kernels, mamba-ssm\n"}
+,{"stream_name":"stdout","time":59.047692455,"data":"\n"}
+,{"stream_name":"stdout","time":59.118170616,"data":"Successfully installed apache-tvm-ffi-0.1.9 causal-conv1d-1.7.0+cu130torch2.11sm75 mamba-ssm-2.3.2.post1+cu130torch2.11sm75 nvidia-cutlass-dsl-4.8.1 nvidia-cutlass-dsl-libs-base-4.8.1 nvidia-cutlass-dsl-libs-core-4.8.1 nvidia-cutlass-dsl-libs-cu12-4.8.1 quack-kernels-0.6.5 tilelang-0.1.8 torch-c-dlpack-ext-0.1.5 z3-solver-4.15.4.0\n"}
+,{"stream_name":"stdout","time":59.277667353,"data":"[runner 2026-11-14T15:35:54Z] exit 0\n"}
+,{"stream_name":"stdout","time":59.277861648,"data":"[runner 2026-11-14T15:35:54Z] $ pip install \"datasets\" \"transformers\u003c5\" \"wandb\"\n"}
+,{"stream_name":"stdout","time":59.714674157,"data":"Requirement already satisfied: datasets in /usr/local/lib/python3.13/dist-packages (4.8.5)\n"}
+,{"stream_name":"stdout","time":59.898228716,"data":"Collecting transformers\u003c5\n"}
+,{"stream_name":"stdout","time":59.976609322,"data":"  Downloading transformers-4.57.6-py3-none-any.whl.metadata (43 kB)\n"}
+,{"stream_name":"stdout","time":60.124990983,"data":"Requirement already satisfied: wandb in /usr/local/lib/python3.13/dist-packages (0.28.1)\n"}
+,{"stream_name":"stdout","time":60.126210517,"data":"Requirement already satisfied: filelock in /usr/local/lib/python3.13/dist-packages (from transformers\u003c5) (4.2.4)\n"}
+,{"stream_name":"stdout","time":60.231500794,"data":"Collecting huggingface-hub\u003c1.0,\u003e=0.34.0 (from transformers\u003c5)\n"}
+,{"stream_name":"stdout","time":60.238444982,"data":"  Downloading huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)\n"}
+,{"stream_name":"stdout","time":60.277709069,"data":"Requirement already satisfied: numpy\u003e=1.17 in /usr/local/lib/python3.13/dist-packages (from transformers\u003c5) (2.1.3)\n"}
+,{"stream_name":"stdout","time":60.278211003,"data":"Requirement already satisfied: packaging\u003e=20.0 in /usr/local/lib/python3.13/dist-packages (from transformers\u003c5) (26.3)\n"}
+,{"stream_name":"stdout","time":60.278879237,"data":"Requirement already satisfied: pyyaml\u003e=5.1 in /usr/local/lib/python3.13/dist-packages (from transformers\u003c5) (6.0.3)\n"}
+,{"stream_name":"stdout","time":60.279614052,"data":"Requirement already satisfied: regex!=2019.12.17 in /usr/local/lib/python3.13/dist-packages (from transformers\u003c5) (2025.11.3)\n"}
+,{"stream_name":"stdout","time":60.280245322,"data":"Requirement already satisfied: requests in /usr/local/lib/python3.13/dist-packages (from transformers\u003c5) (2.34.2)\n"}
+,{"stream_name":"stdout","time":60.579117485,"data":"Collecting tokenizers\u003c=0.23.0,\u003e=0.22.0 (from transformers\u003c5)\n"}
+,{"stream_name":"stdout","time":60.586004499,"data":"  Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)\n"}
+,{"stream_name":"stdout","time":60.606060486,"data":"Requirement already satisfied: safetensors\u003e=0.4.3 in /usr/local/lib/python3.13/dist-packages (from transformers\u003c5) (0.8.0)\n"}
+,{"stream_name":"stdout","time":60.606735719,"data":"Requirement already satisfied: tqdm\u003e=4.27 in /usr/local/lib/python3.13/dist-packages (from transformers\u003c5) (4.67.3)\n"}
+,{"stream_name":"stdout","time":60.610129325,"data":"Requirement already satisfied: fsspec\u003e=2023.5.0 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003c1.0,\u003e=0.34.0-\u003etransformers\u003c5) (2025.12.0)\n"}
+,{"stream_name":"stdout","time":60.610994685,"data":"Requirement already satisfied: hf-xet\u003c2.0.0,\u003e=1.1.3 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003c1.0,\u003e=0.34.0-\u003etransformers\u003c5) (1.7.0)\n"}
+,{"stream_name":"stdout","time":60.611894715,"data":"Requirement already satisfied: typing-extensions\u003e=3.7.4.3 in /usr/local/lib/python3.13/dist-packages (from huggingface-hub\u003c1.0,\u003e=0.34.0-\u003etransformers\u003c5) (4.16.0)\n"}
+,{"stream_name":"stdout","time":60.619308398,"data":"Requirement already satisfied: pyarrow\u003e=21.0.0 in /usr/local/lib/python3.13/dist-packages (from datasets) (23.0.1)\n"}
+,{"stream_name":"stdout","time":60.619843452,"data":"Requirement already satisfied: dill\u003c0.4.2,\u003e=0.3.0 in /usr/local/lib/python3.13/dist-packages (from datasets) (0.4.1)\n"}
+,{"stream_name":"stdout","time":60.620468939,"data":"Requirement already satisfied: pandas in /usr/local/lib/python3.13/dist-packages (from datasets) (2.3.3)\n"}
+,{"stream_name":"stdout","time":60.621221057,"data":"Requirement already satisfied: httpx\u003c1.0.0 in /usr/local/lib/python3.13/dist-packages (from datasets) (0.28.1)\n"}
+,{"stream_name":"stdout","time":60.621915603,"data":"Requirement already satisfied: xxhash in /usr/local/lib/python3.13/dist-packages (from datasets) (4.0.2)\n"}
+,{"stream_name":"stdout","time":60.62258043,"data":"Requirement already satisfied: multiprocess\u003c0.70.20 in /usr/local/lib/python3.13/dist-packages (from datasets) (0.70.19)\n"}
+,{"stream_name":"stdout","time":60.642060854,"data":"Requirement already satisfied: aiohttp!=4.0.0a0,!=4.0.0a1 in /usr/local/lib/python3.13/dist-packages (from fsspec[http]\u003c=2026.2.0,\u003e=2023.1.0-\u003edatasets) (3.14.5)\n"}
+,{"stream_name":"stdout","time":60.64354308,"data":"Requirement already satisfied: anyio in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1.0.0-\u003edatasets) (4.15.1)\n"}
+,{"stream_name":"stdout","time":60.644151269,"data":"Requirement already satisfied: certifi in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1.0.0-\u003edatasets) (2026.10.23)\n"}
+,{"stream_name":"stdout","time":60.64485934,"data":"Requirement already satisfied: httpcore==1.* in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1.0.0-\u003edatasets) (1.0.9)\n"}
+,{"stream_name":"stdout","time":60.645578801,"data":"Requirement already satisfied: idna in /usr/local/lib/python3.13/dist-packages (from httpx\u003c1.0.0-\u003edatasets) (3.20)\n"}
+,{"stream_name":"stdout","time":60.647804683,"data":"Requirement already satisfied: h11\u003e=0.16 in /usr/local/lib/python3.13/dist-packages (from httpcore==1.*-\u003ehttpx\u003c1.0.0-\u003edatasets) (0.16.0)\n"}
+,{"stream_name":"stdout","time":60.650399585,"data":"Requirement already satisfied: click\u003e=8.2.0 in /usr/local/lib/python3.13/dist-packages (from wandb) (8.5.0)\n"}
+,{"stream_name":"stdout","time":60.651007246,"data":"Requirement already satisfied: platformdirs in /usr/local/lib/python3.13/dist-packages (from wandb) (4.13.5)\n"}
+,{"stream_name":"stdout","time":60.651774871,"data":"Requirement already satisfied: protobuf!=5.28.0,!=5.29.0,\u003c8,\u003e=5 in /usr/local/lib/python3.13/dist-packages (from wandb) (7.36.2)\n"}
+,{"stream_name":"stdout","time":60.652456753,"data":"Requirement already satisfied: pydantic\u003c3,\u003e=2.6 in /usr/local/lib/python3.13/dist-packages (from wandb) (2.14.1)\n"}
+,{"stream_name":"stdout","time":60.653330587,"data":"Requirement already satisfied: sentry-sdk\u003e=2.0.0 in /usr/local/lib/python3.13/dist-packages (from wandb) (2.73.0)\n"}
+,{"stream_name":"stdout","time":60.659370051,"data":"Requirement already satisfied: annotated-types\u003e=0.6.0 in /usr/local/lib/python3.13/dist-packages (from pydantic\u003c3,\u003e=2.6-\u003ewandb) (0.8.0)\n"}
+,{"stream_name":"stdout","time":60.659973133,"data":"Requirement already satisfied: pydantic-core==2.50.1 in /usr/local/lib/python3.13/dist-packages (from pydantic\u003c3,\u003e=2.6-\u003ewandb) (2.50.1)\n"}
+,{"stream_name":"stdout","time":60.660825578,"data":"Requirement already satisfied: typing-inspection\u003e=0.4.4 in /usr/local/lib/python3.13/dist-packages (from pydantic\u003c3,\u003e=2.6-\u003ewandb) (0.4.4)\n"}
+,{"stream_name":"stdout","time":60.663239428,"data":"Requirement already satisfied: charset_normalizer\u003c4,\u003e=2 in /usr/local/lib/python3.13/dist-packages (from requests-\u003etransformers\u003c5) (3.4.9)\n"}
+,{"stream_name":"stdout","time":60.664050041,"data":"Requirement already satisfied: urllib3\u003c3,\u003e=1.26 in /usr/local/lib/python3.13/dist-packages (from requests-\u003etransformers\u003c5) (2.8.0)\n"}
+,{"stream_name":"stdout","time":60.670523895,"data":"Requirement already satisfied: aiohappyeyeballs\u003e=2.5.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-\u003efsspec[http]\u003c=2026.2.0,\u003e=2023.1.0-\u003edatasets) (2.7.1)\n"}
+,{"stream_name":"stdout","time":60.671191209,"data":"Requirement already satisfied: aiosignal\u003e=1.4.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-\u003efsspec[http]\u003c=2026.2.0,\u003e=2023.1.0-\u003edatasets) (1.4.0)\n"}
+,{"stream_name":"stdout","time":60.671901976,"data":"Requirement already satisfied: attrs\u003e=17.3.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-\u003efsspec[http]\u003c=2026.2.0,\u003e=2023.1.0-\u003edatasets) (26.1.0)\n"}
+,{"stream_name":"stdout","time":60.672656122,"data":"Requirement already satisfied: frozenlist\u003e=1.1.1 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-\u003efsspec[http]\u003c=2026.2.0,\u003e=2023.1.0-\u003edatasets) (1.8.0)\n"}
+,{"stream_name":"stdout","time":60.673372527,"data":"Requirement already satisfied: multidict\u003c8.0,\u003e=4.5 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-\u003efsspec[http]\u003c=2026.2.0,\u003e=2023.1.0-\u003edatasets) (6.9.1)\n"}
+,{"stream_name":"stdout","time":60.674030231,"data":"Requirement already satisfied: propcache\u003e=0.2.0 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-\u003efsspec[http]\u003c=2026.2.0,\u003e=2023.1.0-\u003edatasets) (0.5.4)\n"}
+,{"stream_name":"stdout","time":60.674912531,"data":"Requirement already satisfied: yarl\u003c2.0,\u003e=1.25.1 in /usr/local/lib/python3.13/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-\u003efsspec[http]\u003c=2026.2.0,\u003e=2023.1.0-\u003edatasets) (1.25.1)\n"}
+,{"stream_name":"stdout","time":60.716023724,"data":"Requirement already satisfied: python-dateutil\u003e=2.8.2 in /usr/local/lib/python3.13/dist-packages (from pandas-\u003edatasets) (2.9.0.post0)\n"}
+,{"stream_name":"stdout","time":60.716545623,"data":"Requirement already satisfied: pytz\u003e=2020.1 in /usr/local/lib/python3.13/dist-packages (from pandas-\u003edatasets) (2025.2)\n"}
+,{"stream_name":"stdout","time":60.717198101,"data":"Requirement already satisfied: tzdata\u003e=2022.7 in /usr/local/lib/python3.13/dist-packages (from pandas-\u003edatasets) (2026.5)\n"}
+,{"stream_name":"stdout","time":60.722953592,"data":"Requirement already satisfied: six\u003e=1.5 in /usr/local/lib/python3.13/dist-packages (from python-dateutil\u003e=2.8.2-\u003epandas-\u003edatasets) (1.17.0)\n"}
+,{"stream_name":"stdout","time":60.736322551,"data":"Downloading transformers-4.57.6-py3-none-any.whl (12.0 MB)\n"}
+,{"stream_name":"stdout","time":61.01754265,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 45.5 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":61.024086747,"data":"Downloading huggingface_hub-0.36.2-py3-none-any.whl (566 kB)\n"}
+,{"stream_name":"stdout","time":61.052299448,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 11.9 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":61.059884162,"data":"Downloading tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)\n"}
+,{"stream_name":"stdout","time":61.103472793,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 73.1 MB/s  0:00:00\n"}
+,{"stream_name":"stdout","time":62.222262713,"data":"Installing collected packages: huggingface-hub, tokenizers, transformers\n"}
+,{"stream_name":"stdout","time":62.222822871,"data":"  Attempting uninstall: huggingface-hub\n"}
+,{"stream_name":"stdout","time":62.244901799,"data":"    Found existing installation: huggingface_hub 1.33.0\n"}
+,{"stream_name":"stdout","time":62.268199493,"data":"    Uninstalling huggingface_hub-1.33.0:\n"}
+,{"stream_name":"stdout","time":62.439882874,"data":"      Successfully uninstalled huggingface_hub-1.33.0\n"}
+,{"stream_name":"stdout","time":62.801313283,"data":"  Attempting uninstall: tokenizers\n"}
+,{"stream_name":"stdout","time":62.830791317,"data":"    Found existing installation: tokenizers 0.23.3\n"}
+,{"stream_name":"stdout","time":62.840914603,"data":"    Uninstalling tokenizers-0.23.3:\n"}
+,{"stream_name":"stdout","time":62.910718879,"data":"      Successfully uninstalled tokenizers-0.23.3\n"}
+,{"stream_name":"stdout","time":63.00139525,"data":"  Attempting uninstall: transformers\n"}
+,{"stream_name":"stdout","time":63.030445571,"data":"    Found existing installation: transformers 5.20.2\n"}
+,{"stream_name":"stdout","time":63.524749164,"data":"    Uninstalling transformers-5.20.2:\n"}
+,{"stream_name":"stdout","time":66.016779602,"data":"      Successfully uninstalled transformers-5.20.2\n"}
+,{"stream_name":"stdout","time":73.871998906,"data":"\n"}
+,{"stream_name":"stdout","time":73.87315192,"data":"ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n"}
+,{"stream_name":"stdout","time":73.873175114,"data":"gradio-client 2.7.2 requires huggingface-hub\u003c3.0,\u003e=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.\n"}
+,{"stream_name":"stdout","time":73.873180887,"data":"gradio 6.30.0 requires huggingface-hub\u003c3.0,\u003e=1.16.0, but you have huggingface-hub 0.36.2 which is incompatible.\n"}
+,{"stream_name":"stdout","time":73.873184819,"data":"gradio 6.30.0 requires pillow\u003c13.0,\u003e=8.0, but you have pillow 13.0.0 which is incompatible.\n"}
+,{"stream_name":"stdout","time":73.873188606,"data":"diffusers 0.42.0 requires huggingface-hub\u003c3.0,\u003e=1.32.0, but you have huggingface-hub 0.36.2 which is incompatible.\n"}
+,{"stream_name":"stdout","time":73.945695363,"data":"Successfully installed huggingface-hub-0.36.2 tokenizers-0.22.2 transformers-4.57.6\n"}
+,{"stream_name":"stdout","time":74.094634354,"data":"[runner 2026-11-14T15:36:08Z] exit 0\n"}
+,{"stream_name":"stdout","time":74.094861844,"data":"[runner 2026-11-14T15:36:08Z] $ /usr/bin/python3 /kaggle/working/_versions.py\n"}
+,{"stream_name":"stdout","time":89.706001551,"data":"VERSIONS_JSON={\"torch\": \"2.11.0+cu130\", \"triton\": \"3.6.0\", \"mamba-ssm\": \"2.3.2.post1+cu130torch2.11sm75\", \"causal-conv1d\": \"1.7.0+cu130torch2.11sm75\", \"transformers\": \"4.57.6\", \"datasets\": \"4.8.5\", \"wandb\": \"0.28.1\", \"einops\": \"0.8.2\", \"numpy\": \"2.1.3\", \"mamba_ssm_import\": \"ok 2.3.2.post1\", \"causal_conv1d_import\": \"ok 1.7.0\"}\n"}
+,{"stream_name":"stdout","time":93.50327866,"data":"[runner 2026-11-14T15:36:28Z] exit 0\n"}
+,{"stream_name":"stdout","time":93.503594496,"data":"[runner 2026-11-14T15:36:28Z] $ /usr/bin/python3 -m pip freeze \u003e /kaggle/working/output/pip_freeze.txt\n"}
+,{"stream_name":"stdout","time":94.471474964,"data":"[runner 2026-11-14T15:36:29Z] exit 0\n"}
+,{"stream_name":"stderr","time":102.680403211,"data":"/kaggle/src/script.py:412: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":102.680436481,"data":"  t.extractall(os.path.dirname(TRITON_CACHE) or \"/tmp\")\n"}
+,{"stream_name":"stdout","time":104.376962064,"data":"[runner 2026-11-14T15:36:39Z] restored Triton cache from /kaggle/input/notebooks/parthgarg101/abr-q005/output/triton_cache.tar.gz\n"}
+,{"stream_name":"stdout","time":104.379540498,"data":"[runner 2026-11-14T15:36:39Z] running 3 named runs on 2 GPU(s)\n"}
+,{"stream_name":"stdout","time":118.170098713,"data":"[runner 2026-11-14T15:36:52Z] [Alternate-Blocks-4L_s123] $ python experiments/full_scale/train.py --config Alternate-Blocks-4L --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 11.471\n"}
+,{"stream_name":"stdout","time":118.201991423,"data":"[runner 2026-11-14T15:36:52Z] [ABR-2L-noCBSC_s123] restoring previous session output from /kaggle/input/notebooks/parthgarg101/abr-q005/output/ABR-2L-noCBSC_s123\n"}
+,{"stream_name":"stdout","time":119.061245152,"data":"[runner 2026-11-14T15:36:53Z] [ABR-2L-noCBSC_s123] $ python experiments/full_scale/train.py --config ABR-2L-noCBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 11.471\n"}
+,{"stream_name":"stdout","time":132.655420339,"data":"[Alternate-Blocks-4L_s123] \n"}
+,{"stream_name":"stdout","time":132.655450489,"data":"[Alternate-Blocks-4L_s123] ===== session start 2026-11-14T15:37:07+00:00 | run_id=Alternate-Blocks-4L_seed123_20261114T153706Z | run=Alternate-Blocks-4L_s123_b32 | device=cuda | mamba_backend=mamba_ssm | reportable=True =====\n"}
+,{"stream_name":"stdout","time":132.659513117,"data":"[Alternate-Blocks-4L_s123] [train] Alternate-Blocks-4L seed=123 params=18,884,352 steps=60000 B=8 T=256 block=32\n"}
+,{"stream_name":"stdout","time":133.03520364,"data":"[ABR-2L-noCBSC_s123] \n"}
+,{"stream_name":"stdout","time":133.035231304,"data":"[ABR-2L-noCBSC_s123] ===== session start 2026-11-14T15:37:07+00:00 | run_id=ABR-2L-noCBSC_seed123_20261114T114156Z | run=ABR-2L-noCBSC_s123_b32 | device=cuda | mamba_backend=mamba_ssm | reportable=True =====\n"}
+,{"stream_name":"stdout","time":133.105049426,"data":"[ABR-2L-noCBSC_s123] [train] resumed from step 14591\n"}
+,{"stream_name":"stdout","time":133.105073547,"data":"[ABR-2L-noCBSC_s123] [train] ABR-2L-noCBSC seed=123 params=15,911,168 steps=60000 B=8 T=256 block=32\n"}
+,{"stream_name":"stdout","time":135.438564147,"data":"[ABR-2L-noCBSC_s123] wandb: WARNING `resume` will be ignored since W\u0026B syncing is set to `offline`. Starting a new run with run id 52iru8xc.\n"}
+,{"stream_name":"stdout","time":135.438585292,"data":"[Alternate-Blocks-4L_s123] wandb: WARNING `resume` will be ignored since W\u0026B syncing is set to `offline`. Starting a new run with run id phucxbs1.\n"}
+,{"stream_name":"stdout","time":135.447008382,"data":"[ABR-2L-noCBSC_s123] wandb: Tracking run with wandb version 0.28.1\n"}
+,{"stream_name":"stdout","time":135.447386245,"data":"[Alternate-Blocks-4L_s123] wandb: Tracking run with wandb version 0.28.1\n"}
+,{"stream_name":"stdout","time":135.447403494,"data":"[ABR-2L-noCBSC_s123] wandb: W\u0026B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.\n"}
+,{"stream_name":"stdout","time":135.447741818,"data":"[Alternate-Blocks-4L_s123] wandb: W\u0026B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.\n"}
+,{"stream_name":"stdout","time":135.447753155,"data":"[Alternate-Blocks-4L_s123] wandb: Run data is saved locally in /kaggle/working/output/Alternate-Blocks-4L_s123/Alternate-Blocks-4L_seed123_20261114T153706Z/wandb/offline-run-20261114_153709-phucxbs1\n"}
+,{"stream_name":"stdout","time":135.447757805,"data":"[Alternate-Blocks-4L_s123] wandb: View this run in the terminal with `wandb leet`\n"}
+,{"stream_name":"stdout","time":135.449282332,"data":"[ABR-2L-noCBSC_s123] wandb: Run data is saved locally in /kaggle/working/output/ABR-2L-noCBSC_s123/ABR-2L-noCBSC_seed123_20261114T114156Z/wandb/offline-run-20261114_153709-52iru8xc\n"}
+,{"stream_name":"stdout","time":135.449332328,"data":"[ABR-2L-noCBSC_s123] wandb: View this run in the terminal with `wandb leet`\n"}
+,{"stream_name":"stdout","time":138.692779344,"data":"[ABR-2L-noCBSC_s123] /usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:900.)\n"}
+,{"stream_name":"stdout","time":138.692819704,"data":"[ABR-2L-noCBSC_s123]   return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass\n"}
+,{"stream_name":"stdout","time":138.702830045,"data":"[Alternate-Blocks-4L_s123] /usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:900.)\n"}
+,{"stream_name":"stdout","time":138.702855191,"data":"[Alternate-Blocks-4L_s123]   return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass\n"}
+,{"stream_name":"stdout","time":176.8985151,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 15000 lr=2.58e-04 train=5.3646 val~=5.2606 (ppl 192.6) | transformer_pct=0.464 mamba_pct=0.536 entropy=0.691 block_entropy=0.065 transformer_frac_hard=0.461\n"}
+,{"stream_name":"stdout","time":256.674571959,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step=  1000 lr=3.00e-04 train=7.3096 val~=6.2506 (ppl 518.3) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":274.135619503,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 16000 lr=2.53e-04 train=5.3379 val~=5.2379 (ppl 188.3) | transformer_pct=0.461 mamba_pct=0.539 entropy=0.690 block_entropy=0.065 transformer_frac_hard=0.469\n"}
+,{"stream_name":"stdout","time":372.88009847,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 17000 lr=2.47e-04 train=5.3349 val~=5.2325 (ppl 187.3) | transformer_pct=0.387 mamba_pct=0.613 entropy=0.667 block_entropy=0.055 transformer_frac_hard=0.383\n"}
+,{"stream_name":"stdout","time":380.381512146,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step=  2000 lr=3.00e-04 train=6.1161 val~=5.9139 (ppl 370.1) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":471.588838228,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 18000 lr=2.40e-04 train=5.3113 val~=5.2153 (ppl 184.1) | transformer_pct=0.504 mamba_pct=0.496 entropy=0.693 block_entropy=0.061 transformer_frac_hard=0.508\n"}
+,{"stream_name":"stdout","time":504.931116387,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step=  3000 lr=2.99e-04 train=5.8839 val~=5.7260 (ppl 306.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":570.710401206,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 19000 lr=2.34e-04 train=5.2926 val~=5.1987 (ppl 181.0) | transformer_pct=0.499 mamba_pct=0.501 entropy=0.693 block_entropy=0.048 transformer_frac_hard=0.508\n"}
+,{"stream_name":"stdout","time":629.061405583,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step=  4000 lr=2.97e-04 train=5.7651 val~=5.6186 (ppl 275.5) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":669.259345021,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 20000 lr=2.27e-04 train=5.2648 val~=5.1931 (ppl 180.0) | transformer_pct=0.509 mamba_pct=0.491 entropy=0.693 block_entropy=0.096 transformer_frac_hard=0.523\n"}
+,{"stream_name":"stdout","time":753.592087514,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step=  5000 lr=2.96e-04 train=5.6482 val~=5.5177 (ppl 249.1) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":768.257853438,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 21000 lr=2.20e-04 train=5.2633 val~=5.1798 (ppl 177.7) | transformer_pct=0.457 mamba_pct=0.543 entropy=0.689 block_entropy=0.073 transformer_frac_hard=0.469\n"}
+,{"stream_name":"stdout","time":867.003967706,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 22000 lr=2.13e-04 train=5.2495 val~=5.1581 (ppl 173.8) | transformer_pct=0.463 mamba_pct=0.537 entropy=0.690 block_entropy=0.081 transformer_frac_hard=0.461\n"}
+,{"stream_name":"stdout","time":877.761916781,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step=  6000 lr=2.94e-04 train=5.5692 val~=5.4561 (ppl 234.2) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":966.070133415,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 23000 lr=2.06e-04 train=5.2352 val~=5.1423 (ppl 171.1) | transformer_pct=0.457 mamba_pct=0.543 entropy=0.689 block_entropy=0.069 transformer_frac_hard=0.461\n"}
+,{"stream_name":"stdout","time":1002.26704633,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step=  7000 lr=2.91e-04 train=5.5120 val~=5.3979 (ppl 220.9) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":1064.865233459,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 24000 lr=1.99e-04 train=5.2249 val~=5.1335 (ppl 169.6) | transformer_pct=0.574 mamba_pct=0.426 entropy=0.682 block_entropy=0.073 transformer_frac_hard=0.578\n"}
+,{"stream_name":"stdout","time":1126.370576092,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step=  8000 lr=2.88e-04 train=5.4631 val~=5.3376 (ppl 208.0) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":1163.926455935,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 25000 lr=1.91e-04 train=5.2067 val~=5.1223 (ppl 167.7) | transformer_pct=0.492 mamba_pct=0.508 entropy=0.693 block_entropy=0.047 transformer_frac_hard=0.492\n"}
+,{"stream_name":"stdout","time":1250.910915555,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step=  9000 lr=2.85e-04 train=5.4126 val~=5.2941 (ppl 199.2) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":1262.674152361,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 26000 lr=1.83e-04 train=5.2001 val~=5.0967 (ppl 163.5) | transformer_pct=0.478 mamba_pct=0.522 entropy=0.692 block_entropy=0.057 transformer_frac_hard=0.477\n"}
+,{"stream_name":"stdout","time":1361.76748646,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 27000 lr=1.76e-04 train=5.1953 val~=5.0953 (ppl 163.3) | transformer_pct=0.575 mamba_pct=0.425 entropy=0.682 block_entropy=0.075 transformer_frac_hard=0.570\n"}
+,{"stream_name":"stdout","time":1375.100896782,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 10000 lr=2.82e-04 train=5.3674 val~=5.2684 (ppl 194.1) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":1460.595968409,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 28000 lr=1.68e-04 train=5.1766 val~=5.0842 (ppl 161.5) | transformer_pct=0.488 mamba_pct=0.512 entropy=0.693 block_entropy=0.082 transformer_frac_hard=0.492\n"}
+,{"stream_name":"stdout","time":1499.700871658,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 11000 lr=2.78e-04 train=5.3519 val~=5.2270 (ppl 186.2) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":1559.543099741,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 29000 lr=1.60e-04 train=5.1690 val~=5.0727 (ppl 159.6) | transformer_pct=0.568 mamba_pct=0.432 entropy=0.684 block_entropy=0.073 transformer_frac_hard=0.570\n"}
+,{"stream_name":"stdout","time":1623.910910321,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 12000 lr=2.73e-04 train=5.3101 val~=5.1989 (ppl 181.1) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":1658.178727043,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 30000 lr=1.52e-04 train=5.1625 val~=5.0594 (ppl 157.5) | transformer_pct=0.520 mamba_pct=0.480 entropy=0.692 block_entropy=0.121 transformer_frac_hard=0.516\n"}
+,{"stream_name":"stdout","time":1748.448670391,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 13000 lr=2.68e-04 train=5.2990 val~=5.1693 (ppl 175.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":1757.265072718,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 31000 lr=1.44e-04 train=5.1485 val~=5.0561 (ppl 157.0) | transformer_pct=0.532 mamba_pct=0.468 entropy=0.691 block_entropy=0.079 transformer_frac_hard=0.531\n"}
+,{"stream_name":"stdout","time":1856.078227285,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 32000 lr=1.36e-04 train=5.1346 val~=5.0565 (ppl 157.0) | transformer_pct=0.472 mamba_pct=0.528 entropy=0.692 block_entropy=0.059 transformer_frac_hard=0.477\n"}
+,{"stream_name":"stdout","time":1872.655975212,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 14000 lr=2.63e-04 train=5.2675 val~=5.1510 (ppl 172.6) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":1955.19156463,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 33000 lr=1.28e-04 train=5.1283 val~=5.0507 (ppl 156.1) | transformer_pct=0.487 mamba_pct=0.513 entropy=0.693 block_entropy=0.065 transformer_frac_hard=0.484\n"}
+,{"stream_name":"stdout","time":1997.211875135,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 15000 lr=2.58e-04 train=5.2471 val~=5.1343 (ppl 169.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":2053.962189482,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 34000 lr=1.20e-04 train=5.1288 val~=5.0487 (ppl 155.8) | transformer_pct=0.510 mamba_pct=0.490 entropy=0.693 block_entropy=0.063 transformer_frac_hard=0.508\n"}
+,{"stream_name":"stdout","time":2121.376252389,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 16000 lr=2.53e-04 train=5.2193 val~=5.1180 (ppl 167.0) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":2153.089484825,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 35000 lr=1.13e-04 train=5.1286 val~=5.0373 (ppl 154.0) | transformer_pct=0.544 mamba_pct=0.456 entropy=0.689 block_entropy=0.082 transformer_frac_hard=0.547\n"}
+,{"stream_name":"stdout","time":2245.912957242,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 17000 lr=2.47e-04 train=5.2123 val~=5.0947 (ppl 163.2) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":2251.755075708,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 36000 lr=1.05e-04 train=5.1049 val~=5.0251 (ppl 152.2) | transformer_pct=0.505 mamba_pct=0.495 entropy=0.693 block_entropy=0.063 transformer_frac_hard=0.508\n"}
+,{"stream_name":"stdout","time":2350.794187643,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 37000 lr=9.77e-05 train=5.1009 val~=5.0237 (ppl 152.0) | transformer_pct=0.460 mamba_pct=0.540 entropy=0.690 block_entropy=0.073 transformer_frac_hard=0.453\n"}
+,{"stream_name":"stdout","time":2370.070455958,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 18000 lr=2.40e-04 train=5.1839 val~=5.0715 (ppl 159.4) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":2449.487570914,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 38000 lr=9.03e-05 train=5.0974 val~=5.0138 (ppl 150.5) | transformer_pct=0.472 mamba_pct=0.528 entropy=0.692 block_entropy=0.083 transformer_frac_hard=0.477\n"}
+,{"stream_name":"stdout","time":2494.575858458,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 19000 lr=2.34e-04 train=5.1637 val~=5.0522 (ppl 156.4) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":2548.54558295,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 39000 lr=8.31e-05 train=5.0950 val~=5.0102 (ppl 149.9) | transformer_pct=0.444 mamba_pct=0.556 entropy=0.687 block_entropy=0.062 transformer_frac_hard=0.461\n"}
+,{"stream_name":"stdout","time":2618.782248053,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 20000 lr=2.27e-04 train=5.1333 val~=5.0433 (ppl 155.0) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":2647.211717326,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 40000 lr=7.61e-05 train=5.0890 val~=5.0021 (ppl 148.7) | transformer_pct=0.484 mamba_pct=0.516 entropy=0.693 block_entropy=0.075 transformer_frac_hard=0.484\n"}
+,{"stream_name":"stdout","time":2743.403016446,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 21000 lr=2.20e-04 train=5.1319 val~=5.0280 (ppl 152.6) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":2746.400517254,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 41000 lr=6.94e-05 train=5.0833 val~=4.9960 (ppl 147.8) | transformer_pct=0.550 mamba_pct=0.450 entropy=0.688 block_entropy=0.070 transformer_frac_hard=0.562\n"}
+,{"stream_name":"stdout","time":2845.178075874,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 42000 lr=6.28e-05 train=5.0655 val~=4.9851 (ppl 146.2) | transformer_pct=0.420 mamba_pct=0.580 entropy=0.680 block_entropy=0.092 transformer_frac_hard=0.422\n"}
+,{"stream_name":"stdout","time":2867.492787576,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 22000 lr=2.13e-04 train=5.1172 val~=5.0153 (ppl 150.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":2944.270571503,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 43000 lr=5.65e-05 train=5.0636 val~=4.9784 (ppl 145.2) | transformer_pct=0.519 mamba_pct=0.481 entropy=0.692 block_entropy=0.077 transformer_frac_hard=0.508\n"}
+,{"stream_name":"stdout","time":2992.049437376,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 23000 lr=2.06e-04 train=5.1017 val~=4.9940 (ppl 147.5) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":3043.017695442,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 44000 lr=5.04e-05 train=5.0665 val~=4.9728 (ppl 144.4) | transformer_pct=0.455 mamba_pct=0.545 entropy=0.689 block_entropy=0.081 transformer_frac_hard=0.461\n"}
+,{"stream_name":"stdout","time":3116.264057714,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 24000 lr=1.99e-04 train=5.0926 val~=4.9813 (ppl 145.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":3142.141949957,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 45000 lr=4.46e-05 train=5.0542 val~=4.9621 (ppl 142.9) | transformer_pct=0.545 mamba_pct=0.455 entropy=0.689 block_entropy=0.097 transformer_frac_hard=0.539\n"}
+,{"stream_name":"stdout","time":3240.819452743,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 25000 lr=1.91e-04 train=5.0725 val~=4.9672 (ppl 143.6) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":3240.908732955,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 46000 lr=3.91e-05 train=5.0403 val~=4.9555 (ppl 142.0) | transformer_pct=0.522 mamba_pct=0.478 entropy=0.692 block_entropy=0.085 transformer_frac_hard=0.516\n"}
+,{"stream_name":"stdout","time":3339.966739218,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 47000 lr=3.40e-05 train=5.0472 val~=4.9505 (ppl 141.2) | transformer_pct=0.574 mamba_pct=0.426 entropy=0.682 block_entropy=0.075 transformer_frac_hard=0.586\n"}
+,{"stream_name":"stdout","time":3364.940023189,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 26000 lr=1.83e-04 train=5.0669 val~=4.9541 (ppl 141.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":3438.662076675,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 48000 lr=2.91e-05 train=5.0354 val~=4.9464 (ppl 140.7) | transformer_pct=0.485 mamba_pct=0.515 entropy=0.693 block_entropy=0.062 transformer_frac_hard=0.484\n"}
+,{"stream_name":"stdout","time":3489.430010582,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 27000 lr=1.76e-04 train=5.0610 val~=4.9596 (ppl 142.5) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":3537.719995187,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 49000 lr=2.46e-05 train=5.0234 val~=4.9432 (ppl 140.2) | transformer_pct=0.536 mamba_pct=0.464 entropy=0.691 block_entropy=0.064 transformer_frac_hard=0.539\n"}
+,{"stream_name":"stdout","time":3613.607539367,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 28000 lr=1.68e-04 train=5.0405 val~=4.9410 (ppl 139.9) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":3636.262175771,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 50000 lr=2.04e-05 train=5.0185 val~=4.9356 (ppl 139.2) | transformer_pct=0.508 mamba_pct=0.492 entropy=0.693 block_entropy=0.100 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":3735.292757005,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 51000 lr=1.66e-05 train=5.0167 val~=4.9321 (ppl 138.7) | transformer_pct=0.542 mamba_pct=0.458 entropy=0.690 block_entropy=0.080 transformer_frac_hard=0.539\n"}
+,{"stream_name":"stdout","time":3738.249900988,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 29000 lr=1.60e-04 train=5.0345 val~=4.9300 (ppl 138.4) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":3833.975896457,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 52000 lr=1.32e-05 train=5.0064 val~=4.9277 (ppl 138.1) | transformer_pct=0.425 mamba_pct=0.575 entropy=0.682 block_entropy=0.069 transformer_frac_hard=0.414\n"}
+,{"stream_name":"stdout","time":3862.378323919,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 30000 lr=1.52e-04 train=5.0259 val~=4.9164 (ppl 136.5) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":3933.041093505,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 53000 lr=1.01e-05 train=5.0172 val~=4.9231 (ppl 137.4) | transformer_pct=0.545 mamba_pct=0.455 entropy=0.689 block_entropy=0.066 transformer_frac_hard=0.555\n"}
+,{"stream_name":"stdout","time":3986.851011704,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 31000 lr=1.44e-04 train=5.0116 val~=4.9083 (ppl 135.4) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":4031.710039388,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 54000 lr=7.46e-06 train=5.0083 val~=4.9224 (ppl 137.3) | transformer_pct=0.424 mamba_pct=0.576 entropy=0.682 block_entropy=0.075 transformer_frac_hard=0.422\n"}
+,{"stream_name":"stdout","time":4111.045440664,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 32000 lr=1.36e-04 train=4.9951 val~=4.9073 (ppl 135.3) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":4130.71657617,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 55000 lr=5.20e-06 train=5.0076 val~=4.9206 (ppl 137.1) | transformer_pct=0.530 mamba_pct=0.470 entropy=0.691 block_entropy=0.046 transformer_frac_hard=0.531\n"}
+,{"stream_name":"stdout","time":4229.424650986,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 56000 lr=3.33e-06 train=5.0036 val~=4.9192 (ppl 136.9) | transformer_pct=0.502 mamba_pct=0.498 entropy=0.693 block_entropy=0.082 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":4235.568827113,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 33000 lr=1.28e-04 train=4.9871 val~=4.8932 (ppl 133.4) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":4328.522602616,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 57000 lr=1.88e-06 train=5.0040 val~=4.9190 (ppl 136.9) | transformer_pct=0.439 mamba_pct=0.561 entropy=0.686 block_entropy=0.085 transformer_frac_hard=0.438\n"}
+,{"stream_name":"stdout","time":4359.672015163,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 34000 lr=1.20e-04 train=4.9863 val~=4.8878 (ppl 132.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":4427.201420266,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 58000 lr=8.36e-07 train=5.0043 val~=4.9176 (ppl 136.7) | transformer_pct=0.416 mamba_pct=0.584 entropy=0.679 block_entropy=0.090 transformer_frac_hard=0.414\n"}
+,{"stream_name":"stdout","time":4484.200048534,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 35000 lr=1.13e-04 train=4.9825 val~=4.8722 (ppl 130.6) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":4526.25329223,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 59000 lr=2.09e-07 train=5.0057 val~=4.9177 (ppl 136.7) | transformer_pct=0.533 mamba_pct=0.467 entropy=0.691 block_entropy=0.091 transformer_frac_hard=0.539\n"}
+,{"stream_name":"stdout","time":4608.346913314,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 36000 lr=1.05e-04 train=4.9551 val~=4.8563 (ppl 128.6) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":4625.130304512,"data":"[ABR-2L-noCBSC_s123]   [ABR-2L-noCBSC s=123] step= 60000 lr=0.00e+00 train=4.9898 val~=4.9176 (ppl 136.7) | transformer_pct=0.509 mamba_pct=0.491 entropy=0.693 block_entropy=0.076 transformer_frac_hard=0.508\n"}
+,{"stream_name":"stdout","time":4625.482643188,"data":"[ABR-2L-noCBSC_s123] [train] full evaluation on validation and test splits ...\n"}
+,{"stream_name":"stdout","time":4642.186685843,"data":"[ABR-2L-noCBSC_s123] [train] FINAL val loss=4.9816 ppl=145.71 | test loss=5.0051 ppl=149.17 | wall=1.66 h\n"}
+,{"stream_name":"stdout","time":4642.200933111,"data":"[ABR-2L-noCBSC_s123] wandb: \n"}
+,{"stream_name":"stdout","time":4642.200957889,"data":"[ABR-2L-noCBSC_s123] wandb: Run history:\n"}
+,{"stream_name":"stdout","time":4642.200984044,"data":"[ABR-2L-noCBSC_s123] wandb:                            lr ███▇▇▆▆▆▅▅▅▅▅▄▄▄▃▃▃▃▃▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":4642.200991875,"data":"[ABR-2L-noCBSC_s123] wandb:         routing/block_entropy ▃▃▂▃▁▇▅▄▅▁▂▅▆▅▅▃▃▃▆▃▆▃▅▄▇▅▆▆▅▃▃█▅▄▅▁▆▆▇▇\n"}
+,{"stream_name":"stdout","time":4642.20099794,"data":"[ABR-2L-noCBSC_s123] wandb:               routing/entropy ▇▇▁███▇▇▅██▅█▅▇███▇██▆█▇▄█▇█▅█▇█▇▇▅██▆▄▇\n"}
+,{"stream_name":"stdout","time":4642.201003875,"data":"[ABR-2L-noCBSC_s123] wandb:             routing/mamba_pct ▅▅█▄▄▃▅▅▁▄▅▁▄▁▃▅▄▃▂▄▅▆▄▂▇▃▅▃▁▄▂▃▂▂▇▃▄▆▇▃\n"}
+,{"stream_name":"stdout","time":4642.201022605,"data":"[ABR-2L-noCBSC_s123] wandb:                 routing/tau/0 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":4642.201027589,"data":"[ABR-2L-noCBSC_s123] wandb:                 routing/tau/1 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":4642.201032873,"data":"[ABR-2L-noCBSC_s123] wandb: routing/transformer_frac_hard ▄▄▁▅▅▆▄▄█▅▄▇▅▇▆▄▅▅▇▅▄▄▅▇▂▅▄▆█▅▆▅▆▇▂▆▅▃▂▆\n"}
+,{"stream_name":"stdout","time":4642.201051125,"data":"[ABR-2L-noCBSC_s123] wandb:       routing/transformer_pct ▄▄▁▅▅▆▄▄█▅▄█▅█▆▄▅▆▇▅▄▃▅▇▂▆▄▆█▅▇▆▇▇▂▆▅▃▂▆\n"}
+,{"stream_name":"stdout","time":4642.201056364,"data":"[ABR-2L-noCBSC_s123] wandb:           tau/layers.0.router ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":4642.201060816,"data":"[ABR-2L-noCBSC_s123] wandb:           tau/layers.1.router ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":4642.201065216,"data":"[ABR-2L-noCBSC_s123] wandb:                            +8 ...\n"}
+,{"stream_name":"stdout","time":4642.201068912,"data":"[ABR-2L-noCBSC_s123] wandb: \n"}
+,{"stream_name":"stdout","time":4642.201072657,"data":"[ABR-2L-noCBSC_s123] wandb: Run summary:\n"}
+,{"stream_name":"stdout","time":4642.201078067,"data":"[ABR-2L-noCBSC_s123] wandb:                     gpu_hours 1.66301\n"}
+,{"stream_name":"stdout","time":4642.201082,"data":"[ABR-2L-noCBSC_s123] wandb:                            lr 0\n"}
+,{"stream_name":"stdout","time":4642.201085832,"data":"[ABR-2L-noCBSC_s123] wandb:                        params 15911168\n"}
+,{"stream_name":"stdout","time":4642.201102925,"data":"[ABR-2L-noCBSC_s123] wandb:         routing/block_entropy 0.07614\n"}
+,{"stream_name":"stdout","time":4642.201106443,"data":"[ABR-2L-noCBSC_s123] wandb:               routing/entropy 0.69297\n"}
+,{"stream_name":"stdout","time":4642.201110574,"data":"[ABR-2L-noCBSC_s123] wandb:             routing/mamba_pct 0.49053\n"}
+,{"stream_name":"stdout","time":4642.201114339,"data":"[ABR-2L-noCBSC_s123] wandb:                 routing/tau/0 0.1\n"}
+,{"stream_name":"stdout","time":4642.201118408,"data":"[ABR-2L-noCBSC_s123] wandb:                 routing/tau/1 0.1\n"}
+,{"stream_name":"stdout","time":4642.201121904,"data":"[ABR-2L-noCBSC_s123] wandb: routing/transformer_frac_hard 0.50781\n"}
+,{"stream_name":"stdout","time":4642.201125399,"data":"[ABR-2L-noCBSC_s123] wandb:       routing/transformer_pct 0.50947\n"}
+,{"stream_name":"stdout","time":4642.20112933,"data":"[ABR-2L-noCBSC_s123] wandb:                           +15 ...\n"}
+,{"stream_name":"stdout","time":4642.201132869,"data":"[ABR-2L-noCBSC_s123] wandb: \n"}
+,{"stream_name":"stdout","time":4642.201265211,"data":"[ABR-2L-noCBSC_s123] wandb: You can sync this run to the cloud by running:\n"}
+,{"stream_name":"stdout","time":4642.201277625,"data":"[ABR-2L-noCBSC_s123] wandb: wandb sync /kaggle/working/output/ABR-2L-noCBSC_s123/ABR-2L-noCBSC_seed123_20261114T114156Z/wandb/offline-run-20261114_153709-52iru8xc\n"}
+,{"stream_name":"stdout","time":4642.201373545,"data":"[ABR-2L-noCBSC_s123] wandb: Find logs at: /kaggle/working/output/ABR-2L-noCBSC_s123/ABR-2L-noCBSC_seed123_20261114T114156Z/wandb/offline-run-20261114_153709-52iru8xc/logs\n"}
+,{"stream_name":"stdout","time":4642.203342166,"data":"[ABR-2L-noCBSC_s123] ===== session end 2026-11-14T16:52:16+00:00 | status=done =====\n"}
+,{"stream_name":"stdout","time":4642.560556307,"data":"[ABR-2L-noCBSC_s123] [train] result -\u003e /kaggle/working/output/ABR-2L-noCBSC_s123/ABR-2L-noCBSC_seed123_20261114T114156Z/result.json\n"}
+,{"stream_name":"stdout","time":4642.929966343,"data":"[ABR-2L-noCBSC_s123] Exception ignored in: \u003cprovenance._Tee object at 0x78203b1bba60\u003e\n"}
+,{"stream_name":"stdout","time":4642.929991616,"data":"[ABR-2L-noCBSC_s123] Traceback (most recent call last):\n"}
+,{"stream_name":"stdout","time":4642.929995802,"data":"[ABR-2L-noCBSC_s123]   File \"/kaggle/working/repo/experiments/full_scale/provenance.py\", line 531, in flush\n"}
+,{"stream_name":"stdout","time":4642.930438794,"data":"[ABR-2L-noCBSC_s123]     st.flush()\n"}
+,{"stream_name":"stdout","time":4642.930467771,"data":"[ABR-2L-noCBSC_s123] ValueError: I/O operation on closed file.\n"}
+,{"stream_name":"stdout","time":4644.235466397,"data":"[runner 2026-11-14T16:52:19Z] exit 0\n"}
+,{"stream_name":"stdout","time":4652.703599058,"data":"[runner 2026-11-14T16:52:27Z] [ABR-2L-CBSC_s123] restoring previous session output from /kaggle/input/notebooks/parthgarg101/abr-q005/output/ABR-2L-CBSC_s123\n"}
+,{"stream_name":"stdout","time":4653.717132664,"data":"[runner 2026-11-14T16:52:28Z] [ABR-2L-CBSC_s123] $ python experiments/full_scale/train.py --config ABR-2L-CBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours 10.210\n"}
+,{"stream_name":"stdout","time":4667.349131847,"data":"[ABR-2L-CBSC_s123] \n"}
+,{"stream_name":"stdout","time":4667.349180849,"data":"[ABR-2L-CBSC_s123] ===== session start 2026-11-14T16:52:42+00:00 | run_id=ABR-2L-CBSC_seed123_20261114T102939Z | run=ABR-2L-CBSC_s123_b32 | device=cuda | mamba_backend=mamba_ssm | reportable=True =====\n"}
+,{"stream_name":"stdout","time":4667.415762025,"data":"[ABR-2L-CBSC_s123] [train] resumed from step 59575\n"}
+,{"stream_name":"stdout","time":4667.415869818,"data":"[ABR-2L-CBSC_s123] [train] ABR-2L-CBSC seed=123 params=15,911,168 steps=60000 B=8 T=256 block=32\n"}
+,{"stream_name":"stdout","time":4668.516979642,"data":"[ABR-2L-CBSC_s123] wandb: WARNING `resume` will be ignored since W\u0026B syncing is set to `offline`. Starting a new run with run id hutlg4ho.\n"}
+,{"stream_name":"stdout","time":4668.523641334,"data":"[ABR-2L-CBSC_s123] wandb: Tracking run with wandb version 0.28.1\n"}
+,{"stream_name":"stdout","time":4668.523660681,"data":"[ABR-2L-CBSC_s123] wandb: W\u0026B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.\n"}
+,{"stream_name":"stdout","time":4668.523665555,"data":"[ABR-2L-CBSC_s123] wandb: Run data is saved locally in /kaggle/working/output/ABR-2L-CBSC_s123/ABR-2L-CBSC_seed123_20261114T102939Z/wandb/offline-run-20261114_165242-hutlg4ho\n"}
+,{"stream_name":"stdout","time":4668.52366985,"data":"[ABR-2L-CBSC_s123] wandb: View this run in the terminal with `wandb leet`\n"}
+,{"stream_name":"stdout","time":4670.432729046,"data":"[ABR-2L-CBSC_s123] /usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:900.)\n"}
+,{"stream_name":"stdout","time":4670.432762242,"data":"[ABR-2L-CBSC_s123]   return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass\n"}
+,{"stream_name":"stdout","time":4712.539771844,"data":"[ABR-2L-CBSC_s123]   [ABR-2L-CBSC s=123] step= 60000 lr=0.00e+00 train=4.9575 val~=4.8690 (ppl 130.2) | transformer_pct=0.512 mamba_pct=0.488 entropy=0.693 block_entropy=0.074 transformer_frac_hard=0.508\n"}
+,{"stream_name":"stdout","time":4712.892510746,"data":"[ABR-2L-CBSC_s123] [train] full evaluation on validation and test splits ...\n"}
+,{"stream_name":"stdout","time":4730.02199996,"data":"[ABR-2L-CBSC_s123] [train] FINAL val loss=4.9061 ppl=135.12 | test loss=4.9276 ppl=138.04 | wall=1.63 h\n"}
+,{"stream_name":"stdout","time":4730.034090024,"data":"[ABR-2L-CBSC_s123] wandb: \n"}
+,{"stream_name":"stdout","time":4730.034114607,"data":"[ABR-2L-CBSC_s123] wandb: Run history:\n"}
+,{"stream_name":"stdout","time":4730.034120916,"data":"[ABR-2L-CBSC_s123] wandb:                            lr █▆▅▄▃▂▁▁▁\n"}
+,{"stream_name":"stdout","time":4730.034136267,"data":"[ABR-2L-CBSC_s123] wandb:         routing/block_entropy ▁\n"}
+,{"stream_name":"stdout","time":4730.034170251,"data":"[ABR-2L-CBSC_s123] wandb:               routing/entropy ▁\n"}
+,{"stream_name":"stdout","time":4730.034174877,"data":"[ABR-2L-CBSC_s123] wandb:             routing/mamba_pct ▁\n"}
+,{"stream_name":"stdout","time":4730.034178955,"data":"[ABR-2L-CBSC_s123] wandb:                 routing/tau/0 ▁\n"}
+,{"stream_name":"stdout","time":4730.034182541,"data":"[ABR-2L-CBSC_s123] wandb:                 routing/tau/1 ▁\n"}
+,{"stream_name":"stdout","time":4730.034186013,"data":"[ABR-2L-CBSC_s123] wandb: routing/transformer_frac_hard ▁\n"}
+,{"stream_name":"stdout","time":4730.034189502,"data":"[ABR-2L-CBSC_s123] wandb:       routing/transformer_pct ▁\n"}
+,{"stream_name":"stdout","time":4730.034193036,"data":"[ABR-2L-CBSC_s123] wandb:           tau/layers.0.router ▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":4730.034196684,"data":"[ABR-2L-CBSC_s123] wandb:           tau/layers.1.router ▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":4730.034200224,"data":"[ABR-2L-CBSC_s123] wandb:                            +8 ...\n"}
+,{"stream_name":"stdout","time":4730.034203717,"data":"[ABR-2L-CBSC_s123] wandb: \n"}
+,{"stream_name":"stdout","time":4730.034207696,"data":"[ABR-2L-CBSC_s123] wandb: Run summary:\n"}
+,{"stream_name":"stdout","time":4730.034211989,"data":"[ABR-2L-CBSC_s123] wandb:                     gpu_hours 1.63185\n"}
+,{"stream_name":"stdout","time":4730.034216178,"data":"[ABR-2L-CBSC_s123] wandb:                            lr 0\n"}
+,{"stream_name":"stdout","time":4730.03421981,"data":"[ABR-2L-CBSC_s123] wandb:                        params 15911168\n"}
+,{"stream_name":"stdout","time":4730.034223391,"data":"[ABR-2L-CBSC_s123] wandb:         routing/block_entropy 0.07405\n"}
+,{"stream_name":"stdout","time":4730.034226923,"data":"[ABR-2L-CBSC_s123] wandb:               routing/entropy 0.69288\n"}
+,{"stream_name":"stdout","time":4730.034230517,"data":"[ABR-2L-CBSC_s123] wandb:             routing/mamba_pct 0.48834\n"}
+,{"stream_name":"stdout","time":4730.0342345,"data":"[ABR-2L-CBSC_s123] wandb:                 routing/tau/0 0.1\n"}
+,{"stream_name":"stdout","time":4730.034238511,"data":"[ABR-2L-CBSC_s123] wandb:                 routing/tau/1 0.1\n"}
+,{"stream_name":"stdout","time":4730.034242839,"data":"[ABR-2L-CBSC_s123] wandb: routing/transformer_frac_hard 0.50781\n"}
+,{"stream_name":"stdout","time":4730.034247217,"data":"[ABR-2L-CBSC_s123] wandb:       routing/transformer_pct 0.51166\n"}
+,{"stream_name":"stdout","time":4730.034251486,"data":"[ABR-2L-CBSC_s123] wandb:                           +15 ...\n"}
+,{"stream_name":"stdout","time":4730.034255446,"data":"[ABR-2L-CBSC_s123] wandb: \n"}
+,{"stream_name":"stdout","time":4730.034259177,"data":"[ABR-2L-CBSC_s123] wandb: You can sync this run to the cloud by running:\n"}
+,{"stream_name":"stdout","time":4730.034263494,"data":"[ABR-2L-CBSC_s123] wandb: wandb sync /kaggle/working/output/ABR-2L-CBSC_s123/ABR-2L-CBSC_seed123_20261114T102939Z/wandb/offline-run-20261114_165242-hutlg4ho\n"}
+,{"stream_name":"stdout","time":4730.034267705,"data":"[ABR-2L-CBSC_s123] wandb: Find logs at: /kaggle/working/output/ABR-2L-CBSC_s123/ABR-2L-CBSC_seed123_20261114T102939Z/wandb/offline-run-20261114_165242-hutlg4ho/logs\n"}
+,{"stream_name":"stdout","time":4730.036601219,"data":"[ABR-2L-CBSC_s123] ===== session end 2026-11-14T16:53:44+00:00 | status=done =====\n"}
+,{"stream_name":"stdout","time":4730.388284132,"data":"[ABR-2L-CBSC_s123] [train] result -\u003e /kaggle/working/output/ABR-2L-CBSC_s123/ABR-2L-CBSC_seed123_20261114T102939Z/result.json\n"}
+,{"stream_name":"stdout","time":4730.766280688,"data":"[ABR-2L-CBSC_s123] Exception ignored in: \u003cprovenance._Tee object at 0x783509de4a30\u003e\n"}
+,{"stream_name":"stdout","time":4730.766312208,"data":"[ABR-2L-CBSC_s123] Traceback (most recent call last):\n"}
+,{"stream_name":"stdout","time":4730.766317986,"data":"[ABR-2L-CBSC_s123]   File \"/kaggle/working/repo/experiments/full_scale/provenance.py\", line 531, in flush\n"}
+,{"stream_name":"stdout","time":4730.766710173,"data":"[ABR-2L-CBSC_s123]     st.flush()\n"}
+,{"stream_name":"stdout","time":4730.766724163,"data":"[ABR-2L-CBSC_s123] ValueError: I/O operation on closed file.\n"}
+,{"stream_name":"stdout","time":4731.975838301,"data":"[runner 2026-11-14T16:53:46Z] exit 0\n"}
+,{"stream_name":"stdout","time":4732.996021868,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 37000 lr=9.77e-05 train=4.9500 val~=4.8565 (ppl 128.6) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":4856.973259655,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 38000 lr=9.03e-05 train=4.9452 val~=4.8466 (ppl 127.3) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":4981.386355391,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 39000 lr=8.31e-05 train=4.9391 val~=4.8347 (ppl 125.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":5105.420812628,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 40000 lr=7.61e-05 train=4.9311 val~=4.8329 (ppl 125.6) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":5229.828505571,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 41000 lr=6.94e-05 train=4.9243 val~=4.8191 (ppl 123.9) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":5353.861170998,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 42000 lr=6.28e-05 train=4.9050 val~=4.8095 (ppl 122.7) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":5478.250194694,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 43000 lr=5.65e-05 train=4.9037 val~=4.8041 (ppl 122.0) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":5602.20789017,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 44000 lr=5.04e-05 train=4.9059 val~=4.7961 (ppl 121.0) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":5726.569299949,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 45000 lr=4.46e-05 train=4.8925 val~=4.7910 (ppl 120.4) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":5850.578310295,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 46000 lr=3.91e-05 train=4.8775 val~=4.7811 (ppl 119.2) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":5975.049835061,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 47000 lr=3.40e-05 train=4.8841 val~=4.7813 (ppl 119.3) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":6099.038242877,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 48000 lr=2.91e-05 train=4.8712 val~=4.7770 (ppl 118.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":6223.509589517,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 49000 lr=2.46e-05 train=4.8594 val~=4.7675 (ppl 117.6) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":6347.519740331,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 50000 lr=2.04e-05 train=4.8537 val~=4.7646 (ppl 117.3) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":6471.933216248,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 51000 lr=1.66e-05 train=4.8501 val~=4.7601 (ppl 116.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":6595.96710963,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 52000 lr=1.32e-05 train=4.8384 val~=4.7577 (ppl 116.5) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":6720.407132121,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 53000 lr=1.01e-05 train=4.8489 val~=4.7539 (ppl 116.0) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":6844.423272078,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 54000 lr=7.46e-06 train=4.8388 val~=4.7496 (ppl 115.5) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":6968.824369244,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 55000 lr=5.20e-06 train=4.8393 val~=4.7479 (ppl 115.3) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":7092.904208385,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 56000 lr=3.33e-06 train=4.8348 val~=4.7460 (ppl 115.1) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":7217.327036091,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 57000 lr=1.88e-06 train=4.8327 val~=4.7449 (ppl 115.0) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":7341.331876509,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 58000 lr=8.36e-07 train=4.8351 val~=4.7440 (ppl 114.9) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":7465.755553646,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 59000 lr=2.09e-07 train=4.8373 val~=4.7436 (ppl 114.9) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":7589.782704224,"data":"[Alternate-Blocks-4L_s123]   [Alternate-Blocks-4L s=123] step= 60000 lr=0.00e+00 train=4.8197 val~=4.7436 (ppl 114.8) | transformer_pct=0.500 mamba_pct=0.500 entropy=0.693 block_entropy=-0.000 transformer_frac_hard=0.500\n"}
+,{"stream_name":"stdout","time":7590.185421468,"data":"[Alternate-Blocks-4L_s123] [train] full evaluation on validation and test splits ...\n"}
+,{"stream_name":"stdout","time":7613.083188293,"data":"[Alternate-Blocks-4L_s123] [train] FINAL val loss=4.7308 ppl=113.39 | test loss=4.7454 ppl=115.05 | wall=2.08 h\n"}
+,{"stream_name":"stdout","time":7613.098024128,"data":"[Alternate-Blocks-4L_s123] wandb: \n"}
+,{"stream_name":"stdout","time":7613.098049268,"data":"[Alternate-Blocks-4L_s123] wandb: Run history:\n"}
+,{"stream_name":"stdout","time":7613.098054335,"data":"[Alternate-Blocks-4L_s123] wandb:                            lr ▂▃████████▇▇▇▇▇▇▆▆▅▅▅▄▄▄▃▃▃▃▂▂▂▂▂▂▂▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":7613.098059781,"data":"[Alternate-Blocks-4L_s123] wandb:         routing/block_entropy ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":7613.098243801,"data":"[Alternate-Blocks-4L_s123] wandb:               routing/entropy ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":7613.098261114,"data":"[Alternate-Blocks-4L_s123] wandb:             routing/mamba_pct ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":7613.098266021,"data":"[Alternate-Blocks-4L_s123] wandb: routing/transformer_frac_hard ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":7613.098270424,"data":"[Alternate-Blocks-4L_s123] wandb:       routing/transformer_pct ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":7613.098302095,"data":"[Alternate-Blocks-4L_s123] wandb:                   tokens_seen ▁▁▁▁▂▂▂▃▃▃▃▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▆▇▇▇███\n"}
+,{"stream_name":"stdout","time":7613.098307256,"data":"[Alternate-Blocks-4L_s123] wandb:                     train/aux ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":7613.098311512,"data":"[Alternate-Blocks-4L_s123] wandb:                 train/aux_ent ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":7613.098315483,"data":"[Alternate-Blocks-4L_s123] wandb:                  train/aux_lb ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁\n"}
+,{"stream_name":"stdout","time":7613.098320031,"data":"[Alternate-Blocks-4L_s123] wandb:                            +4 ...\n"}
+,{"stream_name":"stdout","time":7613.098324057,"data":"[Alternate-Blocks-4L_s123] wandb: \n"}
+,{"stream_name":"stdout","time":7613.098328249,"data":"[Alternate-Blocks-4L_s123] wandb: Run summary:\n"}
+,{"stream_name":"stdout","time":7613.098332588,"data":"[Alternate-Blocks-4L_s123] wandb:                     gpu_hours 2.07841\n"}
+,{"stream_name":"stdout","time":7613.098336613,"data":"[Alternate-Blocks-4L_s123] wandb:                            lr 0\n"}
+,{"stream_name":"stdout","time":7613.098340897,"data":"[Alternate-Blocks-4L_s123] wandb:                        params 18884352\n"}
+,{"stream_name":"stdout","time":7613.098481115,"data":"[Alternate-Blocks-4L_s123] wandb:         routing/block_entropy 0\n"}
+,{"stream_name":"stdout","time":7613.098506395,"data":"[Alternate-Blocks-4L_s123] wandb:               routing/entropy 0.69315\n"}
+,{"stream_name":"stdout","time":7613.098512081,"data":"[Alternate-Blocks-4L_s123] wandb:             routing/mamba_pct 0.5\n"}
+,{"stream_name":"stdout","time":7613.098516989,"data":"[Alternate-Blocks-4L_s123] wandb: routing/transformer_frac_hard 0.5\n"}
+,{"stream_name":"stdout","time":7613.09853929,"data":"[Alternate-Blocks-4L_s123] wandb:       routing/transformer_pct 0.5\n"}
+,{"stream_name":"stdout","time":7613.098545284,"data":"[Alternate-Blocks-4L_s123] wandb:                     test_loss 4.7454\n"}
+,{"stream_name":"stdout","time":7613.098550217,"data":"[Alternate-Blocks-4L_s123] wandb:                      test_ppl 115.05336\n"}
+,{"stream_name":"stdout","time":7613.098556014,"data":"[Alternate-Blocks-4L_s123] wandb:                           +11 ...\n"}
+,{"stream_name":"stdout","time":7613.098561029,"data":"[Alternate-Blocks-4L_s123] wandb: \n"}
+,{"stream_name":"stdout","time":7613.098565932,"data":"[Alternate-Blocks-4L_s123] wandb: You can sync this run to the cloud by running:\n"}
+,{"stream_name":"stdout","time":7613.09857111,"data":"[Alternate-Blocks-4L_s123] wandb: wandb sync /kaggle/working/output/Alternate-Blocks-4L_s123/Alternate-Blocks-4L_seed123_20261114T153706Z/wandb/offline-run-20261114_153709-phucxbs1\n"}
+,{"stream_name":"stdout","time":7613.098576814,"data":"[Alternate-Blocks-4L_s123] wandb: Find logs at: /kaggle/working/output/Alternate-Blocks-4L_s123/Alternate-Blocks-4L_seed123_20261114T153706Z/wandb/offline-run-20261114_153709-phucxbs1/logs\n"}
+,{"stream_name":"stdout","time":7613.101712527,"data":"[Alternate-Blocks-4L_s123] ===== session end 2026-11-14T17:41:47+00:00 | status=done =====\n"}
+,{"stream_name":"stdout","time":7613.501912387,"data":"[Alternate-Blocks-4L_s123] [train] result -\u003e /kaggle/working/output/Alternate-Blocks-4L_s123/Alternate-Blocks-4L_seed123_20261114T153706Z/result.json\n"}
+,{"stream_name":"stdout","time":7613.845062805,"data":"[Alternate-Blocks-4L_s123] Exception ignored in: \u003cprovenance._Tee object at 0x79453c044430\u003e\n"}
+,{"stream_name":"stdout","time":7613.84511642,"data":"[Alternate-Blocks-4L_s123] Traceback (most recent call last):\n"}
+,{"stream_name":"stdout","time":7613.845121783,"data":"[Alternate-Blocks-4L_s123]   File \"/kaggle/working/repo/experiments/full_scale/provenance.py\", line 531, in flush\n"}
+,{"stream_name":"stdout","time":7613.845394485,"data":"[Alternate-Blocks-4L_s123]     st.flush()\n"}
+,{"stream_name":"stdout","time":7613.84540713,"data":"[Alternate-Blocks-4L_s123] ValueError: I/O operation on closed file.\n"}
+,{"stream_name":"stdout","time":7615.042284322,"data":"[runner 2026-11-14T17:41:49Z] exit 0\n"}
+,{"stream_name":"stdout","time":7651.298283834,"data":"[runner 2026-11-14T17:42:26Z] done, exit code 0\n"}
+,{"stream_name":"stderr","time":7653.976765021,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":7653.976794119,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":7654.279172248,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":7654.279195534,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":7655.122917155,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":7656.285325136,"data":"[NbConvertApp] Writing 425577 bytes to __results__.html\n"}
+]

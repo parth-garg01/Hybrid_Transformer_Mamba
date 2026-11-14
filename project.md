@@ -237,3 +237,8 @@ None yet. No reportable experiment has been run under the new pipeline.
 - **q006** launched 2026-11-14T15:34:28Z with 3 runs (the two 2L runs resuming, plus Alternate-Blocks-4L s123). Queue: 37 of 40 main runs done.
 - **Sweep config, by the pre-registered rule** (PRD P2.4: lowest mean val PPL among the three 4L ABR configs, 5 seeds each, 60k steps, all reportable): ABR-4L-gatedCBSC 99.14 (sd 3.41), ABR-4L-CBSC 103.51 (sd 1.99), ABR-4L-noCBSC 107.89 (sd 4.62). Chosen: **ABR-4L-gatedCBSC**. Added with `queue.py add-sweep ABR-4L-gatedCBSC` (blocks 8/16/64 × seeds 42, 123; block 32 reuses the main runs). The rule was applied as written; the config was not picked by looking at sweep results.
 - **q007** launched 2026-11-14T15:36:47Z alongside q006 (`advance --max-sessions 2`): 5 of the 6 sweep runs (about 13.8 h and 9.2 h of planned lane load, so some runs will be cut off at the budget and resume). The sweep does not depend on q006. Quota check: about 18.5 h left this week; q006 needs about 2.6 h and q007 11.5 h. ABR-4L-gatedCBSC_s123_b64 is still pending.
+
+### 2026-11-14 — Lead: session q006 finished; all 40 main runs done
+- **q006** complete (about 19:30Z): 3 runs finished (Alternate-Blocks-4L s123, and ABR-2L-noCBSC s123 and ABR-2L-CBSC s123, which resumed from q005). `verify_provenance --strict` passes (3 results, manifest ok).
+- Queue: **40 of 40 main runs done**. q007 is running 5 sweep runs; ABR-4L-gatedCBSC_s123_b64 is pending.
+- No new session was launched next to q007: about 3 h of this week's quota is left, and a third session could hit the limit and stop q007 early. The remaining sweep runs go to the next session after q007 (or after the 2026-11-21 reset).
