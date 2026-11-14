@@ -230,3 +230,4 @@ None yet. No reportable experiment has been run under the new pipeline.
 - Queue: 26 of 40 main runs done, 14 pending; then the 6-run block sweep.
 - The first `advance` download stalled on a dead connection (no socket timeout) and was stopped after about 9 min; the re-run finished. Queue state had not changed, so no duplicate launch was possible.
 - **q005 not launched:** Kaggle refused the kernel push with "Maximum weekly GPU quota of 30.00 hours reached" (2026-11-13 about 20:50Z). The `abr-code` v7 dataset version was created but no kernel uses it yet. q004 ran its full 11.5 h, so the weekly reset happened somewhere in the q001–q004 window; the exact reset time is still unknown.
+- **q005** launched 2026-11-14T00:51:03Z, right after the weekly quota reset (Saturday 00:00 UTC, matching the notifier's guess). 13 runs; the two Transformer-Only runs resume from q004. Queue: 26 done, 13 running, 1 pending.
