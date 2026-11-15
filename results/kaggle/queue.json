@@ -4,7 +4,7 @@
   "user": "parthgarg101",
   "max_hours": null,
   "created_utc": "2026-11-09T23:25:41Z",
-  "next_session": 8,
+  "next_session": 9,
   "token_cache": {
     "ref": "parthgarg101/abr-wikitext103-gpt2-tokens",
     "expected_sha256": {
@@ -755,14 +755,17 @@
       "block_size": 8,
       "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours} --block-size 8",
       "status": "running",
-      "kernel": "parthgarg101/abr-q007",
+      "kernel": "parthgarg101/abr-q008",
       "sessions": [
-        "q007"
+        "q007",
+        "q008"
       ],
-      "resume_from": null,
+      "resume_from": "parthgarg101/abr-q007",
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T15:36:47Z"
+      "hours_done": 11.186,
+      "updated_utc": "2026-11-15T16:11:20Z",
+      "last_exit_code": 0,
+      "last_state": "done"
     },
     "ABR-4L-gatedCBSC_s123_b8": {
       "config": "ABR-4L-gatedCBSC",
@@ -770,14 +773,17 @@
       "block_size": 8,
       "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours} --block-size 8",
       "status": "running",
-      "kernel": "parthgarg101/abr-q007",
+      "kernel": "parthgarg101/abr-q008",
       "sessions": [
-        "q007"
+        "q007",
+        "q008"
       ],
-      "resume_from": null,
+      "resume_from": "parthgarg101/abr-q007",
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T15:36:47Z"
+      "hours_done": 11.186,
+      "updated_utc": "2026-11-15T16:11:20Z",
+      "last_exit_code": 0,
+      "last_state": "done"
     },
     "ABR-4L-gatedCBSC_s42_b16": {
       "config": "ABR-4L-gatedCBSC",
@@ -785,14 +791,17 @@
       "block_size": 16,
       "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours} --block-size 16",
       "status": "running",
-      "kernel": "parthgarg101/abr-q007",
+      "kernel": "parthgarg101/abr-q008",
       "sessions": [
-        "q007"
+        "q007",
+        "q008"
       ],
       "resume_from": null,
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T15:36:47Z"
+      "hours_done": 0,
+      "updated_utc": "2026-11-15T16:11:20Z",
+      "last_exit_code": null,
+      "last_state": null
     },
     "ABR-4L-gatedCBSC_s123_b16": {
       "config": "ABR-4L-gatedCBSC",
@@ -800,14 +809,17 @@
       "block_size": 16,
       "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours} --block-size 16",
       "status": "running",
-      "kernel": "parthgarg101/abr-q007",
+      "kernel": "parthgarg101/abr-q008",
       "sessions": [
-        "q007"
+        "q007",
+        "q008"
       ],
       "resume_from": null,
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T15:36:47Z"
+      "hours_done": 0,
+      "updated_utc": "2026-11-15T16:11:20Z",
+      "last_exit_code": null,
+      "last_state": null
     },
     "ABR-4L-gatedCBSC_s42_b64": {
       "config": "ABR-4L-gatedCBSC",
@@ -815,27 +827,32 @@
       "block_size": 64,
       "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 42 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours} --block-size 64",
       "status": "running",
-      "kernel": "parthgarg101/abr-q007",
+      "kernel": "parthgarg101/abr-q008",
       "sessions": [
-        "q007"
+        "q007",
+        "q008"
       ],
       "resume_from": null,
       "failures": 0,
-      "hours_done": 0.0,
-      "updated_utc": "2026-11-14T15:36:47Z"
+      "hours_done": 0,
+      "updated_utc": "2026-11-15T16:11:20Z",
+      "last_exit_code": null,
+      "last_state": null
     },
     "ABR-4L-gatedCBSC_s123_b64": {
       "config": "ABR-4L-gatedCBSC",
       "seed": 123,
       "block_size": 64,
       "cmd": "python experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 123 --out $ABR_OUTPUT_DIR --device cuda --wandb offline --max-hours {max_hours} --block-size 64",
-      "status": "pending",
-      "kernel": null,
-      "sessions": [],
+      "status": "running",
+      "kernel": "parthgarg101/abr-q008",
+      "sessions": [
+        "q008"
+      ],
       "resume_from": null,
       "failures": 0,
       "hours_done": 0.0,
-      "updated_utc": "2026-11-14T15:35:04Z"
+      "updated_utc": "2026-11-15T16:11:20Z"
     }
   },
   "sessions": {
@@ -1870,8 +1887,102 @@
         "name": "q007"
       },
       "resume_from": [],
+      "status": "downloaded",
+      "launched_utc": "2026-11-14T15:36:21Z",
+      "kernel_status": "complete",
+      "failure_message": "",
+      "finished_utc": "2026-11-15T16:10:36Z",
+      "download": {
+        "dest": "/Users/parthgarg/Documents/papers/hybrid_mamba/results/kaggle/queue/q007",
+        "skipped_remote": [
+          "_mounted_wheels/causal_conv1d-1.7.0+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl",
+          "_mounted_wheels/mamba_ssm-2.3.2.post1+cu130torch2.11sm75-cp313-cp313-linux_x86_64.whl",
+          "output/ABR-4L-gatedCBSC_s123_b8/checkpoints/ABR-4L-gatedCBSC_s123_b8/ckpt.pt",
+          "output/ABR-4L-gatedCBSC_s42_b8/checkpoints/ABR-4L-gatedCBSC_s42_b8/ckpt.pt",
+          "output/triton_cache.tar.gz"
+        ],
+        "files": [
+          "abr-q007.log",
+          "launch.json",
+          "output/ABR-4L-gatedCBSC_s123_b8/ABR-4L-gatedCBSC_seed123_20261114T191431Z/train.log",
+          "output/ABR-4L-gatedCBSC_s123_b8/ABR-4L-gatedCBSC_seed123_20261114T191431Z/wandb/offline-run-20261114_191433-szjn3kj6/files/requirements.txt",
+          "output/ABR-4L-gatedCBSC_s123_b8/ABR-4L-gatedCBSC_seed123_20261114T191431Z/wandb/offline-run-20261114_191433-szjn3kj6/logs/debug-internal.log",
+          "output/ABR-4L-gatedCBSC_s123_b8/ABR-4L-gatedCBSC_seed123_20261114T191431Z/wandb/offline-run-20261114_191433-szjn3kj6/logs/debug.log",
+          "output/ABR-4L-gatedCBSC_s123_b8/ABR-4L-gatedCBSC_seed123_20261114T191431Z/wandb/offline-run-20261114_191433-szjn3kj6/run-szjn3kj6.wandb",
+          "output/ABR-4L-gatedCBSC_s123_b8/run.log",
+          "output/ABR-4L-gatedCBSC_s123_b8/run_status.json",
+          "output/ABR-4L-gatedCBSC_s42_b8/ABR-4L-gatedCBSC_seed42_20261114T191431Z/train.log",
+          "output/ABR-4L-gatedCBSC_s42_b8/ABR-4L-gatedCBSC_seed42_20261114T191431Z/wandb/offline-run-20261114_191433-wiagcvvl/files/requirements.txt",
+          "output/ABR-4L-gatedCBSC_s42_b8/ABR-4L-gatedCBSC_seed42_20261114T191431Z/wandb/offline-run-20261114_191433-wiagcvvl/logs/debug-internal.log",
+          "output/ABR-4L-gatedCBSC_s42_b8/ABR-4L-gatedCBSC_seed42_20261114T191431Z/wandb/offline-run-20261114_191433-wiagcvvl/logs/debug.log",
+          "output/ABR-4L-gatedCBSC_s42_b8/ABR-4L-gatedCBSC_seed42_20261114T191431Z/wandb/offline-run-20261114_191433-wiagcvvl/run-wiagcvvl.wandb",
+          "output/ABR-4L-gatedCBSC_s42_b8/run.log",
+          "output/ABR-4L-gatedCBSC_s42_b8/run_status.json",
+          "output/kaggle_env.json",
+          "output/pip_freeze.txt",
+          "output/run.log"
+        ],
+        "gpu": "Tesla T4"
+      },
+      "download_dir": "results/kaggle/queue/q007"
+    },
+    "q008": {
+      "kernel_ref": "parthgarg101/abr-q008",
+      "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-q008",
+      "kernel_version": 1,
+      "dataset_version": 11,
+      "runs": [
+        "ABR-4L-gatedCBSC_s42_b8",
+        "ABR-4L-gatedCBSC_s42_b16",
+        "ABR-4L-gatedCBSC_s42_b64",
+        "ABR-4L-gatedCBSC_s123_b8",
+        "ABR-4L-gatedCBSC_s123_b16",
+        "ABR-4L-gatedCBSC_s123_b64"
+      ],
+      "plan": {
+        "session_hours": 11.5,
+        "overhead_hours": 0.3,
+        "lanes": [
+          [
+            {
+              "run": "ABR-4L-gatedCBSC_s42_b8",
+              "est_hours": 0.25
+            },
+            {
+              "run": "ABR-4L-gatedCBSC_s42_b16",
+              "est_hours": 4.59
+            },
+            {
+              "run": "ABR-4L-gatedCBSC_s42_b64",
+              "est_hours": 4.59
+            }
+          ],
+          [
+            {
+              "run": "ABR-4L-gatedCBSC_s123_b8",
+              "est_hours": 0.25
+            },
+            {
+              "run": "ABR-4L-gatedCBSC_s123_b16",
+              "est_hours": 4.59
+            },
+            {
+              "run": "ABR-4L-gatedCBSC_s123_b64",
+              "est_hours": 4.59
+            }
+          ]
+        ],
+        "est_load_hours": [
+          9.43,
+          9.43
+        ],
+        "name": "q008"
+      },
+      "resume_from": [
+        "parthgarg101/abr-q007"
+      ],
       "status": "running",
-      "launched_utc": "2026-11-14T15:36:21Z"
+      "launched_utc": "2026-11-15T16:10:54Z"
     }
   }
 }
