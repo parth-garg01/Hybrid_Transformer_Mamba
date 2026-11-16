@@ -251,3 +251,8 @@ None yet. No reportable experiment has been run under the new pipeline.
 ### 2026-11-15 — Lead: session q007 finished; q008 launched
 - **q007** (block-size sweep, ABR-4L-gatedCBSC) ran its full 11.5 h but finished no run. Block 8 is much slower than the cost estimate assumed: s42_b8 reached step 56,989 and s123_b8 step 57,323 of 60,000 before the session budget ran out. Both saved checkpoints. The b16 and b64 runs were skipped because only 15 min of budget was left. Manifest written; strict verify PASS (0 results, manifest ok).
 - **q008** launched 2026-11-15T16:11:20Z (status QUEUED at launch). Lane 0: s42_b8 (resume from q007), s42_b16, s42_b64. Lane 1: the same three with s123. Weekly GPU quota is close to the limit; if Kaggle stops q008 early, the partial runs resume after the 2026-11-21 reset.
+
+### 2026-11-17 — Lead: session q008 finished; Phase 2 complete (46/46 runs)
+- **q008** finished all six block-sweep runs at 60k steps (the two block-8 runs resumed from q007). Manifest written; strict verify PASS (6 results).
+- **Block-size sweep** (ABR-4L-gatedCBSC, seeds 42 and 123, test PPL): block 8 = 102.83 (1.42 steps/s), 16 = 98.86 (2.47), 32 = 102.69 (4.08), 64 = 107.62 (5.49). Block 16 is lowest but only 2 seeds per point; speed falls roughly in proportion to the number of blocks.
+- Tables regenerated with `scripts/make_tables.py` (46 runs, 0 skipped, nothing missing; output deterministic). Main-grid numbers unchanged.

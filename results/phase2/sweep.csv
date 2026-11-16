@@ -1,1 +1,5 @@
-
+config,block_size,n,seeds,val_ppl_mean,val_ppl_std,test_ppl_mean,test_ppl_std,steps_per_s_mean
+ABR-4L-gatedCBSC,8,2,42 123,103.76,1.45666,102.833,1.52944,1.41687
+ABR-4L-gatedCBSC,16,2,42 123,99.3824,0.519286,98.8597,0.0226313,2.47033
+ABR-4L-gatedCBSC,32,2,42 123,102.541,2.73603,102.692,2.26728,4.08041
+ABR-4L-gatedCBSC,64,2,42 123,107.68,0.994456,107.621,0.6766,5.49475

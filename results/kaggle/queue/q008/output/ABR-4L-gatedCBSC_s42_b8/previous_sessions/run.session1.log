@@ -1,0 +1,103 @@
+
+===== session start 2026-11-14T19:14:32+00:00 | run_id=ABR-4L-gatedCBSC_seed42_20261114T191431Z | run=ABR-4L-gatedCBSC_s42_b8 | device=cuda | mamba_backend=mamba_ssm | reportable=True =====
+[train] ABR-4L-gatedCBSC seed=42 params=19,124,576 steps=60000 B=8 T=256 block=8
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id wiagcvvl.
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /kaggle/working/output/ABR-4L-gatedCBSC_s42_b8/ABR-4L-gatedCBSC_seed42_20261114T191431Z/wandb/offline-run-20261114_191433-wiagcvvl
+wandb: View this run in the terminal with `wandb leet`
+/usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:900.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  [ABR-4L-gatedCBSC s=42] step=  1000 lr=3.00e-04 train=7.3425 val~=6.2496 (ppl 517.8) | transformer_pct=0.474 mamba_pct=0.526 entropy=0.692 block_entropy=0.182 transformer_frac_hard=0.474
+  [ABR-4L-gatedCBSC s=42] step=  2000 lr=3.00e-04 train=6.1420 val~=5.9394 (ppl 379.7) | transformer_pct=0.524 mamba_pct=0.476 entropy=0.692 block_entropy=0.062 transformer_frac_hard=0.525
+  [ABR-4L-gatedCBSC s=42] step=  3000 lr=2.99e-04 train=5.9354 val~=5.7710 (ppl 320.9) | transformer_pct=0.530 mamba_pct=0.470 entropy=0.691 block_entropy=0.042 transformer_frac_hard=0.528
+  [ABR-4L-gatedCBSC s=42] step=  4000 lr=2.97e-04 train=5.8004 val~=5.6684 (ppl 289.6) | transformer_pct=0.514 mamba_pct=0.486 entropy=0.693 block_entropy=0.038 transformer_frac_hard=0.516
+  [ABR-4L-gatedCBSC s=42] step=  5000 lr=2.96e-04 train=5.7162 val~=5.5802 (ppl 265.1) | transformer_pct=0.559 mamba_pct=0.441 entropy=0.686 block_entropy=0.039 transformer_frac_hard=0.558
+  [ABR-4L-gatedCBSC s=42] step=  6000 lr=2.94e-04 train=5.6195 val~=5.4968 (ppl 243.9) | transformer_pct=0.532 mamba_pct=0.468 entropy=0.691 block_entropy=0.046 transformer_frac_hard=0.530
+  [ABR-4L-gatedCBSC s=42] step=  7000 lr=2.91e-04 train=5.5614 val~=5.4375 (ppl 229.9) | transformer_pct=0.527 mamba_pct=0.473 entropy=0.692 block_entropy=0.039 transformer_frac_hard=0.524
+  [ABR-4L-gatedCBSC s=42] step=  8000 lr=2.88e-04 train=5.5156 val~=5.3776 (ppl 216.5) | transformer_pct=0.561 mamba_pct=0.439 entropy=0.686 block_entropy=0.045 transformer_frac_hard=0.558
+  [ABR-4L-gatedCBSC s=42] step=  9000 lr=2.85e-04 train=5.4734 val~=5.3384 (ppl 208.2) | transformer_pct=0.501 mamba_pct=0.499 entropy=0.693 block_entropy=0.036 transformer_frac_hard=0.499
+  [ABR-4L-gatedCBSC s=42] step= 10000 lr=2.82e-04 train=5.4401 val~=5.3075 (ppl 201.8) | transformer_pct=0.545 mamba_pct=0.455 entropy=0.689 block_entropy=0.040 transformer_frac_hard=0.547
+  [ABR-4L-gatedCBSC s=42] step= 11000 lr=2.78e-04 train=5.3856 val~=5.2625 (ppl 193.0) | transformer_pct=0.568 mamba_pct=0.432 entropy=0.684 block_entropy=0.050 transformer_frac_hard=0.572
+  [ABR-4L-gatedCBSC s=42] step= 12000 lr=2.73e-04 train=5.3589 val~=5.2396 (ppl 188.6) | transformer_pct=0.527 mamba_pct=0.473 entropy=0.692 block_entropy=0.053 transformer_frac_hard=0.527
+  [ABR-4L-gatedCBSC s=42] step= 13000 lr=2.68e-04 train=5.3326 val~=5.2031 (ppl 181.8) | transformer_pct=0.540 mamba_pct=0.460 entropy=0.690 block_entropy=0.045 transformer_frac_hard=0.543
+  [ABR-4L-gatedCBSC s=42] step= 14000 lr=2.63e-04 train=5.3114 val~=5.1796 (ppl 177.6) | transformer_pct=0.530 mamba_pct=0.470 entropy=0.691 block_entropy=0.045 transformer_frac_hard=0.530
+  [ABR-4L-gatedCBSC s=42] step= 15000 lr=2.58e-04 train=5.2689 val~=5.1380 (ppl 170.4) | transformer_pct=0.564 mamba_pct=0.436 entropy=0.685 block_entropy=0.047 transformer_frac_hard=0.562
+  [ABR-4L-gatedCBSC s=42] step= 16000 lr=2.53e-04 train=5.2452 val~=5.1273 (ppl 168.6) | transformer_pct=0.564 mamba_pct=0.436 entropy=0.685 block_entropy=0.048 transformer_frac_hard=0.566
+  [ABR-4L-gatedCBSC s=42] step= 17000 lr=2.47e-04 train=5.2245 val~=5.1139 (ppl 166.3) | transformer_pct=0.553 mamba_pct=0.447 entropy=0.687 block_entropy=0.050 transformer_frac_hard=0.553
+  [ABR-4L-gatedCBSC s=42] step= 18000 lr=2.40e-04 train=5.2007 val~=5.0920 (ppl 162.7) | transformer_pct=0.551 mamba_pct=0.449 entropy=0.688 block_entropy=0.048 transformer_frac_hard=0.550
+  [ABR-4L-gatedCBSC s=42] step= 19000 lr=2.34e-04 train=5.1871 val~=5.0432 (ppl 155.0) | transformer_pct=0.547 mamba_pct=0.453 entropy=0.689 block_entropy=0.054 transformer_frac_hard=0.547
+  [ABR-4L-gatedCBSC s=42] step= 20000 lr=2.27e-04 train=5.1660 val~=5.0483 (ppl 155.7) | transformer_pct=0.549 mamba_pct=0.451 entropy=0.688 block_entropy=0.045 transformer_frac_hard=0.547
+  [ABR-4L-gatedCBSC s=42] step= 21000 lr=2.20e-04 train=5.1576 val~=5.0428 (ppl 154.9) | transformer_pct=0.515 mamba_pct=0.485 entropy=0.693 block_entropy=0.054 transformer_frac_hard=0.512
+  [ABR-4L-gatedCBSC s=42] step= 22000 lr=2.13e-04 train=5.1362 val~=5.0163 (ppl 150.8) | transformer_pct=0.524 mamba_pct=0.476 entropy=0.692 block_entropy=0.055 transformer_frac_hard=0.519
+  [ABR-4L-gatedCBSC s=42] step= 23000 lr=2.06e-04 train=5.1191 val~=4.9664 (ppl 143.5) | transformer_pct=0.545 mamba_pct=0.455 entropy=0.689 block_entropy=0.053 transformer_frac_hard=0.545
+  [ABR-4L-gatedCBSC s=42] step= 24000 lr=1.99e-04 train=5.1119 val~=4.9967 (ppl 147.9) | transformer_pct=0.567 mamba_pct=0.433 entropy=0.684 block_entropy=0.050 transformer_frac_hard=0.568
+  [ABR-4L-gatedCBSC s=42] step= 25000 lr=1.91e-04 train=5.1013 val~=4.9710 (ppl 144.2) | transformer_pct=0.550 mamba_pct=0.450 entropy=0.688 block_entropy=0.055 transformer_frac_hard=0.552
+  [ABR-4L-gatedCBSC s=42] step= 26000 lr=1.83e-04 train=5.0763 val~=4.9286 (ppl 138.2) | transformer_pct=0.516 mamba_pct=0.484 entropy=0.693 block_entropy=0.050 transformer_frac_hard=0.517
+  [ABR-4L-gatedCBSC s=42] step= 27000 lr=1.76e-04 train=5.0674 val~=4.9369 (ppl 139.3) | transformer_pct=0.549 mamba_pct=0.451 entropy=0.688 block_entropy=0.071 transformer_frac_hard=0.550
+  [ABR-4L-gatedCBSC s=42] step= 28000 lr=1.68e-04 train=5.0458 val~=4.9115 (ppl 135.8) | transformer_pct=0.522 mamba_pct=0.478 entropy=0.692 block_entropy=0.060 transformer_frac_hard=0.523
+  [ABR-4L-gatedCBSC s=42] step= 29000 lr=1.60e-04 train=5.0307 val~=4.8643 (ppl 129.6) | transformer_pct=0.548 mamba_pct=0.452 entropy=0.688 block_entropy=0.064 transformer_frac_hard=0.543
+  [ABR-4L-gatedCBSC s=42] step= 30000 lr=1.52e-04 train=5.0155 val~=4.8570 (ppl 128.6) | transformer_pct=0.544 mamba_pct=0.456 entropy=0.689 block_entropy=0.064 transformer_frac_hard=0.544
+  [ABR-4L-gatedCBSC s=42] step= 31000 lr=1.44e-04 train=5.0129 val~=4.8575 (ppl 128.7) | transformer_pct=0.527 mamba_pct=0.473 entropy=0.692 block_entropy=0.059 transformer_frac_hard=0.522
+  [ABR-4L-gatedCBSC s=42] step= 32000 lr=1.36e-04 train=4.9891 val~=4.8460 (ppl 127.2) | transformer_pct=0.512 mamba_pct=0.488 entropy=0.693 block_entropy=0.069 transformer_frac_hard=0.510
+  [ABR-4L-gatedCBSC s=42] step= 33000 lr=1.28e-04 train=4.9852 val~=4.8441 (ppl 127.0) | transformer_pct=0.526 mamba_pct=0.474 entropy=0.692 block_entropy=0.057 transformer_frac_hard=0.521
+  [ABR-4L-gatedCBSC s=42] step= 34000 lr=1.20e-04 train=4.9712 val~=4.8234 (ppl 124.4) | transformer_pct=0.522 mamba_pct=0.478 entropy=0.692 block_entropy=0.056 transformer_frac_hard=0.521
+  [ABR-4L-gatedCBSC s=42] step= 35000 lr=1.13e-04 train=4.9621 val~=4.8144 (ppl 123.3) | transformer_pct=0.518 mamba_pct=0.482 entropy=0.692 block_entropy=0.061 transformer_frac_hard=0.520
+  [ABR-4L-gatedCBSC s=42] step= 36000 lr=1.05e-04 train=4.9672 val~=4.7962 (ppl 121.0) | transformer_pct=0.545 mamba_pct=0.455 entropy=0.689 block_entropy=0.068 transformer_frac_hard=0.544
+  [ABR-4L-gatedCBSC s=42] step= 37000 lr=9.77e-05 train=4.9391 val~=4.7905 (ppl 120.4) | transformer_pct=0.527 mamba_pct=0.473 entropy=0.692 block_entropy=0.058 transformer_frac_hard=0.527
+  [ABR-4L-gatedCBSC s=42] step= 38000 lr=9.03e-05 train=4.9349 val~=4.7655 (ppl 117.4) | transformer_pct=0.556 mamba_pct=0.444 entropy=0.687 block_entropy=0.060 transformer_frac_hard=0.558
+  [ABR-4L-gatedCBSC s=42] step= 39000 lr=8.31e-05 train=4.9055 val~=4.7721 (ppl 118.2) | transformer_pct=0.528 mamba_pct=0.472 entropy=0.692 block_entropy=0.062 transformer_frac_hard=0.522
+  [ABR-4L-gatedCBSC s=42] step= 40000 lr=7.61e-05 train=4.9160 val~=4.7608 (ppl 116.8) | transformer_pct=0.537 mamba_pct=0.463 entropy=0.690 block_entropy=0.060 transformer_frac_hard=0.538
+  [ABR-4L-gatedCBSC s=42] step= 41000 lr=6.94e-05 train=4.9065 val~=4.7530 (ppl 115.9) | transformer_pct=0.510 mamba_pct=0.490 entropy=0.693 block_entropy=0.060 transformer_frac_hard=0.511
+  [ABR-4L-gatedCBSC s=42] step= 42000 lr=6.28e-05 train=4.9065 val~=4.7457 (ppl 115.1) | transformer_pct=0.522 mamba_pct=0.478 entropy=0.692 block_entropy=0.061 transformer_frac_hard=0.524
+  [ABR-4L-gatedCBSC s=42] step= 43000 lr=5.65e-05 train=4.8936 val~=4.7381 (ppl 114.2) | transformer_pct=0.518 mamba_pct=0.482 entropy=0.693 block_entropy=0.061 transformer_frac_hard=0.521
+  [ABR-4L-gatedCBSC s=42] step= 44000 lr=5.04e-05 train=4.8918 val~=4.7331 (ppl 113.6) | transformer_pct=0.524 mamba_pct=0.476 entropy=0.692 block_entropy=0.061 transformer_frac_hard=0.523
+  [ABR-4L-gatedCBSC s=42] step= 45000 lr=4.46e-05 train=4.8854 val~=4.7295 (ppl 113.2) | transformer_pct=0.504 mamba_pct=0.496 entropy=0.693 block_entropy=0.072 transformer_frac_hard=0.507
+  [ABR-4L-gatedCBSC s=42] step= 46000 lr=3.91e-05 train=4.8720 val~=4.7255 (ppl 112.8) | transformer_pct=0.504 mamba_pct=0.496 entropy=0.693 block_entropy=0.067 transformer_frac_hard=0.502
+  [ABR-4L-gatedCBSC s=42] step= 47000 lr=3.40e-05 train=4.8683 val~=4.7164 (ppl 111.8) | transformer_pct=0.495 mamba_pct=0.505 entropy=0.693 block_entropy=0.070 transformer_frac_hard=0.495
+  [ABR-4L-gatedCBSC s=42] step= 48000 lr=2.91e-05 train=4.8489 val~=4.7082 (ppl 110.9) | transformer_pct=0.510 mamba_pct=0.490 entropy=0.693 block_entropy=0.068 transformer_frac_hard=0.512
+  [ABR-4L-gatedCBSC s=42] step= 49000 lr=2.46e-05 train=4.8453 val~=4.7024 (ppl 110.2) | transformer_pct=0.514 mamba_pct=0.486 entropy=0.693 block_entropy=0.065 transformer_frac_hard=0.511
+  [ABR-4L-gatedCBSC s=42] step= 50000 lr=2.04e-05 train=4.8439 val~=4.7000 (ppl 109.9) | transformer_pct=0.534 mamba_pct=0.466 entropy=0.691 block_entropy=0.060 transformer_frac_hard=0.535
+  [ABR-4L-gatedCBSC s=42] step= 51000 lr=1.66e-05 train=4.8443 val~=4.6939 (ppl 109.3) | transformer_pct=0.492 mamba_pct=0.508 entropy=0.693 block_entropy=0.065 transformer_frac_hard=0.492
+  [ABR-4L-gatedCBSC s=42] step= 52000 lr=1.32e-05 train=4.8309 val~=4.6919 (ppl 109.1) | transformer_pct=0.503 mamba_pct=0.497 entropy=0.693 block_entropy=0.063 transformer_frac_hard=0.507
+  [ABR-4L-gatedCBSC s=42] step= 53000 lr=1.01e-05 train=4.8430 val~=4.6854 (ppl 108.4) | transformer_pct=0.510 mamba_pct=0.490 entropy=0.693 block_entropy=0.069 transformer_frac_hard=0.514
+  [ABR-4L-gatedCBSC s=42] step= 54000 lr=7.46e-06 train=4.8259 val~=4.6831 (ppl 108.1) | transformer_pct=0.502 mamba_pct=0.498 entropy=0.693 block_entropy=0.066 transformer_frac_hard=0.502
+  [ABR-4L-gatedCBSC s=42] step= 55000 lr=5.20e-06 train=4.8152 val~=4.6816 (ppl 107.9) | transformer_pct=0.522 mamba_pct=0.478 entropy=0.692 block_entropy=0.067 transformer_frac_hard=0.521
+  [ABR-4L-gatedCBSC s=42] step= 56000 lr=3.33e-06 train=4.8164 val~=4.6795 (ppl 107.7) | transformer_pct=0.501 mamba_pct=0.499 entropy=0.693 block_entropy=0.057 transformer_frac_hard=0.504
+[train] session budget reached at step 56989; checkpoint saved. Run the same command again to resume.
+wandb: 
+wandb: Run history:
+wandb:                            lr ▇███████▇▇▇▇▇▇▇▇▆▆▆▅▅▅▄▄▄▄▄▃▃▃▂▂▂▂▂▁▁▁▁▁
+wandb:         routing/block_entropy █▂▁▁▁▁▁▁▂▂▁▂▂▂▂▁▂▂▂▂▃▂▂▂▂▂▂▂▂▂▂▂▃▂▃▂▂▂▂▂
+wandb:               routing/entropy ▇▇█▃▆▂█▅▁▇▂▂▄▅█▅▁▄█▄▄▅▇█▇▃▇▆█▇██████████
+wandb:             routing/mamba_pct █▄▄▂▄▆▃▁▄▃▁▂▃▂▅▂▅▂▄▂▄▅▄▅▃▂▄▃▅▄▄▆▆▆▅▇▆▅▆▆
+wandb:                 routing/tau/0 █▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                 routing/tau/1 █▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                 routing/tau/2 █▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                 routing/tau/3 █▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: routing/transformer_frac_hard ▁▅▅▄▇▅▇▃▆█▆▅▇█▇▆▆▄▆▅▆▄▄▄▄▅▇▄▆▄▅▃▃▃▄▅▂▄▃▃
+wandb:       routing/transformer_pct ▁▅▅▇▅▃█▅▆▅█▇▇▆▇▅▆█▇▄▆▄▅▅▄▅▇▅▆▅▃▃▃▄▄▂▃▄▃▃
+wandb:                           +12 ...
+wandb: 
+wandb: Run summary:
+wandb:                            lr 0.0
+wandb:         routing/block_entropy 0.05722
+wandb:               routing/entropy 0.69314
+wandb:             routing/mamba_pct 0.49862
+wandb:                 routing/tau/0 0.1
+wandb:                 routing/tau/1 0.1
+wandb:                 routing/tau/2 0.1
+wandb:                 routing/tau/3 0.1
+wandb: routing/transformer_frac_hard 0.50391
+wandb:       routing/transformer_pct 0.50138
+wandb:                           +12 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /kaggle/working/output/ABR-4L-gatedCBSC_s42_b8/ABR-4L-gatedCBSC_seed42_20261114T191431Z/wandb/offline-run-20261114_191433-wiagcvvl
+wandb: Find logs at: /kaggle/working/output/ABR-4L-gatedCBSC_s42_b8/ABR-4L-gatedCBSC_seed42_20261114T191431Z/wandb/offline-run-20261114_191433-wiagcvvl/logs
+===== session end 2026-11-15T06:25:26+00:00 | status=incomplete =====
+Exception ignored in: <provenance._Tee object at 0x7b98432fe350>
+Traceback (most recent call last):
+  File "/kaggle/working/repo/experiments/full_scale/provenance.py", line 531, in flush
+    st.flush()
+ValueError: I/O operation on closed file.

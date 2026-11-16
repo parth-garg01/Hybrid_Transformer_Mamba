@@ -1,0 +1,5328 @@
+{
+  "meta": {
+    "schema_version": 1,
+    "run_id": "ABR-4L-gatedCBSC_seed42_20261116T014508Z",
+    "reportable": true,
+    "debug": false,
+    "git_commit": "1b0a5b238582048d75652a65f00f9fc65096c0d0",
+    "git_branch": "HEAD",
+    "git_describe": "1b0a5b2",
+    "git_tags": [],
+    "git_source": "snapshot",
+    "git_snapshot_created_utc": "2026-11-15T16:10:54Z",
+    "git_dirty": false,
+    "git_changed_files": [],
+    "git_untracked_files": [],
+    "command_line": "experiments/full_scale/train.py --config ABR-4L-gatedCBSC --seed 42 --out /kaggle/working/output/ABR-4L-gatedCBSC_s42_b64 --device cuda --wandb offline --max-hours 4.274 --block-size 64",
+    "python_executable": "/usr/bin/python3",
+    "cwd": "/kaggle/working/repo",
+    "start_utc": "2026-11-16T01:45:08Z",
+    "start_unix": 1794793508.2496476,
+    "hostname": "94f22c5539a0",
+    "platform": "Linux-6.18.55+-x86_64-with-glibc2.39",
+    "python_version": "3.13.16",
+    "torch_version": "2.11.0+cu130",
+    "cuda_version": "13.0",
+    "cudnn_version": 92700,
+    "gpu_name": "Tesla T4",
+    "gpu_count": 1,
+    "gpu_driver": "580.178.04",
+    "mamba_backend": "mamba_ssm",
+    "mamba_ssm_version": "2.3.2.post1+cu130torch2.11sm75",
+    "causal_conv1d_version": "1.7.0+cu130torch2.11sm75",
+    "pip_freeze": [
+      "a2a-sdk==1.3.0",
+      "absl-py==2.0.0",
+      "accelerate==1.15.0",
+      "access==1.1.10.post3",
+      "affine==3.0.1",
+      "aiobotocore==2.26.0",
+      "aiofiles==25.1.0",
+      "aiohappyeyeballs==2.7.1",
+      "aiohttp==3.14.5",
+      "aioitertools==0.13.0",
+      "aiosignal==1.4.0",
+      "aiosqlite==0.22.1",
+      "alabaster==1.0.0",
+      "albucore==0.0.24",
+      "albumentations==2.0.8",
+      "ale-py==0.12.1",
+      "alembic==1.20.1",
+      "altair==5.5.0",
+      "annotated-doc==0.0.5",
+      "annotated-types==0.8.0",
+      "anyio==4.15.1",
+      "anywidget==0.9.21",
+      "apache-tvm-ffi==0.1.9",
+      "apsw==3.54.1.0",
+      "argon2-cffi==25.1.0",
+      "argon2-cffi-bindings==26.1.0",
+      "args==0.1.0",
+      "array_record==0.8.6",
+      "arrow==1.4.0",
+      "arviz==0.22.0",
+      "asn1crypto==1.5.1",
+      "astropy==7.2.3",
+      "astropy-iers-data==0.2026.10.19.0.52.1",
+      "asttokens==3.0.2",
+      "astunparse==1.6.3",
+      "async-lru==2.4.0",
+      "atpublic==5.1",
+      "attrs==26.1.0",
+      "audioop-lts==0.2.2",
+      "audioread==3.1.0",
+      "Authlib==1.9.1",
+      "autograd==1.9.1",
+      "babel==2.18.0",
+      "backcall==0.2.0",
+      "bayesian-optimization==3.4.0",
+      "beartype==0.23.1",
+      "beautifulsoup4==4.13.5",
+      "betterproto==2.0.0b7",
+      "bigframes==2.51.0",
+      "bigquery-magics==0.14.0",
+      "black==26.10.1",
+      "blake3==1.0.11",
+      "bleach==6.4.0",
+      "blinker==1.9.0",
+      "blis==1.3.3",
+      "blobfile==3.3.0",
+      "blosc2==4.14.1",
+      "bokeh==3.8.2",
+      "Boruta==0.4.3",
+      "boto3==1.41.5",
+      "botocore==1.41.5",
+      "Bottleneck==1.4.2",
+      "bqplot==0.12.47",
+      "branca==0.8.2",
+      "brotli==1.2.1",
+      "build==1.6.1",
+      "cachebox==5.2.3",
+      "CacheControl==0.14.4",
+      "cachetools==6.2.6",
+      "Cartopy==0.26.0",
+      "catalogue==2.0.10",
+      "catboost==1.2.10",
+      "category_encoders==2.11.2",
+      "causal_conv1d @ file:///kaggle/working/_mounted_wheels/causal_conv1d-1.7.0%2Bcu130torch2.11sm75-cp313-cp313-linux_x86_64.whl#sha256=c13ca5ad79884dfe7d276a9fb2611c3e8972da76484c4bef217d6d0e8067edb9",
+      "certifi==2026.10.23",
+      "cesium==0.12.4",
+      "cffi==2.1.1",
+      "chardet==5.2.0",
+      "charset-normalizer==3.4.9",
+      "chex==0.1.90",
+      "clarabel==0.11.1",
+      "click==8.5.0",
+      "click-plugins==1.1.1.2",
+      "cligj==0.7.2",
+      "clint==0.5.1",
+      "cloudpathlib==0.26.0",
+      "cloudpickle==3.1.2",
+      "cmake==3.31.10",
+      "cmdstanpy==1.3.0",
+      "colorama==0.4.6",
+      "colorcet==3.2.1",
+      "colorlog==6.12.0",
+      "colorlover==0.3.0",
+      "comm==0.2.3",
+      "community==1.0.0b1",
+      "confection==1.3.3",
+      "ConfigSpace==1.2.2",
+      "cons==0.4.7",
+      "contourpy==1.4.0",
+      "coverage==7.17.0",
+      "cpsat-logutils==1.0.0",
+      "cramjam==2.14.0",
+      "cryptography==50.0.2",
+      "cucim-cu13==26.6.0",
+      "cuda-bindings==13.0.3",
+      "cuda-core==0.7.0",
+      "cuda-pathfinder==1.8.4",
+      "cuda-python==13.0.3",
+      "cuda-toolkit==13.0.2",
+      "cudf-cu13==26.6.0",
+      "cudf-polars-cu13==26.6.0",
+      "cufflinks==0.17.3",
+      "cuml-cu13==26.6.0",
+      "cupy-cuda13x==14.0.1",
+      "curl_cffi==0.16.3",
+      "cuvs-cu13==26.6.0",
+      "cvxopt==1.3.2",
+      "cvxpy==1.6.7",
+      "cycler==0.12.1",
+      "cyipopt==1.5.0",
+      "cymem==2.0.13",
+      "Cython==3.0.12",
+      "cytoolz==1.2.0",
+      "dacite==1.9.2",
+      "dask==2026.1.1",
+      "dask-cuda==26.6.0",
+      "dask-cudf-cu13==26.6.0",
+      "dask-expr==2.0.0",
+      "dask-jobqueue==0.9.0",
+      "dataclasses-json==0.6.7",
+      "dataproc-spark-connect==1.1.0",
+      "datasets==4.8.5",
+      "db-dtypes==1.9.0",
+      "dbus-python==1.3.2",
+      "deap==1.4.4",
+      "debugpy==1.8.15",
+      "decorator==5.3.1",
+      "deepdiff==9.1.0",
+      "defusedxml==0.7.1",
+      "Deprecated==3.0.1",
+      "deprecation==2.1.0",
+      "diffusers==0.42.0",
+      "dill==0.4.1",
+      "dipy==1.12.1",
+      "distributed==2026.1.1",
+      "distributed-ucxx-cu13==0.50.1",
+      "distro==1.9.0",
+      "dlib==20.0.1",
+      "dm-tree==0.1.10",
+      "dnspython==2.9.1",
+      "docker==7.2.0",
+      "docstring-to-markdown==0.17",
+      "docstring_parser==0.18.0",
+      "docutils==0.21.2",
+      "dopamine_rl==4.1.2",
+      "duckdb==1.3.2",
+      "earthengine-api==1.7.39",
+      "easydict==1.13",
+      "easyocr==1.7.2",
+      "editdistance==0.8.1",
+      "eerepr==0.1.3",
+      "einops==0.8.2",
+      "email-validator==2.3.0",
+      "emoji==2.16.0",
+      "en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl#sha256=1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85",
+      "entrypoints==0.4.2",
+      "esda==2.9.0",
+      "et_xmlfile==2.0.0",
+      "etils==1.14.0",
+      "etuples==0.3.10",
+      "execnb==0.3.3",
+      "Farama-Notifications==0.0.6",
+      "fastai==2.8.12",
+      "fastapi==0.141.1",
+      "fastcore==2.2.33",
+      "fastdownload==0.0.8",
+      "fastgit==0.1.4",
+      "fastjsonschema==2.22.2",
+      "fastprogress==1.1.6",
+      "fastspec==0.2.6",
+      "fasttext==0.9.3",
+      "fasttransform==0.0.5",
+      "fasttransport==0.0.4",
+      "fastuuid==0.14.0",
+      "featuretools==1.31.0",
+      "filelock==4.2.4",
+      "filetype==1.2.0",
+      "fiona==1.10.1",
+      "firebase-admin==6.9.0",
+      "Flask==3.1.3",
+      "flatbuffers==25.12.19",
+      "flax==0.12.12",
+      "folium==0.20.0",
+      "fonttools==4.67.0",
+      "formulaic==1.2.2",
+      "fqdn==1.6.0",
+      "frozendict==2.4.7",
+      "frozenlist==1.8.0",
+      "fsspec==2025.12.0",
+      "func_timeout==4.3.5",
+      "funcy==2.1",
+      "fury==0.11.0",
+      "future==1.0.0",
+      "fuzzywuzzy==0.18.0",
+      "gast==0.7.0",
+      "gatspy==0.3",
+      "gcsfs==2025.12.0",
+      "GDAL==3.8.4",
+      "gdown==5.2.2",
+      "geemap==0.38.9",
+      "gensim==4.4.0",
+      "geocoder==1.38.1",
+      "geographiclib==2.1",
+      "geojson==3.3.0",
+      "geopandas==1.2.0",
+      "geopy==2.4.1",
+      "gepa==0.1.4",
+      "ghapi==2.1.5",
+      "giddy==2.3.9",
+      "gin-config==0.5.0",
+      "glob2==0.7",
+      "google==3.0.0",
+      "google-adk==2.7.1",
+      "google-api-core==2.30.3",
+      "google-api-python-client==2.201.0",
+      "google-auth==2.49.0",
+      "google-auth-httplib2==0.4.4",
+      "google-auth-oauthlib==1.5.0",
+      "google-cloud-aiplatform==2.7.0",
+      "google-cloud-bigquery==3.46.2",
+      "google-cloud-bigquery-connection==1.23.0",
+      "google-cloud-core==2.8.0",
+      "google-cloud-dataproc==5.32.0",
+      "google-cloud-datastore==2.27.0",
+      "google-cloud-firestore==2.34.1",
+      "google-cloud-functions==1.25.0",
+      "google-cloud-language==2.22.0",
+      "google-cloud-monitoring==2.32.0",
+      "google-cloud-resource-manager==1.19.0",
+      "google-cloud-spanner==3.71.0",
+      "google-cloud-storage==3.17.1",
+      "google-cloud-storage-control==1.17.0",
+      "google-cloud-texttospeech==2.38.0",
+      "google-cloud-translate==3.28.0",
+      "google-cloud-videointelligence==2.21.0",
+      "google-cloud-vision==3.16.0",
+      "google-colab @ file:///colabtools/dist/google_colab-1.0.0.tar.gz",
+      "google-crc32c==1.9.0",
+      "google-genai==2.12.1",
+      "google-pasta==0.2.0",
+      "google-resumable-media==2.11.0",
+      "googleapis-common-protos==1.76.0",
+      "googledrivedownloader==1.1.0",
+      "gpxpy==1.6.2",
+      "gradio==6.30.0",
+      "gradio_client==2.7.2",
+      "grain==0.2.18",
+      "graphviz==0.21",
+      "groovy==0.1.2",
+      "grpc-google-iam-v1==0.14.6",
+      "grpc-interceptor==0.15.4",
+      "grpcio==1.85.1",
+      "grpcio-status==1.84.1",
+      "grpcio-tools==1.85.1",
+      "grpclib==0.4.9",
+      "gspread==6.2.1",
+      "gspread-dataframe==4.0.0",
+      "gym==0.26.2",
+      "gym-notices==0.1.0",
+      "gymnasium==1.2.0",
+      "gymnax==0.0.8",
+      "h11==0.16.0",
+      "h2==4.4.1",
+      "h2o==3.46.0.12",
+      "h5netcdf==1.8.1",
+      "h5py==3.14.0",
+      "haversine==2.9.0",
+      "hdbscan==0.8.44",
+      "hep_ml==0.8.0",
+      "hf-gradio==0.4.1",
+      "hf-xet==1.7.0",
+      "highspy==1.15.1",
+      "holidays==0.107",
+      "holoviews==1.23.2",
+      "hpack==4.2.0",
+      "html5lib==1.1",
+      "httpcore==1.0.9",
+      "httpcore2==2.16.0",
+      "httpimport==1.4.1",
+      "httplib2==0.32.0",
+      "httptools==0.9.0",
+      "httpx==0.28.1",
+      "httpx2==2.16.0",
+      "huggingface_hub==0.36.2",
+      "humanize==4.16.0",
+      "hyperframe==6.1.0",
+      "hyperopt==0.3.0",
+      "ibis-framework==9.5.0",
+      "id==1.6.1",
+      "idna==3.20",
+      "igraph==1.0.0",
+      "ImageHash==4.3.2",
+      "ImageIO==2.38.1",
+      "imageio-ffmpeg==0.6.0",
+      "imagesize==2.0.1",
+      "imbalanced-learn==0.14.2",
+      "immutabledict==4.3.1",
+      "importlib_metadata==8.9.0",
+      "importlib_resources==7.1.0",
+      "imutils==0.5.4",
+      "in-toto-attestation==0.9.3",
+      "inequality==1.1.2",
+      "inflect==7.6.0",
+      "iniconfig==2.3.1",
+      "intel-cmplr-lib-ur==2025.3.3",
+      "intel-openmp==2025.3.3",
+      "interface_meta==2.0.1",
+      "ipyevents==2.0.4",
+      "ipyfilechooser==0.6.0",
+      "ipykernel==6.17.1",
+      "ipyleaflet==0.20.0",
+      "ipympl==0.10.0",
+      "ipyparallel==8.8.0",
+      "ipython==7.34.0",
+      "ipython-genutils==0.2.0",
+      "ipython-sql==0.5.0",
+      "ipython_pygments_lexers==1.1.1",
+      "ipywidgets==8.1.5",
+      "isoduration==20.11.0",
+      "isoweek==1.3.3",
+      "itsdangerous==2.2.0",
+      "Janome==0.5.0",
+      "jaraco.classes==3.4.0",
+      "jaraco.context==6.1.2",
+      "jaraco.functools==4.6.0",
+      "jax==0.11.1",
+      "jax-cuda13-pjrt==0.11.1",
+      "jax-cuda13-plugin==0.11.1",
+      "jaxlib==0.11.1",
+      "jedi==0.20.1",
+      "jeepney==0.9.0",
+      "jieba==0.42.1",
+      "Jinja2==3.1.6",
+      "jiter==0.10.0",
+      "jmespath==1.1.0",
+      "joblib==1.6.0",
+      "joserfc==1.7.7",
+      "json-rpc==1.15.0",
+      "json5==0.17.3",
+      "jsonpatch==1.36",
+      "jsonpickle==4.1.4",
+      "jsonpointer==3.4",
+      "jsonschema==4.26.0",
+      "jsonschema-specifications==2025.9.1",
+      "jupyter-console==6.6.3",
+      "jupyter-events==0.12.1",
+      "jupyter-leaflet==0.20.0",
+      "jupyter-lsp==2.3.1",
+      "jupyter_client==7.4.9",
+      "jupyter_core==5.9.1",
+      "jupyter_kernel_gateway @ git+https://github.com/googlecolab/kernel_gateway@b134e9945df25c2dcb98ade9129399be10788671",
+      "jupyter_server==2.12.5",
+      "jupyter_server_proxy==4.6.0",
+      "jupyter_server_terminals==0.5.4",
+      "jupyterlab==4.5.11",
+      "jupyterlab-lsp==5.3.0",
+      "jupyterlab_pygments==0.3.0",
+      "jupyterlab_server==2.28.1",
+      "jupyterlab_widgets==3.0.17",
+      "jupytext==1.19.6",
+      "kaggle==2.0.2",
+      "kaggle-environments==1.33.3",
+      "kagglehub==1.0.3",
+      "kagglesdk==0.1.38",
+      "keras==3.13.2",
+      "keras-core==0.1.7",
+      "keras-cv==0.9.0",
+      "keras-hub==0.26.0",
+      "keras-nlp==0.26.0",
+      "keras-tuner==1.4.8",
+      "keyring==25.7.0",
+      "keyrings.google-artifactregistry-auth==1.1.2",
+      "kiwisolver==1.5.1",
+      "kornia==0.9.0",
+      "kornia_rs==0.2.0",
+      "kt-legacy==1.0.5",
+      "langchain==1.4.7",
+      "langchain-core==1.7.0",
+      "langchain-protocol==0.0.20",
+      "langgraph==1.2.17",
+      "langgraph-checkpoint==4.3.0",
+      "langgraph-prebuilt==1.1.1",
+      "langgraph-sdk==0.4.9",
+      "langid==1.1.6",
+      "langsmith==0.14.12",
+      "lark==1.3.1",
+      "launchpadlib==1.11.0",
+      "lazr.restfulclient==0.14.6",
+      "lazr.uri==1.0.6",
+      "lazy-loader==0.6",
+      "learntools @ git+https://github.com/Kaggle/learntools@e9ba66dc899d3e17b80d3a1b9a5d29f430d310cb",
+      "libclang==18.1.1",
+      "libcudf-cu13==26.6.0",
+      "libcugraph-cu13==26.6.0",
+      "libcuml-cu13==26.6.0",
+      "libcuvs-cu13==26.6.0",
+      "libkvikio-cu13==26.6.0",
+      "libnvforest-cu13==26.6.0",
+      "libpysal==4.14.1",
+      "libraft-cu13==26.6.0",
+      "librapidsmpf-cu13==26.6.0",
+      "librmm-cu13==26.6.0",
+      "librosa==0.11.0",
+      "libucx-cu13==1.20.1",
+      "libucxx-cu13==0.50.0",
+      "lightgbm==4.6.0",
+      "lightning-utilities==0.15.3",
+      "lime==0.2.0.1",
+      "line_profiler==5.1.0",
+      "linkify-it-py==2.2.0",
+      "litellm==1.93.2",
+      "llvmlite==0.44.0",
+      "lml==0.2.0",
+      "locket==1.0.0",
+      "logical-unification==0.4.7",
+      "lxml==6.1.3",
+      "lz4==4.4.5",
+      "Mako==1.4.3",
+      "mamba==0.11.3",
+      "mamba_ssm @ file:///kaggle/working/_mounted_wheels/mamba_ssm-2.3.2.post1%2Bcu130torch2.11sm75-cp313-cp313-linux_x86_64.whl#sha256=33994f83d2198f53d75e2790ea3c6e273143d3a97ea50afadfba941ce3b72ccc",
+      "mapclassify==2.10.0",
+      "Markdown==3.11.2",
+      "markdown-it-py==4.2.0",
+      "MarkupSafe==3.0.4",
+      "marshmallow==3.26.2",
+      "matplotlib==3.10.0",
+      "matplotlib-inline==0.2.2",
+      "matplotlib-venn==1.1.2",
+      "mdit-py-plugins==0.6.1",
+      "mdurl==0.1.2",
+      "mgwr==2.2.1",
+      "minify_html==0.18.1",
+      "miniKanren==1.0.5",
+      "missingno==0.5.2",
+      "mistune==0.8.4",
+      "mizani==0.13.5",
+      "mkl==2025.3.1",
+      "ml_collections==1.1.0",
+      "ml_dtypes==0.6.0",
+      "mlcrate==0.2.0",
+      "mlxtend==0.23.4",
+      "mmh3==5.3.1",
+      "mne==1.13.2",
+      "model-signing==1.1.1",
+      "momepy==0.11.0",
+      "moocore==0.3.2",
+      "more-itertools==10.8.0",
+      "moviepy==1.0.3",
+      "mpld3==0.5.12",
+      "mpmath==1.3.0",
+      "msgpack==1.2.3",
+      "multidict==6.9.1",
+      "multimethod==1.12",
+      "multipledispatch==1.0.0",
+      "multiprocess==0.70.19",
+      "multitasking==0.0.13",
+      "murmurhash==1.0.15",
+      "music21==9.9.2",
+      "mypy_extensions==1.1.0",
+      "namex==0.1.0",
+      "narwhals==2.27.1",
+      "natsort==8.4.0",
+      "nbclassic==1.3.3",
+      "nbclient==0.5.13",
+      "nbconvert==6.4.5",
+      "nbdev==3.3.27",
+      "nbformat==5.11.1",
+      "ndindex==1.10.1",
+      "nest-asyncio==1.6.0",
+      "networkx==3.7",
+      "nh3==0.3.7",
+      "nibabel==5.4.2",
+      "nilearn==0.14.1",
+      "ninja==1.13.2",
+      "nltk==3.9.1",
+      "notebook==6.5.7",
+      "notebook_shim==0.2.4",
+      "numba==0.61.2",
+      "numba-cuda==0.28.2",
+      "numexpr==2.14.2",
+      "numpy==2.1.3",
+      "nvforest-cu13==26.6.0",
+      "nvidia-cublas==13.1.0.3",
+      "nvidia-cublas-cu12==12.9.2.10",
+      "nvidia-cuda-cccl==13.0.85",
+      "nvidia-cuda-crt==13.4.92",
+      "nvidia-cuda-cupti==13.0.85",
+      "nvidia-cuda-cupti-cu12==12.9.79",
+      "nvidia-cuda-nvcc==13.0.88",
+      "nvidia-cuda-nvcc-cu12==12.9.86",
+      "nvidia-cuda-nvrtc==13.0.88",
+      "nvidia-cuda-nvrtc-cu12==12.9.86",
+      "nvidia-cuda-runtime==13.0.96",
+      "nvidia-cuda-runtime-cu12==12.9.79",
+      "nvidia-cudnn-cu12==9.27.0.42",
+      "nvidia-cudnn-cu13==9.19.0.56",
+      "nvidia-cufft==12.0.0.61",
+      "nvidia-cufft-cu12==11.4.1.4",
+      "nvidia-cufile==1.15.1.6",
+      "nvidia-curand==10.4.0.35",
+      "nvidia-curand-cu12==10.3.10.19",
+      "nvidia-cusolver==12.0.4.66",
+      "nvidia-cusolver-cu12==11.7.5.82",
+      "nvidia-cusparse==12.6.3.3",
+      "nvidia-cusparse-cu12==12.5.10.65",
+      "nvidia-cusparselt-cu13==0.8.0",
+      "nvidia-cutlass-dsl==4.8.1",
+      "nvidia-cutlass-dsl-libs-base==4.8.1",
+      "nvidia-cutlass-dsl-libs-core==4.8.1",
+      "nvidia-cutlass-dsl-libs-cu12==4.8.1",
+      "nvidia-libnvcomp-cu13==5.2.0.13",
+      "nvidia-ml-py==13.615.71",
+      "nvidia-nccl-cu12==2.32.3",
+      "nvidia-nccl-cu13==2.28.9",
+      "nvidia-nvimgcodec-cu13==0.8.0.22",
+      "nvidia-nvjitlink==13.0.88",
+      "nvidia-nvjitlink-cu12==12.9.86",
+      "nvidia-nvshmem-cu13==3.4.5",
+      "nvidia-nvtx==13.0.85",
+      "nvidia-nvvm==13.0.88",
+      "nvtx==0.2.16",
+      "nx-cugraph-cu13==26.6.0",
+      "oauth2client==4.1.3",
+      "oauthlib==3.3.1",
+      "odfpy==1.4.1",
+      "olefile==0.47",
+      "omegaconf==2.4.0",
+      "onemkl-license==2025.3.1",
+      "onnx==1.23.2",
+      "open-spiel==2.0.1",
+      "openai==2.54.0",
+      "opencv-contrib-python==4.14.0.94",
+      "opencv-python==4.14.0.94",
+      "opencv-python-headless==4.14.0.94",
+      "openpyxl==3.1.5",
+      "openslide-bin==4.0.1.2",
+      "openslide-python==1.4.7",
+      "opentelemetry-api==1.42.1",
+      "opentelemetry-resourcedetector-gcp==1.14.0",
+      "opentelemetry-sdk==1.42.1",
+      "opentelemetry-semantic-conventions==0.63b1",
+      "opt_einsum==3.4.0",
+      "optax==0.2.8",
+      "optree==0.20.0",
+      "optuna==5.0.0",
+      "orbax-checkpoint==0.12.8",
+      "orderly-set==5.5.0",
+      "orjson==3.13.0",
+      "orloge==1.0.0",
+      "ormsgpack==1.13.0",
+      "osqp==1.1.3",
+      "overrides==7.7.0",
+      "packaging==26.3",
+      "pandas==2.3.3",
+      "pandas-datareader==0.11.1",
+      "pandas-gbq==0.30.0",
+      "pandas-profiling==3.6.6",
+      "pandas-stubs==2.2.3.250527",
+      "pandasql==0.7.3",
+      "pandocfilters==1.5.1",
+      "panel==1.9.4",
+      "panel-material-ui==0.16.6",
+      "papermill==2.7.0",
+      "param==2.4.2",
+      "parso==0.8.7",
+      "parsy==2.2",
+      "partd==1.4.2",
+      "path==17.1.1",
+      "path.py==12.5.0",
+      "pathlib_abc==0.5.2",
+      "pathos==0.3.5",
+      "pathspec==1.1.1",
+      "patsy==1.0.3",
+      "pdf2image==1.17.0",
+      "peewee==4.5.3",
+      "peft==0.21.2",
+      "pettingzoo==1.27.0",
+      "pexpect==4.9.0",
+      "phik==0.12.5",
+      "pickleshare==0.7.5",
+      "pillow==13.0.0",
+      "pip==26.2.2",
+      "platformdirs==4.13.5",
+      "plotly==5.24.1",
+      "plotly-express==0.4.1",
+      "plotnine==0.14.5",
+      "pluggy==1.7.0",
+      "plum-dispatch==2.9.0",
+      "pointpats==2.5.5",
+      "pokerkit==0.6.3",
+      "polars==1.35.2",
+      "polars-runtime-32==1.35.2",
+      "pooch==1.9.0",
+      "portpicker==1.6.0",
+      "POT==0.9.7.post1",
+      "pox==0.3.7",
+      "ppft==1.7.8",
+      "preshed==3.0.13",
+      "prettytable==3.18.0",
+      "proglog==0.1.12",
+      "progressbar2==4.5.0",
+      "prometheus_client==0.26.0",
+      "promise==2.3",
+      "prompt_toolkit==3.0.53",
+      "propcache==0.5.4",
+      "prophet==1.5.0",
+      "proto-plus==1.29.0",
+      "protobuf==7.36.2",
+      "psutil==5.9.5",
+      "psycopg2==2.9.13",
+      "psygnal==0.16.1",
+      "ptyprocess==0.7.0",
+      "pudb==2026.1",
+      "PuLP==4.2.0",
+      "puremagic==2.2.0",
+      "py-cpuinfo==9.0.0",
+      "py4j==0.10.9.9",
+      "pyaml==26.7.0",
+      "PyArabic==0.6.15",
+      "pyarrow==23.0.1",
+      "pyasn1==0.6.4",
+      "pyasn1_modules==0.4.2",
+      "pybind11==3.1.0",
+      "pycairo==1.29.2",
+      "pyclipper==1.4.0",
+      "pycocotools==2.0.11",
+      "pycparser==3.12",
+      "pycryptodome==4.2.0",
+      "pycryptodomex==3.24.1",
+      "pycuda==2026.1",
+      "pydantic==2.14.1",
+      "pydantic_core==2.50.1",
+      "pydata-google-auth==1.9.1",
+      "pydicom==3.0.2",
+      "pydot==4.0.1",
+      "pydotplus==2.0.2",
+      "PyDrive2==1.21.1",
+      "pydub==0.25.1",
+      "pyemd==2.0.0",
+      "pyerfa==2.0.1.5",
+      "pyexcel-io==0.6.8",
+      "pyexcel-ods==0.6.0",
+      "pygame==2.6.1",
+      "pygit2==1.20.1",
+      "pygltflib==1.16.5",
+      "Pygments==2.21.0",
+      "PyGObject==3.48.2",
+      "pyiceberg==0.12.0",
+      "pyjson5==2.0.1",
+      "PyJWT==2.15.1",
+      "pyLDAvis==3.4.1",
+      "pylibcudf-cu13==26.6.0",
+      "pylibcugraph-cu13==26.6.0",
+      "pylibraft-cu13==26.6.0",
+      "pymc==5.28.5",
+      "pymongo==4.19.0",
+      "Pympler==1.1",
+      "pynndescent==0.6.0",
+      "pyogrio==0.13.0",
+      "pyomo==6.10.1",
+      "PyOpenGL==3.1.10",
+      "pyOpenSSL==26.4.0",
+      "pyparsing==3.3.3",
+      "pypdf==6.21.4",
+      "pyperclip==1.11.0",
+      "pyproj==3.8.0",
+      "pyproject_hooks==1.3.3",
+      "pyroaring==1.2.0",
+      "pysal==25.7",
+      "pyshp==3.1.6",
+      "PySocks==1.7.1",
+      "pyspark==4.0.4",
+      "pytensor==2.38.3",
+      "pytesseract==0.3.13",
+      "pytest==8.4.2",
+      "python-apt==0.0.0",
+      "python-bidi==0.6.12",
+      "python-box==7.4.1",
+      "python-dateutil==2.9.0.post0",
+      "python-dotenv==1.2.4",
+      "python-fasthtml==0.14.14",
+      "python-json-logger==4.2.0",
+      "python-louvain==0.16",
+      "python-lsp-jsonrpc==1.1.2",
+      "python-lsp-server==1.15.0",
+      "python-multipart==0.0.32",
+      "python-slugify==9.1.3",
+      "python-snappy==0.7.3",
+      "python-utils==4.1.4",
+      "pytokens==0.4.1",
+      "pytools==2026.1.1",
+      "pytorch-ignite==0.5.5",
+      "pytorch-lightning==2.6.6",
+      "pytz==2025.2",
+      "PyUpSet==0.1.1.post7",
+      "pyviz_comms==3.0.6",
+      "PyWavelets==1.10.0",
+      "PyYAML==6.0.3",
+      "pyzmq==27.0.2",
+      "qgrid==1.3.1",
+      "qtconsole==5.7.2",
+      "QtPy==2.4.3",
+      "quack-kernels==0.6.5",
+      "quantecon==0.13.1",
+      "raft-dask-cu13==26.6.0",
+      "rapids-dask-dependency==26.6.0",
+      "rapids-logger==0.2.3",
+      "rapidsmpf-cu13==26.6.0",
+      "rasterio==1.5.2",
+      "rasterstats==0.21.0",
+      "ratelim==0.1.6",
+      "ray==2.59.0",
+      "referencing==0.37.0",
+      "regex==2025.11.3",
+      "requests==2.34.2",
+      "requests-oauthlib==2.0.0",
+      "requests-toolbelt==1.0.0",
+      "requirements-parser==0.9.0",
+      "rfc3161-client==1.0.9",
+      "rfc3339-validator==0.1.4",
+      "rfc3986-validator==0.1.1",
+      "rfc3987-syntax==1.1.0",
+      "rfc8785==0.1.4",
+      "rgf-python==3.12.0",
+      "rich==13.9.4",
+      "rmm-cu13==26.6.0",
+      "roman-numerals==4.1.0",
+      "roman-numerals-py==4.1.0",
+      "rouge_score==0.1.2",
+      "rpds-py==2026.9.1",
+      "rpy2==3.5.17",
+      "rsa==4.9.1",
+      "rtree==1.4.1",
+      "ruamel.yaml==0.19.1",
+      "s3fs==2025.12.0",
+      "s3transfer==0.15.0",
+      "safehttpx==0.1.7",
+      "safetensors==0.8.0",
+      "scikit-image==0.25.2",
+      "scikit-learn==1.6.1",
+      "scikit-multilearn==0.2.0",
+      "scikit-optimize==0.10.2",
+      "scikit-plot==0.3.7",
+      "scikit-surprise==1.1.5",
+      "scipy==1.16.3",
+      "scooby==0.12.0",
+      "scs==3.3.1",
+      "seaborn==0.13.2",
+      "SecretStorage==3.5.0",
+      "securesystemslib==1.6.0",
+      "segment_anything @ git+https://github.com/facebookresearch/segment-anything.git@dca509fe793f601edb92606367a655c15ac00fdf",
+      "segregation==2.5.4",
+      "semantic-version==2.10.0",
+      "Send2Trash==2.1.0",
+      "sentence-transformers==5.7.0",
+      "sentencepiece==0.2.2",
+      "sentry-sdk==2.73.0",
+      "setuptools==81.0.0",
+      "shap==0.54.1",
+      "shapely==2.2.0",
+      "shellingham==1.5.4",
+      "Shimmy==2.0.1",
+      "sigstore==4.5.1",
+      "sigstore-models==0.0.6",
+      "sigstore-rekor-types==0.0.18",
+      "simpervisor==1.0.0",
+      "simple-parsing==0.1.9",
+      "simpleitk==2.5.6",
+      "simplejson==4.2.0",
+      "simsimd==6.5.16",
+      "siphash24==1.9",
+      "six==1.17.0",
+      "sklearn-compat==0.1.6",
+      "sklearn-pandas==2.2.0",
+      "slicer==0.0.8",
+      "smart_open==8.0.4",
+      "sniffio==1.3.1",
+      "snowballstemmer==3.1.1",
+      "sortedcontainers==2.4.0",
+      "soundfile==0.14.0",
+      "soupsieve==3.0.4",
+      "soxr==1.1.0",
+      "spacy==3.8.16",
+      "spacy-legacy==3.0.12",
+      "spacy-loggers==1.0.5",
+      "spaghetti==1.7.6",
+      "spanner-graph-notebook==1.1.11",
+      "spglm==1.1.0",
+      "Sphinx==8.2.3",
+      "sphinxcontrib-applehelp==2.0.0",
+      "sphinxcontrib-devhelp==2.0.0",
+      "sphinxcontrib-htmlhelp==2.1.0",
+      "sphinxcontrib-jsmath==2.0.0",
+      "sphinxcontrib-qthelp==2.0.0",
+      "sphinxcontrib-serializinghtml==2.0.0",
+      "spint==1.1.0",
+      "splot==1.1.7",
+      "spopt==0.7.0",
+      "spreg==1.9.0",
+      "SQLAlchemy==2.1.6",
+      "sqlglot==25.20.2",
+      "sqlparse==0.6.0",
+      "squarify==0.4.5",
+      "srsly==2.5.4",
+      "standard-aifc==3.13.0",
+      "standard-chunk==3.13.0",
+      "standard-sunau==3.13.0",
+      "stanio==0.5.1",
+      "starlette==1.9.0",
+      "statsmodels==0.15.0",
+      "stopit==1.1.2",
+      "strictyaml==1.7.3",
+      "stringzilla==5.3.1",
+      "stumpy==1.14.1",
+      "sympy==1.14.0",
+      "tables==3.10.2",
+      "tabulate==0.9.0",
+      "tbb==2022.3.1",
+      "tblib==3.2.2",
+      "tcmlib==1.6.0",
+      "tenacity==9.1.4",
+      "tensorboard==2.21.0",
+      "tensorboard-data-server==0.7.2",
+      "tensorflow==2.21.0",
+      "tensorflow-datasets==4.9.10",
+      "tensorflow-hub==0.16.1",
+      "tensorflow-metadata==1.21.0",
+      "tensorflow-probability==0.25.0",
+      "tensorflow-text==2.21.1",
+      "tensorstore==0.1.85",
+      "termcolor==3.3.0",
+      "terminado==0.18.1",
+      "testpath==0.6.0",
+      "text-unidecode==1.3",
+      "textblob==0.19.0",
+      "texttable==1.7.2",
+      "tf-slim==1.1.0",
+      "tf_keras==2.21.0",
+      "thinc==8.3.13",
+      "threadpoolctl==3.7.0",
+      "tifffile==2026.10.15",
+      "tiktoken==0.14.0",
+      "tilelang==0.1.8",
+      "timm==1.0.30",
+      "tinycss2==1.5.1",
+      "tobler==0.14.0",
+      "tokenizers==0.22.2",
+      "toml==0.10.2",
+      "tomlkit==0.14.0",
+      "toolz==0.12.1",
+      "torch==2.11.0+cu130",
+      "torch_c_dlpack_ext==0.1.5",
+      "torchao==0.10.0",
+      "torchaudio==2.11.0+cu130",
+      "torchcodec==0.11.0+cu130",
+      "torchdata==0.11.0",
+      "torchinfo==1.8.0",
+      "torchmetrics==1.9.0",
+      "torchsummary==1.5.1",
+      "torchtune==0.6.1",
+      "torchvision==0.26.0+cu130",
+      "tornado==6.5.7",
+      "TPOT==1.1.0",
+      "tqdm==4.67.3",
+      "traitlets==5.16.1",
+      "traittypes==0.2.3",
+      "transformers==4.57.6",
+      "treelite==4.8.0",
+      "treescope==0.1.10",
+      "triton==3.6.0",
+      "truststore==0.10.5",
+      "trx-python==0.6",
+      "tsfresh==0.21.2",
+      "tuf==7.0.1",
+      "tweepy==4.17.0",
+      "typeguard==4.6.0",
+      "typer==0.27.3",
+      "types-pytz==2026.5.0.20261006",
+      "types-setuptools==84.0.0.20261006",
+      "typing-inspect==0.9.0",
+      "typing-inspection==0.4.4",
+      "typing_extensions==4.16.0",
+      "tzdata==2026.5",
+      "tzlocal==5.4.5",
+      "ucxx-cu13==0.50.0",
+      "ujson==6.0.0",
+      "umap-learn==0.5.12",
+      "umf==1.0.3",
+      "universal_pathlib==0.3.10",
+      "update_checker==1.0.1",
+      "uri-template==1.3.0",
+      "uritemplate==4.2.0",
+      "urllib3==2.8.0",
+      "urwid==5.0.1",
+      "urwid_readline==0.15.1",
+      "uuid_utils==0.18.0",
+      "uvicorn==0.54.0",
+      "uvloop==0.23.0",
+      "vega-datasets==0.9.0",
+      "visions==0.8.1",
+      "vtk==9.7.1",
+      "wadllib==1.3.6",
+      "Wand==0.7.2",
+      "wandb==0.28.1",
+      "wasabi==1.1.3",
+      "watchdog==6.0.0",
+      "watchfiles==1.3.0",
+      "wavio==0.0.9",
+      "wcwidth==0.9.3",
+      "weasel==1.0.0",
+      "webcolors==25.10.0",
+      "webencodings==0.6.1",
+      "websocket-client==1.9.2",
+      "websockets==15.0.1",
+      "Werkzeug==3.1.9",
+      "wheel==0.48.0",
+      "widgetsnbextension==4.0.16",
+      "woodwork==0.31.0",
+      "wordcloud==1.9.6",
+      "wrapt==1.17.3",
+      "xarray==2025.12.0",
+      "xarray-einstats==0.11.0",
+      "xee==0.1.2",
+      "xgboost==3.4.1",
+      "xlrd==2.0.2",
+      "xvfbwrapper==0.2.37",
+      "xxhash==4.0.2",
+      "xyzservices==2026.9.1",
+      "yarl==1.25.1",
+      "ydata-profiling==4.18.4",
+      "ydf==0.15.0",
+      "ydf_tf==2.21.0",
+      "yellowbrick==1.5",
+      "yfinance==0.2.66",
+      "z3-solver==4.15.4.0",
+      "zict==3.0.0",
+      "zipp==4.1.2",
+      "zstandard==0.25.0"
+    ],
+    "kaggle": {
+      "on_kaggle": true,
+      "markers_present": [
+        "KAGGLE_KERNEL_RUN_TYPE",
+        "KAGGLE_URL_BASE",
+        "KAGGLE_DATA_PROXY_PROJECT"
+      ],
+      "kernel_url": "https://www.kaggle.com/code/parthgarg101/abr-q008",
+      "kernel_version": null,
+      "env": {
+        "KAGGLE_CONTAINER_NAME": "kaggle_wEDVueAH3ZsdN8Xr9QfcAbRbQhYgRi7QeBGOu6sk-369951563-webtier",
+        "KAGGLE_DATASET_VERSION": "11",
+        "KAGGLE_DATA_PROXY_PROJECT": "kaggle-161607",
+        "KAGGLE_DATA_PROXY_URL": "https://dp.kaggle.net",
+        "KAGGLE_DOCKER_IMAGE": "gcr.io/kaggle-gpu-images/python@sha256:de153e6d303881930c51286216393d56f56b26458d0661350305a1e8144eea01",
+        "KAGGLE_GCP_ZONE": "us-central1-b",
+        "KAGGLE_GRPC_DATA_PROXY_URL": "dp.kaggle.net:443",
+        "KAGGLE_KERNEL_INTEGRATIONS": "",
+        "KAGGLE_KERNEL_RUN_TYPE": "Batch",
+        "KAGGLE_KERNEL_URL": "https://www.kaggle.com/code/parthgarg101/abr-q008",
+        "KAGGLE_URL_BASE": "https://www.kaggle.com"
+      }
+    },
+    "wandb_url": null,
+    "config": {
+      "label": "ABR-4L-gatedCBSC",
+      "seed": 42,
+      "model_cfg": {
+        "label": "ABR-4L-gatedCBSC",
+        "n_layers": 4,
+        "expert_type": "abr",
+        "routing_mode": "learned",
+        "cbsc_mode": "gated_state",
+        "legacy": false,
+        "attn_frac": 0.5
+      },
+      "steps": 60000,
+      "block_size": 64,
+      "batch_size": 8,
+      "seq_len": 256,
+      "d_model": 256,
+      "n_heads": 8,
+      "ffn_mult": 4,
+      "lr": 0.0003,
+      "lr_warmup": 500,
+      "weight_decay": 0.1,
+      "betas": [
+        0.9,
+        0.95
+      ],
+      "grad_clip": 1.0,
+      "lambda_lb": 0.01,
+      "lambda_ent": 0.001,
+      "eval_every": 1000,
+      "eval_batches": 50,
+      "eval_seed": 1234,
+      "full_eval": {
+        "seq_len": 256,
+        "stride": 128
+      },
+      "max_train_tokens": null,
+      "legacy": false,
+      "dataset": "wikitext/wikitext-103-raw-v1",
+      "tokenizer": "gpt2"
+    },
+    "dataset_sha256": {
+      "train": "08ed01c3c3f123b1c6070649637c2438059804fa04b45b9d46f49f096316e3f3",
+      "validation": "71eeb54c40958160f1026591d24e5161fffcf767e71de89999869091285e498f",
+      "test": "f571ffeb95ad772ba3eb9868523b5cd07e22396095de96d5bfff23ad29800123"
+    },
+    "param_count": 19124576,
+    "train_tokens": 122880000,
+    "train_meta": {
+      "run_name": "ABR-4L-gatedCBSC_s42_b64",
+      "device": "cuda",
+      "legacy": false,
+      "dataset_n_tokens": {
+        "train": 117920140,
+        "validation": 247289,
+        "test": 283287
+      },
+      "max_hours": 4.274,
+      "resumed_from_step": null,
+      "previous_sessions": []
+    },
+    "end_utc": "2026-11-16T04:47:46Z",
+    "duration_s": 10958.187
+  },
+  "results": {
+    "label": "ABR-4L-gatedCBSC",
+    "seed": 42,
+    "config": {
+      "label": "ABR-4L-gatedCBSC",
+      "n_layers": 4,
+      "expert_type": "abr",
+      "routing_mode": "learned",
+      "cbsc_mode": "gated_state",
+      "legacy": false,
+      "attn_frac": 0.5
+    },
+    "run_name": "ABR-4L-gatedCBSC_s42_b64",
+    "block_size": 64,
+    "steps": 60000,
+    "legacy": false,
+    "params": 19124576,
+    "tokens_seen": 122880000,
+    "val_loss": 4.685676694071031,
+    "val_ppl": 108.38359003132298,
+    "val_n_tokens": 247288,
+    "test_loss": 4.683049593250064,
+    "test_ppl": 108.09922909893862,
+    "test_n_tokens": 283286,
+    "final_train_loss": 4.7754345769882205,
+    "final_val_loss_est": 4.6607421779632565,
+    "curves": {
+      "step": [
+        1000,
+        2000,
+        3000,
+        4000,
+        5000,
+        6000,
+        7000,
+        8000,
+        9000,
+        10000,
+        11000,
+        12000,
+        13000,
+        14000,
+        15000,
+        16000,
+        17000,
+        18000,
+        19000,
+        20000,
+        21000,
+        22000,
+        23000,
+        24000,
+        25000,
+        26000,
+        27000,
+        28000,
+        29000,
+        30000,
+        31000,
+        32000,
+        33000,
+        34000,
+        35000,
+        36000,
+        37000,
+        38000,
+        39000,
+        40000,
+        41000,
+        42000,
+        43000,
+        44000,
+        45000,
+        46000,
+        47000,
+        48000,
+        49000,
+        50000,
+        51000,
+        52000,
+        53000,
+        54000,
+        55000,
+        56000,
+        57000,
+        58000,
+        59000,
+        60000
+      ],
+      "train_loss": [
+        7.342854769706726,
+        6.105041546821594,
+        5.883414286613465,
+        5.73748504447937,
+        5.652847225189209,
+        5.575144371509552,
+        5.5164293193817135,
+        5.469875308036804,
+        5.417501431465149,
+        5.383187881469727,
+        5.329818040847778,
+        5.291651949882508,
+        5.265604632377625,
+        5.252499507427215,
+        5.205879129886627,
+        5.185422696113586,
+        5.184526924610138,
+        5.164633207798004,
+        5.142198597431183,
+        5.1186802921295165,
+        5.104460105895996,
+        5.072773053646087,
+        5.051308530330658,
+        5.048131668567658,
+        5.050032749176025,
+        5.015464580535888,
+        5.020478315830231,
+        5.00737652349472,
+        4.988714655399322,
+        4.973228485584259,
+        4.965634306430816,
+        4.945185373306274,
+        4.952542330265045,
+        4.933170213222503,
+        4.925403037071228,
+        4.926613732337952,
+        4.905012451171875,
+        4.891721768856049,
+        4.869957406044007,
+        4.881226234912872,
+        4.873881439685822,
+        4.871728958129883,
+        4.858153812408447,
+        4.8587272777557375,
+        4.851417246818542,
+        4.83565960931778,
+        4.829889953613281,
+        4.807385808944702,
+        4.806802290439606,
+        4.805180223941803,
+        4.8052075643539425,
+        4.795179812431336,
+        4.8074828023910525,
+        4.791703303337097,
+        4.780944372653961,
+        4.781775319814682,
+        4.781855797767639,
+        4.794984234333039,
+        4.777766079425811,
+        4.7754345769882205
+      ],
+      "val_loss_est": [
+        6.228300294876099,
+        5.887852630615234,
+        5.725712146759033,
+        5.608344135284423,
+        5.524299201965332,
+        5.452507877349854,
+        5.388125238418579,
+        5.331395225524902,
+        5.295491209030152,
+        5.248704700469971,
+        5.213273429870606,
+        5.183559331893921,
+        5.149380874633789,
+        5.107712116241455,
+        5.081380949020386,
+        5.0633987712860105,
+        5.094537258148193,
+        5.026662979125977,
+        4.994554176330566,
+        5.017634658813477,
+        4.979514570236206,
+        4.942938776016235,
+        4.907848873138428,
+        4.92018726348877,
+        4.886949977874756,
+        4.885566082000732,
+        4.88157732963562,
+        4.8833193016052245,
+        4.859884614944458,
+        4.835378761291504,
+        4.809692163467407,
+        4.83018913269043,
+        4.802964735031128,
+        4.7796072578430175,
+        4.781380462646484,
+        4.76235671043396,
+        4.762600145339966,
+        4.742988777160645,
+        4.752935466766357,
+        4.745399751663208,
+        4.748733100891113,
+        4.731755294799805,
+        4.717889308929443,
+        4.72034065246582,
+        4.711792678833008,
+        4.702342767715454,
+        4.694093561172485,
+        4.684955339431763,
+        4.682349815368652,
+        4.679566869735718,
+        4.676141052246094,
+        4.673452882766724,
+        4.66945237159729,
+        4.666889686584472,
+        4.664890575408935,
+        4.663366451263427,
+        4.662617197036743,
+        4.66118085861206,
+        4.660803852081298,
+        4.6607421779632565
+      ],
+      "lr": [
+        0.0002999477312803273,
+        0.00029952980005908385,
+        0.0002986951024658695,
+        0.00029744596495258525,
+        0.0002957858690895221,
+        0.00029371944186160016,
+        0.0002912524427721317,
+        0.0002883917477900524,
+        0.0002851453301853628,
+        0.0002815222383061948,
+        0.0002775325703594421,
+        0.000273187446265247,
+        0.0002684989766637882,
+        0.00026348022916075436,
+        0.0002581451919055837,
+        0.0002525087346039822,
+        0.0002465865670733873,
+        0.00024039519545688846,
+        0.0002339518762176462,
+        0.00022727456804203436,
+        0.00022038188178555992,
+        0.00021329302860107063,
+        0.00020602776639382672,
+        0.00019860634475267488,
+        0.00019104944851081244,
+        0.00018337814009344714,
+        0.00017561380081304058,
+        0.00016777807127575542,
+        0.00015989279106520427,
+        0.00015197993787161384,
+        0.0001440615662360596,
+        0.0001361597460805047,
+        0.00012829650119496896,
+        0.00012049374785327578,
+        0.00011277323372846643,
+        0.00010515647727813445,
+        9.766470776862499e-05,
+        9.031880610526189e-05,
+        8.313924663351926e-05,
+        7.614604007334866e-05,
+        6.935867774571337e-05,
+        6.279607724678103e-05,
+        5.6476529721189974e-05,
+        5.0417648881348774e-05,
+        4.463632191486022e-05,
+        3.914866241690115e-05,
+        3.396996547874203e-05,
+        2.9114665057584768e-05,
+        2.4596293746534905e-05,
+        2.0427445056837544e-05,
+        1.661973831750283e-05,
+        1.3183786290151838e-05,
+        1.0129165589346643e-05,
+        7.4643899908477525e-06,
+        5.196886702194203e-06,
+        3.3329756617438917e-06,
+        1.8778519238719203e-06,
+        8.355711794222342e-07,
+        2.0903845176995503e-07,
+        0.0
+      ],
+      "tokens": [
+        2048000,
+        4096000,
+        6144000,
+        8192000,
+        10240000,
+        12288000,
+        14336000,
+        16384000,
+        18432000,
+        20480000,
+        22528000,
+        24576000,
+        26624000,
+        28672000,
+        30720000,
+        32768000,
+        34816000,
+        36864000,
+        38912000,
+        40960000,
+        43008000,
+        45056000,
+        47104000,
+        49152000,
+        51200000,
+        53248000,
+        55296000,
+        57344000,
+        59392000,
+        61440000,
+        63488000,
+        65536000,
+        67584000,
+        69632000,
+        71680000,
+        73728000,
+        75776000,
+        77824000,
+        79872000,
+        81920000,
+        83968000,
+        86016000,
+        88064000,
+        90112000,
+        92160000,
+        94208000,
+        96256000,
+        98304000,
+        100352000,
+        102400000,
+        104448000,
+        106496000,
+        108544000,
+        110592000,
+        112640000,
+        114688000,
+        116736000,
+        118784000,
+        120832000,
+        122880000
+      ]
+    },
+    "routing_history": [
+      {
+        "step": 1000,
+        "transformer_pct": 0.5230008363723755,
+        "mamba_pct": 0.4769991934299469,
+        "entropy": 0.6920887231826782,
+        "block_entropy": 0.17083078622817993,
+        "transformer_frac_hard": 0.5078125,
+        "per_layer": [
+          {
+            "transformer_pct": 0.49898046255111694,
+            "mamba_pct": 0.5010195374488831,
+            "entropy": 0.6931451559066772,
+            "block_entropy": 0.27562975883483887,
+            "transformer_frac_hard": 0.46875,
+            "layer": 0,
+            "tau": 0.3676954247709635
+          },
+          {
+            "transformer_pct": 0.4889529049396515,
+            "mamba_pct": 0.5110470652580261,
+            "entropy": 0.6929030418395996,
+            "block_entropy": 0.07524175941944122,
+            "transformer_frac_hard": 0.46875,
+            "layer": 1,
+            "tau": 0.3676954247709635
+          },
+          {
+            "transformer_pct": 0.4552237391471863,
+            "mamba_pct": 0.5447762608528137,
+            "entropy": 0.6891319751739502,
+            "block_entropy": 0.139472097158432,
+            "transformer_frac_hard": 0.4375,
+            "layer": 2,
+            "tau": 0.3676954247709635
+          },
+          {
+            "transformer_pct": 0.6488462686538696,
+            "mamba_pct": 0.35115379095077515,
+            "entropy": 0.6481579542160034,
+            "block_entropy": 0.19297951459884644,
+            "transformer_frac_hard": 0.65625,
+            "layer": 3,
+            "tau": 0.3676954247709635
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.3676954247709635,
+          "layers.1.router": 0.3676954247709635,
+          "layers.2.router": 0.3676954247709635,
+          "layers.3.router": 0.3676954247709635
+        },
+        "aux_lb_layers": [
+          1.0000041723251343,
+          1.0004881620407104,
+          1.0080196857452393,
+          1.0886207818984985
+        ],
+        "aux_ent_layers": [
+          0.6931451559066772,
+          0.6929030418395996,
+          0.6891319751739502,
+          0.6481579542160034
+        ]
+      },
+      {
+        "step": 2000,
+        "transformer_pct": 0.49622780084609985,
+        "mamba_pct": 0.5037721991539001,
+        "entropy": 0.693118691444397,
+        "block_entropy": 0.05567466467618942,
+        "transformer_frac_hard": 0.4921875,
+        "per_layer": [
+          {
+            "transformer_pct": 0.37662264704704285,
+            "mamba_pct": 0.6233774423599243,
+            "entropy": 0.6623865365982056,
+            "block_entropy": 0.1342988908290863,
+            "transformer_frac_hard": 0.375,
+            "layer": 0,
+            "tau": 0.1351999253974994
+          },
+          {
+            "transformer_pct": 0.5313087105751038,
+            "mamba_pct": 0.46869128942489624,
+            "entropy": 0.691185474395752,
+            "block_entropy": 0.00046147117973305285,
+            "transformer_frac_hard": 0.53125,
+            "layer": 1,
+            "tau": 0.1351999253974994
+          },
+          {
+            "transformer_pct": 0.5861018896102905,
+            "mamba_pct": 0.4138981103897095,
+            "entropy": 0.6782459020614624,
+            "block_entropy": 0.02142205648124218,
+            "transformer_frac_hard": 0.59375,
+            "layer": 2,
+            "tau": 0.13601193696144842
+          },
+          {
+            "transformer_pct": 0.4908779263496399,
+            "mamba_pct": 0.5091221332550049,
+            "entropy": 0.6929807662963867,
+            "block_entropy": 0.0665162205696106,
+            "transformer_frac_hard": 0.46875,
+            "layer": 3,
+            "tau": 0.1351999253974994
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1351999253974994,
+          "layers.1.router": 0.1351999253974994,
+          "layers.2.router": 0.13601193696144842,
+          "layers.3.router": 0.1351999253974994
+        },
+        "aux_lb_layers": [
+          1.0608879327774048,
+          1.0039209127426147,
+          1.0296540260314941,
+          1.0003328323364258
+        ],
+        "aux_ent_layers": [
+          0.6623865365982056,
+          0.691185474395752,
+          0.6782459020614624,
+          0.6929807662963867
+        ]
+      },
+      {
+        "step": 3000,
+        "transformer_pct": 0.5000507831573486,
+        "mamba_pct": 0.49994921684265137,
+        "entropy": 0.6931471824645996,
+        "block_entropy": 0.03175883740186691,
+        "transformer_frac_hard": 0.5,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6608424186706543,
+            "mamba_pct": 0.3391575813293457,
+            "entropy": 0.6404751539230347,
+            "block_entropy": 0.05815397575497627,
+            "transformer_frac_hard": 0.65625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4576444625854492,
+            "mamba_pct": 0.5423555374145508,
+            "entropy": 0.6895549297332764,
+            "block_entropy": 0.020589282736182213,
+            "transformer_frac_hard": 0.46875,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.31250035762786865,
+            "mamba_pct": 0.6874996423721313,
+            "entropy": 0.6210867166519165,
+            "block_entropy": 6.2003828134038486e-06,
+            "transformer_frac_hard": 0.3125,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5692160129547119,
+            "mamba_pct": 0.4307839870452881,
+            "entropy": 0.6835346221923828,
+            "block_entropy": 0.04828588664531708,
+            "transformer_frac_hard": 0.5625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.1034811735153198,
+          1.0071759223937988,
+          1.1406245231628418,
+          1.0191633701324463
+        ],
+        "aux_ent_layers": [
+          0.6404751539230347,
+          0.6895549297332764,
+          0.6210867166519165,
+          0.6835346221923828
+        ]
+      },
+      {
+        "step": 4000,
+        "transformer_pct": 0.46879512071609497,
+        "mamba_pct": 0.5312049388885498,
+        "entropy": 0.6911984086036682,
+        "block_entropy": 0.050836801528930664,
+        "transformer_frac_hard": 0.4609375,
+        "per_layer": [
+          {
+            "transformer_pct": 0.5121206045150757,
+            "mamba_pct": 0.4878793954849243,
+            "entropy": 0.6928533315658569,
+            "block_entropy": 0.13630566000938416,
+            "transformer_frac_hard": 0.5,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5312536954879761,
+            "mamba_pct": 0.4687463045120239,
+            "entropy": 0.6911923289299011,
+            "block_entropy": 0.001082029426470399,
+            "transformer_frac_hard": 0.53125,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.2653214633464813,
+            "mamba_pct": 0.7346785068511963,
+            "entropy": 0.5785497426986694,
+            "block_entropy": 0.03606216982007027,
+            "transformer_frac_hard": 0.25,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5664845705032349,
+            "mamba_pct": 0.43351542949676514,
+            "entropy": 0.684280514717102,
+            "block_entropy": 0.029897356405854225,
+            "transformer_frac_hard": 0.5625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0005874633789062,
+          1.0039072036743164,
+          1.2202959060668945,
+          1.0176807641983032
+        ],
+        "aux_ent_layers": [
+          0.6928533315658569,
+          0.6911923289299011,
+          0.5785497426986694,
+          0.684280514717102
+        ]
+      },
+      {
+        "step": 5000,
+        "transformer_pct": 0.5229840278625488,
+        "mamba_pct": 0.47701597213745117,
+        "entropy": 0.6920902729034424,
+        "block_entropy": 0.036649107933044434,
+        "transformer_frac_hard": 0.5234375,
+        "per_layer": [
+          {
+            "transformer_pct": 0.3891116976737976,
+            "mamba_pct": 0.6108883023262024,
+            "entropy": 0.668349027633667,
+            "block_entropy": 0.044444479048252106,
+            "transformer_frac_hard": 0.375,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6488301753997803,
+            "mamba_pct": 0.3511698246002197,
+            "entropy": 0.6481677293777466,
+            "block_entropy": 0.023418817669153214,
+            "transformer_frac_hard": 0.65625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6701716184616089,
+            "mamba_pct": 0.3298283815383911,
+            "entropy": 0.6340570449829102,
+            "block_entropy": 0.037145763635635376,
+            "transformer_frac_hard": 0.6875,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.3838226795196533,
+            "mamba_pct": 0.6161773204803467,
+            "entropy": 0.6659045219421387,
+            "block_entropy": 0.04158736392855644,
+            "transformer_frac_hard": 0.375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.049185037612915,
+          1.0886017084121704,
+          1.1158335208892822,
+          1.0539886951446533
+        ],
+        "aux_ent_layers": [
+          0.668349027633667,
+          0.6481677293777466,
+          0.6340570449829102,
+          0.6659045219421387
+        ]
+      },
+      {
+        "step": 6000,
+        "transformer_pct": 0.5796177387237549,
+        "mamba_pct": 0.42038220167160034,
+        "entropy": 0.6804150342941284,
+        "block_entropy": 0.05405718833208084,
+        "transformer_frac_hard": 0.578125,
+        "per_layer": [
+          {
+            "transformer_pct": 0.4916253387928009,
+            "mamba_pct": 0.5083746314048767,
+            "entropy": 0.6930068731307983,
+            "block_entropy": 0.08228354901075363,
+            "transformer_frac_hard": 0.46875,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5993705987930298,
+            "mamba_pct": 0.4006294012069702,
+            "entropy": 0.6732660531997681,
+            "block_entropy": 0.038212087005376816,
+            "transformer_frac_hard": 0.59375,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.7070441246032715,
+            "mamba_pct": 0.2929559051990509,
+            "entropy": 0.6047771573066711,
+            "block_entropy": 0.020687362179160118,
+            "transformer_frac_hard": 0.71875,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5204311609268188,
+            "mamba_pct": 0.47956886887550354,
+            "entropy": 0.6923120617866516,
+            "block_entropy": 0.07504575699567795,
+            "transformer_frac_hard": 0.53125,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.000280499458313,
+          1.0394980907440186,
+          1.1714690923690796,
+          1.0016697645187378
+        ],
+        "aux_ent_layers": [
+          0.6930068731307983,
+          0.6732660531997681,
+          0.6047771573066711,
+          0.6923120617866516
+        ]
+      },
+      {
+        "step": 7000,
+        "transformer_pct": 0.5174259543418884,
+        "mamba_pct": 0.4825740456581116,
+        "entropy": 0.6925396919250488,
+        "block_entropy": 0.020403478294610977,
+        "transformer_frac_hard": 0.515625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.41802147030830383,
+            "mamba_pct": 0.5819785594940186,
+            "entropy": 0.679645299911499,
+            "block_entropy": 0.03318098932504654,
+            "transformer_frac_hard": 0.40625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6562601327896118,
+            "mamba_pct": 0.3437398672103882,
+            "entropy": 0.6434850096702576,
+            "block_entropy": 9.934425906976685e-05,
+            "transformer_frac_hard": 0.65625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4349217712879181,
+            "mamba_pct": 0.5650782585144043,
+            "entropy": 0.6846527457237244,
+            "block_entropy": 0.022999359294772148,
+            "transformer_frac_hard": 0.4375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.56050044298172,
+            "mamba_pct": 0.43949949741363525,
+            "entropy": 0.6858086585998535,
+            "block_entropy": 0.025334224104881287,
+            "transformer_frac_hard": 0.5625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0268819332122803,
+          1.0976688861846924,
+          1.0169408321380615,
+          1.0146411657333374
+        ],
+        "aux_ent_layers": [
+          0.679645299911499,
+          0.6434850096702576,
+          0.6846527457237244,
+          0.6858086585998535
+        ]
+      },
+      {
+        "step": 8000,
+        "transformer_pct": 0.544291615486145,
+        "mamba_pct": 0.455708384513855,
+        "entropy": 0.6892185211181641,
+        "block_entropy": 0.020746171474456787,
+        "transformer_frac_hard": 0.5390625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6113477349281311,
+            "mamba_pct": 0.3886522650718689,
+            "entropy": 0.6681413650512695,
+            "block_entropy": 0.06410320848226547,
+            "transformer_frac_hard": 0.59375,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.43746185302734375,
+            "mamba_pct": 0.5625381469726562,
+            "entropy": 0.6853046417236328,
+            "block_entropy": 0.0009325287537649274,
+            "transformer_frac_hard": 0.4375,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5306764841079712,
+            "mamba_pct": 0.4693235158920288,
+            "entropy": 0.6912639141082764,
+            "block_entropy": 0.0029645285103470087,
+            "transformer_frac_hard": 0.53125,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5976803302764893,
+            "mamba_pct": 0.40231966972351074,
+            "entropy": 0.6739410161972046,
+            "block_entropy": 0.014984415844082832,
+            "transformer_frac_hard": 0.59375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.049593448638916,
+          1.0156440734863281,
+          1.0037641525268555,
+          1.038165807723999
+        ],
+        "aux_ent_layers": [
+          0.6681413650512695,
+          0.6853046417236328,
+          0.6912639141082764,
+          0.6739410161972046
+        ]
+      },
+      {
+        "step": 9000,
+        "transformer_pct": 0.5190403461456299,
+        "mamba_pct": 0.48095962405204773,
+        "entropy": 0.6924219131469727,
+        "block_entropy": 0.03604483604431152,
+        "transformer_frac_hard": 0.5078125,
+        "per_layer": [
+          {
+            "transformer_pct": 0.5873168706893921,
+            "mamba_pct": 0.4126831293106079,
+            "entropy": 0.6778202056884766,
+            "block_entropy": 0.07298530638217926,
+            "transformer_frac_hard": 0.5625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5036680102348328,
+            "mamba_pct": 0.4963320195674896,
+            "entropy": 0.6931203007698059,
+            "block_entropy": 0.011491321958601475,
+            "transformer_frac_hard": 0.5,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5683568716049194,
+            "mamba_pct": 0.4316430985927582,
+            "entropy": 0.6837725639343262,
+            "block_entropy": 0.026108283549547195,
+            "transformer_frac_hard": 0.5625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.41681966185569763,
+            "mamba_pct": 0.58318030834198,
+            "entropy": 0.6792446970939636,
+            "block_entropy": 0.033594418317079544,
+            "transformer_frac_hard": 0.40625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0304969549179077,
+          1.0000537633895874,
+          1.018690586090088,
+          1.0276758670806885
+        ],
+        "aux_ent_layers": [
+          0.6778202056884766,
+          0.6931203007698059,
+          0.6837725639343262,
+          0.6792446970939636
+        ]
+      },
+      {
+        "step": 10000,
+        "transformer_pct": 0.5168740749359131,
+        "mamba_pct": 0.4831259548664093,
+        "entropy": 0.692577600479126,
+        "block_entropy": 0.03928818553686142,
+        "transformer_frac_hard": 0.515625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.5327894687652588,
+            "mamba_pct": 0.4672105014324188,
+            "entropy": 0.6909953355789185,
+            "block_entropy": 0.02201918140053749,
+            "transformer_frac_hard": 0.53125,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5117220878601074,
+            "mamba_pct": 0.4882779121398926,
+            "entropy": 0.6928723454475403,
+            "block_entropy": 0.020717961713671684,
+            "transformer_frac_hard": 0.5,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.37465357780456543,
+            "mamba_pct": 0.6253464221954346,
+            "entropy": 0.6613860130310059,
+            "block_entropy": 0.0019180841045454144,
+            "transformer_frac_hard": 0.375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6483311057090759,
+            "mamba_pct": 0.3516688942909241,
+            "entropy": 0.6484736204147339,
+            "block_entropy": 0.11249750852584839,
+            "transformer_frac_hard": 0.65625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.004300594329834,
+          1.0005496740341187,
+          1.0628468990325928,
+          1.0880085229873657
+        ],
+        "aux_ent_layers": [
+          0.6909953355789185,
+          0.6928723454475403,
+          0.6613860130310059,
+          0.6484736204147339
+        ]
+      },
+      {
+        "step": 11000,
+        "transformer_pct": 0.5046959519386292,
+        "mamba_pct": 0.4953039884567261,
+        "entropy": 0.6931030750274658,
+        "block_entropy": 0.0368029847741127,
+        "transformer_frac_hard": 0.5,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6642360091209412,
+            "mamba_pct": 0.3357640206813812,
+            "entropy": 0.6381857395172119,
+            "block_entropy": 0.06572379916906357,
+            "transformer_frac_hard": 0.65625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.34375,
+            "mamba_pct": 0.65625,
+            "entropy": 0.6434915065765381,
+            "block_entropy": 2.375278862487562e-10,
+            "transformer_frac_hard": 0.34375,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6301653385162354,
+            "mamba_pct": 0.36983466148376465,
+            "entropy": 0.658867597579956,
+            "block_entropy": 0.016660058870911598,
+            "transformer_frac_hard": 0.625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.3806326389312744,
+            "mamba_pct": 0.6193673610687256,
+            "entropy": 0.6643730401992798,
+            "block_entropy": 0.06482808291912079,
+            "transformer_frac_hard": 0.375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.107893705368042,
+          1.09765625,
+          1.0677720308303833,
+          1.0569943189620972
+        ],
+        "aux_ent_layers": [
+          0.6381857395172119,
+          0.6434915065765381,
+          0.658867597579956,
+          0.6643730401992798
+        ]
+      },
+      {
+        "step": 12000,
+        "transformer_pct": 0.5477879047393799,
+        "mamba_pct": 0.4522121548652649,
+        "entropy": 0.6885727643966675,
+        "block_entropy": 0.04769060015678406,
+        "transformer_frac_hard": 0.546875,
+        "per_layer": [
+          {
+            "transformer_pct": 0.5815423727035522,
+            "mamba_pct": 0.41845762729644775,
+            "entropy": 0.6797893047332764,
+            "block_entropy": 0.07350964099168777,
+            "transformer_frac_hard": 0.5625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4714691936969757,
+            "mamba_pct": 0.5285308361053467,
+            "entropy": 0.691518247127533,
+            "block_entropy": 0.02374684251844883,
+            "transformer_frac_hard": 0.46875,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5276094675064087,
+            "mamba_pct": 0.4723905324935913,
+            "entropy": 0.6916218400001526,
+            "block_entropy": 0.01564345322549343,
+            "transformer_frac_hard": 0.53125,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.610530436038971,
+            "mamba_pct": 0.38946956396102905,
+            "entropy": 0.6685101985931396,
+            "block_entropy": 0.0778624564409256,
+            "transformer_frac_hard": 0.625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0265966653823853,
+          1.00325608253479,
+          1.0030491352081299,
+          1.04886794090271
+        ],
+        "aux_ent_layers": [
+          0.6797893047332764,
+          0.691518247127533,
+          0.6916218400001526,
+          0.6685101985931396
+        ]
+      },
+      {
+        "step": 13000,
+        "transformer_pct": 0.4783550202846527,
+        "mamba_pct": 0.5216450095176697,
+        "entropy": 0.6922098398208618,
+        "block_entropy": 0.0290093794465065,
+        "transformer_frac_hard": 0.4765625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6650455594062805,
+            "mamba_pct": 0.3349544405937195,
+            "entropy": 0.6376320123672485,
+            "block_entropy": 0.04457128420472145,
+            "transformer_frac_hard": 0.65625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.378182590007782,
+            "mamba_pct": 0.6218174695968628,
+            "entropy": 0.6631673574447632,
+            "block_entropy": 0.010286962613463402,
+            "transformer_frac_hard": 0.375,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.37252917885780334,
+            "mamba_pct": 0.627470850944519,
+            "entropy": 0.6602879762649536,
+            "block_entropy": 0.009586936794221401,
+            "transformer_frac_hard": 0.375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.497662752866745,
+            "mamba_pct": 0.5023372173309326,
+            "entropy": 0.6931362748146057,
+            "block_entropy": 0.051592327654361725,
+            "transformer_frac_hard": 0.5,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.1089600324630737,
+          1.0593581199645996,
+          1.064995288848877,
+          1.0000218152999878
+        ],
+        "aux_ent_layers": [
+          0.6376320123672485,
+          0.6631673574447632,
+          0.6602879762649536,
+          0.6931362748146057
+        ]
+      },
+      {
+        "step": 14000,
+        "transformer_pct": 0.5045105218887329,
+        "mamba_pct": 0.49548953771591187,
+        "entropy": 0.693106472492218,
+        "block_entropy": 0.04007076844573021,
+        "transformer_frac_hard": 0.515625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.5708107948303223,
+            "mamba_pct": 0.42918920516967773,
+            "entropy": 0.6830850839614868,
+            "block_entropy": 0.06848147511482239,
+            "transformer_frac_hard": 0.59375,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.40624070167541504,
+            "mamba_pct": 0.593759298324585,
+            "entropy": 0.6754610538482666,
+            "block_entropy": 0.000945613777730614,
+            "transformer_frac_hard": 0.40625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5650508403778076,
+            "mamba_pct": 0.4349491596221924,
+            "entropy": 0.6846599578857422,
+            "block_entropy": 0.009312334470450878,
+            "transformer_frac_hard": 0.5625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.47593963146209717,
+            "mamba_pct": 0.5240604281425476,
+            "entropy": 0.6919889450073242,
+            "block_entropy": 0.08154365420341492,
+            "transformer_frac_hard": 0.5,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0200567245483398,
+          1.0351632833480835,
+          1.0169264078140259,
+          1.002315640449524
+        ],
+        "aux_ent_layers": [
+          0.6830850839614868,
+          0.6754610538482666,
+          0.6846599578857422,
+          0.6919889450073242
+        ]
+      },
+      {
+        "step": 15000,
+        "transformer_pct": 0.48681914806365967,
+        "mamba_pct": 0.5131808519363403,
+        "entropy": 0.6927996873855591,
+        "block_entropy": 0.024009883403778076,
+        "transformer_frac_hard": 0.4921875,
+        "per_layer": [
+          {
+            "transformer_pct": 0.4630672037601471,
+            "mamba_pct": 0.5369328260421753,
+            "entropy": 0.690416693687439,
+            "block_entropy": 0.04782110080122948,
+            "transformer_frac_hard": 0.46875,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.564395546913147,
+            "mamba_pct": 0.435604453086853,
+            "entropy": 0.6848305463790894,
+            "block_entropy": 0.007182682398706675,
+            "transformer_frac_hard": 0.5625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.37500718235969543,
+            "mamba_pct": 0.624992847442627,
+            "entropy": 0.6615669131278992,
+            "block_entropy": 6.915198900969699e-05,
+            "transformer_frac_hard": 0.375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.544806718826294,
+            "mamba_pct": 0.45519331097602844,
+            "entropy": 0.6891264915466309,
+            "block_entropy": 0.04096660017967224,
+            "transformer_frac_hard": 0.5625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0054559707641602,
+          1.0165871381759644,
+          1.062492847442627,
+          1.0080305337905884
+        ],
+        "aux_ent_layers": [
+          0.690416693687439,
+          0.6848305463790894,
+          0.6615669131278992,
+          0.6891264915466309
+        ]
+      },
+      {
+        "step": 16000,
+        "transformer_pct": 0.547089695930481,
+        "mamba_pct": 0.4529103636741638,
+        "entropy": 0.6887056827545166,
+        "block_entropy": 0.04046258330345154,
+        "transformer_frac_hard": 0.5546875,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6936403512954712,
+            "mamba_pct": 0.3063596487045288,
+            "entropy": 0.6161569356918335,
+            "block_entropy": 0.04304571822285652,
+            "transformer_frac_hard": 0.6875,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4539675712585449,
+            "mamba_pct": 0.5460324287414551,
+            "entropy": 0.6889032125473022,
+            "block_entropy": 0.05228779464960098,
+            "transformer_frac_hard": 0.46875,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5156675577163696,
+            "mamba_pct": 0.484332412481308,
+            "entropy": 0.6926561594009399,
+            "block_entropy": 0.03372791409492493,
+            "transformer_frac_hard": 0.53125,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.525083065032959,
+            "mamba_pct": 0.474916934967041,
+            "entropy": 0.6918883323669434,
+            "block_entropy": 0.03278890997171402,
+            "transformer_frac_hard": 0.53125,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.1499862670898438,
+          1.00847589969635,
+          1.0009818077087402,
+          1.002516508102417
+        ],
+        "aux_ent_layers": [
+          0.6161569356918335,
+          0.6889032125473022,
+          0.6926561594009399,
+          0.6918883323669434
+        ]
+      },
+      {
+        "step": 17000,
+        "transformer_pct": 0.5401725769042969,
+        "mamba_pct": 0.4598274230957031,
+        "entropy": 0.6899160146713257,
+        "block_entropy": 0.02932363748550415,
+        "transformer_frac_hard": 0.5390625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.8011839389801025,
+            "mamba_pct": 0.19881606101989746,
+            "entropy": 0.4987567365169525,
+            "block_entropy": 0.05324121564626694,
+            "transformer_frac_hard": 0.8125,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5700802803039551,
+            "mamba_pct": 0.4299197196960449,
+            "entropy": 0.6832922697067261,
+            "block_entropy": 0.03347236290574074,
+            "transformer_frac_hard": 0.5625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4057307541370392,
+            "mamba_pct": 0.5942692160606384,
+            "entropy": 0.6752669811248779,
+            "block_entropy": 0.003076177556067705,
+            "transformer_frac_hard": 0.40625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.3836953938007355,
+            "mamba_pct": 0.6163046360015869,
+            "entropy": 0.6658442616462708,
+            "block_entropy": 0.027504783123731613,
+            "transformer_frac_hard": 0.375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.362847089767456,
+          1.0196449756622314,
+          1.0355467796325684,
+          1.0541070699691772
+        ],
+        "aux_ent_layers": [
+          0.4987567365169525,
+          0.6832922697067261,
+          0.6752669811248779,
+          0.6658442616462708
+        ]
+      },
+      {
+        "step": 18000,
+        "transformer_pct": 0.5508495569229126,
+        "mamba_pct": 0.449150413274765,
+        "entropy": 0.6879668831825256,
+        "block_entropy": 0.020588740706443787,
+        "transformer_frac_hard": 0.546875,
+        "per_layer": [
+          {
+            "transformer_pct": 0.4230209290981293,
+            "mamba_pct": 0.5769791007041931,
+            "entropy": 0.6812484264373779,
+            "block_entropy": 0.04886965826153755,
+            "transformer_frac_hard": 0.40625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6254566311836243,
+            "mamba_pct": 0.37454336881637573,
+            "entropy": 0.6613296270370483,
+            "block_entropy": 0.0112964091822505,
+            "transformer_frac_hard": 0.625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5945544838905334,
+            "mamba_pct": 0.40544551610946655,
+            "entropy": 0.6751579642295837,
+            "block_entropy": 0.0057472288608551025,
+            "transformer_frac_hard": 0.59375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5603663921356201,
+            "mamba_pct": 0.43963363766670227,
+            "entropy": 0.6858412027359009,
+            "block_entropy": 0.016441665589809418,
+            "transformer_frac_hard": 0.5625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0237029790878296,
+          1.0629572868347168,
+          1.0357621908187866,
+          1.0145763158798218
+        ],
+        "aux_ent_layers": [
+          0.6812484264373779,
+          0.6613296270370483,
+          0.6751579642295837,
+          0.6858412027359009
+        ]
+      },
+      {
+        "step": 19000,
+        "transformer_pct": 0.56732177734375,
+        "mamba_pct": 0.43267822265625,
+        "entropy": 0.6840551495552063,
+        "block_entropy": 0.03416678309440613,
+        "transformer_frac_hard": 0.5703125,
+        "per_layer": [
+          {
+            "transformer_pct": 0.7670684456825256,
+            "mamba_pct": 0.23293156921863556,
+            "entropy": 0.5427943468093872,
+            "block_entropy": 0.07385657727718353,
+            "transformer_frac_hard": 0.78125,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.3408382534980774,
+            "mamba_pct": 0.6591617465019226,
+            "entropy": 0.641589879989624,
+            "block_entropy": 0.012833988294005394,
+            "transformer_frac_hard": 0.34375,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.7187052965164185,
+            "mamba_pct": 0.28129470348358154,
+            "entropy": 0.594171941280365,
+            "block_entropy": 0.000774182437453419,
+            "transformer_frac_hard": 0.71875,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.44267523288726807,
+            "mamba_pct": 0.5573247671127319,
+            "entropy": 0.6865604519844055,
+            "block_entropy": 0.049202386289834976,
+            "transformer_frac_hard": 0.4375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.2853021621704102,
+          1.1013298034667969,
+          1.1913280487060547,
+          1.0131444931030273
+        ],
+        "aux_ent_layers": [
+          0.5427943468093872,
+          0.641589879989624,
+          0.594171941280365,
+          0.6865604519844055
+        ]
+      },
+      {
+        "step": 20000,
+        "transformer_pct": 0.5840314030647278,
+        "mamba_pct": 0.4159685969352722,
+        "entropy": 0.6789574027061462,
+        "block_entropy": 0.03961221128702164,
+        "transformer_frac_hard": 0.5859375,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6639319658279419,
+            "mamba_pct": 0.3360680341720581,
+            "entropy": 0.6383929252624512,
+            "block_entropy": 0.04229038953781128,
+            "transformer_frac_hard": 0.65625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5657479166984558,
+            "mamba_pct": 0.4342521131038666,
+            "entropy": 0.6844764947891235,
+            "block_entropy": 0.014394145458936691,
+            "transformer_frac_hard": 0.5625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4575795531272888,
+            "mamba_pct": 0.5424204468727112,
+            "entropy": 0.6895438432693481,
+            "block_entropy": 0.020622223615646362,
+            "transformer_frac_hard": 0.46875,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6488662362098694,
+            "mamba_pct": 0.351133793592453,
+            "entropy": 0.6481456756591797,
+            "block_entropy": 0.08114209771156311,
+            "transformer_frac_hard": 0.65625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.1074947118759155,
+          1.0172913074493408,
+          1.0071980953216553,
+          1.0886446237564087
+        ],
+        "aux_ent_layers": [
+          0.6383929252624512,
+          0.6844764947891235,
+          0.6895438432693481,
+          0.6481456756591797
+        ]
+      },
+      {
+        "step": 21000,
+        "transformer_pct": 0.4958540201187134,
+        "mamba_pct": 0.5041459798812866,
+        "entropy": 0.693112850189209,
+        "block_entropy": 0.0464707650244236,
+        "transformer_frac_hard": 0.4921875,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6364570260047913,
+            "mamba_pct": 0.36354294419288635,
+            "entropy": 0.655429482460022,
+            "block_entropy": 0.06636187434196472,
+            "transformer_frac_hard": 0.625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.35543549060821533,
+            "mamba_pct": 0.6445645093917847,
+            "entropy": 0.6507466435432434,
+            "block_entropy": 0.029464950785040855,
+            "transformer_frac_hard": 0.34375,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5334426164627075,
+            "mamba_pct": 0.46655744314193726,
+            "entropy": 0.690908670425415,
+            "block_entropy": 0.050650082528591156,
+            "transformer_frac_hard": 0.53125,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.45808085799217224,
+            "mamba_pct": 0.5419191122055054,
+            "entropy": 0.6896286010742188,
+            "block_entropy": 0.039406150579452515,
+            "transformer_frac_hard": 0.46875,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0744822025299072,
+          1.083595633506775,
+          1.0044736862182617,
+          1.0070288181304932
+        ],
+        "aux_ent_layers": [
+          0.655429482460022,
+          0.6507466435432434,
+          0.690908670425415,
+          0.6896286010742188
+        ]
+      },
+      {
+        "step": 22000,
+        "transformer_pct": 0.5082106590270996,
+        "mamba_pct": 0.491789311170578,
+        "entropy": 0.6930123567581177,
+        "block_entropy": 0.05348542705178261,
+        "transformer_frac_hard": 0.515625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6194268465042114,
+            "mamba_pct": 0.3805730938911438,
+            "entropy": 0.664344072341919,
+            "block_entropy": 0.13861596584320068,
+            "transformer_frac_hard": 0.625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.37503737211227417,
+            "mamba_pct": 0.6249626278877258,
+            "entropy": 0.661582350730896,
+            "block_entropy": 0.0002896224323194474,
+            "transformer_frac_hard": 0.375,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5126252174377441,
+            "mamba_pct": 0.48737478256225586,
+            "entropy": 0.6928282976150513,
+            "block_entropy": 0.042753636837005615,
+            "transformer_frac_hard": 0.53125,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5257532596588135,
+            "mamba_pct": 0.47424668073654175,
+            "entropy": 0.6918201446533203,
+            "block_entropy": 0.03228248655796051,
+            "transformer_frac_hard": 0.53125,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0570510625839233,
+          1.0624626874923706,
+          1.0006375312805176,
+          1.002652883529663
+        ],
+        "aux_ent_layers": [
+          0.664344072341919,
+          0.661582350730896,
+          0.6928282976150513,
+          0.6918201446533203
+        ]
+      },
+      {
+        "step": 23000,
+        "transformer_pct": 0.5541266798973083,
+        "mamba_pct": 0.44587329030036926,
+        "entropy": 0.6872762441635132,
+        "block_entropy": 0.055711474269628525,
+        "transformer_frac_hard": 0.546875,
+        "per_layer": [
+          {
+            "transformer_pct": 0.7289324998855591,
+            "mamba_pct": 0.2710675001144409,
+            "entropy": 0.584317684173584,
+            "block_entropy": 0.06445606052875519,
+            "transformer_frac_hard": 0.71875,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.34091344475746155,
+            "mamba_pct": 0.6590865254402161,
+            "entropy": 0.6416395306587219,
+            "block_entropy": 0.06409456580877304,
+            "transformer_frac_hard": 0.3125,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5838823318481445,
+            "mamba_pct": 0.4161176383495331,
+            "entropy": 0.679007887840271,
+            "block_entropy": 0.03465132787823677,
+            "transformer_frac_hard": 0.59375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5627784729003906,
+            "mamba_pct": 0.437221497297287,
+            "entropy": 0.685244083404541,
+            "block_entropy": 0.0596439465880394,
+            "transformer_frac_hard": 0.5625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.2096402645111084,
+          1.101233959197998,
+          1.0281449556350708,
+          1.0157644748687744
+        ],
+        "aux_ent_layers": [
+          0.584317684173584,
+          0.6416395306587219,
+          0.679007887840271,
+          0.685244083404541
+        ]
+      },
+      {
+        "step": 24000,
+        "transformer_pct": 0.5188774466514587,
+        "mamba_pct": 0.48112255334854126,
+        "entropy": 0.6924343109130859,
+        "block_entropy": 0.028812088072299957,
+        "transformer_frac_hard": 0.515625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.683623194694519,
+            "mamba_pct": 0.31637680530548096,
+            "entropy": 0.6241081953048706,
+            "block_entropy": 0.05714428424835205,
+            "transformer_frac_hard": 0.6875,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4437965750694275,
+            "mamba_pct": 0.5562034249305725,
+            "entropy": 0.6868161559104919,
+            "block_entropy": 0.019334405660629272,
+            "transformer_frac_hard": 0.4375,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.49949708580970764,
+            "mamba_pct": 0.5005029439926147,
+            "entropy": 0.6931466460227966,
+            "block_entropy": 0.002993355505168438,
+            "transformer_frac_hard": 0.5,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4485928416252136,
+            "mamba_pct": 0.5514071583747864,
+            "entropy": 0.6878523826599121,
+            "block_entropy": 0.03577630594372749,
+            "transformer_frac_hard": 0.4375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.134869933128357,
+          1.012635350227356,
+          1.0000009536743164,
+          1.0105708837509155
+        ],
+        "aux_ent_layers": [
+          0.6241081953048706,
+          0.6868161559104919,
+          0.6931466460227966,
+          0.6878523826599121
+        ]
+      },
+      {
+        "step": 25000,
+        "transformer_pct": 0.5840084552764893,
+        "mamba_pct": 0.4159916043281555,
+        "entropy": 0.6789652109146118,
+        "block_entropy": 0.01537727378308773,
+        "transformer_frac_hard": 0.5859375,
+        "per_layer": [
+          {
+            "transformer_pct": 0.748019814491272,
+            "mamba_pct": 0.2519802153110504,
+            "entropy": 0.5645002126693726,
+            "block_entropy": 0.02517825737595558,
+            "transformer_frac_hard": 0.75,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.283075213432312,
+            "mamba_pct": 0.716924786567688,
+            "entropy": 0.5958343148231506,
+            "block_entropy": 0.008212819695472717,
+            "transformer_frac_hard": 0.28125,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.8381898403167725,
+            "mamba_pct": 0.16181015968322754,
+            "entropy": 0.4426593780517578,
+            "block_entropy": 0.017362287268042564,
+            "transformer_frac_hard": 0.84375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.46674874424934387,
+            "mamba_pct": 0.5332512259483337,
+            "entropy": 0.6909343004226685,
+            "block_entropy": 0.010755731724202633,
+            "transformer_frac_hard": 0.46875,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.2460551261901855,
+          1.188225507736206,
+          1.4574894905090332,
+          1.0044224262237549
+        ],
+        "aux_ent_layers": [
+          0.5645002126693726,
+          0.5958343148231506,
+          0.4426593780517578,
+          0.6909343004226685
+        ]
+      },
+      {
+        "step": 26000,
+        "transformer_pct": 0.5077333450317383,
+        "mamba_pct": 0.4922666549682617,
+        "entropy": 0.6930276155471802,
+        "block_entropy": 0.02964891493320465,
+        "transformer_frac_hard": 0.5,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6026971340179443,
+            "mamba_pct": 0.39730292558670044,
+            "entropy": 0.6719028949737549,
+            "block_entropy": 0.03394320607185364,
+            "transformer_frac_hard": 0.59375,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5318552851676941,
+            "mamba_pct": 0.4681447446346283,
+            "entropy": 0.6911162734031677,
+            "block_entropy": 0.01573716662824154,
+            "transformer_frac_hard": 0.53125,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4377104938030243,
+            "mamba_pct": 0.5622894763946533,
+            "entropy": 0.6853670477867126,
+            "block_entropy": 0.0040009040385484695,
+            "transformer_frac_hard": 0.4375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.45867055654525757,
+            "mamba_pct": 0.5413293838500977,
+            "entropy": 0.6897270083427429,
+            "block_entropy": 0.06491437554359436,
+            "transformer_frac_hard": 0.4375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0421867370605469,
+          1.004059076309204,
+          1.0155198574066162,
+          1.0068325996398926
+        ],
+        "aux_ent_layers": [
+          0.6719028949737549,
+          0.6911162734031677,
+          0.6853670477867126,
+          0.6897270083427429
+        ]
+      },
+      {
+        "step": 27000,
+        "transformer_pct": 0.5128311514854431,
+        "mamba_pct": 0.4871688485145569,
+        "entropy": 0.6928179264068604,
+        "block_entropy": 0.04158418998122215,
+        "transformer_frac_hard": 0.515625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.5653786063194275,
+            "mamba_pct": 0.4346213936805725,
+            "entropy": 0.6845739483833313,
+            "block_entropy": 0.11542321741580963,
+            "transformer_frac_hard": 0.5625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6577191352844238,
+            "mamba_pct": 0.34228086471557617,
+            "entropy": 0.6425367593765259,
+            "block_entropy": 0.006218934431672096,
+            "transformer_frac_hard": 0.65625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.33195745944976807,
+            "mamba_pct": 0.6680425405502319,
+            "entropy": 0.6355562210083008,
+            "block_entropy": 0.0324038565158844,
+            "transformer_frac_hard": 0.34375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.49626943469047546,
+            "mamba_pct": 0.5037305355072021,
+            "entropy": 0.6931193470954895,
+            "block_entropy": 0.01229074690490961,
+            "transformer_frac_hard": 0.5,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0170974731445312,
+          1.0995012521743774,
+          1.1129531860351562,
+          1.0000555515289307
+        ],
+        "aux_ent_layers": [
+          0.6845739483833313,
+          0.6425367593765259,
+          0.6355562210083008,
+          0.6931193470954895
+        ]
+      },
+      {
+        "step": 28000,
+        "transformer_pct": 0.5291076898574829,
+        "mamba_pct": 0.4708923101425171,
+        "entropy": 0.6914516687393188,
+        "block_entropy": 0.03379655256867409,
+        "transformer_frac_hard": 0.53125,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6781821846961975,
+            "mamba_pct": 0.3218178153038025,
+            "entropy": 0.6282321214675903,
+            "block_entropy": 0.03564827889204025,
+            "transformer_frac_hard": 0.6875,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.655748724937439,
+            "mamba_pct": 0.34425127506256104,
+            "entropy": 0.6438151597976685,
+            "block_entropy": 0.0030861375853419304,
+            "transformer_frac_hard": 0.65625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.3773138225078583,
+            "mamba_pct": 0.6226861476898193,
+            "entropy": 0.662733793258667,
+            "block_entropy": 0.009528144262731075,
+            "transformer_frac_hard": 0.375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4051860272884369,
+            "mamba_pct": 0.5948139429092407,
+            "entropy": 0.6750584840774536,
+            "block_entropy": 0.08692364394664764,
+            "transformer_frac_hard": 0.40625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.12699556350708,
+          1.0970306396484375,
+          1.0602076053619385,
+          1.0359586477279663
+        ],
+        "aux_ent_layers": [
+          0.6282321214675903,
+          0.6438151597976685,
+          0.662733793258667,
+          0.6750584840774536
+        ]
+      },
+      {
+        "step": 29000,
+        "transformer_pct": 0.5639777183532715,
+        "mamba_pct": 0.4360222816467285,
+        "entropy": 0.6849384307861328,
+        "block_entropy": 0.03063868172466755,
+        "transformer_frac_hard": 0.5703125,
+        "per_layer": [
+          {
+            "transformer_pct": 0.571985125541687,
+            "mamba_pct": 0.4280148148536682,
+            "entropy": 0.6827473640441895,
+            "block_entropy": 0.04959753155708313,
+            "transformer_frac_hard": 0.59375,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6863971948623657,
+            "mamba_pct": 0.31360283493995667,
+            "entropy": 0.621953010559082,
+            "block_entropy": 0.005792819894850254,
+            "transformer_frac_hard": 0.6875,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.40566059947013855,
+            "mamba_pct": 0.5943393707275391,
+            "entropy": 0.6752402186393738,
+            "block_entropy": 0.005614466965198517,
+            "transformer_frac_hard": 0.40625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5918678641319275,
+            "mamba_pct": 0.4081321656703949,
+            "entropy": 0.6761715412139893,
+            "block_entropy": 0.06154990941286087,
+            "transformer_frac_hard": 0.59375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0207276344299316,
+          1.1389756202697754,
+          1.0355995893478394,
+          1.0337587594985962
+        ],
+        "aux_ent_layers": [
+          0.6827473640441895,
+          0.621953010559082,
+          0.6752402186393738,
+          0.6761715412139893
+        ]
+      },
+      {
+        "step": 30000,
+        "transformer_pct": 0.5438666343688965,
+        "mamba_pct": 0.4561333954334259,
+        "entropy": 0.6892936825752258,
+        "block_entropy": 0.0526714026927948,
+        "transformer_frac_hard": 0.5390625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.5589056015014648,
+            "mamba_pct": 0.44109439849853516,
+            "entropy": 0.6861913204193115,
+            "block_entropy": 0.06823846697807312,
+            "transformer_frac_hard": 0.5625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6869184970855713,
+            "mamba_pct": 0.3130815029144287,
+            "entropy": 0.6215440630912781,
+            "block_entropy": 0.004597888328135014,
+            "transformer_frac_hard": 0.6875,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.40263378620147705,
+            "mamba_pct": 0.5973661541938782,
+            "entropy": 0.6740651726722717,
+            "block_entropy": 0.03626168891787529,
+            "transformer_frac_hard": 0.40625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.527008593082428,
+            "mamba_pct": 0.472991406917572,
+            "entropy": 0.6916875839233398,
+            "block_entropy": 0.10158754885196686,
+            "transformer_frac_hard": 0.5,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0138795375823975,
+          1.139754056930542,
+          1.0379207134246826,
+          1.002917766571045
+        ],
+        "aux_ent_layers": [
+          0.6861913204193115,
+          0.6215440630912781,
+          0.6740651726722717,
+          0.6916875839233398
+        ]
+      },
+      {
+        "step": 31000,
+        "transformer_pct": 0.5169399976730347,
+        "mamba_pct": 0.48306000232696533,
+        "entropy": 0.6925731301307678,
+        "block_entropy": 0.045854099094867706,
+        "transformer_frac_hard": 0.5078125,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6797744035720825,
+            "mamba_pct": 0.3202255964279175,
+            "entropy": 0.6270394325256348,
+            "block_entropy": 0.10144404321908951,
+            "transformer_frac_hard": 0.625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5912294387817383,
+            "mamba_pct": 0.4087705910205841,
+            "entropy": 0.6764079332351685,
+            "block_entropy": 0.011449961923062801,
+            "transformer_frac_hard": 0.59375,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4373268485069275,
+            "mamba_pct": 0.5626731514930725,
+            "entropy": 0.6852706670761108,
+            "block_entropy": 0.0012402847642078996,
+            "transformer_frac_hard": 0.4375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.3594294488430023,
+            "mamba_pct": 0.6405705213546753,
+            "entropy": 0.6530892252922058,
+            "block_entropy": 0.06928209960460663,
+            "transformer_frac_hard": 0.375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.1292753219604492,
+          1.0332913398742676,
+          1.0157116651535034,
+          1.079040288925171
+        ],
+        "aux_ent_layers": [
+          0.6270394325256348,
+          0.6764079332351685,
+          0.6852706670761108,
+          0.6530892252922058
+        ]
+      },
+      {
+        "step": 32000,
+        "transformer_pct": 0.5128494501113892,
+        "mamba_pct": 0.48715054988861084,
+        "entropy": 0.692816972732544,
+        "block_entropy": 0.040727369487285614,
+        "transformer_frac_hard": 0.5078125,
+        "per_layer": [
+          {
+            "transformer_pct": 0.5804948210716248,
+            "mamba_pct": 0.41950517892837524,
+            "entropy": 0.6801317930221558,
+            "block_entropy": 0.08093045651912689,
+            "transformer_frac_hard": 0.5625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.7129576206207275,
+            "mamba_pct": 0.28704237937927246,
+            "entropy": 0.5994821786880493,
+            "block_entropy": 0.03960106149315834,
+            "transformer_frac_hard": 0.71875,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.3127056658267975,
+            "mamba_pct": 0.6872943043708801,
+            "entropy": 0.6212484240531921,
+            "block_entropy": 0.005580470897257328,
+            "transformer_frac_hard": 0.3125,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4452398419380188,
+            "mamba_pct": 0.5547600984573364,
+            "entropy": 0.6871378421783447,
+            "block_entropy": 0.03679748997092247,
+            "transformer_frac_hard": 0.4375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0259177684783936,
+          1.1814038753509521,
+          1.1403168439865112,
+          1.0119946002960205
+        ],
+        "aux_ent_layers": [
+          0.6801317930221558,
+          0.5994821786880493,
+          0.6212484240531921,
+          0.6871378421783447
+        ]
+      },
+      {
+        "step": 33000,
+        "transformer_pct": 0.5404884815216064,
+        "mamba_pct": 0.45951151847839355,
+        "entropy": 0.689864993095398,
+        "block_entropy": 0.04580555111169815,
+        "transformer_frac_hard": 0.5390625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6201830506324768,
+            "mamba_pct": 0.3798169493675232,
+            "entropy": 0.663974404335022,
+            "block_entropy": 0.06676853448152542,
+            "transformer_frac_hard": 0.625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6794906854629517,
+            "mamba_pct": 0.32050925493240356,
+            "entropy": 0.6272528171539307,
+            "block_entropy": 0.04515508562326431,
+            "transformer_frac_hard": 0.6875,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.3892013132572174,
+            "mamba_pct": 0.610798716545105,
+            "entropy": 0.6683894395828247,
+            "block_entropy": 0.04274970293045044,
+            "transformer_frac_hard": 0.375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.47307878732681274,
+            "mamba_pct": 0.5269211530685425,
+            "entropy": 0.6916970014572144,
+            "block_entropy": 0.028548885136842728,
+            "transformer_frac_hard": 0.46875,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0577759742736816,
+          1.1288676261901855,
+          1.0491054058074951,
+          1.002898931503296
+        ],
+        "aux_ent_layers": [
+          0.663974404335022,
+          0.6272528171539307,
+          0.6683894395828247,
+          0.6916970014572144
+        ]
+      },
+      {
+        "step": 34000,
+        "transformer_pct": 0.5626140236854553,
+        "mamba_pct": 0.43738600611686707,
+        "entropy": 0.6852855682373047,
+        "block_entropy": 0.025991464033722878,
+        "transformer_frac_hard": 0.5625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.685242772102356,
+            "mamba_pct": 0.31475725769996643,
+            "entropy": 0.6228542327880859,
+            "block_entropy": 0.08275256305932999,
+            "transformer_frac_hard": 0.6875,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4701722264289856,
+            "mamba_pct": 0.5298277735710144,
+            "entropy": 0.6913667321205139,
+            "block_entropy": 0.006116424687206745,
+            "transformer_frac_hard": 0.46875,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5000317692756653,
+            "mamba_pct": 0.4999682307243347,
+            "entropy": 0.6931471824645996,
+            "block_entropy": 0.00026206797338090837,
+            "transformer_frac_hard": 0.5,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5950092077255249,
+            "mamba_pct": 0.4049908518791199,
+            "entropy": 0.6749833822250366,
+            "block_entropy": 0.01483478955924511,
+            "transformer_frac_hard": 0.59375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.1372594833374023,
+          1.003558874130249,
+          1.0,
+          1.036107063293457
+        ],
+        "aux_ent_layers": [
+          0.6228542327880859,
+          0.6913667321205139,
+          0.6931471824645996,
+          0.6749833822250366
+        ]
+      },
+      {
+        "step": 35000,
+        "transformer_pct": 0.5778002142906189,
+        "mamba_pct": 0.4221997857093811,
+        "entropy": 0.6809921264648438,
+        "block_entropy": 0.02357577718794346,
+        "transformer_frac_hard": 0.5859375,
+        "per_layer": [
+          {
+            "transformer_pct": 0.7240740656852722,
+            "mamba_pct": 0.2759259343147278,
+            "entropy": 0.5890643000602722,
+            "block_entropy": 0.05521396920084953,
+            "transformer_frac_hard": 0.75,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.40600913763046265,
+            "mamba_pct": 0.5939908623695374,
+            "entropy": 0.6753730177879333,
+            "block_entropy": 0.0023154779337346554,
+            "transformer_frac_hard": 0.40625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6249017715454102,
+            "mamba_pct": 0.37509822845458984,
+            "entropy": 0.661613404750824,
+            "block_entropy": 0.0006856124964542687,
+            "transformer_frac_hard": 0.625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5562158823013306,
+            "mamba_pct": 0.44378408789634705,
+            "entropy": 0.6868133544921875,
+            "block_entropy": 0.036088041961193085,
+            "transformer_frac_hard": 0.5625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.2008365392684937,
+          1.0353370904922485,
+          1.0624017715454102,
+          1.0126408338546753
+        ],
+        "aux_ent_layers": [
+          0.5890643000602722,
+          0.6753730177879333,
+          0.661613404750824,
+          0.6868133544921875
+        ]
+      },
+      {
+        "step": 36000,
+        "transformer_pct": 0.5736870765686035,
+        "mamba_pct": 0.4263129234313965,
+        "entropy": 0.6822479963302612,
+        "block_entropy": 0.03738715872168541,
+        "transformer_frac_hard": 0.578125,
+        "per_layer": [
+          {
+            "transformer_pct": 0.798268735408783,
+            "mamba_pct": 0.20173123478889465,
+            "entropy": 0.5027930736541748,
+            "block_entropy": 0.07184186577796936,
+            "transformer_frac_hard": 0.8125,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.3089318871498108,
+            "mamba_pct": 0.6910681128501892,
+            "entropy": 0.6182433366775513,
+            "block_entropy": 0.022626694291830063,
+            "transformer_frac_hard": 0.3125,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6249937415122986,
+            "mamba_pct": 0.3750062584877014,
+            "entropy": 0.661566436290741,
+            "block_entropy": 0.00012254943430889398,
+            "transformer_frac_hard": 0.625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5625540018081665,
+            "mamba_pct": 0.4374459981918335,
+            "entropy": 0.6853005886077881,
+            "block_entropy": 0.05495752394199371,
+            "transformer_frac_hard": 0.5625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.3558571338653564,
+          1.1460280418395996,
+          1.0624938011169434,
+          1.015652060508728
+        ],
+        "aux_ent_layers": [
+          0.5027930736541748,
+          0.6182433366775513,
+          0.661566436290741,
+          0.6853005886077881
+        ]
+      },
+      {
+        "step": 37000,
+        "transformer_pct": 0.4921071231365204,
+        "mamba_pct": 0.5078928470611572,
+        "entropy": 0.693022608757019,
+        "block_entropy": 0.030127305537462234,
+        "transformer_frac_hard": 0.4921875,
+        "per_layer": [
+          {
+            "transformer_pct": 0.5904998779296875,
+            "mamba_pct": 0.4095001518726349,
+            "entropy": 0.6766761541366577,
+            "block_entropy": 0.02082044631242752,
+            "transformer_frac_hard": 0.59375,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4697890877723694,
+            "mamba_pct": 0.5302109122276306,
+            "entropy": 0.6913206577301025,
+            "block_entropy": 0.007147529162466526,
+            "transformer_frac_hard": 0.46875,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5216346383094788,
+            "mamba_pct": 0.47836536169052124,
+            "entropy": 0.6922107934951782,
+            "block_entropy": 0.019314328208565712,
+            "transformer_frac_hard": 0.53125,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.3865048587322235,
+            "mamba_pct": 0.6134951114654541,
+            "entropy": 0.6671589612960815,
+            "block_entropy": 0.0732269138097763,
+            "transformer_frac_hard": 0.375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.032760739326477,
+          1.0036507844924927,
+          1.001872181892395,
+          1.0515245199203491
+        ],
+        "aux_ent_layers": [
+          0.6766761541366577,
+          0.6913206577301025,
+          0.6922107934951782,
+          0.6671589612960815
+        ]
+      },
+      {
+        "step": 38000,
+        "transformer_pct": 0.555207371711731,
+        "mamba_pct": 0.44479262828826904,
+        "entropy": 0.6870390176773071,
+        "block_entropy": 0.05621348321437836,
+        "transformer_frac_hard": 0.546875,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6160775423049927,
+            "mamba_pct": 0.3839224874973297,
+            "entropy": 0.6659517884254456,
+            "block_entropy": 0.07648971676826477,
+            "transformer_frac_hard": 0.59375,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6157294511795044,
+            "mamba_pct": 0.3842705190181732,
+            "entropy": 0.6661161184310913,
+            "block_entropy": 0.06687472760677338,
+            "transformer_frac_hard": 0.59375,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.40613383054733276,
+            "mamba_pct": 0.5938661098480225,
+            "entropy": 0.6754205226898193,
+            "block_entropy": 0.001130566350184381,
+            "transformer_frac_hard": 0.40625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.582888662815094,
+            "mamba_pct": 0.417111337184906,
+            "entropy": 0.67934250831604,
+            "block_entropy": 0.08035892248153687,
+            "transformer_frac_hard": 0.59375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0538959503173828,
+          1.0535732507705688,
+          1.0352435111999512,
+          1.0274821519851685
+        ],
+        "aux_ent_layers": [
+          0.6659517884254456,
+          0.6661161184310913,
+          0.6754205226898193,
+          0.67934250831604
+        ]
+      },
+      {
+        "step": 39000,
+        "transformer_pct": 0.5579206347465515,
+        "mamba_pct": 0.44207942485809326,
+        "entropy": 0.6864224672317505,
+        "block_entropy": 0.035539641976356506,
+        "transformer_frac_hard": 0.5546875,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6398196816444397,
+            "mamba_pct": 0.3601803183555603,
+            "entropy": 0.6535218954086304,
+            "block_entropy": 0.07613958418369293,
+            "transformer_frac_hard": 0.625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.44246333837509155,
+            "mamba_pct": 0.5575366616249084,
+            "entropy": 0.6865115761756897,
+            "block_entropy": 0.016786271706223488,
+            "transformer_frac_hard": 0.4375,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5614928603172302,
+            "mamba_pct": 0.4385071396827698,
+            "entropy": 0.6855652928352356,
+            "block_entropy": 0.0058343131095170975,
+            "transformer_frac_hard": 0.5625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5879064798355103,
+            "mamba_pct": 0.41209352016448975,
+            "entropy": 0.6776114702224731,
+            "block_entropy": 0.04339838773012161,
+            "transformer_frac_hard": 0.59375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0781981945037842,
+          1.0132418870925903,
+          1.0151255130767822,
+          1.0309102535247803
+        ],
+        "aux_ent_layers": [
+          0.6535218954086304,
+          0.6865115761756897,
+          0.6855652928352356,
+          0.6776114702224731
+        ]
+      },
+      {
+        "step": 40000,
+        "transformer_pct": 0.5039084553718567,
+        "mamba_pct": 0.4960915148258209,
+        "entropy": 0.6931166648864746,
+        "block_entropy": 0.049715377390384674,
+        "transformer_frac_hard": 0.5,
+        "per_layer": [
+          {
+            "transformer_pct": 0.48010125756263733,
+            "mamba_pct": 0.5198987126350403,
+            "entropy": 0.6923550963401794,
+            "block_entropy": 0.07534514367580414,
+            "transformer_frac_hard": 0.5,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.537943959236145,
+            "mamba_pct": 0.4620560109615326,
+            "entropy": 0.6902649402618408,
+            "block_entropy": 0.02729354053735733,
+            "transformer_frac_hard": 0.53125,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5051174163818359,
+            "mamba_pct": 0.49488258361816406,
+            "entropy": 0.6930948495864868,
+            "block_entropy": 0.018611067906022072,
+            "transformer_frac_hard": 0.5,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.49247121810913086,
+            "mamba_pct": 0.5075287818908691,
+            "entropy": 0.6930338144302368,
+            "block_entropy": 0.0776117667555809,
+            "transformer_frac_hard": 0.46875,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0015836954116821,
+          1.0057590007781982,
+          1.0001047849655151,
+          1.0002267360687256
+        ],
+        "aux_ent_layers": [
+          0.6923550963401794,
+          0.6902649402618408,
+          0.6930948495864868,
+          0.6930338144302368
+        ]
+      },
+      {
+        "step": 41000,
+        "transformer_pct": 0.5493955016136169,
+        "mamba_pct": 0.45060449838638306,
+        "entropy": 0.6882593631744385,
+        "block_entropy": 0.06426861882209778,
+        "transformer_frac_hard": 0.5546875,
+        "per_layer": [
+          {
+            "transformer_pct": 0.5869748592376709,
+            "mamba_pct": 0.4130251407623291,
+            "entropy": 0.6779406666755676,
+            "block_entropy": 0.1244502067565918,
+            "transformer_frac_hard": 0.59375,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.656836748123169,
+            "mamba_pct": 0.34316325187683105,
+            "entropy": 0.6431113481521606,
+            "block_entropy": 0.01789003796875477,
+            "transformer_frac_hard": 0.65625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.38909608125686646,
+            "mamba_pct": 0.6109039783477783,
+            "entropy": 0.6683419942855835,
+            "block_entropy": 0.033996183425188065,
+            "transformer_frac_hard": 0.40625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5646743774414062,
+            "mamba_pct": 0.43532559275627136,
+            "entropy": 0.684758186340332,
+            "block_entropy": 0.08073806762695312,
+            "transformer_frac_hard": 0.5625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0302585363388062,
+          1.098391056060791,
+          1.0491987466812134,
+          1.0167311429977417
+        ],
+        "aux_ent_layers": [
+          0.6779406666755676,
+          0.6431113481521606,
+          0.6683419942855835,
+          0.684758186340332
+        ]
+      },
+      {
+        "step": 42000,
+        "transformer_pct": 0.5153023600578308,
+        "mamba_pct": 0.4846976399421692,
+        "entropy": 0.6926788091659546,
+        "block_entropy": 0.030893029645085335,
+        "transformer_frac_hard": 0.515625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6214734315872192,
+            "mamba_pct": 0.37852656841278076,
+            "entropy": 0.6633381843566895,
+            "block_entropy": 0.08316604793071747,
+            "transformer_frac_hard": 0.625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.47271278500556946,
+            "mamba_pct": 0.5272872447967529,
+            "entropy": 0.6916571855545044,
+            "block_entropy": 0.015469334088265896,
+            "transformer_frac_hard": 0.46875,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5313471555709839,
+            "mamba_pct": 0.4686529040336609,
+            "entropy": 0.6911805868148804,
+            "block_entropy": 0.0006749957683496177,
+            "transformer_frac_hard": 0.53125,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4356761574745178,
+            "mamba_pct": 0.564323902130127,
+            "entropy": 0.6848490834236145,
+            "block_entropy": 0.02426173910498619,
+            "transformer_frac_hard": 0.4375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.059023141860962,
+          1.0029784440994263,
+          1.003930687904358,
+          1.0165501832962036
+        ],
+        "aux_ent_layers": [
+          0.6633381843566895,
+          0.6916571855545044,
+          0.6911805868148804,
+          0.6848490834236145
+        ]
+      },
+      {
+        "step": 43000,
+        "transformer_pct": 0.5563057661056519,
+        "mamba_pct": 0.44369423389434814,
+        "entropy": 0.6867930889129639,
+        "block_entropy": 0.02798335999250412,
+        "transformer_frac_hard": 0.5625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.7164627313613892,
+            "mamba_pct": 0.2835373282432556,
+            "entropy": 0.5962632298469543,
+            "block_entropy": 0.0346439890563488,
+            "transformer_frac_hard": 0.71875,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.46725550293922424,
+            "mamba_pct": 0.5327444672584534,
+            "entropy": 0.691001296043396,
+            "block_entropy": 0.026773985475301743,
+            "transformer_frac_hard": 0.46875,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.562343955039978,
+            "mamba_pct": 0.437656044960022,
+            "entropy": 0.6853533983230591,
+            "block_entropy": 0.0010085080284625292,
+            "transformer_frac_hard": 0.5625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.47916096448898315,
+            "mamba_pct": 0.5208390355110168,
+            "entropy": 0.6922783851623535,
+            "block_entropy": 0.049506962299346924,
+            "transformer_frac_hard": 0.5,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.1874244213104248,
+          1.004288673400879,
+          1.0155470371246338,
+          1.001737117767334
+        ],
+        "aux_ent_layers": [
+          0.5962632298469543,
+          0.691001296043396,
+          0.6853533983230591,
+          0.6922783851623535
+        ]
+      },
+      {
+        "step": 44000,
+        "transformer_pct": 0.5339969992637634,
+        "mamba_pct": 0.4660030007362366,
+        "entropy": 0.6908338069915771,
+        "block_entropy": 0.036220405250787735,
+        "transformer_frac_hard": 0.53125,
+        "per_layer": [
+          {
+            "transformer_pct": 0.603080153465271,
+            "mamba_pct": 0.396919846534729,
+            "entropy": 0.6717429757118225,
+            "block_entropy": 0.06837251037359238,
+            "transformer_frac_hard": 0.59375,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.657346248626709,
+            "mamba_pct": 0.3426537811756134,
+            "entropy": 0.6427800059318542,
+            "block_entropy": 0.005922320764511824,
+            "transformer_frac_hard": 0.65625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.41463297605514526,
+            "mamba_pct": 0.5853670239448547,
+            "entropy": 0.6785004734992981,
+            "block_entropy": 0.029288504272699356,
+            "transformer_frac_hard": 0.40625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.46092867851257324,
+            "mamba_pct": 0.5390713214874268,
+            "entropy": 0.6900908946990967,
+            "block_entropy": 0.0412982814013958,
+            "transformer_frac_hard": 0.46875,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0425019264221191,
+          1.0990314483642578,
+          1.029150128364563,
+          1.0061062574386597
+        ],
+        "aux_ent_layers": [
+          0.6717429757118225,
+          0.6427800059318542,
+          0.6785004734992981,
+          0.6900908946990967
+        ]
+      },
+      {
+        "step": 45000,
+        "transformer_pct": 0.5543570518493652,
+        "mamba_pct": 0.44564294815063477,
+        "entropy": 0.6872261166572571,
+        "block_entropy": 0.050001516938209534,
+        "transformer_frac_hard": 0.5703125,
+        "per_layer": [
+          {
+            "transformer_pct": 0.5769495964050293,
+            "mamba_pct": 0.4230503737926483,
+            "entropy": 0.6812574863433838,
+            "block_entropy": 0.15470917522907257,
+            "transformer_frac_hard": 0.625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5632314682006836,
+            "mamba_pct": 0.4367685317993164,
+            "entropy": 0.6851293444633484,
+            "block_entropy": 0.0035942508839070797,
+            "transformer_frac_hard": 0.5625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5615977048873901,
+            "mamba_pct": 0.43840229511260986,
+            "entropy": 0.6855393052101135,
+            "block_entropy": 0.005723802838474512,
+            "transformer_frac_hard": 0.5625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5156494379043579,
+            "mamba_pct": 0.4843505024909973,
+            "entropy": 0.6926572918891907,
+            "block_entropy": 0.03597882390022278,
+            "transformer_frac_hard": 0.53125,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0236849784851074,
+          1.0159926414489746,
+          1.0151770114898682,
+          1.0009795427322388
+        ],
+        "aux_ent_layers": [
+          0.6812574863433838,
+          0.6851293444633484,
+          0.6855393052101135,
+          0.6926572918891907
+        ]
+      },
+      {
+        "step": 46000,
+        "transformer_pct": 0.5227144956588745,
+        "mamba_pct": 0.4772854745388031,
+        "entropy": 0.6921149492263794,
+        "block_entropy": 0.048775188624858856,
+        "transformer_frac_hard": 0.515625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6128658652305603,
+            "mamba_pct": 0.3871341347694397,
+            "entropy": 0.667448878288269,
+            "block_entropy": 0.11468592286109924,
+            "transformer_frac_hard": 0.59375,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5445765256881714,
+            "mamba_pct": 0.45542341470718384,
+            "entropy": 0.6891677379608154,
+            "block_entropy": 0.04277379810810089,
+            "transformer_frac_hard": 0.53125,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.44102025032043457,
+            "mamba_pct": 0.5589797496795654,
+            "entropy": 0.6861737370491028,
+            "block_entropy": 0.013184883631765842,
+            "transformer_frac_hard": 0.4375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.49239543080329895,
+            "mamba_pct": 0.5076045989990234,
+            "entropy": 0.6930314898490906,
+            "block_entropy": 0.024456167593598366,
+            "transformer_frac_hard": 0.5,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.050954818725586,
+          1.0079482793807983,
+          1.0139144659042358,
+          1.000231385231018
+        ],
+        "aux_ent_layers": [
+          0.667448878288269,
+          0.6891677379608154,
+          0.6861737370491028,
+          0.6930314898490906
+        ]
+      },
+      {
+        "step": 47000,
+        "transformer_pct": 0.5173361897468567,
+        "mamba_pct": 0.4826638102531433,
+        "entropy": 0.692546010017395,
+        "block_entropy": 0.04342850297689438,
+        "transformer_frac_hard": 0.515625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6946365833282471,
+            "mamba_pct": 0.30536335706710815,
+            "entropy": 0.6153403520584106,
+            "block_entropy": 0.09628787636756897,
+            "transformer_frac_hard": 0.6875,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5325449705123901,
+            "mamba_pct": 0.46745502948760986,
+            "entropy": 0.6910273432731628,
+            "block_entropy": 0.01727164164185524,
+            "transformer_frac_hard": 0.53125,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4355267882347107,
+            "mamba_pct": 0.5644732117652893,
+            "entropy": 0.6848104000091553,
+            "block_entropy": 0.04940549284219742,
+            "transformer_frac_hard": 0.4375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4066363573074341,
+            "mamba_pct": 0.5933636426925659,
+            "entropy": 0.6756108999252319,
+            "block_entropy": 0.010749012231826782,
+            "transformer_frac_hard": 0.40625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.1515337228775024,
+          1.0042366981506348,
+          1.0166271924972534,
+          1.0348670482635498
+        ],
+        "aux_ent_layers": [
+          0.6153403520584106,
+          0.6910273432731628,
+          0.6848104000091553,
+          0.6756108999252319
+        ]
+      },
+      {
+        "step": 48000,
+        "transformer_pct": 0.5220562219619751,
+        "mamba_pct": 0.4779437780380249,
+        "entropy": 0.692173957824707,
+        "block_entropy": 0.03520333021879196,
+        "transformer_frac_hard": 0.515625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6588007211685181,
+            "mamba_pct": 0.34119927883148193,
+            "entropy": 0.6418278217315674,
+            "block_entropy": 0.06345140933990479,
+            "transformer_frac_hard": 0.65625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.529425859451294,
+            "mamba_pct": 0.47057414054870605,
+            "entropy": 0.6914144158363342,
+            "block_entropy": 0.021700317040085793,
+            "transformer_frac_hard": 0.53125,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.46878573298454285,
+            "mamba_pct": 0.5312142372131348,
+            "entropy": 0.6911972761154175,
+            "block_entropy": 0.00030374477501027286,
+            "transformer_frac_hard": 0.46875,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.43121257424354553,
+            "mamba_pct": 0.5687874555587769,
+            "entropy": 0.6836536526679993,
+            "block_entropy": 0.05535785108804703,
+            "transformer_frac_hard": 0.40625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.1008707284927368,
+          1.0034635066986084,
+          1.0038973093032837,
+          1.0189268589019775
+        ],
+        "aux_ent_layers": [
+          0.6418278217315674,
+          0.6914144158363342,
+          0.6911972761154175,
+          0.6836536526679993
+        ]
+      },
+      {
+        "step": 49000,
+        "transformer_pct": 0.5375378727912903,
+        "mamba_pct": 0.46246209740638733,
+        "entropy": 0.6903263330459595,
+        "block_entropy": 0.040067967027425766,
+        "transformer_frac_hard": 0.5390625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.7292183637619019,
+            "mamba_pct": 0.2707816958427429,
+            "entropy": 0.5840346813201904,
+            "block_entropy": 0.0834040641784668,
+            "transformer_frac_hard": 0.71875,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4112357795238495,
+            "mamba_pct": 0.5887642502784729,
+            "entropy": 0.6773052215576172,
+            "block_entropy": 0.024378817528486252,
+            "transformer_frac_hard": 0.40625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5930230617523193,
+            "mamba_pct": 0.40697693824768066,
+            "entropy": 0.6757393479347229,
+            "block_entropy": 0.0035197751130908728,
+            "transformer_frac_hard": 0.59375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.41667434573173523,
+            "mamba_pct": 0.5833256244659424,
+            "entropy": 0.6791958808898926,
+            "block_entropy": 0.048969194293022156,
+            "transformer_frac_hard": 0.4375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.2101643085479736,
+          1.0315163135528564,
+          1.0346131324768066,
+          1.0277727842330933
+        ],
+        "aux_ent_layers": [
+          0.5840346813201904,
+          0.6773052215576172,
+          0.6757393479347229,
+          0.6791958808898926
+        ]
+      },
+      {
+        "step": 50000,
+        "transformer_pct": 0.5500757694244385,
+        "mamba_pct": 0.44992420077323914,
+        "entropy": 0.6881235837936401,
+        "block_entropy": 0.02012285217642784,
+        "transformer_frac_hard": 0.546875,
+        "per_layer": [
+          {
+            "transformer_pct": 0.5921135544776917,
+            "mamba_pct": 0.40788644552230835,
+            "entropy": 0.676080048084259,
+            "block_entropy": 0.03603459894657135,
+            "transformer_frac_hard": 0.59375,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.500023603439331,
+            "mamba_pct": 0.49997636675834656,
+            "entropy": 0.6931471824645996,
+            "block_entropy": 0.00023011356825008988,
+            "transformer_frac_hard": 0.5,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5002515316009521,
+            "mamba_pct": 0.49974846839904785,
+            "entropy": 0.6931470632553101,
+            "block_entropy": 0.0014729915419593453,
+            "transformer_frac_hard": 0.5,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6079144477844238,
+            "mamba_pct": 0.3920855224132538,
+            "entropy": 0.669671893119812,
+            "block_entropy": 0.04275369644165039,
+            "transformer_frac_hard": 0.59375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0339395999908447,
+          1.0,
+          1.000000238418579,
+          1.0465821027755737
+        ],
+        "aux_ent_layers": [
+          0.676080048084259,
+          0.6931471824645996,
+          0.6931470632553101,
+          0.669671893119812
+        ]
+      },
+      {
+        "step": 51000,
+        "transformer_pct": 0.5046736001968384,
+        "mamba_pct": 0.49532637000083923,
+        "entropy": 0.693103551864624,
+        "block_entropy": 0.06490764766931534,
+        "transformer_frac_hard": 0.4921875,
+        "per_layer": [
+          {
+            "transformer_pct": 0.4691171944141388,
+            "mamba_pct": 0.5308828353881836,
+            "entropy": 0.691238522529602,
+            "block_entropy": 0.13700927793979645,
+            "transformer_frac_hard": 0.4375,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.7721537351608276,
+            "mamba_pct": 0.22784626483917236,
+            "entropy": 0.5366607904434204,
+            "block_entropy": 0.03445098549127579,
+            "transformer_frac_hard": 0.78125,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.31757044792175293,
+            "mamba_pct": 0.6824295520782471,
+            "entropy": 0.6250245571136475,
+            "block_entropy": 0.04599514603614807,
+            "transformer_frac_hard": 0.3125,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4598532021045685,
+            "mamba_pct": 0.5401468276977539,
+            "entropy": 0.68992018699646,
+            "block_entropy": 0.04217517375946045,
+            "transformer_frac_hard": 0.4375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0038148164749146,
+          1.2962708473205566,
+          1.133122205734253,
+          1.0064470767974854
+        ],
+        "aux_ent_layers": [
+          0.691238522529602,
+          0.5366607904434204,
+          0.6250245571136475,
+          0.68992018699646
+        ]
+      },
+      {
+        "step": 52000,
+        "transformer_pct": 0.5374137759208679,
+        "mamba_pct": 0.4625861942768097,
+        "entropy": 0.6903449296951294,
+        "block_entropy": 0.045930810272693634,
+        "transformer_frac_hard": 0.5390625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6472641229629517,
+            "mamba_pct": 0.35273587703704834,
+            "entropy": 0.6491238474845886,
+            "block_entropy": 0.10589272528886795,
+            "transformer_frac_hard": 0.6875,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.41103968024253845,
+            "mamba_pct": 0.5889602899551392,
+            "entropy": 0.6772347688674927,
+            "block_entropy": 0.016568705439567566,
+            "transformer_frac_hard": 0.40625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.562677800655365,
+            "mamba_pct": 0.437322199344635,
+            "entropy": 0.6852694749832153,
+            "block_entropy": 0.0012267980491742492,
+            "transformer_frac_hard": 0.5625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5286736488342285,
+            "mamba_pct": 0.4713263213634491,
+            "entropy": 0.6915019154548645,
+            "block_entropy": 0.06003500521183014,
+            "transformer_frac_hard": 0.5,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0867466926574707,
+          1.0316557884216309,
+          1.0157139301300049,
+          1.003288745880127
+        ],
+        "aux_ent_layers": [
+          0.6491238474845886,
+          0.6772347688674927,
+          0.6852694749832153,
+          0.6915019154548645
+        ]
+      },
+      {
+        "step": 53000,
+        "transformer_pct": 0.5418909788131714,
+        "mamba_pct": 0.4581090211868286,
+        "entropy": 0.6896333694458008,
+        "block_entropy": 0.06352076679468155,
+        "transformer_frac_hard": 0.5390625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6153402328491211,
+            "mamba_pct": 0.3846597373485565,
+            "entropy": 0.6662992835044861,
+            "block_entropy": 0.08168838173151016,
+            "transformer_frac_hard": 0.625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.49272868037223816,
+            "mamba_pct": 0.5072712898254395,
+            "entropy": 0.6930414438247681,
+            "block_entropy": 0.036410700529813766,
+            "transformer_frac_hard": 0.5,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.514618992805481,
+            "mamba_pct": 0.48538100719451904,
+            "entropy": 0.6927196979522705,
+            "block_entropy": 0.07066009193658829,
+            "transformer_frac_hard": 0.5,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.544875979423523,
+            "mamba_pct": 0.45512402057647705,
+            "entropy": 0.6891140937805176,
+            "block_entropy": 0.06532387435436249,
+            "transformer_frac_hard": 0.53125,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0532134771347046,
+          1.0002113580703735,
+          1.0008548498153687,
+          1.0080552101135254
+        ],
+        "aux_ent_layers": [
+          0.6662992835044861,
+          0.6930414438247681,
+          0.6927196979522705,
+          0.6891140937805176
+        ]
+      },
+      {
+        "step": 54000,
+        "transformer_pct": 0.4915253520011902,
+        "mamba_pct": 0.5084746479988098,
+        "entropy": 0.6930035352706909,
+        "block_entropy": 0.026834841817617416,
+        "transformer_frac_hard": 0.5,
+        "per_layer": [
+          {
+            "transformer_pct": 0.5059686899185181,
+            "mamba_pct": 0.4940313398838043,
+            "entropy": 0.6930758953094482,
+            "block_entropy": 0.05879807844758034,
+            "transformer_frac_hard": 0.53125,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6771153211593628,
+            "mamba_pct": 0.3228847086429596,
+            "entropy": 0.6290248036384583,
+            "block_entropy": 0.03700314834713936,
+            "transformer_frac_hard": 0.6875,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4065209925174713,
+            "mamba_pct": 0.5934789776802063,
+            "entropy": 0.6755672693252563,
+            "block_entropy": 0.0022460795007646084,
+            "transformer_frac_hard": 0.40625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.37649640440940857,
+            "mamba_pct": 0.623503565788269,
+            "entropy": 0.6623228788375854,
+            "block_entropy": 0.009292066097259521,
+            "transformer_frac_hard": 0.375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0001424551010132,
+          1.1254793405532837,
+          1.0349531173706055,
+          1.061012625694275
+        ],
+        "aux_ent_layers": [
+          0.6930758953094482,
+          0.6290248036384583,
+          0.6755672693252563,
+          0.6623228788375854
+        ]
+      },
+      {
+        "step": 55000,
+        "transformer_pct": 0.5678082704544067,
+        "mamba_pct": 0.43219172954559326,
+        "entropy": 0.6839228868484497,
+        "block_entropy": 0.03774663805961609,
+        "transformer_frac_hard": 0.5703125,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6150667667388916,
+            "mamba_pct": 0.3849332630634308,
+            "entropy": 0.6664276123046875,
+            "block_entropy": 0.042166635394096375,
+            "transformer_frac_hard": 0.625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5519187450408936,
+            "mamba_pct": 0.4480813145637512,
+            "entropy": 0.6877463459968567,
+            "block_entropy": 0.03469841927289963,
+            "transformer_frac_hard": 0.5625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6385684013366699,
+            "mamba_pct": 0.3614315390586853,
+            "entropy": 0.6542373895645142,
+            "block_entropy": 0.03755391389131546,
+            "transformer_frac_hard": 0.625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4656791687011719,
+            "mamba_pct": 0.5343208312988281,
+            "entropy": 0.6907894611358643,
+            "block_entropy": 0.03656759113073349,
+            "transformer_frac_hard": 0.46875,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0529614686965942,
+          1.010782241821289,
+          1.0768048763275146,
+          1.0047117471694946
+        ],
+        "aux_ent_layers": [
+          0.6664276123046875,
+          0.6877463459968567,
+          0.6542373895645142,
+          0.6907894611358643
+        ]
+      },
+      {
+        "step": 56000,
+        "transformer_pct": 0.5266838669776917,
+        "mamba_pct": 0.4733162224292755,
+        "entropy": 0.6917223930358887,
+        "block_entropy": 0.046143196523189545,
+        "transformer_frac_hard": 0.5234375,
+        "per_layer": [
+          {
+            "transformer_pct": 0.6518452167510986,
+            "mamba_pct": 0.34815481305122375,
+            "entropy": 0.6462969183921814,
+            "block_entropy": 0.07235097885131836,
+            "transformer_frac_hard": 0.65625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5426615476608276,
+            "mamba_pct": 0.45733845233917236,
+            "entropy": 0.6895027160644531,
+            "block_entropy": 0.041817452758550644,
+            "transformer_frac_hard": 0.53125,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5077537298202515,
+            "mamba_pct": 0.49224627017974854,
+            "entropy": 0.6930269002914429,
+            "block_entropy": 0.019479183480143547,
+            "transformer_frac_hard": 0.5,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4044748544692993,
+            "mamba_pct": 0.5955251455307007,
+            "entropy": 0.6747844219207764,
+            "block_entropy": 0.050925180315971375,
+            "transformer_frac_hard": 0.40625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0922279357910156,
+          1.0072799921035767,
+          1.000240445137024,
+          1.0365002155303955
+        ],
+        "aux_ent_layers": [
+          0.6462969183921814,
+          0.6895027160644531,
+          0.6930269002914429,
+          0.6747844219207764
+        ]
+      },
+      {
+        "step": 57000,
+        "transformer_pct": 0.4945814609527588,
+        "mamba_pct": 0.5054185390472412,
+        "entropy": 0.6930884122848511,
+        "block_entropy": 0.061657845973968506,
+        "transformer_frac_hard": 0.4921875,
+        "per_layer": [
+          {
+            "transformer_pct": 0.5608636140823364,
+            "mamba_pct": 0.4391363561153412,
+            "entropy": 0.6857199668884277,
+            "block_entropy": 0.15464714169502258,
+            "transformer_frac_hard": 0.5625,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6242305636405945,
+            "mamba_pct": 0.3757694363594055,
+            "entropy": 0.6619549989700317,
+            "block_entropy": 0.019454192370176315,
+            "transformer_frac_hard": 0.625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.35000157356262207,
+            "mamba_pct": 0.6499984264373779,
+            "entropy": 0.6474475860595703,
+            "block_entropy": 0.0391099639236927,
+            "transformer_frac_hard": 0.34375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.4432300925254822,
+            "mamba_pct": 0.5567699670791626,
+            "entropy": 0.6866876482963562,
+            "block_entropy": 0.03342008590698242,
+            "transformer_frac_hard": 0.4375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.0148175954818726,
+          1.0617328882217407,
+          1.0899981260299683,
+          1.0128912925720215
+        ],
+        "aux_ent_layers": [
+          0.6857199668884277,
+          0.6619549989700317,
+          0.6474475860595703,
+          0.6866876482963562
+        ]
+      },
+      {
+        "step": 58000,
+        "transformer_pct": 0.5689398050308228,
+        "mamba_pct": 0.43106019496917725,
+        "entropy": 0.6836113929748535,
+        "block_entropy": 0.03838052228093147,
+        "transformer_frac_hard": 0.5625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.7259975671768188,
+            "mamba_pct": 0.27400246262550354,
+            "entropy": 0.5871992111206055,
+            "block_entropy": 0.03311171755194664,
+            "transformer_frac_hard": 0.71875,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5913856625556946,
+            "mamba_pct": 0.4086143374443054,
+            "entropy": 0.6763502359390259,
+            "block_entropy": 0.05501805618405342,
+            "transformer_frac_hard": 0.5625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.406406044960022,
+            "mamba_pct": 0.593593955039978,
+            "entropy": 0.6755237579345703,
+            "block_entropy": 0.0010294197127223015,
+            "transformer_frac_hard": 0.40625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.5519700050354004,
+            "mamba_pct": 0.4480299949645996,
+            "entropy": 0.6877356767654419,
+            "block_entropy": 0.06436291337013245,
+            "transformer_frac_hard": 0.5625,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.2042996883392334,
+          1.0334053039550781,
+          1.0350393056869507,
+          1.0108035802841187
+        ],
+        "aux_ent_layers": [
+          0.5871992111206055,
+          0.6763502359390259,
+          0.6755237579345703,
+          0.6877356767654419
+        ]
+      },
+      {
+        "step": 59000,
+        "transformer_pct": 0.5624644756317139,
+        "mamba_pct": 0.43753552436828613,
+        "entropy": 0.6853231191635132,
+        "block_entropy": 0.029062828049063683,
+        "transformer_frac_hard": 0.5625,
+        "per_layer": [
+          {
+            "transformer_pct": 0.7171621918678284,
+            "mamba_pct": 0.28283780813217163,
+            "entropy": 0.5956135988235474,
+            "block_entropy": 0.07896912097930908,
+            "transformer_frac_hard": 0.71875,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.46645447611808777,
+            "mamba_pct": 0.5335454940795898,
+            "entropy": 0.6908949017524719,
+            "block_entropy": 0.00889050867408514,
+            "transformer_frac_hard": 0.46875,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.62398362159729,
+            "mamba_pct": 0.37601640820503235,
+            "entropy": 0.6620802283287048,
+            "block_entropy": 0.007603025063872337,
+            "transformer_frac_hard": 0.625,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.44225770235061646,
+            "mamba_pct": 0.5577422976493835,
+            "entropy": 0.6864639520645142,
+            "block_entropy": 0.020788656547665596,
+            "transformer_frac_hard": 0.4375,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.1886377334594727,
+          1.004501223564148,
+          1.0614879131317139,
+          1.0133366584777832
+        ],
+        "aux_ent_layers": [
+          0.5956135988235474,
+          0.6908949017524719,
+          0.6620802283287048,
+          0.6864639520645142
+        ]
+      },
+      {
+        "step": 60000,
+        "transformer_pct": 0.5093561410903931,
+        "mamba_pct": 0.49064385890960693,
+        "entropy": 0.6929720640182495,
+        "block_entropy": 0.05306019261479378,
+        "transformer_frac_hard": 0.5078125,
+        "per_layer": [
+          {
+            "transformer_pct": 0.538172721862793,
+            "mamba_pct": 0.46182724833488464,
+            "entropy": 0.6902300119400024,
+            "block_entropy": 0.08515562117099762,
+            "transformer_frac_hard": 0.53125,
+            "layer": 0,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.6471679210662842,
+            "mamba_pct": 0.3528321087360382,
+            "entropy": 0.6491822004318237,
+            "block_entropy": 0.06972915679216385,
+            "transformer_frac_hard": 0.65625,
+            "layer": 1,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.3695255517959595,
+            "mamba_pct": 0.6304744482040405,
+            "entropy": 0.6587027311325073,
+            "block_entropy": 0.019428126513957977,
+            "transformer_frac_hard": 0.375,
+            "layer": 2,
+            "tau": 0.1
+          },
+          {
+            "transformer_pct": 0.48255831003189087,
+            "mamba_pct": 0.5174416899681091,
+            "entropy": 0.6925386190414429,
+            "block_entropy": 0.03792787715792656,
+            "transformer_frac_hard": 0.46875,
+            "layer": 3,
+            "tau": 0.1
+          }
+        ],
+        "tau": {
+          "layers.0.router": 0.1,
+          "layers.1.router": 0.1,
+          "layers.2.router": 0.1,
+          "layers.3.router": 0.1
+        },
+        "aux_lb_layers": [
+          1.005828619003296,
+          1.086633563041687,
+          1.0680943727493286,
+          1.0012166500091553
+        ],
+        "aux_ent_layers": [
+          0.6902300119400024,
+          0.6491822004318237,
+          0.6587027311325073,
+          0.6925386190414429
+        ]
+      }
+    ],
+    "final_routing_stats": {
+      "transformer_pct": 0.5337613224983215,
+      "mamba_pct": 0.46623870730400085,
+      "entropy": 0.6908657550811768,
+      "block_entropy": 0.05218532681465149,
+      "transformer_frac_hard": 0.5250000357627869,
+      "per_layer": [
+        {
+          "transformer_pct": 0.6519167423248291,
+          "mamba_pct": 0.3480832576751709,
+          "entropy": 0.6462520360946655,
+          "block_entropy": 0.15377087891101837,
+          "transformer_frac_hard": 0.6000000238418579,
+          "layer": 0,
+          "tau": 0.1
+        },
+        {
+          "transformer_pct": 0.4501541554927826,
+          "mamba_pct": 0.5498458743095398,
+          "entropy": 0.6881697177886963,
+          "block_entropy": 0.0012162216007709503,
+          "transformer_frac_hard": 0.45000001788139343,
+          "layer": 1,
+          "tau": 0.1
+        },
+        {
+          "transformer_pct": 0.549998939037323,
+          "mamba_pct": 0.450001060962677,
+          "entropy": 0.6881390810012817,
+          "block_entropy": 1.3412797670753207e-05,
+          "transformer_frac_hard": 0.550000011920929,
+          "layer": 2,
+          "tau": 0.1
+        },
+        {
+          "transformer_pct": 0.48297548294067383,
+          "mamba_pct": 0.5170245170593262,
+          "entropy": 0.6925673484802246,
+          "block_entropy": 0.053740810602903366,
+          "transformer_frac_hard": 0.5,
+          "layer": 3,
+          "tau": 0.1
+        }
+      ],
+      "tau": [
+        0.1,
+        0.1,
+        0.1,
+        0.1
+      ]
+    },
+    "wall_time_s": 10958.781706809998,
+    "gpu_hours": 3.0441060296694435,
+    "device": "cuda",
+    "gpu_name": "Tesla T4",
+    "n_sessions": 1,
+    "sessions": [
+      {
+        "start_utc": "2026-11-16T01:45:09+00:00",
+        "start_step": 0,
+        "device": "cuda",
+        "git_commit": "1b0a5b238582048d75652a65f00f9fc65096c0d0",
+        "end_utc": "2026-11-16T04:47:46+00:00",
+        "end_step": 60000
+      }
+    ],
+    "mamba_backend": "mamba_ssm",
+    "reportable": true,
+    "debug": false,
+    "dataset_sha256": {
+      "train": "08ed01c3c3f123b1c6070649637c2438059804fa04b45b9d46f49f096316e3f3",
+      "validation": "71eeb54c40958160f1026591d24e5161fffcf767e71de89999869091285e498f",
+      "test": "f571ffeb95ad772ba3eb9868523b5cd07e22396095de96d5bfff23ad29800123"
+    },
+    "wandb_url": null,
+    "wandb_dir": "/kaggle/working/output/ABR-4L-gatedCBSC_s42_b64/ABR-4L-gatedCBSC_seed42_20261116T014508Z"
+  }
+}

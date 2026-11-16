@@ -1,0 +1,53 @@
+
+===== session start 2026-11-15T18:33:49+00:00 | run_id=ABR-4L-gatedCBSC_seed123_20261114T191431Z | run=ABR-4L-gatedCBSC_s123_b8 | device=cuda | mamba_backend=mamba_ssm | reportable=True =====
+[train] resumed from step 57323
+[train] ABR-4L-gatedCBSC seed=123 params=19,124,576 steps=60000 B=8 T=256 block=8
+wandb: WARNING `resume` will be ignored since W&B syncing is set to `offline`. Starting a new run with run id szjn3kj6.
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /kaggle/working/output/ABR-4L-gatedCBSC_s123_b8/ABR-4L-gatedCBSC_seed123_20261114T191431Z/wandb/offline-run-20261115_183351-szjn3kj6
+wandb: View this run in the terminal with `wandb leet`
+/usr/local/lib/python3.13/dist-packages/torch/autograd/graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at /pytorch/aten/src/ATen/native/transformers/cuda/attention_backward.cu:900.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  [ABR-4L-gatedCBSC s=123] step= 58000 lr=8.36e-07 train=4.8324 val~=4.6901 (ppl 108.9) | transformer_pct=0.513 mamba_pct=0.487 entropy=0.693 block_entropy=0.060 transformer_frac_hard=0.513
+  [ABR-4L-gatedCBSC s=123] step= 59000 lr=2.09e-07 train=4.8360 val~=4.6898 (ppl 108.8) | transformer_pct=0.493 mamba_pct=0.507 entropy=0.693 block_entropy=0.055 transformer_frac_hard=0.490
+  [ABR-4L-gatedCBSC s=123] step= 60000 lr=0.00e+00 train=4.8188 val~=4.6898 (ppl 108.8) | transformer_pct=0.530 mamba_pct=0.470 entropy=0.691 block_entropy=0.054 transformer_frac_hard=0.526
+[train] full evaluation on validation and test splits ...
+[train] FINAL val loss=4.6520 ppl=104.79 | test loss=4.6436 ppl=103.91 | wall=11.72 h
+wandb: 
+wandb: Run history:
+wandb:                            lr ██▇▇▇▆▆▆▆▅▅▅▄▄▄▄▄▃▃▃▃▃▃▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb:         routing/block_entropy █▂▁
+wandb:               routing/entropy ▇█▁
+wandb:             routing/mamba_pct ▄█▁
+wandb:                 routing/tau/0 ▁▁▁
+wandb:                 routing/tau/1 ▁▁▁
+wandb:                 routing/tau/2 ▁▁▁
+wandb:                 routing/tau/3 ▁▁▁
+wandb: routing/transformer_frac_hard ▅▁█
+wandb:       routing/transformer_pct ▅▁█
+wandb:                           +12 ...
+wandb: 
+wandb: Run summary:
+wandb:             gpu_hours 11.72393
+wandb:                    lr 0
+wandb:                params 19124576
+wandb: routing/block_entropy 0.05405
+wandb:       routing/entropy 0.69132
+wandb:     routing/mamba_pct 0.46982
+wandb:         routing/tau/0 0.1
+wandb:         routing/tau/1 0.1
+wandb:         routing/tau/2 0.1
+wandb:         routing/tau/3 0.1
+wandb:                   +19 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /kaggle/working/output/ABR-4L-gatedCBSC_s123_b8/ABR-4L-gatedCBSC_seed123_20261114T191431Z/wandb/offline-run-20261115_183351-szjn3kj6
+wandb: Find logs at: /kaggle/working/output/ABR-4L-gatedCBSC_s123_b8/ABR-4L-gatedCBSC_seed123_20261114T191431Z/wandb/offline-run-20261115_183351-szjn3kj6/logs
+===== session end 2026-11-15T19:06:18+00:00 | status=done =====
+[train] result -> /kaggle/working/output/ABR-4L-gatedCBSC_s123_b8/ABR-4L-gatedCBSC_seed123_20261114T191431Z/result.json
+Exception ignored in: <provenance._Tee object at 0x7c95dde299f0>
+Traceback (most recent call last):
+  File "/kaggle/working/repo/experiments/full_scale/provenance.py", line 531, in flush
+    st.flush()
+ValueError: I/O operation on closed file.
